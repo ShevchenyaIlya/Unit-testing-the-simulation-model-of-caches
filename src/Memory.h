@@ -15,12 +15,12 @@
 using namespace std;
 
 
-static constexpr size_t blockCount = 2;
+static constexpr size_t blockCount = 4;
 static constexpr size_t memSize = 1024*1024; // memory size in 4-byte words
 static constexpr size_t lineSizeBytes = 128;
 static constexpr size_t lineSizeWords = lineSizeBytes / sizeof(Word);
-static constexpr size_t dataCacheBytes = 4096;
-static constexpr size_t codeCacheBytes = 1024;
+static constexpr size_t dataCacheBytes = 8192;
+static constexpr size_t codeCacheBytes = 2048;
 
 
 using Line = std::array<Word, lineSizeWords>;
@@ -28,7 +28,9 @@ struct CacheCell {
     Word address;
     Line dataLine;
     Word lastUsage;
+    bool validityBit;
 };
+
 using Block = vector<CacheCell>;
 
 static Word ToWordAddr(Word ip) { return ip >> 2u; }
@@ -255,49 +257,120 @@ public:
         initializeCache();
     }
 
-    bool check_key(bool dataOrCode, int key)
+    bool checkAddress(bool dataOrCode, int address)
     {
         vector<Block> temporalCacheCopy;
         int blockSize = 0;
         if (dataOrCode) {
             temporalCacheCopy = _dataMemory;
-            blockSize = dataCacheBytes / lineSizeBytes / blockCount;
+            blockSize = dataCacheBytes / blockCount;
         }
         else {
             temporalCacheCopy = _codeMemory;
-            blockSize = codeCacheBytes / lineSizeBytes / blockCount;
+            blockSize = codeCacheBytes / blockCount;
         }
 
         for (Block block : temporalCacheCopy)
         {
-
+            if (block[(address % blockSize) / lineSizeBytes].address == address)
+                return true;
         }
-
-
+        return false;
     }
 
-    Word findEntryWithLowestValue(bool dataOrCode, int size)
+
+    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
     {
-        unordered_map<Word, pair<Line, Word>> sampleMap;
-        if (dataOrCode)
-            sampleMap = _dataMemory;
-        else
-            sampleMap = _codeMemory;
-
-        if (sampleMap.size() < size)
-            return 0;
-
-        Word entryWithMixValue = sampleMap.begin()->second.second;
-        Word entryIp = sampleMap.begin()->first;
-
-        unordered_map<Word, pair<Line, Word>>::iterator currentEntry;
-        for (currentEntry = sampleMap.begin(); currentEntry != sampleMap.end(); ++currentEntry) {
-            if (currentEntry->second.second < entryWithMixValue) {
-                entryWithMixValue = currentEntry->second.second;
-                entryIp = currentEntry->first;
+        for (int i = 0; i < blockCount; i++)
+        {
+            if (i != key && cache[i][indexing].lastUsage == 0)
+            {
+                return false;
             }
         }
-        return entryIp;
+        return true;
+    }
+
+    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
+    {
+        if (checkAllBits(cache, key, indexing))
+        {
+            for (int j = 0; j < blockCount; j++)
+            {
+                if (key != j)
+                    cache[j][indexing].lastUsage = 0;
+            }
+        }
+    }
+
+    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
+    {
+        for (int i = 0; i < blockCount; i++)
+        {
+            if (cache[i][indexing].address == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
+    {
+
+        vector<Block> *temporalCacheCopy;
+        int blockSize = 0;
+        if (dataOrCode) {
+            temporalCacheCopy = &_dataMemory;
+            blockSize = dataCacheBytes / blockCount;
+        }
+        else {
+            temporalCacheCopy = &_codeMemory;
+            blockSize = codeCacheBytes / blockCount;
+        }
+        
+
+        for (int i = 0; i < blockCount; i++) {
+            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
+                return pair<Word, Word>(i, (key % blockSize) / lineSizeBytes);
+            }
+        }
+
+        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
+        Word entryIdentification = 0;
+        for (int i = 0; i < blockCount; i++)
+        {
+            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
+            {
+                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
+                entryIdentification = i;
+            }
+        }
+
+        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
+
+        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
+    }
+
+
+    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
+        vector<Block> temporalCacheCopy;
+        int blockSize = 0;
+        if (dataOrCode) {
+            temporalCacheCopy = _dataMemory;
+            blockSize = dataCacheBytes / blockCount;
+        }
+        else {
+            temporalCacheCopy = _codeMemory;
+            blockSize = codeCacheBytes / blockCount;
+        }
+
+        for (int i = 0; i < blockCount; i++)
+        {
+            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
+                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
+        }
+        return pair<Word, Word> (0, 0);
     }
 
     void Request(Word ip)
@@ -307,7 +380,7 @@ public:
             Word lineAddr = ToLineAddr(_memoryRequestIp);
             Word offset = ToLineOffset(_memoryRequestIp);
 
-            if (check_key(_codeMemory, lineAddr)) {
+            if (checkAddress(false, lineAddr)) {
                 _waitCycles = codeLatency;
                 _cacheMiss = false;
             }
@@ -329,26 +402,26 @@ public:
         {
             Line memoryLine = _mem.readLineFromMemory(_requestedIp);
 
-            Word latestUsage = findEntryWithLowestValue(false, codeCacheBytes / lineSizeWords);
+            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
+            Word blockId = latestUsage.first;
+            Word cellId = latestUsage.second;
 
-//            Word writeAddress = latestUsage;
-//            if (latestUsage == 0) {
-//                writeAddress = _requestedIp;
-//                _codeMemory[writeAddress] = std::pair<Line, Word>(memoryLine, responseTime);
-//            }
-            if (latestUsage != 0)
+            if (_codeMemory[blockId][cellId].address != 0)
             {
-                _mem.writeLineToMemory(_codeMemory[latestUsage].first, latestUsage);
-                _codeMemory.erase(latestUsage);
+                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
+                                       _codeMemory[blockId][cellId].address);
             }
 
-            _codeMemory[_requestedIp] = std::pair<Line, Word>(memoryLine, responseTime);
+            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
+
             return memoryLine[_requestedOffset];
 
         } else {
-//            _lastCodeUsage[_requestedIp] = responseTime;
-            _codeMemory[_requestedIp].second = responseTime;
-            return _codeMemory[_requestedIp].first[_requestedOffset];
+            pair<Word, Word> position = findEntry(_requestedIp, false);
+            _codeMemory[position.first][position.second].lastUsage = 1;
+            changeLRUBit(_codeMemory, position.first, position.second);
+
+            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
         }
     }
 
@@ -360,13 +433,14 @@ public:
         Word lineAddr = ToLineAddr(instr->_addr);
         Word offset = ToLineOffset(instr->_addr);
 
-        if (check_key(_dataMemory, lineAddr)) {
+        if (checkAddress(true, lineAddr)) {
             _waitCycles = dataLatency;
             _cacheMiss = false;
         } else {
             _cacheMiss = true;
             _waitCycles = failLatency;
-            if (instr->_type == IType::St && (findEntryWithLowestValue(true, dataCacheBytes / lineSizeWords)))
+            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+            if (instr->_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
                 _waitCycles += 120;
         }
         _requestedIp = lineAddr;
@@ -385,30 +459,38 @@ public:
         {
             Line memoryLine = _mem.readLineFromMemory(_requestedIp);
 
-            if (instr->_type == IType::St)
+            bool validity = true;
+            if (instr->_type == IType::St) {
                 memoryLine[ToLineOffset(instr->_addr)] = instr->_data;
-
-            Word latestUsage = findEntryWithLowestValue(true, dataCacheBytes / lineSizeWords);
-
-            if (latestUsage != 0)
-            {
-                _mem.writeLineToMemory(_dataMemory[latestUsage].first, latestUsage);
-                _codeMemory.erase(latestUsage);
+                validity = false;
             }
 
-            _dataMemory[_requestedIp] = std::pair<Line, Word>(memoryLine, responseTime);
+            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+            Word blockId = latestUsage.first;
+            Word cellId = latestUsage.second;
+
+            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
+            {
+                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
+            }
+
+            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
 
             if (instr->_type == IType::Ld)
                 instr->_data = memoryLine[_requestedOffset];
         }
         else
         {
-            _dataMemory[_requestedIp].second = responseTime;
+            pair<Word, Word> position = findEntry(_requestedIp, true);
+            _dataMemory[position.first][position.second].lastUsage = 1;
+            changeLRUBit(_dataMemory, position.first, position.second);
 
             if (instr->_type == IType::Ld)
-                instr->_data = _dataMemory[_requestedIp].first[_requestedOffset];
-            else if (instr->_type == IType::St)
-                _dataMemory[_requestedIp].first[_requestedOffset] = instr->_data;
+                instr->_data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
+            else if (instr->_type == IType::St) {
+                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = instr->_data;
+                _dataMemory[position.first][position.second].validityBit = false;
+            }
         }
 
         return true;
@@ -417,8 +499,8 @@ public:
     void initializeCache()
     {
         for (int i = 0; i < blockCount; ++i) {
-            _codeMemory1[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
-            _dataMemory1[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
+            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
+            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
         }
     }
 
@@ -442,11 +524,6 @@ private:
     Word _requestedOffset = 0;
     size_t _waitCycles = 0;
     bool _cacheMiss = false;
-
-
-    //TODO: Structure <Line address, <Line, Last usage>>
-//    unordered_map<Word, pair<Line, Word>> _dataMemory = unordered_map<Word, pair<Line, Word>>();
-//    unordered_map<Word, pair<Line, Word>> _codeMemory = unordered_map<Word, pair<Line, Word>>();
 
     vector<Block> _codeMemory = vector<Block>(blockCount);
     vector<Block> _dataMemory = vector<Block>(blockCount);
