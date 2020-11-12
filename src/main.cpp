@@ -4,36 +4,15 @@
 
 #include <optional>
 
-
-// First task. Instruction per tact: 0.007611794. Info stored in info.odt file.
-
 int main()
 {
     MemoryStorage mem ;
-    mem.LoadElf("../program");
+    mem.LoadElf("program");
     UncachedMem uncachedMem = UncachedMem (mem);
     std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
     Cpu cpu{*memModelPtr};
     cpu.Reset(0x200);
 
-//    unordered_map <Word, pair<Line, Word>> _dataMemory = {
-//            {123, pair<Line, Word>(Line(), 0)},
-//            {222, pair<Line, Word>(Line(), 0)},
-//            {134, pair<Line, Word>(Line(), 0)},
-//            {108, pair<Line, Word>(Line(), 0)},
-//            {202, pair<Line, Word>(Line(), 0)},
-//            {52, pair<Line, Word>(Line(), 0)},
-//    };
-//
-//    bool result = !(_dataMemory.find(123) == _dataMemory.end());
-//    result = !(_dataMemory.find(222) == _dataMemory.end());
-//    result = !(_dataMemory.find(134) == _dataMemory.end());
-//    result = !(_dataMemory.find(437) == _dataMemory.end());
-//    unordered_map<Word, pair<Line, Word>>::iterator currentEntry;
-//    for (currentEntry = _dataMemory.begin(); currentEntry != _dataMemory.end(); ++currentEntry) {
-//        int value1 = currentEntry->first;
-//        pair<Line, Word> value2 = currentEntry->second;
-//    }
     int32_t print_int = 0;
 
     while (true)
