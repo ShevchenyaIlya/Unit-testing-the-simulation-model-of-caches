@@ -6,47 +6,51 @@
 
 #IncludeRegexTransform: 
 
-/home/shevchenya/CLionProjects/CourseWork/src/BaseTypes.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/BaseTypes.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/Cpu.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Cpu.h
 Memory.h
-/home/shevchenya/CLionProjects/CourseWork/src/Memory.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Memory.h
 Decoder.h
-/home/shevchenya/CLionProjects/CourseWork/src/Decoder.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Decoder.h
 RegisterFile.h
-/home/shevchenya/CLionProjects/CourseWork/src/RegisterFile.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/RegisterFile.h
 CsrFile.h
-/home/shevchenya/CLionProjects/CourseWork/src/CsrFile.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/CsrFile.h
 Executor.h
-/home/shevchenya/CLionProjects/CourseWork/src/Executor.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Executor.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/CsrFile.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/CsrFile.h
 optional
 -
 Instruction.h
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/Decoder.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Decoder.h
 Instruction.h
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/Executor.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Executor.h
 Instruction.h
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.cpp
+Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
+
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 optional
 -
 memory
 -
 BaseTypes.h
-/home/shevchenya/CLionProjects/CourseWork/src/BaseTypes.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/BaseTypes.h
 PoolAllocator.h
-/home/shevchenya/CLionProjects/CourseWork/src/PoolAllocator.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/PoolAllocator.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/Memory.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Memory.h
 Instruction.h
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 iostream
 -
 algorithm
@@ -66,23 +70,23 @@ map
 unordered_map
 -
 
-/home/shevchenya/CLionProjects/CourseWork/src/PoolAllocator.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/PoolAllocator.h
 cstddef
 -
 cstdlib
 -
 
-/home/shevchenya/CLionProjects/CourseWork/src/RegisterFile.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/RegisterFile.h
 Instruction.h
-/home/shevchenya/CLionProjects/CourseWork/src/Instruction.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Instruction.h
 
-/home/shevchenya/CLionProjects/CourseWork/src/main.cpp
+/home/shevchenya/CLionProjects/CourseWorkCache/src/main.cpp
 Cpu.h
-/home/shevchenya/CLionProjects/CourseWork/src/Cpu.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Cpu.h
 Memory.h
-/home/shevchenya/CLionProjects/CourseWork/src/Memory.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/Memory.h
 BaseTypes.h
-/home/shevchenya/CLionProjects/CourseWork/src/BaseTypes.h
+/home/shevchenya/CLionProjects/CourseWorkCache/src/BaseTypes.h
 optional
 -
 
