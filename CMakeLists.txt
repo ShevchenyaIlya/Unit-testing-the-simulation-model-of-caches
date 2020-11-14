@@ -10,5 +10,6 @@ file(GLOB SRC
         "src/*.h"
         "src/*.cpp"
         )
-
 add_executable(riscv_sim ${SRC})
+add_subdirectory(google_tests)
+
