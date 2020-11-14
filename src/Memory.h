@@ -19,8 +19,8 @@ static constexpr size_t blockCount = 4;
 static constexpr size_t memSize = 1024*1024; // memory size in 4-byte words
 static constexpr size_t lineSizeBytes = 128;
 static constexpr size_t lineSizeWords = lineSizeBytes / sizeof(Word);
-static constexpr size_t dataCacheBytes = 8192;
-static constexpr size_t codeCacheBytes = 2048;
+static constexpr size_t dataCacheBytes = 4096;
+static constexpr size_t codeCacheBytes = 1024;
 
 
 using Line = std::array<Word, lineSizeWords>;
@@ -514,6 +514,31 @@ public:
     {
         return _waitCycles;
     }
+
+    const vector<Block> &getCodeMemory() const {
+        return _codeMemory;
+    }
+
+    const vector<Block> &getDataMemory() const {
+        return _dataMemory;
+    }
+
+    Word getMemoryRequestIp() const {
+        return _memoryRequestIp;
+    }
+
+    Word getRequestedIp() const {
+        return _requestedIp;
+    }
+
+    Word getRequestedOffset() const {
+        return _requestedOffset;
+    }
+
+    UncachedMem &getMem() const {
+        return _mem;
+    }
+
 private:
     static constexpr size_t failLatency = 152;
     static constexpr size_t codeLatency = 1;
