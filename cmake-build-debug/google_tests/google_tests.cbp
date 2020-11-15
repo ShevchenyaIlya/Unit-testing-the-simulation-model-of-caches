@@ -282,7 +282,19 @@
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp">
 			<Option target="google_tests_run"/>
 		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_code_request_tests.cpp">
+			<Option target="google_tests_run"/>
+		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_code_response_tests.cpp">
+			<Option target="google_tests_run"/>
+		</Unit>
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_created_tests.cpp">
+			<Option target="google_tests_run"/>
+		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_request_tests.cpp">
+			<Option target="google_tests_run"/>
+		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_response_tests.cpp">
 			<Option target="google_tests_run"/>
 		</Unit>
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/lib/googlemock/src/gmock-all.cc">
@@ -296,6 +308,9 @@
 		</Unit>
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/lib/googletest/src/gtest_main.cc">
 			<Option target="gtest_main"/>
+		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/pseudoLRU_tests.cpp">
+			<Option target="google_tests_run"/>
 		</Unit>
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/simple_tests.cpp">
 			<Option target="google_tests_run"/>

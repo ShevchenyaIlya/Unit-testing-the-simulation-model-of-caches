@@ -76,7 +76,7 @@ preinstall: google_tests/preinstall
 CMakeFiles/riscv_sim.dir/all:
 	$(MAKE) -f CMakeFiles/riscv_sim.dir/build.make CMakeFiles/riscv_sim.dir/depend
 	$(MAKE) -f CMakeFiles/riscv_sim.dir/build.make CMakeFiles/riscv_sim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=14,15,16 "Built target riscv_sim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=19,20,21 "Built target riscv_sim"
 .PHONY : CMakeFiles/riscv_sim.dir/all
 
 # Build rule for subdir invocation for target.
@@ -124,12 +124,12 @@ google_tests/CMakeFiles/google_tests_run.dir/all: google_tests/lib/googletest/CM
 google_tests/CMakeFiles/google_tests_run.dir/all: google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/depend
 	$(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=5,6,7,8,9 "Built target google_tests_run"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14 "Built target google_tests_run"
 .PHONY : google_tests/CMakeFiles/google_tests_run.dir/all
 
 # Build rule for subdir invocation for target.
 google_tests/CMakeFiles/google_tests_run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 google_tests/CMakeFiles/google_tests_run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles 0
 .PHONY : google_tests/CMakeFiles/google_tests_run.dir/rule
@@ -266,7 +266,7 @@ google_tests/lib/googletest/preinstall:
 google_tests/lib/googletest/CMakeFiles/gtest_main.dir/all: google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f google_tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make google_tests/lib/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f google_tests/lib/googletest/CMakeFiles/gtest_main.dir/build.make google_tests/lib/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=12,13 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=17,18 "Built target gtest_main"
 .PHONY : google_tests/lib/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -293,7 +293,7 @@ google_tests/lib/googletest/CMakeFiles/gtest_main.dir/clean:
 google_tests/lib/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f google_tests/lib/googletest/CMakeFiles/gtest.dir/build.make google_tests/lib/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f google_tests/lib/googletest/CMakeFiles/gtest.dir/build.make google_tests/lib/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=10,11 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=15,16 "Built target gtest"
 .PHONY : google_tests/lib/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
