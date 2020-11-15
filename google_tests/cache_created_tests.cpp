@@ -30,3 +30,4 @@ TEST_F(CacheMemoryFixture, IsCacheCreated) {
     for (int i = 0; i < cache.getDataMemory()[0].size(); i++)
         ASSERT_EQ(cache.getDataMemory()[2][i].address, 0);
 }
+
