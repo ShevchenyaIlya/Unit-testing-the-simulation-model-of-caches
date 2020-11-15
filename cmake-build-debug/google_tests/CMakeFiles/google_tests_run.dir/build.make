@@ -70,35 +70,65 @@ google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/google_tests_run.dir/simple_tests.cpp.s"
 	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/simple_tests.cpp -o CMakeFiles/google_tests_run.dir/simple_tests.cpp.s
 
-google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.o: google_tests/CMakeFiles/google_tests_run.dir/flags.make
-google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.o: ../google_tests/cache_tests.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.o"
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/google_tests_run.dir/cache_tests.cpp.o -c /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_tests.cpp
+google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o: google_tests/CMakeFiles/google_tests_run.dir/flags.make
+google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o: ../google_tests/cache_created_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o -c /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_created_tests.cpp
 
-google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/google_tests_run.dir/cache_tests.cpp.i"
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_tests.cpp > CMakeFiles/google_tests_run.dir/cache_tests.cpp.i
+google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.i"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_created_tests.cpp > CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.i
 
-google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/google_tests_run.dir/cache_tests.cpp.s"
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_tests.cpp -o CMakeFiles/google_tests_run.dir/cache_tests.cpp.s
+google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.s"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_created_tests.cpp -o CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.s
+
+google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.o: google_tests/CMakeFiles/google_tests_run.dir/flags.make
+google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.o: ../google_tests/basic_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.o"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/google_tests_run.dir/basic_tests.cpp.o -c /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/basic_tests.cpp
+
+google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/google_tests_run.dir/basic_tests.cpp.i"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/basic_tests.cpp > CMakeFiles/google_tests_run.dir/basic_tests.cpp.i
+
+google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/google_tests_run.dir/basic_tests.cpp.s"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/basic_tests.cpp -o CMakeFiles/google_tests_run.dir/basic_tests.cpp.s
+
+google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o: google_tests/CMakeFiles/google_tests_run.dir/flags.make
+google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o: ../google_tests/cache_additional_functions_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o -c /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp
+
+google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.i"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp > CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.i
+
+google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.s"
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp -o CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.s
 
 # Object files for target google_tests_run
 google_tests_run_OBJECTS = \
 "CMakeFiles/google_tests_run.dir/simple_tests.cpp.o" \
-"CMakeFiles/google_tests_run.dir/cache_tests.cpp.o"
+"CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o" \
+"CMakeFiles/google_tests_run.dir/basic_tests.cpp.o" \
+"CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o"
 
 # External object files for target google_tests_run
 google_tests_run_EXTERNAL_OBJECTS =
 
 google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.o
-google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.o
+google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o
+google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.o
+google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o
 google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/build.make
 google_tests/google_tests_run: lib/libgtestd.a
 google_tests/google_tests_run: lib/libgtest_maind.a
 google_tests/google_tests_run: lib/libgtestd.a
 google_tests/google_tests_run: google_tests/CMakeFiles/google_tests_run.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable google_tests_run"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable google_tests_run"
 	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/google_tests_run.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

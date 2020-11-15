@@ -171,32 +171,86 @@ google_tests_run/fast:
 	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/build
 .PHONY : google_tests_run/fast
 
-cache_tests.o: cache_tests.cpp.o
+basic_tests.o: basic_tests.cpp.o
 
-.PHONY : cache_tests.o
+.PHONY : basic_tests.o
 
 # target to build an object file
-cache_tests.cpp.o:
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.o
-.PHONY : cache_tests.cpp.o
+basic_tests.cpp.o:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.o
+.PHONY : basic_tests.cpp.o
 
-cache_tests.i: cache_tests.cpp.i
+basic_tests.i: basic_tests.cpp.i
 
-.PHONY : cache_tests.i
+.PHONY : basic_tests.i
 
 # target to preprocess a source file
-cache_tests.cpp.i:
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.i
-.PHONY : cache_tests.cpp.i
+basic_tests.cpp.i:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.i
+.PHONY : basic_tests.cpp.i
 
-cache_tests.s: cache_tests.cpp.s
+basic_tests.s: basic_tests.cpp.s
 
-.PHONY : cache_tests.s
+.PHONY : basic_tests.s
 
 # target to generate assembly for a file
-cache_tests.cpp.s:
-	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_tests.cpp.s
-.PHONY : cache_tests.cpp.s
+basic_tests.cpp.s:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/basic_tests.cpp.s
+.PHONY : basic_tests.cpp.s
+
+cache_additional_functions_tests.o: cache_additional_functions_tests.cpp.o
+
+.PHONY : cache_additional_functions_tests.o
+
+# target to build an object file
+cache_additional_functions_tests.cpp.o:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.o
+.PHONY : cache_additional_functions_tests.cpp.o
+
+cache_additional_functions_tests.i: cache_additional_functions_tests.cpp.i
+
+.PHONY : cache_additional_functions_tests.i
+
+# target to preprocess a source file
+cache_additional_functions_tests.cpp.i:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.i
+.PHONY : cache_additional_functions_tests.cpp.i
+
+cache_additional_functions_tests.s: cache_additional_functions_tests.cpp.s
+
+.PHONY : cache_additional_functions_tests.s
+
+# target to generate assembly for a file
+cache_additional_functions_tests.cpp.s:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.s
+.PHONY : cache_additional_functions_tests.cpp.s
+
+cache_created_tests.o: cache_created_tests.cpp.o
+
+.PHONY : cache_created_tests.o
+
+# target to build an object file
+cache_created_tests.cpp.o:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.o
+.PHONY : cache_created_tests.cpp.o
+
+cache_created_tests.i: cache_created_tests.cpp.i
+
+.PHONY : cache_created_tests.i
+
+# target to preprocess a source file
+cache_created_tests.cpp.i:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.i
+.PHONY : cache_created_tests.cpp.i
+
+cache_created_tests.s: cache_created_tests.cpp.s
+
+.PHONY : cache_created_tests.s
+
+# target to generate assembly for a file
+cache_created_tests.cpp.s:
+	cd /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug && $(MAKE) -f google_tests/CMakeFiles/google_tests_run.dir/build.make google_tests/CMakeFiles/google_tests_run.dir/cache_created_tests.cpp.s
+.PHONY : cache_created_tests.cpp.s
 
 simple_tests.o: simple_tests.cpp.o
 
@@ -238,9 +292,15 @@ help:
 	@echo "... google_tests_run"
 	@echo "... list_install_components"
 	@echo "... install/local"
-	@echo "... cache_tests.o"
-	@echo "... cache_tests.i"
-	@echo "... cache_tests.s"
+	@echo "... basic_tests.o"
+	@echo "... basic_tests.i"
+	@echo "... basic_tests.s"
+	@echo "... cache_additional_functions_tests.o"
+	@echo "... cache_additional_functions_tests.i"
+	@echo "... cache_additional_functions_tests.s"
+	@echo "... cache_created_tests.o"
+	@echo "... cache_created_tests.i"
+	@echo "... cache_created_tests.s"
 	@echo "... simple_tests.o"
 	@echo "... simple_tests.i"
 	@echo "... simple_tests.s"

@@ -324,7 +324,7 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_tests.cpp
+/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp
 memory
 -
 gtest/gtest.h
