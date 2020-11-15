@@ -515,11 +515,11 @@ public:
         return _waitCycles;
     }
 
-    const vector<Block> &getCodeMemory() const {
+    vector<Block> &getCodeMemory() {
         return _codeMemory;
     }
 
-    const vector<Block> &getDataMemory() const {
+    vector<Block> &getDataMemory(){
         return _dataMemory;
     }
 
