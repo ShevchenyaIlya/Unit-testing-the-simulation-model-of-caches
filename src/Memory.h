@@ -317,7 +317,6 @@ public:
     
     pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
     {
-
         vector<Block> *temporalCacheCopy;
         int blockSize = 0;
         if (dataOrCode) {
