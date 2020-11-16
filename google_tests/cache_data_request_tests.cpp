@@ -6,6 +6,7 @@
 
 #include "gtest/gtest.h"
 #include "../src/Memory.h"
+#include "../src/PoolAllocator.h"
 
 class CacheMemoryFixture : public ::testing::Test {
 protected:
@@ -16,3 +17,4 @@ protected:
     }
     std::unique_ptr<CachedMem> memModelPtr;
 };
+
