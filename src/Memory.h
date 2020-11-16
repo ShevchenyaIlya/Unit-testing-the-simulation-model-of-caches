@@ -514,6 +514,26 @@ public:
         return _waitCycles;
     }
 
+    static const size_t getFailLatency() {
+        return failLatency;
+    }
+
+    static const size_t getCodeLatency() {
+        return codeLatency;
+    }
+
+    static const size_t getDataLatency() {
+        return dataLatency;
+    }
+
+    void setWaitCycles(size_t waitCycles) {
+        _waitCycles = waitCycles;
+    }
+
+    bool isCacheMiss() const {
+        return _cacheMiss;
+    }
+
     vector<Block> &getCodeMemory() {
         return _codeMemory;
     }
@@ -534,8 +554,24 @@ public:
         return _requestedOffset;
     }
 
+    void setMemoryRequestIp(Word memoryRequestIp) {
+        _memoryRequestIp = memoryRequestIp;
+    }
+
+    void setCacheMiss(bool cacheMiss) {
+        _cacheMiss = cacheMiss;
+    }
+
     UncachedMem &getMem() const {
         return _mem;
+    }
+
+    void setRequestedIp(Word requestedIp) {
+        _requestedIp = requestedIp;
+    }
+
+    void setRequestedOffset(Word requestedOffset) {
+        _requestedOffset = requestedOffset;
     }
 
 private:
