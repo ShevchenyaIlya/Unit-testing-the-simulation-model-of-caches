@@ -18,3 +18,12 @@ TEST(tests, tests_sum_eq) {
 TEST(tests, tests_sum_neq) {
     ASSERT_NE(3, sum(2, 2));
 }
+
+
+//TODO: Rerun all prev created tests
+TEST(additional, test_implicit) {
+    MemoryStorage mem ;
+    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+    UncachedMem uncachedMem = UncachedMem (mem);
+    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+}
