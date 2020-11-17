@@ -1,0 +1,844 @@
+        -:    0:Source:/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_additional_functions_tests.cpp
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_additional_functions_tests.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://
+        -:    2:// Created by shevchenya on 15/11/2020.
+        -:    3://
+        -:    4:
+        -:    5:#include <memory>
+        -:    6:#include <random>
+        -:    7:
+        -:    8:#include "gtest/gtest.h"
+        -:    9:#include "../src/Memory.h"
+        -:   10:
+    #####:   11:class CacheMemoryFixture : public ::testing::Test {
+    $$$$$:   11-block  0
+    $$$$$:   11-block  1
+    $$$$$:   11-block  2
+    $$$$$:   11-block  3
+    $$$$$:   11-block  4
+    $$$$$:   11-block  5
+        -:   12:protected:
+    #####:   13:    void SetUp() override {
+    $$$$$:   13-block  0
+    #####:   14:        MemoryStorage mem ;
+    $$$$$:   14-block  0
+    %%%%%:   14-block  1
+    #####:   15:        UncachedMem uncachedMem = UncachedMem (mem);
+    $$$$$:   15-block  0
+    %%%%%:   15-block  1
+    #####:   16:        memModelPtr = std::make_unique<CachedMem> ( uncachedMem);
+    $$$$$:   16-block  0
+    #####:   17:    }
+        -:   18:    std::unique_ptr<CachedMem> memModelPtr;
+        -:   19:};
+        -:   20:
+        8:   21:TEST_F(CacheMemoryFixture, CheckAddressTests) {
+        1:   21-block  0
+        1:   21-block  1
+        1:   21-block  2
+        1:   21-block  3
+        1:   21-block  4
+    %%%%%:   21-block  5
+    %%%%%:   21-block  6
+    %%%%%:   21-block  7
+    %%%%%:   21-block  8
+    %%%%%:   21-block  9
+    %%%%%:   21-block 10
+        1:   21-block 11
+        1:   21-block 12
+        1:   21-block 13
+        1:   21-block 14
+        1:   21-block 15
+        2:   22:    CachedMem cache = *memModelPtr;
+        1:   22-block  0
+        1:   22-block  1
+        1:   22-block  2
+    $$$$$:   22-block  3
+        1:   22-block  4
+    %%%%%:   22-block  5
+        1:   23:    ASSERT_FALSE(cache.checkAddress(true, 512));
+        1:   23-block  0
+        1:   23-block  1
+    $$$$$:   23-block  2
+    $$$$$:   23-block  3
+    $$$$$:   23-block  4
+    $$$$$:   23-block  5
+    $$$$$:   23-block  6
+        1:   23-block  7
+        1:   23-block  8
+        1:   23-block  9
+    %%%%%:   23-block 10
+    %%%%%:   23-block 11
+    %%%%%:   23-block 12
+    %%%%%:   23-block 13
+    %%%%%:   23-block 14
+    %%%%%:   23-block 15
+    %%%%%:   23-block 16
+    %%%%%:   23-block 17
+        1:   24:    ASSERT_FALSE(cache.checkAddress(false, 1024));
+        1:   24-block  0
+    $$$$$:   24-block  1
+        1:   24-block  2
+    $$$$$:   24-block  3
+    $$$$$:   24-block  4
+    $$$$$:   24-block  5
+    $$$$$:   24-block  6
+    $$$$$:   24-block  7
+        1:   24-block  8
+        1:   24-block  9
+        1:   24-block 10
+    %%%%%:   24-block 11
+    %%%%%:   24-block 12
+    %%%%%:   24-block 13
+    %%%%%:   24-block 14
+    %%%%%:   24-block 15
+    %%%%%:   24-block 16
+    %%%%%:   24-block 17
+    %%%%%:   24-block 18
+        -:   25:
+        1:   26:    cache.getDataMemory()[0][4].address = 512;
+        1:   26-block  0
+        1:   27:    cache.getCodeMemory()[0][0].address = 1024;
+        -:   28:
+        1:   29:    ASSERT_TRUE(cache.checkAddress(true, 512));
+    $$$$$:   29-block  0
+        1:   29-block  1
+    $$$$$:   29-block  2
+    $$$$$:   29-block  3
+    $$$$$:   29-block  4
+    $$$$$:   29-block  5
+    $$$$$:   29-block  6
+        1:   29-block  7
+        1:   29-block  8
+        1:   29-block  9
+    %%%%%:   29-block 10
+    %%%%%:   29-block 11
+    %%%%%:   29-block 12
+    %%%%%:   29-block 13
+    %%%%%:   29-block 14
+    %%%%%:   29-block 15
+    %%%%%:   29-block 16
+    %%%%%:   29-block 17
+        1:   30:    ASSERT_TRUE(cache.checkAddress(false, 1024));
+        1:   30-block  0
+    $$$$$:   30-block  1
+        1:   30-block  2
+    $$$$$:   30-block  3
+    $$$$$:   30-block  4
+    $$$$$:   30-block  5
+    $$$$$:   30-block  6
+    $$$$$:   30-block  7
+        1:   30-block  8
+        1:   30-block  9
+        1:   30-block 10
+    %%%%%:   30-block 11
+    %%%%%:   30-block 12
+    %%%%%:   30-block 13
+    %%%%%:   30-block 14
+    %%%%%:   30-block 15
+    %%%%%:   30-block 16
+    %%%%%:   30-block 17
+    %%%%%:   30-block 18
+        -:   31:
+        1:   32:    cache.getDataMemory()[0][4].address = 511;
+        1:   32-block  0
+        1:   33:    cache.getDataMemory()[1][4].address = 512;
+        1:   34:    cache.getCodeMemory()[0][0].address = 128;
+        1:   35:    cache.getCodeMemory()[1][0].address = 1024;
+        -:   36:
+        1:   37:    ASSERT_TRUE(cache.checkAddress(true, 512));
+    $$$$$:   37-block  0
+        1:   37-block  1
+    $$$$$:   37-block  2
+    $$$$$:   37-block  3
+    $$$$$:   37-block  4
+    $$$$$:   37-block  5
+    $$$$$:   37-block  6
+        1:   37-block  7
+        1:   37-block  8
+        1:   37-block  9
+    %%%%%:   37-block 10
+    %%%%%:   37-block 11
+    %%%%%:   37-block 12
+    %%%%%:   37-block 13
+    %%%%%:   37-block 14
+    %%%%%:   37-block 15
+    %%%%%:   37-block 16
+    %%%%%:   37-block 17
+        1:   38:    ASSERT_TRUE(cache.checkAddress(false, 1024));
+        1:   38-block  0
+    $$$$$:   38-block  1
+        1:   38-block  2
+    $$$$$:   38-block  3
+    $$$$$:   38-block  4
+    $$$$$:   38-block  5
+    $$$$$:   38-block  6
+    $$$$$:   38-block  7
+        1:   38-block  8
+        1:   38-block  9
+        1:   38-block 10
+    %%%%%:   38-block 11
+    %%%%%:   38-block 12
+    %%%%%:   38-block 13
+    %%%%%:   38-block 14
+    %%%%%:   38-block 15
+    %%%%%:   38-block 16
+    %%%%%:   38-block 17
+    %%%%%:   38-block 18
+    %%%%%:   38-block 19
+        -:   39:
+        5:   40:    for(Block block : cache.getCodeMemory())
+        1:   40-block  0
+    $$$$$:   40-block  1
+        5:   40-block  2
+        4:   40-block  3
+        4:   40-block  4
+        -:   41:    {
+       12:   42:        for(int i = 0; i < block.size(); i++)
+        4:   42-block  0
+       12:   42-block  1
+        -:   43:        {
+        8:   44:            Word randomValue = rand() % 1024;
+        8:   44-block  0
+        8:   45:            if (randomValue == 512)
+    #####:   46:                randomValue += 12;
+    $$$$$:   46-block  0
+        8:   47:            block[i].address = randomValue;
+        8:   47-block  0
+        -:   48:        }
+        -:   49:    }
+        -:   50:
+        1:   51:    ASSERT_FALSE(cache.checkAddress(false, 512));
+        1:   51-block  0
+        1:   51-block  1
+    $$$$$:   51-block  2
+    $$$$$:   51-block  3
+    $$$$$:   51-block  4
+    $$$$$:   51-block  5
+    $$$$$:   51-block  6
+        1:   51-block  7
+        1:   51-block  8
+        1:   51-block  9
+    %%%%%:   51-block 10
+    %%%%%:   51-block 11
+    %%%%%:   51-block 12
+    %%%%%:   51-block 13
+    %%%%%:   51-block 14
+    %%%%%:   51-block 15
+    %%%%%:   51-block 16
+    %%%%%:   51-block 17
+    %%%%%:   51-block 18
+        -:   52:
+        5:   53:    for(Block block : cache.getDataMemory())
+        1:   53-block  0
+    $$$$$:   53-block  1
+        5:   53-block  2
+        4:   53-block  3
+        4:   53-block  4
+        -:   54:    {
+       36:   55:        for(int i = 0; i < block.size(); i++)
+        4:   55-block  0
+       36:   55-block  1
+        -:   56:        {
+       32:   57:            Word randomValue = rand() % 2048;
+       32:   57-block  0
+       32:   58:            if (randomValue == 1024)
+    #####:   59:                randomValue++;
+    $$$$$:   59-block  0
+       32:   60:            block[i].address = randomValue;
+       32:   60-block  0
+        -:   61:        }
+        -:   62:    }
+        -:   63:
+        1:   64:    ASSERT_FALSE(cache.checkAddress(true, 1024));
+        1:   64-block  0
+        1:   64-block  1
+    $$$$$:   64-block  2
+    $$$$$:   64-block  3
+    $$$$$:   64-block  4
+    $$$$$:   64-block  5
+    $$$$$:   64-block  6
+        1:   64-block  7
+        1:   64-block  8
+        1:   64-block  9
+        1:   64-block 10
+    $$$$$:   64-block 11
+        1:   64-block 12
+    %%%%%:   64-block 13
+    %%%%%:   64-block 14
+    %%%%%:   64-block 15
+    %%%%%:   64-block 16
+    %%%%%:   64-block 17
+    %%%%%:   64-block 18
+    %%%%%:   64-block 19
+    %%%%%:   64-block 20
+        -:   65:}
+        -:   66:
+        -:   67:
+        8:   68:TEST_F(CacheMemoryFixture, CheckAllBitsTests) {
+        1:   68-block  0
+        1:   68-block  1
+        1:   68-block  2
+        1:   68-block  3
+        1:   68-block  4
+    %%%%%:   68-block  5
+    %%%%%:   68-block  6
+    %%%%%:   68-block  7
+    %%%%%:   68-block  8
+    %%%%%:   68-block  9
+    %%%%%:   68-block 10
+        1:   68-block 11
+        1:   68-block 12
+        1:   68-block 13
+        1:   68-block 14
+        1:   68-block 15
+        2:   69:    std::random_device rd;
+        1:   69-block  0
+        1:   69-block  1
+        1:   69-block  2
+        1:   69-block  3
+        1:   69-block  4
+    $$$$$:   69-block  5
+        1:   69-block  6
+    %%%%%:   69-block  7
+    %%%%%:   69-block  8
+    %%%%%:   69-block  9
+    %%%%%:   69-block 10
+    %%%%%:   69-block 11
+        1:   70:    std::mt19937 gen(rd());
+        1:   70-block  0
+        1:   71:    std::uniform_int_distribution<> distrib(0, blockCount);
+        1:   71-block  0
+        2:   72:    CachedMem cache = *memModelPtr;
+        1:   72-block  0
+        1:   72-block  1
+    $$$$$:   72-block  2
+        1:   72-block  3
+        1:   72-block  4
+    %%%%%:   72-block  5
+        -:   73:
+        1:   74:    ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), distrib(gen), (512 % (codeCacheBytes / blockCount)) / lineSizeBytes));
+        1:   74-block  0
+        1:   74-block  1
+    $$$$$:   74-block  2
+    $$$$$:   74-block  3
+    $$$$$:   74-block  4
+    $$$$$:   74-block  5
+    $$$$$:   74-block  6
+        1:   74-block  7
+        1:   74-block  8
+        1:   74-block  9
+    %%%%%:   74-block 10
+    %%%%%:   74-block 11
+    %%%%%:   74-block 12
+    %%%%%:   74-block 13
+    %%%%%:   74-block 14
+    %%%%%:   74-block 15
+    %%%%%:   74-block 16
+    %%%%%:   74-block 17
+        1:   75:    ASSERT_FALSE(cache.checkAllBits(cache.getDataMemory(), distrib(gen), (640 % (dataCacheBytes / blockCount)) / lineSizeBytes));
+        1:   75-block  0
+    $$$$$:   75-block  1
+        1:   75-block  2
+    $$$$$:   75-block  3
+    $$$$$:   75-block  4
+    $$$$$:   75-block  5
+    $$$$$:   75-block  6
+    $$$$$:   75-block  7
+        1:   75-block  8
+        1:   75-block  9
+        1:   75-block 10
+    %%%%%:   75-block 11
+    %%%%%:   75-block 12
+    %%%%%:   75-block 13
+    %%%%%:   75-block 14
+    %%%%%:   75-block 15
+    %%%%%:   75-block 16
+    %%%%%:   75-block 17
+    %%%%%:   75-block 18
+        -:   76:
+        1:   77:    int blockId = distrib(gen);
+        1:   77-block  0
+    $$$$$:   77-block  1
+        5:   78:    for (Block &block : cache.getCodeMemory()) {
+        1:   78-block  0
+        5:   78-block  1
+        4:   78-block  2
+        4:   79:        block[blockId].lastUsage = 1;
+        -:   80:    }
+        -:   81:
+        1:   82:    ASSERT_TRUE(cache.checkAllBits(cache.getCodeMemory(), distrib(gen), blockId));
+        1:   82-block  0
+        1:   82-block  1
+    $$$$$:   82-block  2
+    $$$$$:   82-block  3
+    $$$$$:   82-block  4
+    $$$$$:   82-block  5
+    $$$$$:   82-block  6
+        1:   82-block  7
+        1:   82-block  8
+        1:   82-block  9
+    %%%%%:   82-block 10
+    %%%%%:   82-block 11
+    %%%%%:   82-block 12
+    %%%%%:   82-block 13
+    %%%%%:   82-block 14
+    %%%%%:   82-block 15
+    %%%%%:   82-block 16
+    %%%%%:   82-block 17
+        -:   83:
+        1:   84:    blockId = distrib(gen);
+        1:   84-block  0
+    $$$$$:   84-block  1
+        5:   85:    for (Block &block : cache.getDataMemory()) {
+        1:   85-block  0
+        5:   85-block  1
+        4:   85-block  2
+        4:   86:        block[blockId].lastUsage = 1;
+        -:   87:    }
+        -:   88:
+        1:   89:    ASSERT_TRUE(cache.checkAllBits(cache.getDataMemory(), distrib(gen), blockId));
+        1:   89-block  0
+        1:   89-block  1
+    $$$$$:   89-block  2
+    $$$$$:   89-block  3
+    $$$$$:   89-block  4
+    $$$$$:   89-block  5
+    $$$$$:   89-block  6
+        1:   89-block  7
+        1:   89-block  8
+        1:   89-block  9
+    %%%%%:   89-block 10
+    %%%%%:   89-block 11
+    %%%%%:   89-block 12
+    %%%%%:   89-block 13
+    %%%%%:   89-block 14
+    %%%%%:   89-block 15
+    %%%%%:   89-block 16
+    %%%%%:   89-block 17
+        -:   90:
+        1:   91:    cache.getCodeMemory()[2][3].lastUsage = 0;
+        1:   91-block  0
+        1:   92:    ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
+    $$$$$:   92-block  0
+    $$$$$:   92-block  1
+    $$$$$:   92-block  2
+    $$$$$:   92-block  3
+    $$$$$:   92-block  4
+    $$$$$:   92-block  5
+        1:   92-block  6
+        1:   92-block  7
+        1:   92-block  8
+    %%%%%:   92-block  9
+    %%%%%:   92-block 10
+    %%%%%:   92-block 11
+    %%%%%:   92-block 12
+    %%%%%:   92-block 13
+    %%%%%:   92-block 14
+    %%%%%:   92-block 15
+    %%%%%:   92-block 16
+        -:   93:
+        1:   94:    cache.getDataMemory()[3][2].lastUsage = 0;
+        1:   94-block  0
+        1:   95:    ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
+    $$$$$:   95-block  0
+    $$$$$:   95-block  1
+    $$$$$:   95-block  2
+    $$$$$:   95-block  3
+    $$$$$:   95-block  4
+    $$$$$:   95-block  5
+        1:   95-block  6
+        1:   95-block  7
+        1:   95-block  8
+        1:   95-block  9
+    $$$$$:   95-block 10
+        1:   95-block 11
+    %%%%%:   95-block 12
+    %%%%%:   95-block 13
+    %%%%%:   95-block 14
+    %%%%%:   95-block 15
+    %%%%%:   95-block 16
+    %%%%%:   95-block 17
+    %%%%%:   95-block 18
+    %%%%%:   95-block 19
+        -:   96:}
+        -:   97:
+        -:   98:
+        8:   99:TEST_F(CacheMemoryFixture, ChangeLRUBitTests) {
+        1:   99-block  0
+        1:   99-block  1
+        1:   99-block  2
+        1:   99-block  3
+        1:   99-block  4
+    %%%%%:   99-block  5
+    %%%%%:   99-block  6
+    %%%%%:   99-block  7
+    %%%%%:   99-block  8
+    %%%%%:   99-block  9
+    %%%%%:   99-block 10
+        1:   99-block 11
+        1:   99-block 12
+        1:   99-block 13
+        1:   99-block 14
+        1:   99-block 15
+        2:  100:    CachedMem cache = *memModelPtr;
+        1:  100-block  0
+        1:  100-block  1
+        1:  100-block  2
+    $$$$$:  100-block  3
+        1:  100-block  4
+    %%%%%:  100-block  5
+    %%%%%:  100-block  6
+        -:  101:
+        1:  102:    CachedMem::changeLRUBit(cache.getDataMemory(), 0, 0);
+        1:  102-block  0
+        5:  103:    for (Block block : cache.getDataMemory()) {
+        5:  103-block  0
+        4:  103-block  1
+        4:  103-block  2
+        4:  103-block  3
+    %%%%%:  103-block  4
+    %%%%%:  103-block  5
+    %%%%%:  103-block  6
+        4:  104:        ASSERT_EQ(block[0].lastUsage, 0);
+        4:  104-block  0
+        4:  104-block  1
+    $$$$$:  104-block  2
+    $$$$$:  104-block  3
+    $$$$$:  104-block  4
+    $$$$$:  104-block  5
+        4:  104-block  6
+        4:  104-block  7
+        4:  104-block  8
+        4:  104-block  9
+    $$$$$:  104-block 10
+        4:  104-block 11
+    %%%%%:  104-block 12
+    %%%%%:  104-block 13
+    %%%%%:  104-block 14
+    %%%%%:  104-block 15
+    %%%%%:  104-block 16
+    %%%%%:  104-block 17
+    %%%%%:  104-block 18
+        -:  105:    }
+        -:  106:
+        1:  107:    CachedMem::changeLRUBit(cache.getCodeMemory(), 1, 1);
+        1:  107-block  0
+        5:  108:    for (Block block : cache.getDataMemory()) {
+    $$$$$:  108-block  0
+        5:  108-block  1
+        4:  108-block  2
+        4:  108-block  3
+        4:  108-block  4
+    %%%%%:  108-block  5
+    %%%%%:  108-block  6
+    %%%%%:  108-block  7
+        4:  109:        ASSERT_EQ(block[1].lastUsage, 0);
+        4:  109-block  0
+        4:  109-block  1
+    $$$$$:  109-block  2
+    $$$$$:  109-block  3
+    $$$$$:  109-block  4
+    $$$$$:  109-block  5
+        4:  109-block  6
+        4:  109-block  7
+        4:  109-block  8
+        4:  109-block  9
+    $$$$$:  109-block 10
+        4:  109-block 11
+    %%%%%:  109-block 12
+    %%%%%:  109-block 13
+    %%%%%:  109-block 14
+    %%%%%:  109-block 15
+    %%%%%:  109-block 16
+    %%%%%:  109-block 17
+    %%%%%:  109-block 18
+        -:  110:    }
+        -:  111:
+        5:  112:    for (Block &block : cache.getDataMemory()) {
+        1:  112-block  0
+    $$$$$:  112-block  1
+        5:  112-block  2
+        4:  112-block  3
+        4:  113:        block[2].lastUsage = 1;
+        -:  114:    }
+        -:  115:
+        5:  116:    for (Block &block : cache.getCodeMemory()) {
+        1:  116-block  0
+        5:  116-block  1
+        4:  116-block  2
+        4:  117:        block[3].lastUsage = 1;
+        -:  118:    }
+        -:  119:
+        1:  120:    CachedMem::changeLRUBit(cache.getDataMemory(), 0, 2);
+        1:  120-block  0
+        5:  121:    for (int i = 0; i < cache.getDataMemory().size(); i++) {
+        5:  121-block  0
+        4:  121-block  1
+        4:  122:        if (i == 0)
+        4:  122-block  0
+        1:  123:            ASSERT_EQ(cache.getDataMemory()[i][2].lastUsage, 1);
+        1:  123-block  0
+        1:  123-block  1
+    $$$$$:  123-block  2
+    $$$$$:  123-block  3
+    $$$$$:  123-block  4
+    $$$$$:  123-block  5
+        1:  123-block  6
+        1:  123-block  7
+        1:  123-block  8
+        1:  123-block  9
+    $$$$$:  123-block 10
+    %%%%%:  123-block 11
+    %%%%%:  123-block 12
+    %%%%%:  123-block 13
+    %%%%%:  123-block 14
+    %%%%%:  123-block 15
+    %%%%%:  123-block 16
+    %%%%%:  123-block 17
+    %%%%%:  123-block 18
+        -:  124:        else
+        3:  125:            ASSERT_EQ(cache.getDataMemory()[i][2].lastUsage, 0);
+        3:  125-block  0
+        3:  125-block  1
+    $$$$$:  125-block  2
+    $$$$$:  125-block  3
+    $$$$$:  125-block  4
+    $$$$$:  125-block  5
+        3:  125-block  6
+        3:  125-block  7
+        3:  125-block  8
+        3:  125-block  9
+    $$$$$:  125-block 10
+    %%%%%:  125-block 11
+    %%%%%:  125-block 12
+    %%%%%:  125-block 13
+    %%%%%:  125-block 14
+    %%%%%:  125-block 15
+    %%%%%:  125-block 16
+    %%%%%:  125-block 17
+    %%%%%:  125-block 18
+        -:  126:    }
+        -:  127:
+        1:  128:    CachedMem::changeLRUBit(cache.getCodeMemory(), 1, 3);
+        1:  128-block  0
+        5:  129:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        5:  129-block  0
+        4:  129-block  1
+        1:  129-block  2
+        1:  129-block  3
+        4:  130:        if (i == 1)
+        4:  130-block  0
+        1:  131:            ASSERT_EQ(cache.getCodeMemory()[i][3].lastUsage, 1);
+        1:  131-block  0
+        1:  131-block  1
+    $$$$$:  131-block  2
+    $$$$$:  131-block  3
+    $$$$$:  131-block  4
+    $$$$$:  131-block  5
+        1:  131-block  6
+        1:  131-block  7
+        1:  131-block  8
+        1:  131-block  9
+    $$$$$:  131-block 10
+    %%%%%:  131-block 11
+    %%%%%:  131-block 12
+    %%%%%:  131-block 13
+    %%%%%:  131-block 14
+    %%%%%:  131-block 15
+    %%%%%:  131-block 16
+    %%%%%:  131-block 17
+    %%%%%:  131-block 18
+        -:  132:        else
+        3:  133:            ASSERT_EQ(cache.getCodeMemory()[i][3].lastUsage, 0);
+        3:  133-block  0
+        3:  133-block  1
+    $$$$$:  133-block  2
+    $$$$$:  133-block  3
+    $$$$$:  133-block  4
+    $$$$$:  133-block  5
+        3:  133-block  6
+        3:  133-block  7
+        3:  133-block  8
+        3:  133-block  9
+    $$$$$:  133-block 10
+    %%%%%:  133-block 11
+    %%%%%:  133-block 12
+    %%%%%:  133-block 13
+    %%%%%:  133-block 14
+    %%%%%:  133-block 15
+    %%%%%:  133-block 16
+    %%%%%:  133-block 17
+        -:  134:    }
+        -:  135:}
+        -:  136:
+        -:  137:
+        8:  138:TEST_F(CacheMemoryFixture, IfAllMarkedTests) {
+        1:  138-block  0
+        1:  138-block  1
+        1:  138-block  2
+        1:  138-block  3
+        1:  138-block  4
+    %%%%%:  138-block  5
+    %%%%%:  138-block  6
+    %%%%%:  138-block  7
+    %%%%%:  138-block  8
+    %%%%%:  138-block  9
+        1:  138-block 10
+        1:  138-block 11
+        1:  138-block 12
+        1:  138-block 13
+        1:  138-block 14
+        2:  139:    CachedMem cache = *memModelPtr;
+        1:  139-block  0
+        1:  139-block  1
+        1:  139-block  2
+    $$$$$:  139-block  3
+        1:  139-block  4
+    %%%%%:  139-block  5
+        1:  140:    ASSERT_FALSE(cache.ifAllMarked(cache.getDataMemory(), (512 % (dataCacheBytes / blockCount) / lineSizeBytes)));
+        1:  140-block  0
+    $$$$$:  140-block  1
+    $$$$$:  140-block  2
+    $$$$$:  140-block  3
+    $$$$$:  140-block  4
+    $$$$$:  140-block  5
+        1:  140-block  6
+        1:  140-block  7
+        1:  140-block  8
+    %%%%%:  140-block  9
+    %%%%%:  140-block 10
+    %%%%%:  140-block 11
+    %%%%%:  140-block 12
+    %%%%%:  140-block 13
+    %%%%%:  140-block 14
+    %%%%%:  140-block 15
+    %%%%%:  140-block 16
+        1:  141:    ASSERT_FALSE(cache.ifAllMarked(cache.getCodeMemory(), (512 % (codeCacheBytes / blockCount) / lineSizeBytes)));
+        1:  141-block  0
+    $$$$$:  141-block  1
+    $$$$$:  141-block  2
+    $$$$$:  141-block  3
+    $$$$$:  141-block  4
+    $$$$$:  141-block  5
+    $$$$$:  141-block  6
+        1:  141-block  7
+        1:  141-block  8
+        1:  141-block  9
+    %%%%%:  141-block 10
+    %%%%%:  141-block 11
+    %%%%%:  141-block 12
+    %%%%%:  141-block 13
+    %%%%%:  141-block 14
+    %%%%%:  141-block 15
+    %%%%%:  141-block 16
+    %%%%%:  141-block 17
+        -:  142:
+        5:  143:    for (Block &block : cache.getDataMemory()) {
+        1:  143-block  0
+    $$$$$:  143-block  1
+        5:  143-block  2
+        4:  143-block  3
+        4:  144:        block[(512 % (dataCacheBytes / blockCount)) / lineSizeBytes].address = rand() % 1024 + 1;
+        -:  145:    }
+        -:  146:
+        1:  147:    ASSERT_TRUE(cache.ifAllMarked(cache.getDataMemory(), (512 % (dataCacheBytes / blockCount) / lineSizeBytes)));
+        1:  147-block  0
+    $$$$$:  147-block  1
+    $$$$$:  147-block  2
+    $$$$$:  147-block  3
+    $$$$$:  147-block  4
+    $$$$$:  147-block  5
+        1:  147-block  6
+        1:  147-block  7
+        1:  147-block  8
+    %%%%%:  147-block  9
+    %%%%%:  147-block 10
+    %%%%%:  147-block 11
+    %%%%%:  147-block 12
+    %%%%%:  147-block 13
+    %%%%%:  147-block 14
+    %%%%%:  147-block 15
+    %%%%%:  147-block 16
+        -:  148:
+        5:  149:    for (Block &block : cache.getCodeMemory()) {
+        1:  149-block  0
+    $$$$$:  149-block  1
+        5:  149-block  2
+        4:  149-block  3
+        4:  150:        block[(512 % (codeCacheBytes / blockCount) / lineSizeBytes)].address = rand() % 1024 + 1;
+        -:  151:    }
+        -:  152:
+        1:  153:    ASSERT_TRUE(cache.ifAllMarked(cache.getCodeMemory(), (512 % (codeCacheBytes / blockCount) / lineSizeBytes)));
+        1:  153-block  0
+    $$$$$:  153-block  1
+    $$$$$:  153-block  2
+    $$$$$:  153-block  3
+    $$$$$:  153-block  4
+    $$$$$:  153-block  5
+        1:  153-block  6
+        1:  153-block  7
+        1:  153-block  8
+    %%%%%:  153-block  9
+    %%%%%:  153-block 10
+    %%%%%:  153-block 11
+    %%%%%:  153-block 12
+    %%%%%:  153-block 13
+    %%%%%:  153-block 14
+    %%%%%:  153-block 15
+    %%%%%:  153-block 16
+        -:  154:
+        1:  155:    cache.getCodeMemory()[rand() % blockCount][(512 % (codeCacheBytes / blockCount) / lineSizeBytes)].address = 0;
+        1:  155-block  0
+        1:  156:    cache.getDataMemory()[rand() % blockCount][(512 % (dataCacheBytes / blockCount) / lineSizeBytes)].address = 0;
+        -:  157:
+        1:  158:    ASSERT_FALSE(cache.ifAllMarked(cache.getDataMemory(), (512 % (dataCacheBytes / blockCount) / lineSizeBytes)));
+    $$$$$:  158-block  0
+    $$$$$:  158-block  1
+    $$$$$:  158-block  2
+    $$$$$:  158-block  3
+    $$$$$:  158-block  4
+    $$$$$:  158-block  5
+        1:  158-block  6
+        1:  158-block  7
+        1:  158-block  8
+    %%%%%:  158-block  9
+    %%%%%:  158-block 10
+    %%%%%:  158-block 11
+    %%%%%:  158-block 12
+    %%%%%:  158-block 13
+    %%%%%:  158-block 14
+    %%%%%:  158-block 15
+    %%%%%:  158-block 16
+        1:  159:    ASSERT_FALSE(cache.ifAllMarked(cache.getCodeMemory(), (512 % (codeCacheBytes / blockCount) / lineSizeBytes)));
+        1:  159-block  0
+    $$$$$:  159-block  1
+    $$$$$:  159-block  2
+    $$$$$:  159-block  3
+    $$$$$:  159-block  4
+    $$$$$:  159-block  5
+    $$$$$:  159-block  6
+        1:  159-block  7
+        1:  159-block  8
+        1:  159-block  9
+        1:  159-block 10
+    $$$$$:  159-block 11
+        1:  159-block 12
+    %%%%%:  159-block 13
+    %%%%%:  159-block 14
+    %%%%%:  159-block 15
+    %%%%%:  159-block 16
+    %%%%%:  159-block 17
+    %%%%%:  159-block 18
+    %%%%%:  159-block 19
+    %%%%%:  159-block 20
+        4:  160:}
+        1:  160-block  0
+        1:  160-block  1
+        1:  160-block  2
+        1:  160-block  3
+        1:  160-block  4
+        1:  160-block  5

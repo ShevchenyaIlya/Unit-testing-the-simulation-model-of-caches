@@ -1,0 +1,764 @@
+        -:    0:Source:/home/shevchenya/CLionProjects/CourseWorkCache/src/Memory.h
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#ifndef RISCV_SIM_DATAMEMORY_H
+        -:    2:#define RISCV_SIM_DATAMEMORY_H
+        -:    3:
+        -:    4:#include "Instruction.h"
+        -:    5:#include <iostream>
+        -:    6:#include <algorithm>
+        -:    7:#include <fstream>
+        -:    8:#include <elf.h>
+        -:    9:#include <cstring>
+        -:   10:#include <vector>
+        -:   11:#include <cassert>
+        -:   12:#include <map>
+        -:   13:#include <unordered_map>
+        -:   14:
+        -:   15:using namespace std;
+        -:   16:
+        -:   17:
+        -:   18:static constexpr size_t blockCount = 4;
+        -:   19:static constexpr size_t memSize = 1024*1024; // memory size in 4-byte words
+        -:   20:static constexpr size_t lineSizeBytes = 128;
+        -:   21:static constexpr size_t lineSizeWords = lineSizeBytes / sizeof(Word);
+        -:   22:static constexpr size_t dataCacheBytes = 4096;
+        -:   23:static constexpr size_t codeCacheBytes = 1024;
+        -:   24:
+        -:   25:
+        -:   26:using Line = std::array<Word, lineSizeWords>;
+        -:   27:struct CacheCell {
+        -:   28:    Word address;
+        -:   29:    Line dataLine;
+        -:   30:    Word lastUsage;
+        -:   31:    bool validityBit;
+        -:   32:};
+        -:   33:
+        -:   34:using Block = vector<CacheCell>;
+        -:   35:
+      576:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
+      288:   36-block  0
+      288:   36-block  1
+    #####:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
+    $$$$$:   37-block  0
+    $$$$$:   37-block  1
+    #####:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
+    $$$$$:   38-block  0
+    $$$$$:   38-block  1
+        -:   39:
+       70:   40:class MemoryStorage {
+       35:   40-block  0
+       35:   40-block  1
+        -:   41:public:
+        -:   42:
+       35:   43:    MemoryStorage()
+       35:   43-block  0
+       35:   44:    {
+       35:   44-block  0
+    %%%%%:   44-block  1
+       35:   45:        _mem.resize(memSize);
+       35:   46:    }
+       35:   46-block  0
+        -:   47:
+        7:   48:    bool LoadElf(const std::string &elf_filename) {
+        7:   48-block  0
+       14:   49:        std::ifstream elffile;
+        7:   49-block  0
+        7:   49-block  1
+        7:   49-block  2
+    %%%%%:   49-block  3
+    %%%%%:   49-block  4
+        7:   50:        elffile.open(elf_filename, std::ios::in | std::ios::binary);
+        7:   50-block  0
+        -:   51:
+        7:   52:        if (!elffile.is_open()) {
+        7:   52-block  0
+        7:   52-block  1
+    #####:   53:            std::cerr << "ERROR: load_elf: failed opening file \"" << elf_filename << "\"" << std::endl;
+    $$$$$:   53-block  0
+    $$$$$:   53-block  1
+    $$$$$:   53-block  2
+    $$$$$:   53-block  3
+    #####:   54:            return false;
+    $$$$$:   54-block  0
+        -:   55:        }
+        -:   56:
+        7:   57:        elffile.seekg(0, elffile.end);
+        7:   57-block  0
+        7:   58:        size_t buf_sz = elffile.tellg();
+        7:   58-block  0
+        7:   58-block  1
+        7:   59:        elffile.seekg(0, elffile.beg);
+        -:   60:
+        -:   61:        // Read the entire file. If it doesn't fit in host memory, it won't fit in the risc-v processor
+       14:   62:        std::vector<char> buf(buf_sz);
+        7:   62-block  0
+        7:   62-block  1
+        7:   62-block  2
+    %%%%%:   62-block  3
+    %%%%%:   62-block  4
+        7:   63:        elffile.read(buf.data(), buf_sz);
+        -:   64:
+        7:   65:        if (!elffile) {
+        7:   65-block  0
+        7:   65-block  1
+    #####:   66:            std::cerr << "ERROR: load_elf: failed reading elf header" << std::endl;
+    $$$$$:   66-block  0
+    $$$$$:   66-block  1
+    #####:   67:            return false;
+    $$$$$:   67-block  0
+        -:   68:        }
+        -:   69:
+        7:   70:        if (buf_sz < sizeof(Elf32_Ehdr)) {
+        7:   70-block  0
+    #####:   71:            std::cerr << "ERROR: load_elf: file too small to be a valid elf file" << std::endl;
+    $$$$$:   71-block  0
+    $$$$$:   71-block  1
+    #####:   72:            return false;
+    $$$$$:   72-block  0
+        -:   73:        }
+        -:   74:
+        -:   75:        // make sure the header matches elf32 or elf64
+        7:   76:        Elf32_Ehdr *ehdr = (Elf32_Ehdr *) buf.data();
+        7:   76-block  0
+        7:   77:        unsigned char* e_ident = ehdr->e_ident;
+        7:   78:        if (e_ident[EI_MAG0] != ELFMAG0
+        7:   79:            || e_ident[EI_MAG1] != ELFMAG1
+        7:   79-block  0
+        7:   80:            || e_ident[EI_MAG2] != ELFMAG2
+        7:   80-block  0
+        7:   81:            || e_ident[EI_MAG3] != ELFMAG3) {
+        7:   81-block  0
+    #####:   82:            std::cerr << "ERROR: load_elf: file is not an elf file" << std::endl;
+    $$$$$:   82-block  0
+    $$$$$:   82-block  1
+    #####:   83:            return false;
+    $$$$$:   83-block  0
+        -:   84:        }
+        -:   85:
+        7:   86:        if (e_ident[EI_CLASS] == ELFCLASS32) {
+        7:   86-block  0
+        -:   87:            // 32-bit ELF
+        7:   88:            return this->LoadElfSpecific<Elf32_Ehdr, Elf32_Phdr>(buf.data(), buf_sz);
+        7:   88-block  0
+        7:   88-block  1
+    #####:   89:        } else if (e_ident[EI_CLASS] == ELFCLASS64) {
+    $$$$$:   89-block  0
+        -:   90:            // 64-bit ELF
+    #####:   91:            return this->LoadElfSpecific<Elf64_Ehdr, Elf64_Phdr>(buf.data(), buf_sz);
+    $$$$$:   91-block  0
+    $$$$$:   91-block  1
+        -:   92:        } else {
+    #####:   93:            std::cerr << "ERROR: load_elf: file is neither 32-bit nor 64-bit" << std::endl;
+    $$$$$:   93-block  0
+    $$$$$:   93-block  1
+    #####:   94:            return false;
+    $$$$$:   94-block  0
+        -:   95:        }
+        -:   96:    }
+        -:   97:
+      224:   98:    Word Read(Word ip)
+      224:   98-block  0
+        -:   99:    {
+      224:  100:        return _mem[ToWordAddr(ip)];
+      224:  100-block  0
+        -:  101:    }
+        -:  102:
+       64:  103:    void Write(Word ip, Word data)
+       64:  103-block  0
+        -:  104:    {
+       64:  105:        _mem[ToWordAddr(ip)] = data;
+       64:  105-block  0
+       64:  106:    }
+        -:  107:
+        -:  108:private:
+        -:  109:    template <typename Elf_Ehdr, typename Elf_Phdr>
+        7:  110:    bool LoadElfSpecific(char *buf, size_t buf_sz) {
+    $$$$$:  110-block  0
+        7:  110-block  1
+        -:  111:        // 64-bit ELF
+        7:  112:        Elf_Ehdr *ehdr = (Elf_Ehdr*) buf;
+        7:  113:        Elf_Phdr *phdr = (Elf_Phdr*) (buf + ehdr->e_phoff);
+        7:  114:        if (buf_sz < ehdr->e_phoff + ehdr->e_phnum * sizeof(Elf_Phdr)) {
+    $$$$$:  114-block  0
+        7:  114-block  1
+    #####:  115:            std::cerr << "ERROR: load_elf: file too small for expected number of program header tables" << std::endl;
+    $$$$$:  115-block  0
+    $$$$$:  115-block  1
+    #####:  116:            return false;
+        -:  117:        }
+        7:  118:        auto memptr = reinterpret_cast<char*>(_mem.data());
+    $$$$$:  118-block  0
+        7:  118-block  1
+        -:  119:        // loop through program header tables
+       14:  120:        for (int i = 0 ; i < ehdr->e_phnum ; i++) {
+    $$$$$:  120-block  0
+    $$$$$:  120-block  1
+       14:  120-block  2
+        7:  120-block  3
+        7:  121:            if ((phdr[i].p_type == PT_LOAD) && (phdr[i].p_memsz > 0)) {
+    $$$$$:  121-block  0
+    $$$$$:  121-block  1
+        7:  121-block  2
+        7:  121-block  3
+        7:  122:                if (phdr[i].p_memsz < phdr[i].p_filesz) {
+    $$$$$:  122-block  0
+        7:  122-block  1
+    #####:  123:                    std::cerr << "ERROR: load_elf: file size is larger than memory size" << std::endl;
+    $$$$$:  123-block  0
+    $$$$$:  123-block  1
+    #####:  124:                    return false;
+        -:  125:                }
+        7:  126:                if (phdr[i].p_filesz > 0) {
+    $$$$$:  126-block  0
+        7:  126-block  1
+        7:  127:                    if (phdr[i].p_offset + phdr[i].p_filesz > buf_sz) {
+    $$$$$:  127-block  0
+        7:  127-block  1
+    #####:  128:                        std::cerr << "ERROR: load_elf: file section overflow" << std::endl;
+    $$$$$:  128-block  0
+    $$$$$:  128-block  1
+    #####:  129:                        return false;
+        -:  130:                    }
+        -:  131:
+        -:  132:                    // start of file section: buf + phdr[i].p_offset
+        -:  133:                    // end of file section: buf + phdr[i].p_offset + phdr[i].p_filesz
+        -:  134:                    // start of memory: phdr[i].p_paddr
+        7:  135:                    std::memcpy(memptr + phdr[i].p_paddr, buf + phdr[i].p_offset, phdr[i].p_filesz);
+    $$$$$:  135-block  0
+        7:  135-block  1
+        -:  136:                }
+        7:  137:                if (phdr[i].p_memsz > phdr[i].p_filesz) {
+    $$$$$:  137-block  0
+        7:  137-block  1
+        -:  138:                    // copy 0's to fill up remaining memory
+    #####:  139:                    size_t zeros_sz = phdr[i].p_memsz - phdr[i].p_filesz;
+        7:  140:                    std::memset(memptr + phdr[i].p_paddr + phdr[i].p_filesz, 0, zeros_sz);
+    $$$$$:  140-block  0
+    $$$$$:  140-block  1
+    $$$$$:  140-block  2
+        7:  140-block  3
+        -:  141:                }
+        -:  142:            }
+        -:  143:        }
+        7:  144:        return true;
+    $$$$$:  144-block  0
+        7:  144-block  1
+        -:  145:    }
+        -:  146:
+        -:  147:    std::vector<Word> _mem;
+        -:  148:};
+        -:  149:
+        -:  150:class IMem
+        -:  151:{
+        -:  152:public:
+       35:  153:    IMem() = default;
+       35:  153-block  0
+       35:  154:    virtual ~IMem() = default;
+    $$$$$:  154-block  0
+    $$$$$:  154-block  1
+       35:  154-block  2
+        -:  155:    IMem(const IMem &) = delete;
+        -:  156:    IMem(IMem &&) = delete;
+        -:  157:
+        -:  158:    IMem& operator=(const IMem&) = delete;
+        -:  159:    IMem& operator=(IMem&&) = delete;
+        -:  160:
+        -:  161:    virtual void Request(Word ip) = 0;
+        -:  162:    virtual std::optional<Word> Response() = 0;
+        -:  163:    virtual void Request(InstructionPtr &instr) = 0;
+        -:  164:    virtual bool Response(InstructionPtr &instr) = 0;
+        -:  165:    virtual void Clock() = 0;
+        -:  166:    virtual size_t getWaitCycles() = 0;
+        -:  167:};
+        -:  168:
+       70:  169:class UncachedMem : public IMem
+    $$$$$:  169-block  0
+    $$$$$:  169-block  1
+       35:  169-block  2
+       35:  169-block  3
+        -:  170:{
+        -:  171:public:
+       35:  172:    explicit UncachedMem(MemoryStorage& amem)
+       35:  172-block  0
+       35:  173:            : _mem(amem)
+       35:  173-block  0
+        -:  174:    {
+        -:  175:
+       35:  176:    }
+        -:  177:
+        -:  178:
+    #####:  179:    void Request(Word ip) override
+    $$$$$:  179-block  0
+        -:  180:    {
+    #####:  181:        _requestedIp = ip;
+    #####:  182:        _waitCycles = latency;
+    #####:  183:    }
+        -:  184:
+    #####:  185:    std::optional<Word> Response() override
+    $$$$$:  185-block  0
+        -:  186:    {
+    #####:  187:        if (_waitCycles > 0)
+    $$$$$:  187-block  0
+    #####:  188:            return std::optional<Word>();
+    $$$$$:  188-block  0
+    #####:  189:        return _mem.Read(_requestedIp);
+    $$$$$:  189-block  0
+    $$$$$:  189-block  1
+    $$$$$:  189-block  2
+    $$$$$:  189-block  3
+        -:  190:    }
+        -:  191:
+    #####:  192:    void Request(InstructionPtr &instr) override
+    $$$$$:  192-block  0
+        -:  193:    {
+    #####:  194:        if (instr->_type != IType::Ld && instr->_type != IType::St)
+    $$$$$:  194-block  0
+    $$$$$:  194-block  1
+    $$$$$:  194-block  2
+    $$$$$:  194-block  3
+    $$$$$:  194-block  4
+    #####:  195:            return;
+    $$$$$:  195-block  0
+        -:  196:
+    #####:  197:        Request(instr->_addr);
+    $$$$$:  197-block  0
+        -:  198:    }
+        -:  199:
+    #####:  200:    bool Response(InstructionPtr &instr) override
+    $$$$$:  200-block  0
+        -:  201:    {
+    #####:  202:        if (instr->_type != IType::Ld && instr->_type != IType::St)
+    $$$$$:  202-block  0
+    $$$$$:  202-block  1
+    $$$$$:  202-block  2
+    $$$$$:  202-block  3
+    $$$$$:  202-block  4
+    #####:  203:            return true;
+    $$$$$:  203-block  0
+        -:  204:
+    #####:  205:        if (_waitCycles != 0)
+    $$$$$:  205-block  0
+    #####:  206:            return false;
+    $$$$$:  206-block  0
+        -:  207:
+    #####:  208:        if (instr->_type == IType::Ld)
+    $$$$$:  208-block  0
+    #####:  209:            instr->_data = _mem.Read(instr->_addr);
+    $$$$$:  209-block  0
+    #####:  210:        else if (instr->_type == IType::St)
+    $$$$$:  210-block  0
+    #####:  211:            _mem.Write(instr->_addr, instr->_data);
+    $$$$$:  211-block  0
+        -:  212:
+    #####:  213:        return true;
+    $$$$$:  213-block  0
+        -:  214:    }
+        -:  215:
+        -:  216:    Line readLineFromMemory(Word ip)
+        -:  217:    {
+        -:  218:        Line memoryLine = { 0 };
+        -:  219:        for (int i = 0; i < lineSizeWords; ++i) {
+        -:  220:            memoryLine[i] = _mem.Read(ip + 4 * i);
+        -:  221:        }
+        -:  222:
+        -:  223:        return memoryLine;
+        -:  224:    }
+        -:  225:
+        -:  226:    void writeLineToMemory(Line memoryLine, Word lineAddr)
+        -:  227:    {
+        -:  228:        for (int i = 0; i < lineSizeWords; ++i) {
+        -:  229:            _mem.Write(lineAddr + 4 * i, memoryLine[i]);
+        -:  230:        }
+        -:  231:    }
+        -:  232:
+    #####:  233:    void Clock() override
+    $$$$$:  233-block  0
+        -:  234:    {
+    #####:  235:        if (_waitCycles > 0)
+    $$$$$:  235-block  0
+    #####:  236:            --_waitCycles;
+    $$$$$:  236-block  0
+    #####:  237:    }
+        -:  238:
+    #####:  239:    size_t getWaitCycles() override
+    $$$$$:  239-block  0
+        -:  240:    {
+    #####:  241:        return _waitCycles;
+    $$$$$:  241-block  0
+        -:  242:    }
+        -:  243:
+        -:  244:
+        -:  245:private:
+        -:  246:    static constexpr size_t latency = 120;
+        -:  247:    Word _requestedIp = 0;
+        -:  248:    size_t _waitCycles = 0;
+        -:  249:    MemoryStorage& _mem;
+        -:  250:};
+        -:  251:
+        -:  252:// TODO: Create cache for data and for code that works for 1 and 3 ticks
+      126:  253:class CachedMem
+       63:  253-block  0
+       63:  253-block  1
+        -:  254:{
+        -:  255:public:
+       70:  256:    explicit CachedMem(UncachedMem& uncachedMem): _mem(uncachedMem) {
+       35:  256-block  0
+       35:  256-block  1
+       35:  256-block  2
+       35:  256-block  3
+    %%%%%:  256-block  4
+    %%%%%:  256-block  5
+    %%%%%:  256-block  6
+    %%%%%:  256-block  7
+    %%%%%:  256-block  8
+    %%%%%:  256-block  9
+       35:  257:        initializeCache();
+       35:  258:    }
+       35:  258-block  0
+        -:  259:
+        -:  260:    bool checkAddress(bool dataOrCode, int address)
+        -:  261:    {
+        -:  262:        vector<Block> temporalCacheCopy;
+        -:  263:        int blockSize = 0;
+        -:  264:        if (dataOrCode) {
+        -:  265:            temporalCacheCopy = _dataMemory;
+        -:  266:            blockSize = dataCacheBytes / blockCount;
+        -:  267:        }
+        -:  268:        else {
+        -:  269:            temporalCacheCopy = _codeMemory;
+        -:  270:            blockSize = codeCacheBytes / blockCount;
+        -:  271:        }
+        -:  272:
+        -:  273:        for (Block block : temporalCacheCopy)
+        -:  274:        {
+        -:  275:            if (block[(address % blockSize) / lineSizeBytes].address == address)
+        -:  276:                return true;
+        -:  277:        }
+        -:  278:        return false;
+        -:  279:    }
+        -:  280:
+        -:  281:
+        -:  282:    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
+        -:  283:    {
+        -:  284:        for (int i = 0; i < blockCount; i++)
+        -:  285:        {
+        -:  286:            if (i != key && cache[i][indexing].lastUsage == 0)
+        -:  287:            {
+        -:  288:                return false;
+        -:  289:            }
+        -:  290:        }
+        -:  291:        return true;
+        -:  292:    }
+        -:  293:
+        -:  294:    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
+        -:  295:    {
+        -:  296:        if (checkAllBits(cache, key, indexing))
+        -:  297:        {
+        -:  298:            for (int j = 0; j < blockCount; j++)
+        -:  299:            {
+        -:  300:                if (key != j)
+        -:  301:                    cache[j][indexing].lastUsage = 0;
+        -:  302:            }
+        -:  303:        }
+        -:  304:    }
+        -:  305:
+        -:  306:    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
+        -:  307:    {
+        -:  308:        for (int i = 0; i < blockCount; i++)
+        -:  309:        {
+        -:  310:            if (cache[i][indexing].address == 0)
+        -:  311:            {
+        -:  312:                return false;
+        -:  313:            }
+        -:  314:        }
+        -:  315:        return true;
+        -:  316:    }
+        -:  317:    
+        -:  318:    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
+        -:  319:    {
+        -:  320:        vector<Block> *temporalCacheCopy;
+        -:  321:        int blockSize = 0;
+        -:  322:        if (dataOrCode) {
+        -:  323:            temporalCacheCopy = &_dataMemory;
+        -:  324:            blockSize = dataCacheBytes / blockCount;
+        -:  325:        }
+        -:  326:        else {
+        -:  327:            temporalCacheCopy = &_codeMemory;
+        -:  328:            blockSize = codeCacheBytes / blockCount;
+        -:  329:        }
+        -:  330:        
+        -:  331:
+        -:  332:        for (int i = 0; i < blockCount; i++) {
+        -:  333:            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
+        -:  334:                return pair<Word, Word>(i, (key % blockSize) / lineSizeBytes);
+        -:  335:            }
+        -:  336:        }
+        -:  337:
+        -:  338:        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
+        -:  339:        Word entryIdentification = 0;
+        -:  340:        for (int i = 0; i < blockCount; i++)
+        -:  341:        {
+        -:  342:            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
+        -:  343:            {
+        -:  344:                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
+        -:  345:                entryIdentification = i;
+        -:  346:            }
+        -:  347:        }
+        -:  348:
+        -:  349:        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
+        -:  350:
+        -:  351:        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
+        -:  352:    }
+        -:  353:
+        -:  354:
+        -:  355:    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
+        -:  356:        vector<Block> temporalCacheCopy;
+        -:  357:        int blockSize = 0;
+        -:  358:        if (dataOrCode) {
+        -:  359:            temporalCacheCopy = _dataMemory;
+        -:  360:            blockSize = dataCacheBytes / blockCount;
+        -:  361:        }
+        -:  362:        else {
+        -:  363:            temporalCacheCopy = _codeMemory;
+        -:  364:            blockSize = codeCacheBytes / blockCount;
+        -:  365:        }
+        -:  366:
+        -:  367:        for (int i = 0; i < blockCount; i++)
+        -:  368:        {
+        -:  369:            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
+        -:  370:                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
+        -:  371:        }
+        -:  372:        return pair<Word, Word> (0, 0);
+        -:  373:    }
+        -:  374:
+        -:  375:    void Request(Word ip)
+        -:  376:    {
+        -:  377:        if (ip != _memoryRequestIp) {
+        -:  378:            _memoryRequestIp = ip;
+        -:  379:            Word lineAddr = ToLineAddr(_memoryRequestIp);
+        -:  380:            Word offset = ToLineOffset(_memoryRequestIp);
+        -:  381:
+        -:  382:            if (checkAddress(false, lineAddr)) {
+        -:  383:                _waitCycles = codeLatency;
+        -:  384:                _cacheMiss = false;
+        -:  385:            }
+        -:  386:            else {
+        -:  387:                _cacheMiss = true;
+        -:  388:                _waitCycles = failLatency;
+        -:  389:            }
+        -:  390:            _requestedIp = lineAddr;
+        -:  391:            _requestedOffset = offset;
+        -:  392:        }
+        -:  393:    }
+        -:  394:
+        -:  395:    std::optional<Word> Response(Word responseTime)
+        -:  396:    {
+        -:  397:        if (_waitCycles > 0)
+        -:  398:            return std::optional<Word>();
+        -:  399:
+        -:  400:        if (_cacheMiss)
+        -:  401:        {
+        -:  402:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
+        -:  403:
+        -:  404:            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
+        -:  405:            Word blockId = latestUsage.first;
+        -:  406:            Word cellId = latestUsage.second;
+        -:  407:
+        -:  408:            if (_codeMemory[blockId][cellId].address != 0)
+        -:  409:            {
+        -:  410:                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
+        -:  411:                                       _codeMemory[blockId][cellId].address);
+        -:  412:            }
+        -:  413:
+        -:  414:            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
+        -:  415:
+        -:  416:            return memoryLine[_requestedOffset];
+        -:  417:
+        -:  418:        } else {
+        -:  419:            pair<Word, Word> position = findEntry(_requestedIp, false);
+        -:  420:            _codeMemory[position.first][position.second].lastUsage = 1;
+        -:  421:            changeLRUBit(_codeMemory, position.first, position.second);
+        -:  422:            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
+        -:  423:        }
+        -:  424:    }
+        -:  425:
+        -:  426:    void Request(Word _addr, IType _type)
+        -:  427:    {
+        -:  428:        if (_type != IType::Ld && _type != IType::St)
+        -:  429:            return;
+        -:  430:
+        -:  431:        Word lineAddr = ToLineAddr(_addr);
+        -:  432:        Word offset = ToLineOffset(_addr);
+        -:  433:
+        -:  434:        if (checkAddress(true, lineAddr)) {
+        -:  435:            _waitCycles = dataLatency;
+        -:  436:            _cacheMiss = false;
+        -:  437:        } else {
+        -:  438:            _cacheMiss = true;
+        -:  439:            _waitCycles = failLatency;
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
+        -:  442:                _waitCycles += 120;
+        -:  443:        }
+        -:  444:        _requestedIp = lineAddr;
+        -:  445:        _requestedOffset = offset;
+        -:  446:    }
+        -:  447:
+        -:  448:    bool Response(Word _addr, Word &_data, IType _type, Word responseTime)
+        -:  449:    {
+        -:  450:        if (_type != IType::Ld && _type != IType::St)
+        -:  451:            return true;
+        -:  452:
+        -:  453:        if (_waitCycles != 0)
+        -:  454:            return false;
+        -:  455:
+        -:  456:        if (_cacheMiss)
+        -:  457:        {
+        -:  458:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
+        -:  459:
+        -:  460:            bool validity = true;
+        -:  461:            if (_type == IType::St) {
+        -:  462:                memoryLine[ToLineOffset(_addr)] = _data;
+        -:  463:                validity = false;
+        -:  464:            }
+        -:  465:
+        -:  466:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  467:            Word blockId = latestUsage.first;
+        -:  468:            Word cellId = latestUsage.second;
+        -:  469:
+        -:  470:            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
+        -:  471:            {
+        -:  472:                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
+        -:  473:            }
+        -:  474:
+        -:  475:            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
+        -:  476:
+        -:  477:            if (_type == IType::Ld)
+        -:  478:                _data = memoryLine[_requestedOffset];
+        -:  479:        }
+        -:  480:        else
+        -:  481:        {
+        -:  482:            pair<Word, Word> position = findEntry(_requestedIp, true);
+        -:  483:            _dataMemory[position.first][position.second].lastUsage = 1;
+        -:  484:            changeLRUBit(_dataMemory, position.first, position.second);
+        -:  485:
+        -:  486:            if (_type == IType::Ld)
+        -:  487:                _data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
+        -:  488:            else if (_type == IType::St) {
+        -:  489:                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
+        -:  490:                _dataMemory[position.first][position.second].validityBit = false;
+        -:  491:            }
+        -:  492:        }
+        -:  493:
+        -:  494:        return true;
+        -:  495:    }
+        -:  496:
+       35:  497:    void initializeCache()
+       35:  497-block  0
+        -:  498:    {
+      175:  499:        for (int i = 0; i < blockCount; ++i) {
+       35:  499-block  0
+      175:  499-block  1
+      140:  500:            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
+      140:  500-block  0
+      140:  500-block  1
+    %%%%%:  500-block  2
+    %%%%%:  500-block  3
+      140:  501:            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
+      140:  501-block  0
+    %%%%%:  501-block  1
+        -:  502:        }
+       35:  503:    }
+       35:  503-block  0
+        -:  504:
+        -:  505:    void Clock()
+        -:  506:    {
+        -:  507:        if (_waitCycles > 0)
+        -:  508:            --_waitCycles;
+        -:  509:    }
+        -:  510:
+        -:  511:    size_t getWaitCycles()
+        -:  512:    {
+        -:  513:        return _waitCycles;
+        -:  514:    }
+        -:  515:
+        -:  516:    static const size_t getFailLatency() {
+        -:  517:        return failLatency;
+        -:  518:    }
+        -:  519:
+        -:  520:    static const size_t getCodeLatency() {
+        -:  521:        return codeLatency;
+        -:  522:    }
+        -:  523:
+        -:  524:    static const size_t getDataLatency() {
+        -:  525:        return dataLatency;
+        -:  526:    }
+        -:  527:
+        -:  528:    void setWaitCycles(size_t waitCycles) {
+        -:  529:        _waitCycles = waitCycles;
+        -:  530:    }
+        -:  531:
+        -:  532:    bool isCacheMiss() const {
+        -:  533:        return _cacheMiss;
+        -:  534:    }
+        -:  535:
+        -:  536:    vector<Block> &getCodeMemory() {
+        -:  537:        return _codeMemory;
+        -:  538:    }
+        -:  539:
+        -:  540:    vector<Block> &getDataMemory(){
+        -:  541:        return _dataMemory;
+        -:  542:    }
+        -:  543:
+        -:  544:    Word getMemoryRequestIp() const {
+        -:  545:        return _memoryRequestIp;
+        -:  546:    }
+        -:  547:
+        -:  548:    Word getRequestedIp() const {
+        -:  549:        return _requestedIp;
+        -:  550:    }
+        -:  551:
+        -:  552:    Word getRequestedOffset() const {
+        -:  553:        return _requestedOffset;
+        -:  554:    }
+        -:  555:
+        -:  556:    void setMemoryRequestIp(Word memoryRequestIp) {
+        -:  557:        _memoryRequestIp = memoryRequestIp;
+        -:  558:    }
+        -:  559:
+        -:  560:    void setCacheMiss(bool cacheMiss) {
+        -:  561:        _cacheMiss = cacheMiss;
+        -:  562:    }
+        -:  563:
+        -:  564:    UncachedMem &getMem() const {
+        -:  565:        return _mem;
+        -:  566:    }
+        -:  567:
+        -:  568:    void setRequestedIp(Word requestedIp) {
+        -:  569:        _requestedIp = requestedIp;
+        -:  570:    }
+        -:  571:
+        -:  572:    void setRequestedOffset(Word requestedOffset) {
+        -:  573:        _requestedOffset = requestedOffset;
+        -:  574:    }
+        -:  575:
+        -:  576:private:
+        -:  577:    static constexpr size_t failLatency = 152;
+        -:  578:    static constexpr size_t codeLatency = 1;
+        -:  579:    static constexpr size_t dataLatency = 3;
+        -:  580:
+        -:  581:    Word _memoryRequestIp = 0;
+        -:  582:    Word _requestedIp = 0;
+        -:  583:    Word _requestedOffset = 0;
+        -:  584:    size_t _waitCycles = 0;
+        -:  585:    bool _cacheMiss = false;
+        -:  586:
+        -:  587:    vector<Block> _codeMemory = vector<Block>(blockCount);
+        -:  588:    vector<Block> _dataMemory = vector<Block>(blockCount);
+        -:  589:    UncachedMem& _mem;
+        -:  590:};
+        -:  591:
+        -:  592:#endif //RISCV_SIM_DATAMEMORY_H

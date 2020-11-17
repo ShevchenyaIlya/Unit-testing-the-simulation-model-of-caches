@@ -1,0 +1,133 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags:  
+
+The output was:
+1
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: -c 
+
+The output was:
+1
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: -Aa 
+
+The output was:
+1
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: -D__CLASSIC_C__ 
+
+The output was:
+1
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/cc 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: --target=arm-arm-none-eabi;-mcpu=cortex-m3 
+
+The output was:
+1
+cc: warning: ‘-mcpu=’ is deprecated; use ‘-mtune=’ or ‘-march=’ instead
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+cc: error: unrecognized command line option ‘--target=arm-arm-none-eabi’
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags:  
+
+The output was:
+1
+c++: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+c++: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: -c 
+
+The output was:
+1
+c++: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+c++: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: --c++ 
+
+The output was:
+1
+c++: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+c++: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+c++: error: unrecognized command line option ‘--c++’
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: --ec++ 
+
+The output was:
+1
+c++: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+c++: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+c++: error: unrecognized command line option ‘--ec++’; did you mean ‘-Weffc++’?
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/c++ 
+Build flags: -fprofile-instr-generate;-fcoverage-mapping
+Id flags: --target=arm-arm-none-eabi;-mcpu=cortex-m3 
+
+The output was:
+1
+c++: warning: ‘-mcpu=’ is deprecated; use ‘-mtune=’ or ‘-march=’ instead
+c++: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+c++: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+c++: error: unrecognized command line option ‘--target=arm-arm-none-eabi’
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fc4b1/fast && /usr/bin/make -f CMakeFiles/cmTC_fc4b1.dir/build.make CMakeFiles/cmTC_fc4b1.dir/build
+make[1]: вход в каталог «/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o
+/usr/bin/cc   -fprofile-instr-generate -fcoverage-mapping    -o CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o   -c /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp/testCCompiler.c
+cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+CMakeFiles/cmTC_fc4b1.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o' failed
+make[1]: *** [CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o] Error 1
+make[1]: выход из каталога «/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp»
+Makefile:121: recipe for target 'cmTC_fc4b1/fast' failed
+make: *** [cmTC_fc4b1/fast] Error 2
+
+
+

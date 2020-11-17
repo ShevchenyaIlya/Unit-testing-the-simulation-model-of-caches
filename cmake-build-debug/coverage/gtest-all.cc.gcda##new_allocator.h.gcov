@@ -1,0 +1,500 @@
+        -:    0:Source:/usr/include/c++/7/ext/new_allocator.h
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/lib/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// Allocator that wraps operator new -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2017 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/** @file ext/new_allocator.h
+        -:   26: *  This file is a GNU extension to the Standard C++ Library.
+        -:   27: */
+        -:   28:
+        -:   29:#ifndef _NEW_ALLOCATOR_H
+        -:   30:#define _NEW_ALLOCATOR_H 1
+        -:   31:
+        -:   32:#include <bits/c++config.h>
+        -:   33:#include <new>
+        -:   34:#include <bits/functexcept.h>
+        -:   35:#include <bits/move.h>
+        -:   36:#if __cplusplus >= 201103L
+        -:   37:#include <type_traits>
+        -:   38:#endif
+        -:   39:
+        -:   40:namespace __gnu_cxx _GLIBCXX_VISIBILITY(default)
+        -:   41:{
+        -:   42:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   43:
+        -:   44:  using std::size_t;
+        -:   45:  using std::ptrdiff_t;
+        -:   46:
+        -:   47:  /**
+        -:   48:   *  @brief  An allocator that uses global new, as per [20.4].
+        -:   49:   *  @ingroup allocators
+        -:   50:   *
+        -:   51:   *  This is precisely the allocator defined in the C++ Standard.
+        -:   52:   *    - all allocation calls operator new
+        -:   53:   *    - all deallocation calls operator delete
+        -:   54:   *
+        -:   55:   *  @tparam  _Tp  Type of allocated object.
+        -:   56:   */
+        -:   57:  template<typename _Tp>
+        -:   58:    class new_allocator
+        -:   59:    {
+        -:   60:    public:
+        -:   61:      typedef size_t     size_type;
+        -:   62:      typedef ptrdiff_t  difference_type;
+        -:   63:      typedef _Tp*       pointer;
+        -:   64:      typedef const _Tp* const_pointer;
+        -:   65:      typedef _Tp&       reference;
+        -:   66:      typedef const _Tp& const_reference;
+        -:   67:      typedef _Tp        value_type;
+        -:   68:
+        -:   69:      template<typename _Tp1>
+        -:   70:	struct rebind
+        -:   71:	{ typedef new_allocator<_Tp1> other; };
+        -:   72:
+        -:   73:#if __cplusplus >= 201103L
+        -:   74:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:   75:      // 2103. propagate_on_container_move_assignment
+        -:   76:      typedef std::true_type propagate_on_container_move_assignment;
+        -:   77:#endif
+        -:   78:
+       94:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+    $$$$$:   79-block  0
+    $$$$$:   79-block  1
+        1:   79-block  2
+        1:   79-block  3
+        1:   79-block  4
+        5:   79-block  5
+        4:   79-block  6
+       39:   79-block  7
+    $$$$$:   79-block  8
+    $$$$$:   79-block  9
+        1:   79-block 10
+       39:   79-block 11
+        1:   79-block 12
+        1:   79-block 13
+        1:   79-block 14
+    $$$$$:   79-block 15
+    $$$$$:   79-block 16
+    $$$$$:   79-block 17
+    $$$$$:   79-block 18
+    $$$$$:   79-block 19
+        -:   80:
+        4:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+    $$$$$:   81-block  0
+    $$$$$:   81-block  1
+    $$$$$:   81-block  2
+    $$$$$:   81-block  3
+        4:   81-block  4
+        -:   82:
+        -:   83:      template<typename _Tp1>
+        -:   84:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
+        -:   85:
+       98:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+    $$$$$:   86-block  0
+    $$$$$:   86-block  1
+        1:   86-block  2
+        1:   86-block  3
+        1:   86-block  4
+        5:   86-block  5
+        4:   86-block  6
+       39:   86-block  7
+    $$$$$:   86-block  8
+        1:   86-block  9
+       39:   86-block 10
+    $$$$$:   86-block 11
+        5:   86-block 12
+        1:   86-block 13
+        1:   86-block 14
+    $$$$$:   86-block 15
+    $$$$$:   86-block 16
+    $$$$$:   86-block 17
+    $$$$$:   86-block 18
+    $$$$$:   86-block 19
+        -:   87:
+        -:   88:      pointer
+        -:   89:      address(reference __x) const _GLIBCXX_NOEXCEPT
+        -:   90:      { return std::__addressof(__x); }
+        -:   91:
+        -:   92:      const_pointer
+        -:   93:      address(const_reference __x) const _GLIBCXX_NOEXCEPT
+        -:   94:      { return std::__addressof(__x); }
+        -:   95:
+        -:   96:      // NB: __n is permitted to be 0.  The C++ standard says nothing
+        -:   97:      // about what the return value is when __n == 0.
+        -:   98:      pointer
+       34:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+    $$$$$:   99-block  0
+    $$$$$:   99-block  1
+    $$$$$:   99-block  2
+       15:   99-block  3
+    $$$$$:   99-block  4
+    $$$$$:   99-block  5
+    $$$$$:   99-block  6
+    $$$$$:   99-block  7
+    $$$$$:   99-block  8
+    $$$$$:   99-block  9
+        3:   99-block 10
+    $$$$$:   99-block 11
+        3:   99-block 12
+    $$$$$:   99-block 13
+    $$$$$:   99-block 14
+        1:   99-block 15
+       12:   99-block 16
+    $$$$$:   99-block 17
+    $$$$$:   99-block 18
+    $$$$$:   99-block 19
+    $$$$$:   99-block 20
+        -:  100:      {
+       34:  101:	if (__n > this->max_size())
+    $$$$$:  101-block  0
+    $$$$$:  101-block  1
+    $$$$$:  101-block  2
+       15:  101-block  3
+    $$$$$:  101-block  4
+    $$$$$:  101-block  5
+    $$$$$:  101-block  6
+    $$$$$:  101-block  7
+    $$$$$:  101-block  8
+    $$$$$:  101-block  9
+        3:  101-block 10
+    $$$$$:  101-block 11
+        3:  101-block 12
+    $$$$$:  101-block 13
+    $$$$$:  101-block 14
+        1:  101-block 15
+       12:  101-block 16
+    $$$$$:  101-block 17
+    $$$$$:  101-block 18
+    $$$$$:  101-block 19
+    $$$$$:  101-block 20
+       34:  102:	  std::__throw_bad_alloc();
+    $$$$$:  102-block  0
+    $$$$$:  102-block  1
+    $$$$$:  102-block  2
+    $$$$$:  102-block  3
+    $$$$$:  102-block  4
+    $$$$$:  102-block  5
+    $$$$$:  102-block  6
+       15:  102-block  7
+    $$$$$:  102-block  8
+    $$$$$:  102-block  9
+    $$$$$:  102-block 10
+    $$$$$:  102-block 11
+    $$$$$:  102-block 12
+    $$$$$:  102-block 13
+    $$$$$:  102-block 14
+    $$$$$:  102-block 15
+    $$$$$:  102-block 16
+    $$$$$:  102-block 17
+    $$$$$:  102-block 18
+    $$$$$:  102-block 19
+    $$$$$:  102-block 20
+        3:  102-block 21
+    $$$$$:  102-block 22
+    $$$$$:  102-block 23
+    $$$$$:  102-block 24
+        3:  102-block 25
+    $$$$$:  102-block 26
+    $$$$$:  102-block 27
+    $$$$$:  102-block 28
+    $$$$$:  102-block 29
+    $$$$$:  102-block 30
+        1:  102-block 31
+    $$$$$:  102-block 32
+       12:  102-block 33
+    $$$$$:  102-block 34
+    $$$$$:  102-block 35
+    $$$$$:  102-block 36
+    $$$$$:  102-block 37
+    $$$$$:  102-block 38
+    $$$$$:  102-block 39
+    $$$$$:  102-block 40
+    $$$$$:  102-block 41
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+       34:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+    $$$$$:  111-block  0
+    $$$$$:  111-block  1
+    $$$$$:  111-block  2
+       15:  111-block  3
+    $$$$$:  111-block  4
+    $$$$$:  111-block  5
+    $$$$$:  111-block  6
+    $$$$$:  111-block  7
+    $$$$$:  111-block  8
+    $$$$$:  111-block  9
+        3:  111-block 10
+    $$$$$:  111-block 11
+        3:  111-block 12
+    $$$$$:  111-block 13
+    $$$$$:  111-block 14
+        1:  111-block 15
+       12:  111-block 16
+    $$$$$:  111-block 17
+    $$$$$:  111-block 18
+    $$$$$:  111-block 19
+    $$$$$:  111-block 20
+        -:  112:      }
+        -:  113:
+        -:  114:      // __p is not permitted to be a null pointer.
+        -:  115:      void
+       68:  116:      deallocate(pointer __p, size_type)
+    $$$$$:  116-block  0
+    $$$$$:  116-block  1
+    $$$$$:  116-block  2
+    $$$$$:  116-block  3
+    $$$$$:  116-block  4
+    $$$$$:  116-block  5
+    $$$$$:  116-block  6
+    $$$$$:  116-block  7
+        3:  116-block  8
+        3:  116-block  9
+    $$$$$:  116-block 10
+    $$$$$:  116-block 11
+    $$$$$:  116-block 12
+    $$$$$:  116-block 13
+        1:  116-block 14
+        1:  116-block 15
+       15:  116-block 16
+       15:  116-block 17
+       12:  116-block 18
+       12:  116-block 19
+    $$$$$:  116-block 20
+    $$$$$:  116-block 21
+    $$$$$:  116-block 22
+    $$$$$:  116-block 23
+    $$$$$:  116-block 24
+    $$$$$:  116-block 25
+    $$$$$:  116-block 26
+    $$$$$:  116-block 27
+    $$$$$:  116-block 28
+    $$$$$:  116-block 29
+    $$$$$:  116-block 30
+    $$$$$:  116-block 31
+    $$$$$:  116-block 32
+    $$$$$:  116-block 33
+        3:  116-block 34
+        3:  116-block 35
+    $$$$$:  116-block 36
+    $$$$$:  116-block 37
+    $$$$$:  116-block 38
+    $$$$$:  116-block 39
+    $$$$$:  116-block 40
+    $$$$$:  116-block 41
+    $$$$$:  116-block 42
+    $$$$$:  116-block 43
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+       34:  125:	::operator delete(__p);
+    $$$$$:  125-block  0
+    $$$$$:  125-block  1
+    $$$$$:  125-block  2
+    $$$$$:  125-block  3
+        3:  125-block  4
+    $$$$$:  125-block  5
+    $$$$$:  125-block  6
+        1:  125-block  7
+       15:  125-block  8
+       12:  125-block  9
+    $$$$$:  125-block 10
+    $$$$$:  125-block 11
+    $$$$$:  125-block 12
+    $$$$$:  125-block 13
+    $$$$$:  125-block 14
+    $$$$$:  125-block 15
+    $$$$$:  125-block 16
+        3:  125-block 17
+    $$$$$:  125-block 18
+    $$$$$:  125-block 19
+    $$$$$:  125-block 20
+    $$$$$:  125-block 21
+        -:  126:      }
+        -:  127:
+        -:  128:      size_type
+      100:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+    $$$$$:  129-block  0
+    $$$$$:  129-block  1
+    $$$$$:  129-block  2
+       45:  129-block  3
+    $$$$$:  129-block  4
+    $$$$$:  129-block  5
+    $$$$$:  129-block  6
+    $$$$$:  129-block  7
+    $$$$$:  129-block  8
+    $$$$$:  129-block  9
+        7:  129-block 10
+    $$$$$:  129-block 11
+        9:  129-block 12
+    $$$$$:  129-block 13
+    $$$$$:  129-block 14
+        3:  129-block 15
+       36:  129-block 16
+    $$$$$:  129-block 17
+    $$$$$:  129-block 18
+    $$$$$:  129-block 19
+    $$$$$:  129-block 20
+      100:  130:      { return size_t(-1) / sizeof(_Tp); }
+    $$$$$:  130-block  0
+    $$$$$:  130-block  1
+    $$$$$:  130-block  2
+       45:  130-block  3
+    $$$$$:  130-block  4
+    $$$$$:  130-block  5
+    $$$$$:  130-block  6
+    $$$$$:  130-block  7
+    $$$$$:  130-block  8
+    $$$$$:  130-block  9
+        7:  130-block 10
+    $$$$$:  130-block 11
+        9:  130-block 12
+    $$$$$:  130-block 13
+    $$$$$:  130-block 14
+        3:  130-block 15
+       36:  130-block 16
+    $$$$$:  130-block 17
+    $$$$$:  130-block 18
+    $$$$$:  130-block 19
+    $$$$$:  130-block 20
+        -:  131:
+        -:  132:#if __cplusplus >= 201103L
+        -:  133:      template<typename _Up, typename... _Args>
+        -:  134:	void
+       79:  135:	construct(_Up* __p, _Args&&... __args)
+    $$$$$:  135-block  0
+    $$$$$:  135-block  1
+    $$$$$:  135-block  2
+    $$$$$:  135-block  3
+    $$$$$:  135-block  4
+    $$$$$:  135-block  5
+    $$$$$:  135-block  6
+       38:  135-block  7
+    $$$$$:  135-block  8
+        2:  135-block  9
+        4:  135-block 10
+    $$$$$:  135-block 11
+    $$$$$:  135-block 12
+        1:  135-block 13
+       34:  135-block 14
+    $$$$$:  135-block 15
+    $$$$$:  135-block 16
+    $$$$$:  135-block 17
+       79:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+    $$$$$:  136-block  0
+    $$$$$:  136-block  1
+    %%%%%:  136-block  2
+    $$$$$:  136-block  3
+    $$$$$:  136-block  4
+    $$$$$:  136-block  5
+    %%%%%:  136-block  6
+    %%%%%:  136-block  7
+    %%%%%:  136-block  8
+    $$$$$:  136-block  9
+    $$$$$:  136-block 10
+    $$$$$:  136-block 11
+    $$$$$:  136-block 12
+       38:  136-block 13
+    $$$$$:  136-block 14
+        2:  136-block 15
+        4:  136-block 16
+    $$$$$:  136-block 17
+    $$$$$:  136-block 18
+    %%%%%:  136-block 19
+    $$$$$:  136-block 20
+        1:  136-block 21
+       34:  136-block 22
+    $$$$$:  136-block 23
+    $$$$$:  136-block 24
+    %%%%%:  136-block 25
+    $$$$$:  136-block 26
+    $$$$$:  136-block 27
+    %%%%%:  136-block 28
+    $$$$$:  136-block 29
+        -:  137:
+        -:  138:      template<typename _Up>
+        -:  139:	void
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+    $$$$$:  140-block  0
+    $$$$$:  140-block  1
+    $$$$$:  140-block  2
+    $$$$$:  140-block  3
+    $$$$$:  140-block  4
+    $$$$$:  140-block  5
+    $$$$$:  140-block  6
+    $$$$$:  140-block  7
+    $$$$$:  140-block  8
+    $$$$$:  140-block  9
+    $$$$$:  140-block 10
+    $$$$$:  140-block 11
+    $$$$$:  140-block 12
+    $$$$$:  140-block 13
+    $$$$$:  140-block 14
+    $$$$$:  140-block 15
+    $$$$$:  140-block 16
+    $$$$$:  140-block 17
+    $$$$$:  140-block 18
+    $$$$$:  140-block 19
+    $$$$$:  140-block 20
+    $$$$$:  140-block 21
+    $$$$$:  140-block 22
+        -:  141:#else
+        -:  142:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  143:      // 402. wrong new expression in [some_] allocator::construct
+        -:  144:      void
+        -:  145:      construct(pointer __p, const _Tp& __val)
+        -:  146:      { ::new((void *)__p) _Tp(__val); }
+        -:  147:
+        -:  148:      void
+        -:  149:      destroy(pointer __p) { __p->~_Tp(); }
+        -:  150:#endif
+        -:  151:    };
+        -:  152:
+        -:  153:  template<typename _Tp>
+        -:  154:    inline bool
+        -:  155:    operator==(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+        -:  156:    { return true; }
+        -:  157:
+        -:  158:  template<typename _Tp>
+        -:  159:    inline bool
+        -:  160:    operator!=(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+        -:  161:    { return false; }
+        -:  162:
+        -:  163:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  164:} // namespace
+        -:  165:
+        -:  166:#endif

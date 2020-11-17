@@ -1,0 +1,144 @@
+        -:    0:Source:/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/simple_tests.cpp
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/simple_tests.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://
+        -:    2:// Created by shevchenya on 14/11/2020.
+        -:    3://
+        -:    4:
+        -:    5:#import "gtest/gtest.h"
+        -:    6:#include "../src/Memory.h"
+        -:    7:#include "../src/Instruction.h"
+        -:    8:
+        2:    9:int sum(int num1, int num2) {
+        2:    9-block  0
+        2:   10:    return num1 + num2;
+        2:   10-block  0
+        -:   11:}
+        -:   12:
+        8:   13:TEST(tests, tests_sum_eq) {
+        1:   13-block  0
+        1:   13-block  1
+        1:   13-block  2
+        1:   13-block  3
+        1:   13-block  4
+    %%%%%:   13-block  5
+    %%%%%:   13-block  6
+    %%%%%:   13-block  7
+    %%%%%:   13-block  8
+    %%%%%:   13-block  9
+    %%%%%:   13-block 10
+        1:   13-block 11
+        1:   13-block 12
+        1:   13-block 13
+        1:   13-block 14
+        1:   13-block 15
+        1:   14:    ASSERT_EQ(4, sum(2, 2));
+        1:   14-block  0
+        1:   14-block  1
+    $$$$$:   14-block  2
+    $$$$$:   14-block  3
+    $$$$$:   14-block  4
+    $$$$$:   14-block  5
+        1:   14-block  6
+        1:   14-block  7
+        1:   14-block  8
+        1:   14-block  9
+    $$$$$:   14-block 10
+        1:   14-block 11
+    %%%%%:   14-block 12
+    %%%%%:   14-block 13
+    %%%%%:   14-block 14
+    %%%%%:   14-block 15
+    %%%%%:   14-block 16
+    %%%%%:   14-block 17
+    %%%%%:   14-block 18
+    %%%%%:   14-block 19
+    %%%%%:   14-block 20
+        -:   15:}
+        -:   16:
+        -:   17:
+        8:   18:TEST(tests, tests_sum_neq) {
+        1:   18-block  0
+        1:   18-block  1
+        1:   18-block  2
+        1:   18-block  3
+        1:   18-block  4
+    %%%%%:   18-block  5
+    %%%%%:   18-block  6
+    %%%%%:   18-block  7
+    %%%%%:   18-block  8
+    %%%%%:   18-block  9
+    %%%%%:   18-block 10
+        1:   18-block 11
+        1:   18-block 12
+        1:   18-block 13
+        1:   18-block 14
+        1:   18-block 15
+        1:   19:    ASSERT_NE(3, sum(2, 2));
+        1:   19-block  0
+        1:   19-block  1
+    $$$$$:   19-block  2
+    $$$$$:   19-block  3
+    $$$$$:   19-block  4
+    $$$$$:   19-block  5
+        1:   19-block  6
+        1:   19-block  7
+        1:   19-block  8
+        1:   19-block  9
+    $$$$$:   19-block 10
+        1:   19-block 11
+    %%%%%:   19-block 12
+    %%%%%:   19-block 13
+    %%%%%:   19-block 14
+    %%%%%:   19-block 15
+    %%%%%:   19-block 16
+    %%%%%:   19-block 17
+    %%%%%:   19-block 18
+    %%%%%:   19-block 19
+    %%%%%:   19-block 20
+        -:   20:}
+        -:   21:
+        -:   22:
+        -:   23://TODO: Rerun all prev created tests
+        8:   24:TEST(additional, test_implicit) {
+        1:   24-block  0
+        1:   24-block  1
+        1:   24-block  2
+        1:   24-block  3
+        1:   24-block  4
+    %%%%%:   24-block  5
+    %%%%%:   24-block  6
+    %%%%%:   24-block  7
+    %%%%%:   24-block  8
+    %%%%%:   24-block  9
+        1:   24-block 10
+        1:   24-block 11
+        1:   24-block 12
+        1:   24-block 13
+        1:   24-block 14
+        2:   25:    MemoryStorage mem ;
+        1:   25-block  0
+    %%%%%:   25-block  1
+        1:   26:    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+        1:   26-block  0
+        1:   26-block  1
+        1:   26-block  2
+    %%%%%:   26-block  3
+    %%%%%:   26-block  4
+    %%%%%:   26-block  5
+    %%%%%:   26-block  6
+        2:   27:    UncachedMem uncachedMem = UncachedMem (mem);
+    %%%%%:   27-block  0
+        1:   28:    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+        1:   28-block  0
+        1:   28-block  1
+    %%%%%:   28-block  2
+        5:   29:}
+        1:   29-block  0
+        1:   29-block  1
+        1:   29-block  2
+        1:   29-block  3
+        1:   29-block  4
+        1:   29-block  5

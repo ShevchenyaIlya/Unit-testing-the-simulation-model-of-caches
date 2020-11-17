@@ -1,0 +1,519 @@
+        -:    0:Source:/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_request_tests.cpp
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_data_request_tests.cpp.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_data_request_tests.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://
+        -:    2:// Created by shevchenya on 15/11/2020.
+        -:    3://
+        -:    4:
+        -:    5:#include <random>
+        -:    6:
+        -:    7:#include "gtest/gtest.h"
+        -:    8:#include "../src/Memory.h"
+        -:    9:#include "../src/Instruction.h"
+        -:   10:#include "../src/Decoder.h"
+        -:   11:
+    #####:   12:class CacheMemoryFixture : public ::testing::Test {
+    $$$$$:   12-block  0
+    $$$$$:   12-block  1
+    $$$$$:   12-block  2
+    $$$$$:   12-block  3
+    $$$$$:   12-block  4
+    $$$$$:   12-block  5
+        -:   13:protected:
+    #####:   14:    void SetUp() override {
+    $$$$$:   14-block  0
+    #####:   15:        MemoryStorage mem ;
+    $$$$$:   15-block  0
+    %%%%%:   15-block  1
+    #####:   16:        UncachedMem uncachedMem = UncachedMem (mem);
+    $$$$$:   16-block  0
+    %%%%%:   16-block  1
+    #####:   17:        memModelPtr = std::make_unique<CachedMem> ( uncachedMem);
+    $$$$$:   17-block  0
+    #####:   18:    }
+        -:   19:    std::unique_ptr<CachedMem> memModelPtr;
+        -:   20:};
+        -:   21:
+        8:   22:TEST_F(CacheMemoryFixture, notLoadOrStoreCommands) {
+        1:   22-block  0
+        1:   22-block  1
+        1:   22-block  2
+        1:   22-block  3
+        1:   22-block  4
+    %%%%%:   22-block  5
+    %%%%%:   22-block  6
+    %%%%%:   22-block  7
+    %%%%%:   22-block  8
+    %%%%%:   22-block  9
+    %%%%%:   22-block 10
+        1:   22-block 11
+        1:   22-block 12
+        1:   22-block 13
+        1:   22-block 14
+        1:   22-block 15
+        2:   23:    CachedMem cache = *memModelPtr;
+        1:   23-block  0
+        1:   23-block  1
+        1:   23-block  2
+    $$$$$:   23-block  3
+        1:   23-block  4
+    %%%%%:   23-block  5
+    %%%%%:   23-block  6
+        -:   24:
+        1:   25:    cache.setMemoryRequestIp(512);
+        1:   25-block  0
+        1:   26:    cache.Request(512, IType::J);
+        1:   27:    ASSERT_EQ(cache.getRequestedIp(), 0);
+        1:   27-block  0
+        1:   27-block  1
+    $$$$$:   27-block  2
+    $$$$$:   27-block  3
+    $$$$$:   27-block  4
+    $$$$$:   27-block  5
+        1:   27-block  6
+        1:   27-block  7
+        1:   27-block  8
+    %%%%%:   27-block  9
+    %%%%%:   27-block 10
+    %%%%%:   27-block 11
+    %%%%%:   27-block 12
+    %%%%%:   27-block 13
+    %%%%%:   27-block 14
+    %%%%%:   27-block 15
+    %%%%%:   27-block 16
+    %%%%%:   27-block 17
+    %%%%%:   27-block 18
+        1:   28:    ASSERT_EQ(cache.getRequestedOffset(), 0);
+        1:   28-block  0
+    $$$$$:   28-block  1
+        1:   28-block  2
+    $$$$$:   28-block  3
+    $$$$$:   28-block  4
+    $$$$$:   28-block  5
+    $$$$$:   28-block  6
+        1:   28-block  7
+        1:   28-block  8
+        1:   28-block  9
+    %%%%%:   28-block 10
+    %%%%%:   28-block 11
+    %%%%%:   28-block 12
+    %%%%%:   28-block 13
+    %%%%%:   28-block 14
+    %%%%%:   28-block 15
+    %%%%%:   28-block 16
+    %%%%%:   28-block 17
+    %%%%%:   28-block 18
+    %%%%%:   28-block 19
+        1:   29:    ASSERT_EQ(cache.getWaitCycles(), 0);
+        1:   29-block  0
+    $$$$$:   29-block  1
+        1:   29-block  2
+    $$$$$:   29-block  3
+    $$$$$:   29-block  4
+    $$$$$:   29-block  5
+    $$$$$:   29-block  6
+        1:   29-block  7
+        1:   29-block  8
+        1:   29-block  9
+    %%%%%:   29-block 10
+    %%%%%:   29-block 11
+    %%%%%:   29-block 12
+    %%%%%:   29-block 13
+    %%%%%:   29-block 14
+    %%%%%:   29-block 15
+    %%%%%:   29-block 16
+    %%%%%:   29-block 17
+    %%%%%:   29-block 18
+    %%%%%:   29-block 19
+        -:   30:
+        1:   31:    cache.Request(512, IType::Unsupported);
+        1:   31-block  0
+    $$$$$:   31-block  1
+        1:   32:    ASSERT_EQ(cache.getRequestedIp(), 0);
+        1:   32-block  0
+        1:   32-block  1
+    $$$$$:   32-block  2
+    $$$$$:   32-block  3
+    $$$$$:   32-block  4
+    $$$$$:   32-block  5
+        1:   32-block  6
+        1:   32-block  7
+        1:   32-block  8
+    %%%%%:   32-block  9
+    %%%%%:   32-block 10
+    %%%%%:   32-block 11
+    %%%%%:   32-block 12
+    %%%%%:   32-block 13
+    %%%%%:   32-block 14
+    %%%%%:   32-block 15
+    %%%%%:   32-block 16
+    %%%%%:   32-block 17
+    %%%%%:   32-block 18
+        1:   33:    ASSERT_EQ(cache.getRequestedOffset(), 0);
+        1:   33-block  0
+    $$$$$:   33-block  1
+        1:   33-block  2
+    $$$$$:   33-block  3
+    $$$$$:   33-block  4
+    $$$$$:   33-block  5
+    $$$$$:   33-block  6
+        1:   33-block  7
+        1:   33-block  8
+        1:   33-block  9
+    %%%%%:   33-block 10
+    %%%%%:   33-block 11
+    %%%%%:   33-block 12
+    %%%%%:   33-block 13
+    %%%%%:   33-block 14
+    %%%%%:   33-block 15
+    %%%%%:   33-block 16
+    %%%%%:   33-block 17
+    %%%%%:   33-block 18
+    %%%%%:   33-block 19
+        1:   34:    ASSERT_EQ(cache.getWaitCycles(), 0);
+        1:   34-block  0
+    $$$$$:   34-block  1
+        1:   34-block  2
+    $$$$$:   34-block  3
+    $$$$$:   34-block  4
+    $$$$$:   34-block  5
+    $$$$$:   34-block  6
+        1:   34-block  7
+        1:   34-block  8
+        1:   34-block  9
+        1:   34-block 10
+    $$$$$:   34-block 11
+        1:   34-block 12
+    %%%%%:   34-block 13
+    %%%%%:   34-block 14
+    %%%%%:   34-block 15
+    %%%%%:   34-block 16
+    %%%%%:   34-block 17
+    %%%%%:   34-block 18
+    %%%%%:   34-block 19
+    %%%%%:   34-block 20
+    %%%%%:   34-block 21
+        -:   35:}
+        -:   36:
+        8:   37:TEST_F(CacheMemoryFixture, cacheHit) {
+        1:   37-block  0
+        1:   37-block  1
+        1:   37-block  2
+        1:   37-block  3
+        1:   37-block  4
+    %%%%%:   37-block  5
+    %%%%%:   37-block  6
+    %%%%%:   37-block  7
+    %%%%%:   37-block  8
+    %%%%%:   37-block  9
+    %%%%%:   37-block 10
+        1:   37-block 11
+        1:   37-block 12
+        1:   37-block 13
+        1:   37-block 14
+        1:   37-block 15
+        2:   38:    CachedMem cache = *memModelPtr;
+        1:   38-block  0
+        1:   38-block  1
+        1:   38-block  2
+    $$$$$:   38-block  3
+        1:   38-block  4
+    %%%%%:   38-block  5
+        -:   39:
+        1:   40:    int blockLine = rand() % blockCount;
+        1:   40-block  0
+        1:   41:    Word requestedId = 516;
+        1:   42:    cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].address = ToLineAddr(requestedId);
+        1:   43:    cache.Request(requestedId, IType::St);
+        1:   44:    ASSERT_FALSE(cache.isCacheMiss());
+        1:   44-block  0
+    $$$$$:   44-block  1
+    $$$$$:   44-block  2
+    $$$$$:   44-block  3
+    $$$$$:   44-block  4
+    $$$$$:   44-block  5
+        1:   44-block  6
+        1:   44-block  7
+        1:   44-block  8
+    %%%%%:   44-block  9
+    %%%%%:   44-block 10
+    %%%%%:   44-block 11
+    %%%%%:   44-block 12
+    %%%%%:   44-block 13
+    %%%%%:   44-block 14
+    %%%%%:   44-block 15
+    %%%%%:   44-block 16
+    %%%%%:   44-block 17
+        1:   45:    ASSERT_EQ(cache.getWaitCycles(), cache.getDataLatency());
+        1:   45-block  0
+    $$$$$:   45-block  1
+        1:   45-block  2
+    $$$$$:   45-block  3
+    $$$$$:   45-block  4
+    $$$$$:   45-block  5
+    $$$$$:   45-block  6
+        1:   45-block  7
+        1:   45-block  8
+        1:   45-block  9
+    %%%%%:   45-block 10
+    %%%%%:   45-block 11
+    %%%%%:   45-block 12
+    %%%%%:   45-block 13
+    %%%%%:   45-block 14
+    %%%%%:   45-block 15
+    %%%%%:   45-block 16
+    %%%%%:   45-block 17
+    %%%%%:   45-block 18
+    %%%%%:   45-block 19
+        1:   46:    ASSERT_EQ(cache.getRequestedIp(), ToLineAddr(requestedId));
+        1:   46-block  0
+    $$$$$:   46-block  1
+        1:   46-block  2
+    $$$$$:   46-block  3
+    $$$$$:   46-block  4
+    $$$$$:   46-block  5
+    $$$$$:   46-block  6
+        1:   46-block  7
+        1:   46-block  8
+        1:   46-block  9
+    %%%%%:   46-block 10
+    %%%%%:   46-block 11
+    %%%%%:   46-block 12
+    %%%%%:   46-block 13
+    %%%%%:   46-block 14
+    %%%%%:   46-block 15
+    %%%%%:   46-block 16
+    %%%%%:   46-block 17
+    %%%%%:   46-block 18
+    %%%%%:   46-block 19
+        1:   47:    ASSERT_EQ(cache.getRequestedOffset(), ToLineOffset(requestedId));
+        1:   47-block  0
+    $$$$$:   47-block  1
+        1:   47-block  2
+    $$$$$:   47-block  3
+    $$$$$:   47-block  4
+    $$$$$:   47-block  5
+    $$$$$:   47-block  6
+        1:   47-block  7
+        1:   47-block  8
+        1:   47-block  9
+        1:   47-block 10
+    $$$$$:   47-block 11
+        1:   47-block 12
+    %%%%%:   47-block 13
+    %%%%%:   47-block 14
+    %%%%%:   47-block 15
+    %%%%%:   47-block 16
+    %%%%%:   47-block 17
+    %%%%%:   47-block 18
+    %%%%%:   47-block 19
+    %%%%%:   47-block 20
+    %%%%%:   47-block 21
+        -:   48:}
+        -:   49:
+        8:   50:TEST_F(CacheMemoryFixture, requestMissStoreCommand) {
+        1:   50-block  0
+        1:   50-block  1
+        1:   50-block  2
+        1:   50-block  3
+        1:   50-block  4
+    %%%%%:   50-block  5
+    %%%%%:   50-block  6
+    %%%%%:   50-block  7
+    %%%%%:   50-block  8
+    %%%%%:   50-block  9
+        1:   50-block 10
+        1:   50-block 11
+        1:   50-block 12
+        1:   50-block 13
+        1:   50-block 14
+        2:   51:    CachedMem cache = *memModelPtr;
+        1:   51-block  0
+        1:   51-block  1
+        1:   51-block  2
+    $$$$$:   51-block  3
+        1:   51-block  4
+    %%%%%:   51-block  5
+        -:   52:
+        1:   53:    int blockLine = rand() % blockCount;
+        1:   53-block  0
+        1:   54:    Word requestedId = 520;
+        1:   55:    cache.Request(requestedId, IType::Ld);
+        1:   56:    ASSERT_TRUE(cache.isCacheMiss());
+        1:   56-block  0
+    $$$$$:   56-block  1
+    $$$$$:   56-block  2
+    $$$$$:   56-block  3
+    $$$$$:   56-block  4
+    $$$$$:   56-block  5
+        1:   56-block  6
+        1:   56-block  7
+        1:   56-block  8
+    %%%%%:   56-block  9
+    %%%%%:   56-block 10
+    %%%%%:   56-block 11
+    %%%%%:   56-block 12
+    %%%%%:   56-block 13
+    %%%%%:   56-block 14
+    %%%%%:   56-block 15
+    %%%%%:   56-block 16
+    %%%%%:   56-block 17
+        1:   57:    ASSERT_EQ(cache.getWaitCycles(), cache.getFailLatency());
+        1:   57-block  0
+    $$$$$:   57-block  1
+        1:   57-block  2
+    $$$$$:   57-block  3
+    $$$$$:   57-block  4
+    $$$$$:   57-block  5
+    $$$$$:   57-block  6
+        1:   57-block  7
+        1:   57-block  8
+        1:   57-block  9
+    %%%%%:   57-block 10
+    %%%%%:   57-block 11
+    %%%%%:   57-block 12
+    %%%%%:   57-block 13
+    %%%%%:   57-block 14
+    %%%%%:   57-block 15
+    %%%%%:   57-block 16
+    %%%%%:   57-block 17
+    %%%%%:   57-block 18
+    %%%%%:   57-block 19
+        1:   58:    ASSERT_EQ(cache.getRequestedIp(), ToLineAddr(requestedId));
+        1:   58-block  0
+    $$$$$:   58-block  1
+        1:   58-block  2
+    $$$$$:   58-block  3
+    $$$$$:   58-block  4
+    $$$$$:   58-block  5
+    $$$$$:   58-block  6
+        1:   58-block  7
+        1:   58-block  8
+        1:   58-block  9
+    %%%%%:   58-block 10
+    %%%%%:   58-block 11
+    %%%%%:   58-block 12
+    %%%%%:   58-block 13
+    %%%%%:   58-block 14
+    %%%%%:   58-block 15
+    %%%%%:   58-block 16
+    %%%%%:   58-block 17
+    %%%%%:   58-block 18
+    %%%%%:   58-block 19
+        1:   59:    ASSERT_EQ(cache.getRequestedOffset(), ToLineOffset(requestedId));
+        1:   59-block  0
+    $$$$$:   59-block  1
+        1:   59-block  2
+    $$$$$:   59-block  3
+    $$$$$:   59-block  4
+    $$$$$:   59-block  5
+    $$$$$:   59-block  6
+        1:   59-block  7
+        1:   59-block  8
+        1:   59-block  9
+    %%%%%:   59-block 10
+    %%%%%:   59-block 11
+    %%%%%:   59-block 12
+    %%%%%:   59-block 13
+    %%%%%:   59-block 14
+    %%%%%:   59-block 15
+    %%%%%:   59-block 16
+    %%%%%:   59-block 17
+    %%%%%:   59-block 18
+        -:   60:
+        1:   61:    cache.Request(requestedId, IType::St);
+        1:   61-block  0
+    $$$$$:   61-block  1
+        1:   62:    ASSERT_TRUE(cache.isCacheMiss());
+        1:   62-block  0
+    $$$$$:   62-block  1
+    $$$$$:   62-block  2
+    $$$$$:   62-block  3
+    $$$$$:   62-block  4
+    $$$$$:   62-block  5
+        1:   62-block  6
+        1:   62-block  7
+        1:   62-block  8
+    %%%%%:   62-block  9
+    %%%%%:   62-block 10
+    %%%%%:   62-block 11
+    %%%%%:   62-block 12
+    %%%%%:   62-block 13
+    %%%%%:   62-block 14
+    %%%%%:   62-block 15
+    %%%%%:   62-block 16
+    %%%%%:   62-block 17
+        1:   63:    ASSERT_EQ(cache.getWaitCycles(), cache.getFailLatency());
+        1:   63-block  0
+    $$$$$:   63-block  1
+        1:   63-block  2
+    $$$$$:   63-block  3
+    $$$$$:   63-block  4
+    $$$$$:   63-block  5
+    $$$$$:   63-block  6
+        1:   63-block  7
+        1:   63-block  8
+        1:   63-block  9
+    %%%%%:   63-block 10
+    %%%%%:   63-block 11
+    %%%%%:   63-block 12
+    %%%%%:   63-block 13
+    %%%%%:   63-block 14
+    %%%%%:   63-block 15
+    %%%%%:   63-block 16
+    %%%%%:   63-block 17
+    %%%%%:   63-block 18
+    %%%%%:   63-block 19
+        1:   64:    ASSERT_EQ(cache.getRequestedIp(), ToLineAddr(requestedId));
+        1:   64-block  0
+    $$$$$:   64-block  1
+        1:   64-block  2
+    $$$$$:   64-block  3
+    $$$$$:   64-block  4
+    $$$$$:   64-block  5
+    $$$$$:   64-block  6
+        1:   64-block  7
+        1:   64-block  8
+        1:   64-block  9
+    %%%%%:   64-block 10
+    %%%%%:   64-block 11
+    %%%%%:   64-block 12
+    %%%%%:   64-block 13
+    %%%%%:   64-block 14
+    %%%%%:   64-block 15
+    %%%%%:   64-block 16
+    %%%%%:   64-block 17
+    %%%%%:   64-block 18
+    %%%%%:   64-block 19
+        1:   65:    ASSERT_EQ(cache.getRequestedOffset(), ToLineOffset(requestedId));
+        1:   65-block  0
+    $$$$$:   65-block  1
+        1:   65-block  2
+    $$$$$:   65-block  3
+    $$$$$:   65-block  4
+    $$$$$:   65-block  5
+    $$$$$:   65-block  6
+        1:   65-block  7
+        1:   65-block  8
+        1:   65-block  9
+        1:   65-block 10
+    $$$$$:   65-block 11
+        1:   65-block 12
+    %%%%%:   65-block 13
+    %%%%%:   65-block 14
+    %%%%%:   65-block 15
+    %%%%%:   65-block 16
+    %%%%%:   65-block 17
+    %%%%%:   65-block 18
+    %%%%%:   65-block 19
+    %%%%%:   65-block 20
+    %%%%%:   65-block 21
+        4:   66:}
+        1:   66-block  0
+        1:   66-block  1
+        1:   66-block  2
+        1:   66-block  3
+        1:   66-block  4
+        1:   66-block  5

@@ -1,0 +1,882 @@
+        -:    0:Source:/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_response_tests.cpp
+        -:    0:Graph:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_data_response_tests.cpp.gcno
+        -:    0:Data:/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug/google_tests/CMakeFiles/google_tests_run.dir/cache_data_response_tests.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1://
+        -:    2:// Created by shevchenya on 15/11/2020.
+        -:    3://
+        -:    4:
+        -:    5:#include <random>
+        -:    6:
+        -:    7:#include "gtest/gtest.h"
+        -:    8:#include "../src/Memory.h"
+        -:    9:
+    #####:   10:class CacheMemoryFixture : public ::testing::Test {
+    $$$$$:   10-block  0
+    $$$$$:   10-block  1
+    $$$$$:   10-block  2
+    $$$$$:   10-block  3
+    $$$$$:   10-block  4
+    $$$$$:   10-block  5
+        -:   11:protected:
+    #####:   12:    void SetUp() override {
+    $$$$$:   12-block  0
+    #####:   13:        MemoryStorage mem ;
+    $$$$$:   13-block  0
+    %%%%%:   13-block  1
+    #####:   14:        UncachedMem uncachedMem = UncachedMem (mem);
+    $$$$$:   14-block  0
+    %%%%%:   14-block  1
+    #####:   15:        memModelPtr = std::make_unique<CachedMem> ( uncachedMem);
+    $$$$$:   15-block  0
+    #####:   16:    }
+        -:   17:    std::unique_ptr<CachedMem> memModelPtr;
+        -:   18:};
+        -:   19:
+        8:   20:TEST_F(CacheMemoryFixture, waitDataResponse) {
+        1:   20-block  0
+        1:   20-block  1
+        1:   20-block  2
+        1:   20-block  3
+        1:   20-block  4
+    %%%%%:   20-block  5
+    %%%%%:   20-block  6
+    %%%%%:   20-block  7
+    %%%%%:   20-block  8
+    %%%%%:   20-block  9
+    %%%%%:   20-block 10
+        1:   20-block 11
+        1:   20-block 12
+        1:   20-block 13
+        1:   20-block 14
+        1:   20-block 15
+        2:   21:    CachedMem cache = *memModelPtr;
+        1:   21-block  0
+        1:   21-block  1
+        1:   21-block  2
+    $$$$$:   21-block  3
+        1:   21-block  4
+    %%%%%:   21-block  5
+        1:   22:    cache.setWaitCycles(5);
+        1:   22-block  0
+        -:   23:
+        1:   24:    Word data = 200;
+        1:   25:    ASSERT_FALSE(cache.Response(512, data, IType::St, 24));
+        1:   25-block  0
+    $$$$$:   25-block  1
+    $$$$$:   25-block  2
+    $$$$$:   25-block  3
+    $$$$$:   25-block  4
+    $$$$$:   25-block  5
+        1:   25-block  6
+        1:   25-block  7
+        1:   25-block  8
+        1:   25-block  9
+    $$$$$:   25-block 10
+        1:   25-block 11
+    %%%%%:   25-block 12
+    %%%%%:   25-block 13
+    %%%%%:   25-block 14
+    %%%%%:   25-block 15
+    %%%%%:   25-block 16
+    %%%%%:   25-block 17
+    %%%%%:   25-block 18
+    %%%%%:   25-block 19
+        -:   26:}
+        -:   27:
+        8:   28:TEST_F(CacheMemoryFixture, incorrectCommandType) {
+        1:   28-block  0
+        1:   28-block  1
+        1:   28-block  2
+        1:   28-block  3
+        1:   28-block  4
+    %%%%%:   28-block  5
+    %%%%%:   28-block  6
+    %%%%%:   28-block  7
+    %%%%%:   28-block  8
+    %%%%%:   28-block  9
+    %%%%%:   28-block 10
+        1:   28-block 11
+        1:   28-block 12
+        1:   28-block 13
+        1:   28-block 14
+        1:   28-block 15
+        2:   29:    CachedMem cache = *memModelPtr;
+        1:   29-block  0
+        1:   29-block  1
+        1:   29-block  2
+    $$$$$:   29-block  3
+        1:   29-block  4
+    %%%%%:   29-block  5
+        1:   30:    cache.setWaitCycles(5);
+        1:   30-block  0
+        -:   31:
+        1:   32:    Word data = 200;
+        1:   33:    ASSERT_TRUE(cache.Response(512, data, IType::J, 24));
+        1:   33-block  0
+    $$$$$:   33-block  1
+    $$$$$:   33-block  2
+    $$$$$:   33-block  3
+    $$$$$:   33-block  4
+    $$$$$:   33-block  5
+        1:   33-block  6
+        1:   33-block  7
+        1:   33-block  8
+    %%%%%:   33-block  9
+    %%%%%:   33-block 10
+    %%%%%:   33-block 11
+    %%%%%:   33-block 12
+    %%%%%:   33-block 13
+    %%%%%:   33-block 14
+    %%%%%:   33-block 15
+    %%%%%:   33-block 16
+        1:   34:    ASSERT_TRUE(cache.Response(512, data, IType::Unsupported, 24));
+        1:   34-block  0
+    $$$$$:   34-block  1
+        1:   34-block  2
+    $$$$$:   34-block  3
+    $$$$$:   34-block  4
+    $$$$$:   34-block  5
+    $$$$$:   34-block  6
+    $$$$$:   34-block  7
+        1:   34-block  8
+        1:   34-block  9
+        1:   34-block 10
+        1:   34-block 11
+    $$$$$:   34-block 12
+        1:   34-block 13
+    %%%%%:   34-block 14
+    %%%%%:   34-block 15
+    %%%%%:   34-block 16
+    %%%%%:   34-block 17
+    %%%%%:   34-block 18
+    %%%%%:   34-block 19
+    %%%%%:   34-block 20
+    %%%%%:   34-block 21
+        -:   35:}
+        -:   36:
+        8:   37:TEST_F(CacheMemoryFixture, cacheHitStoreCommand) {
+        1:   37-block  0
+        1:   37-block  1
+        1:   37-block  2
+        1:   37-block  3
+        1:   37-block  4
+    %%%%%:   37-block  5
+    %%%%%:   37-block  6
+    %%%%%:   37-block  7
+    %%%%%:   37-block  8
+    %%%%%:   37-block  9
+    %%%%%:   37-block 10
+        1:   37-block 11
+        1:   37-block 12
+        1:   37-block 13
+        1:   37-block 14
+        1:   37-block 15
+        2:   38:    MemoryStorage mem;
+        1:   38-block  0
+        1:   38-block  1
+        1:   38-block  2
+    $$$$$:   38-block  3
+        1:   38-block  4
+    %%%%%:   38-block  5
+        1:   39:    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+        1:   39-block  0
+        1:   39-block  1
+        1:   39-block  2
+    %%%%%:   39-block  3
+    %%%%%:   39-block  4
+    %%%%%:   39-block  5
+    %%%%%:   39-block  6
+        2:   40:    UncachedMem uncachedMem = UncachedMem (mem);
+        1:   40-block  0
+    $$$$$:   40-block  1
+        1:   40-block  2
+        1:   40-block  3
+    %%%%%:   40-block  4
+        2:   41:    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+        1:   41-block  0
+        1:   41-block  1
+        1:   41-block  2
+    $$$$$:   41-block  3
+        1:   41-block  4
+        1:   41-block  5
+    %%%%%:   41-block  6
+    %%%%%:   41-block  7
+        2:   42:    CachedMem cache = *memModelPtr;
+        1:   42-block  0
+    $$$$$:   42-block  1
+        1:   42-block  2
+        1:   42-block  3
+    %%%%%:   42-block  4
+        -:   43:
+        1:   44:    int blockLine = rand() % blockCount;
+        1:   44-block  0
+        1:   45:    Word requestedId = 520;
+        1:   46:    Word requestOffset = ToLineOffset(requestedId);
+        1:   47:    cache.setRequestedIp(ToLineAddr(requestedId));
+        1:   48:    cache.setRequestedOffset(requestOffset);
+        1:   49:    cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].address = ToLineAddr(requestedId);
+        1:   50:    cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[requestOffset] = 1024;
+        1:   51:    cache.setCacheMiss(false);
+        -:   52:
+        1:   53:    Word data = 1024;
+        1:   54:    ASSERT_TRUE(cache.Response(requestedId, data, IType::St, 5));
+        1:   54-block  0
+    $$$$$:   54-block  1
+    $$$$$:   54-block  2
+    $$$$$:   54-block  3
+    $$$$$:   54-block  4
+    $$$$$:   54-block  5
+        1:   54-block  6
+        1:   54-block  7
+        1:   54-block  8
+    %%%%%:   54-block  9
+    %%%%%:   54-block 10
+    %%%%%:   54-block 11
+    %%%%%:   54-block 12
+    %%%%%:   54-block 13
+    %%%%%:   54-block 14
+    %%%%%:   54-block 15
+    %%%%%:   54-block 16
+        1:   55:    ASSERT_FALSE(cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
+        1:   55-block  0
+    $$$$$:   55-block  1
+    $$$$$:   55-block  2
+    $$$$$:   55-block  3
+    $$$$$:   55-block  4
+    $$$$$:   55-block  5
+    $$$$$:   55-block  6
+        1:   55-block  7
+        1:   55-block  8
+        1:   55-block  9
+    %%%%%:   55-block 10
+    %%%%%:   55-block 11
+    %%%%%:   55-block 12
+    %%%%%:   55-block 13
+    %%%%%:   55-block 14
+    %%%%%:   55-block 15
+    %%%%%:   55-block 16
+    %%%%%:   55-block 17
+    %%%%%:   55-block 18
+        1:   56:    ASSERT_EQ(cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+        1:   56-block  0
+    $$$$$:   56-block  1
+        1:   56-block  2
+    $$$$$:   56-block  3
+    $$$$$:   56-block  4
+    $$$$$:   56-block  5
+    $$$$$:   56-block  6
+        1:   56-block  7
+        1:   56-block  8
+        1:   56-block  9
+    %%%%%:   56-block 10
+    %%%%%:   56-block 11
+    %%%%%:   56-block 12
+    %%%%%:   56-block 13
+    %%%%%:   56-block 14
+    %%%%%:   56-block 15
+    %%%%%:   56-block 16
+    %%%%%:   56-block 17
+        1:   57:    ASSERT_EQ(cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[requestOffset], 1024);
+        1:   57-block  0
+    $$$$$:   57-block  1
+        1:   57-block  2
+    $$$$$:   57-block  3
+    $$$$$:   57-block  4
+    $$$$$:   57-block  5
+    $$$$$:   57-block  6
+        1:   57-block  7
+        1:   57-block  8
+        1:   57-block  9
+        1:   57-block 10
+    $$$$$:   57-block 11
+        1:   57-block 12
+    %%%%%:   57-block 13
+    %%%%%:   57-block 14
+    %%%%%:   57-block 15
+    %%%%%:   57-block 16
+    %%%%%:   57-block 17
+    %%%%%:   57-block 18
+    %%%%%:   57-block 19
+        -:   58:}
+        -:   59:
+        8:   60:TEST_F(CacheMemoryFixture, cacheHitLoadCommand) {
+        1:   60-block  0
+        1:   60-block  1
+        1:   60-block  2
+        1:   60-block  3
+        1:   60-block  4
+    %%%%%:   60-block  5
+    %%%%%:   60-block  6
+    %%%%%:   60-block  7
+    %%%%%:   60-block  8
+    %%%%%:   60-block  9
+    %%%%%:   60-block 10
+        1:   60-block 11
+        1:   60-block 12
+        1:   60-block 13
+        1:   60-block 14
+        1:   60-block 15
+        2:   61:    MemoryStorage mem;
+        1:   61-block  0
+        1:   61-block  1
+        1:   61-block  2
+    $$$$$:   61-block  3
+        1:   61-block  4
+    %%%%%:   61-block  5
+        1:   62:    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+        1:   62-block  0
+        1:   62-block  1
+        1:   62-block  2
+    %%%%%:   62-block  3
+    %%%%%:   62-block  4
+    %%%%%:   62-block  5
+    %%%%%:   62-block  6
+        2:   63:    UncachedMem uncachedMem = UncachedMem (mem);
+        1:   63-block  0
+    $$$$$:   63-block  1
+        1:   63-block  2
+        1:   63-block  3
+    %%%%%:   63-block  4
+        2:   64:    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+        1:   64-block  0
+        1:   64-block  1
+        1:   64-block  2
+    $$$$$:   64-block  3
+        1:   64-block  4
+        1:   64-block  5
+    %%%%%:   64-block  6
+    %%%%%:   64-block  7
+        2:   65:    CachedMem cache = *memModelPtr;
+        1:   65-block  0
+    $$$$$:   65-block  1
+        1:   65-block  2
+        1:   65-block  3
+    %%%%%:   65-block  4
+        -:   66:
+        1:   67:    int blockLine = rand() % blockCount;
+        1:   67-block  0
+        1:   68:    Word requestedId = 520;
+        1:   69:    Word requestOffset = ToLineOffset(requestedId);
+        1:   70:    cache.setRequestedIp(ToLineAddr(requestedId));
+        1:   71:    cache.setRequestedOffset(requestOffset);
+        1:   72:    cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].address = ToLineAddr(requestedId);
+        1:   73:    cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[requestOffset] = 1024;
+        1:   74:    cache.setCacheMiss(false);
+        -:   75:
+        1:   76:    Word data = 0;
+        1:   77:    ASSERT_TRUE(cache.Response(requestedId, data, IType::Ld, 5));
+        1:   77-block  0
+    $$$$$:   77-block  1
+    $$$$$:   77-block  2
+    $$$$$:   77-block  3
+    $$$$$:   77-block  4
+    $$$$$:   77-block  5
+        1:   77-block  6
+        1:   77-block  7
+        1:   77-block  8
+    %%%%%:   77-block  9
+    %%%%%:   77-block 10
+    %%%%%:   77-block 11
+    %%%%%:   77-block 12
+    %%%%%:   77-block 13
+    %%%%%:   77-block 14
+    %%%%%:   77-block 15
+    %%%%%:   77-block 16
+    %%%%%:   77-block 17
+        1:   78:    ASSERT_EQ(cache.getDataMemory()[blockLine][requestedId % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+        1:   78-block  0
+    $$$$$:   78-block  1
+        1:   78-block  2
+    $$$$$:   78-block  3
+    $$$$$:   78-block  4
+    $$$$$:   78-block  5
+    $$$$$:   78-block  6
+        1:   78-block  7
+        1:   78-block  8
+        1:   78-block  9
+    %%%%%:   78-block 10
+    %%%%%:   78-block 11
+    %%%%%:   78-block 12
+    %%%%%:   78-block 13
+    %%%%%:   78-block 14
+    %%%%%:   78-block 15
+    %%%%%:   78-block 16
+    %%%%%:   78-block 17
+        1:   79:    ASSERT_EQ(data, 1024);
+        1:   79-block  0
+    $$$$$:   79-block  1
+        1:   79-block  2
+    $$$$$:   79-block  3
+    $$$$$:   79-block  4
+    $$$$$:   79-block  5
+    $$$$$:   79-block  6
+        1:   79-block  7
+        1:   79-block  8
+        1:   79-block  9
+        1:   79-block 10
+    $$$$$:   79-block 11
+        1:   79-block 12
+    %%%%%:   79-block 13
+    %%%%%:   79-block 14
+    %%%%%:   79-block 15
+    %%%%%:   79-block 16
+    %%%%%:   79-block 17
+    %%%%%:   79-block 18
+    %%%%%:   79-block 19
+        -:   80:}
+        -:   81:
+        8:   82:TEST_F(CacheMemoryFixture, emptyCacheHitStoreCommand) {
+        1:   82-block  0
+        1:   82-block  1
+        1:   82-block  2
+        1:   82-block  3
+        1:   82-block  4
+    %%%%%:   82-block  5
+    %%%%%:   82-block  6
+    %%%%%:   82-block  7
+    %%%%%:   82-block  8
+    %%%%%:   82-block  9
+    %%%%%:   82-block 10
+        1:   82-block 11
+        1:   82-block 12
+        1:   82-block 13
+        1:   82-block 14
+        1:   82-block 15
+        2:   83:    MemoryStorage mem;
+        1:   83-block  0
+        1:   83-block  1
+        1:   83-block  2
+    $$$$$:   83-block  3
+        1:   83-block  4
+    %%%%%:   83-block  5
+        1:   84:    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+        1:   84-block  0
+        1:   84-block  1
+        1:   84-block  2
+    %%%%%:   84-block  3
+    %%%%%:   84-block  4
+    %%%%%:   84-block  5
+    %%%%%:   84-block  6
+        2:   85:    UncachedMem uncachedMem = UncachedMem (mem);
+        1:   85-block  0
+    $$$$$:   85-block  1
+        1:   85-block  2
+        1:   85-block  3
+    %%%%%:   85-block  4
+        2:   86:    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+        1:   86-block  0
+        1:   86-block  1
+        1:   86-block  2
+    $$$$$:   86-block  3
+        1:   86-block  4
+        1:   86-block  5
+    %%%%%:   86-block  6
+    %%%%%:   86-block  7
+        2:   87:    CachedMem cache = *memModelPtr;
+        1:   87-block  0
+    $$$$$:   87-block  1
+        1:   87-block  2
+        1:   87-block  3
+    %%%%%:   87-block  4
+        -:   88:
+        1:   89:    Word requestedId = 520;
+        1:   90:    Word requestOffset = ToLineOffset(requestedId);
+        1:   90-block  0
+        1:   91:    cache.setRequestedIp(ToLineAddr(requestedId));
+        1:   92:    cache.setRequestedOffset(requestOffset);
+        1:   93:    cache.setCacheMiss(true);
+        -:   94:
+        1:   95:    Word data = 0;
+        1:   96:    Word blockCell = requestedId % (dataCacheBytes / blockCount) / lineSizeBytes;
+        1:   97:    ASSERT_TRUE(cache.Response(requestedId, data, IType::St, 5));
+        1:   97-block  0
+    $$$$$:   97-block  1
+    $$$$$:   97-block  2
+    $$$$$:   97-block  3
+    $$$$$:   97-block  4
+    $$$$$:   97-block  5
+        1:   97-block  6
+        1:   97-block  7
+        1:   97-block  8
+    %%%%%:   97-block  9
+    %%%%%:   97-block 10
+    %%%%%:   97-block 11
+    %%%%%:   97-block 12
+    %%%%%:   97-block 13
+    %%%%%:   97-block 14
+    %%%%%:   97-block 15
+    %%%%%:   97-block 16
+    %%%%%:   97-block 17
+        1:   98:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].lastUsage, 1);
+        1:   98-block  0
+    $$$$$:   98-block  1
+        1:   98-block  2
+    $$$$$:   98-block  3
+    $$$$$:   98-block  4
+    $$$$$:   98-block  5
+    $$$$$:   98-block  6
+        1:   98-block  7
+        1:   98-block  8
+        1:   98-block  9
+    %%%%%:   98-block 10
+    %%%%%:   98-block 11
+    %%%%%:   98-block 12
+    %%%%%:   98-block 13
+    %%%%%:   98-block 14
+    %%%%%:   98-block 15
+    %%%%%:   98-block 16
+    %%%%%:   98-block 17
+        1:   99:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].address, ToLineAddr(requestedId));
+        1:   99-block  0
+    $$$$$:   99-block  1
+        1:   99-block  2
+    $$$$$:   99-block  3
+    $$$$$:   99-block  4
+    $$$$$:   99-block  5
+    $$$$$:   99-block  6
+        1:   99-block  7
+        1:   99-block  8
+        1:   99-block  9
+    %%%%%:   99-block 10
+    %%%%%:   99-block 11
+    %%%%%:   99-block 12
+    %%%%%:   99-block 13
+    %%%%%:   99-block 14
+    %%%%%:   99-block 15
+    %%%%%:   99-block 16
+        1:  100:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].dataLine[requestOffset], data);
+        1:  100-block  0
+    $$$$$:  100-block  1
+        1:  100-block  2
+    $$$$$:  100-block  3
+    $$$$$:  100-block  4
+    $$$$$:  100-block  5
+    $$$$$:  100-block  6
+        1:  100-block  7
+        1:  100-block  8
+        1:  100-block  9
+    %%%%%:  100-block 10
+    %%%%%:  100-block 11
+    %%%%%:  100-block 12
+    %%%%%:  100-block 13
+    %%%%%:  100-block 14
+    %%%%%:  100-block 15
+        1:  101:    ASSERT_FALSE(cache.getDataMemory()[0][blockCell].validityBit);
+        1:  101-block  0
+    $$$$$:  101-block  1
+    $$$$$:  101-block  2
+    $$$$$:  101-block  3
+    $$$$$:  101-block  4
+    $$$$$:  101-block  5
+    $$$$$:  101-block  6
+        1:  101-block  7
+        1:  101-block  8
+        1:  101-block  9
+    %%%%%:  101-block 10
+    %%%%%:  101-block 11
+    %%%%%:  101-block 12
+    %%%%%:  101-block 13
+    %%%%%:  101-block 14
+    %%%%%:  101-block 15
+    %%%%%:  101-block 16
+    %%%%%:  101-block 17
+        -:  102:
+        1:  103:    ASSERT_TRUE(cache.Response(requestedId, data, IType::Ld, 5));
+        1:  103-block  0
+    $$$$$:  103-block  1
+        1:  103-block  2
+    $$$$$:  103-block  3
+    $$$$$:  103-block  4
+    $$$$$:  103-block  5
+    $$$$$:  103-block  6
+    $$$$$:  103-block  7
+        1:  103-block  8
+        1:  103-block  9
+        1:  103-block 10
+    %%%%%:  103-block 11
+    %%%%%:  103-block 12
+    %%%%%:  103-block 13
+    %%%%%:  103-block 14
+    %%%%%:  103-block 15
+    %%%%%:  103-block 16
+    %%%%%:  103-block 17
+    %%%%%:  103-block 18
+    %%%%%:  103-block 19
+        1:  104:    ASSERT_EQ(cache.getDataMemory()[1][blockCell].lastUsage, 1);
+        1:  104-block  0
+    $$$$$:  104-block  1
+        1:  104-block  2
+    $$$$$:  104-block  3
+    $$$$$:  104-block  4
+    $$$$$:  104-block  5
+    $$$$$:  104-block  6
+        1:  104-block  7
+        1:  104-block  8
+        1:  104-block  9
+    %%%%%:  104-block 10
+    %%%%%:  104-block 11
+    %%%%%:  104-block 12
+    %%%%%:  104-block 13
+    %%%%%:  104-block 14
+    %%%%%:  104-block 15
+    %%%%%:  104-block 16
+    %%%%%:  104-block 17
+        1:  105:    ASSERT_EQ(cache.getDataMemory()[1][blockCell].address, ToLineAddr(requestedId));
+        1:  105-block  0
+    $$$$$:  105-block  1
+        1:  105-block  2
+    $$$$$:  105-block  3
+    $$$$$:  105-block  4
+    $$$$$:  105-block  5
+    $$$$$:  105-block  6
+        1:  105-block  7
+        1:  105-block  8
+        1:  105-block  9
+    %%%%%:  105-block 10
+    %%%%%:  105-block 11
+    %%%%%:  105-block 12
+    %%%%%:  105-block 13
+    %%%%%:  105-block 14
+    %%%%%:  105-block 15
+    %%%%%:  105-block 16
+        1:  106:    ASSERT_TRUE(cache.getDataMemory()[1][blockCell].validityBit);
+        1:  106-block  0
+    $$$$$:  106-block  1
+    $$$$$:  106-block  2
+    $$$$$:  106-block  3
+    $$$$$:  106-block  4
+    $$$$$:  106-block  5
+    $$$$$:  106-block  6
+        1:  106-block  7
+        1:  106-block  8
+        1:  106-block  9
+    %%%%%:  106-block 10
+    %%%%%:  106-block 11
+    %%%%%:  106-block 12
+    %%%%%:  106-block 13
+    %%%%%:  106-block 14
+    %%%%%:  106-block 15
+    %%%%%:  106-block 16
+    %%%%%:  106-block 17
+    %%%%%:  106-block 18
+        1:  107:    ASSERT_EQ(data, 19);
+        1:  107-block  0
+    $$$$$:  107-block  1
+        1:  107-block  2
+    $$$$$:  107-block  3
+    $$$$$:  107-block  4
+    $$$$$:  107-block  5
+    $$$$$:  107-block  6
+        1:  107-block  7
+        1:  107-block  8
+        1:  107-block  9
+        1:  107-block 10
+    $$$$$:  107-block 11
+        1:  107-block 12
+    %%%%%:  107-block 13
+    %%%%%:  107-block 14
+    %%%%%:  107-block 15
+    %%%%%:  107-block 16
+    %%%%%:  107-block 17
+    %%%%%:  107-block 18
+    %%%%%:  107-block 19
+        -:  108:}
+        -:  109:
+        8:  110:TEST_F(CacheMemoryFixture, fullDataCacheHitStoreCommand) {
+        1:  110-block  0
+        1:  110-block  1
+        1:  110-block  2
+        1:  110-block  3
+        1:  110-block  4
+    %%%%%:  110-block  5
+    %%%%%:  110-block  6
+    %%%%%:  110-block  7
+    %%%%%:  110-block  8
+    %%%%%:  110-block  9
+        1:  110-block 10
+        1:  110-block 11
+        1:  110-block 12
+        1:  110-block 13
+        1:  110-block 14
+        2:  111:    MemoryStorage mem;
+        1:  111-block  0
+        1:  111-block  1
+        1:  111-block  2
+    $$$$$:  111-block  3
+        1:  111-block  4
+    %%%%%:  111-block  5
+        1:  112:    mem.LoadElf("/home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv");
+        1:  112-block  0
+        1:  112-block  1
+        1:  112-block  2
+    %%%%%:  112-block  3
+    %%%%%:  112-block  4
+    %%%%%:  112-block  5
+    %%%%%:  112-block  6
+        2:  113:    UncachedMem uncachedMem = UncachedMem (mem);
+        1:  113-block  0
+    $$$$$:  113-block  1
+        1:  113-block  2
+        1:  113-block  3
+    %%%%%:  113-block  4
+        2:  114:    std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
+        1:  114-block  0
+        1:  114-block  1
+        1:  114-block  2
+    $$$$$:  114-block  3
+        1:  114-block  4
+        1:  114-block  5
+    %%%%%:  114-block  6
+    %%%%%:  114-block  7
+        2:  115:    CachedMem cache = *memModelPtr;
+        1:  115-block  0
+    $$$$$:  115-block  1
+        1:  115-block  2
+        1:  115-block  3
+    %%%%%:  115-block  4
+        -:  116:
+        1:  117:    Word requestedId = 520;
+        1:  118:    Word requestOffset = ToLineOffset(requestedId);
+        1:  118-block  0
+        1:  119:    cache.setRequestedIp(ToLineAddr(requestedId));
+        1:  120:    cache.setRequestedOffset(requestOffset);
+        1:  121:    cache.setCacheMiss(true);
+        5:  122:    for (Block &block : cache.getDataMemory()) {
+        5:  122-block  0
+        4:  122-block  1
+        4:  123:        Word address = requestedId % (dataCacheBytes / blockCount) / lineSizeBytes;
+        4:  124:        block[address].address = 1;
+        4:  125:        Line emptyLine = Line();
+        4:  126:        emptyLine[0] = 1024;
+        4:  127:        block[address].dataLine = emptyLine;
+        -:  128:    }
+        -:  129:
+        1:  130:    Word data = 0;
+        1:  131:    Word blockCell = requestedId % (dataCacheBytes / blockCount) / lineSizeBytes;
+        1:  132:    ASSERT_TRUE(cache.Response(requestedId, data, IType::St, 5));
+        1:  132-block  0
+        1:  132-block  1
+    $$$$$:  132-block  2
+    $$$$$:  132-block  3
+    $$$$$:  132-block  4
+    $$$$$:  132-block  5
+    $$$$$:  132-block  6
+        1:  132-block  7
+        1:  132-block  8
+        1:  132-block  9
+    %%%%%:  132-block 10
+    %%%%%:  132-block 11
+    %%%%%:  132-block 12
+    %%%%%:  132-block 13
+    %%%%%:  132-block 14
+    %%%%%:  132-block 15
+    %%%%%:  132-block 16
+    %%%%%:  132-block 17
+    %%%%%:  132-block 18
+        1:  133:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].lastUsage, 1);
+        1:  133-block  0
+    $$$$$:  133-block  1
+        1:  133-block  2
+    $$$$$:  133-block  3
+    $$$$$:  133-block  4
+    $$$$$:  133-block  5
+    $$$$$:  133-block  6
+        1:  133-block  7
+        1:  133-block  8
+        1:  133-block  9
+    %%%%%:  133-block 10
+    %%%%%:  133-block 11
+    %%%%%:  133-block 12
+    %%%%%:  133-block 13
+    %%%%%:  133-block 14
+    %%%%%:  133-block 15
+    %%%%%:  133-block 16
+    %%%%%:  133-block 17
+        1:  134:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].address, ToLineAddr(requestedId));
+        1:  134-block  0
+    $$$$$:  134-block  1
+        1:  134-block  2
+    $$$$$:  134-block  3
+    $$$$$:  134-block  4
+    $$$$$:  134-block  5
+    $$$$$:  134-block  6
+        1:  134-block  7
+        1:  134-block  8
+        1:  134-block  9
+    %%%%%:  134-block 10
+    %%%%%:  134-block 11
+    %%%%%:  134-block 12
+    %%%%%:  134-block 13
+    %%%%%:  134-block 14
+    %%%%%:  134-block 15
+    %%%%%:  134-block 16
+        1:  135:    ASSERT_EQ(cache.getDataMemory()[0][blockCell].dataLine[requestOffset], data);
+        1:  135-block  0
+    $$$$$:  135-block  1
+        1:  135-block  2
+    $$$$$:  135-block  3
+    $$$$$:  135-block  4
+    $$$$$:  135-block  5
+    $$$$$:  135-block  6
+        1:  135-block  7
+        1:  135-block  8
+        1:  135-block  9
+    %%%%%:  135-block 10
+    %%%%%:  135-block 11
+    %%%%%:  135-block 12
+    %%%%%:  135-block 13
+    %%%%%:  135-block 14
+    %%%%%:  135-block 15
+        1:  136:    ASSERT_FALSE(cache.getDataMemory()[0][blockCell].validityBit);
+        1:  136-block  0
+    $$$$$:  136-block  1
+    $$$$$:  136-block  2
+    $$$$$:  136-block  3
+    $$$$$:  136-block  4
+    $$$$$:  136-block  5
+    $$$$$:  136-block  6
+        1:  136-block  7
+        1:  136-block  8
+        1:  136-block  9
+    %%%%%:  136-block 10
+    %%%%%:  136-block 11
+    %%%%%:  136-block 12
+    %%%%%:  136-block 13
+    %%%%%:  136-block 14
+    %%%%%:  136-block 15
+    %%%%%:  136-block 16
+    %%%%%:  136-block 17
+    %%%%%:  136-block 18
+        -:  137:
+        1:  138:    ASSERT_EQ(cache.getMem().readLineFromMemory(0)[0], 1024);
+        1:  138-block  0
+    $$$$$:  138-block  1
+        1:  138-block  2
+    $$$$$:  138-block  3
+    $$$$$:  138-block  4
+    $$$$$:  138-block  5
+    $$$$$:  138-block  6
+        1:  138-block  7
+        1:  138-block  8
+        1:  138-block  9
+        1:  138-block 10
+    $$$$$:  138-block 11
+        1:  138-block 12
+    %%%%%:  138-block 13
+    %%%%%:  138-block 14
+    %%%%%:  138-block 15
+    %%%%%:  138-block 16
+    %%%%%:  138-block 17
+    %%%%%:  138-block 18
+    %%%%%:  138-block 19
+    %%%%%:  138-block 20
+    %%%%%:  138-block 21
+        4:  139:}
+        1:  139-block  0
+        1:  139-block  1
+        1:  139-block  2
+        1:  139-block  3
+        1:  139-block  4
+        1:  139-block  5

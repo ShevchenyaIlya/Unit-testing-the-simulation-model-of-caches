@@ -1,0 +1,40 @@
+/opt/clion-2019.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_FLAGS=-fprofile-instr-generate -fcoverage-mapping" "-DCMAKE_C_FLAGS=-fprofile-instr-generate -fcoverage-mapping" -G "CodeBlocks - Unix Makefiles" /home/shevchenya/CLionProjects/CourseWorkCache
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- broken
+CMake Error at /opt/clion-2019.3.4/bin/cmake/linux/share/cmake-3.15/Modules/CMakeTestCCompiler.cmake:60 (message):
+  The C compiler
+
+    "/usr/bin/cc"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp
+    
+    Run Build Command(s):/usr/bin/make cmTC_fc4b1/fast && /usr/bin/make -f CMakeFiles/cmTC_fc4b1.dir/build.make CMakeFiles/cmTC_fc4b1.dir/build
+    make[1]: вход в каталог «/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp»
+    Building C object CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o
+    /usr/bin/cc   -fprofile-instr-generate -fcoverage-mapping    -o CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o   -c /home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp/testCCompiler.c
+    cc: error: unrecognized command line option ‘-fprofile-instr-generate’; did you mean ‘-fprofile-generate’?
+    cc: error: unrecognized command line option ‘-fcoverage-mapping’; did you mean ‘-Wcoverage-mismatch’?
+    CMakeFiles/cmTC_fc4b1.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o' failed
+    make[1]: *** [CMakeFiles/cmTC_fc4b1.dir/testCCompiler.c.o] Error 1
+    make[1]: выход из каталога «/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeTmp»
+    Makefile:121: recipe for target 'cmTC_fc4b1/fast' failed
+    make: *** [cmTC_fc4b1/fast] Error 2
+    
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeOutput.log".
+See also "/home/shevchenya/CLionProjects/CourseWorkCache/cmake-build-debug-coverage/CMakeFiles/CMakeError.log".
