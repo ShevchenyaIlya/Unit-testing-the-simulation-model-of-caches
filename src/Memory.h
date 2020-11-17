@@ -424,13 +424,13 @@ public:
         }
     }
 
-    void Request(InstructionPtr &instr)
+    void Request(Word _addr, IType _type)
     {
-        if (instr->_type != IType::Ld && instr->_type != IType::St)
+        if (_type != IType::Ld && _type != IType::St)
             return;
 
-        Word lineAddr = ToLineAddr(instr->_addr);
-        Word offset = ToLineOffset(instr->_addr);
+        Word lineAddr = ToLineAddr(_addr);
+        Word offset = ToLineOffset(_addr);
 
         if (checkAddress(true, lineAddr)) {
             _waitCycles = dataLatency;
@@ -439,16 +439,16 @@ public:
             _cacheMiss = true;
             _waitCycles = failLatency;
             pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
-            if (instr->_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
+            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
                 _waitCycles += 120;
         }
         _requestedIp = lineAddr;
         _requestedOffset = offset;
     }
 
-    bool Response(InstructionPtr &instr, Word responseTime)
+    bool Response(Word _addr, Word &_data, IType _type, Word responseTime)
     {
-        if (instr->_type != IType::Ld && instr->_type != IType::St)
+        if (_type != IType::Ld && _type != IType::St)
             return true;
 
         if (_waitCycles != 0)
@@ -459,8 +459,8 @@ public:
             Line memoryLine = _mem.readLineFromMemory(_requestedIp);
 
             bool validity = true;
-            if (instr->_type == IType::St) {
-                memoryLine[ToLineOffset(instr->_addr)] = instr->_data;
+            if (_type == IType::St) {
+                memoryLine[ToLineOffset(_addr)] = _data;
                 validity = false;
             }
 
@@ -475,8 +475,8 @@ public:
 
             _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
 
-            if (instr->_type == IType::Ld)
-                instr->_data = memoryLine[_requestedOffset];
+            if (_type == IType::Ld)
+                _data = memoryLine[_requestedOffset];
         }
         else
         {
@@ -484,10 +484,10 @@ public:
             _dataMemory[position.first][position.second].lastUsage = 1;
             changeLRUBit(_dataMemory, position.first, position.second);
 
-            if (instr->_type == IType::Ld)
-                instr->_data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
-            else if (instr->_type == IType::St) {
-                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = instr->_data;
+            if (_type == IType::Ld)
+                _data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
+            else if (_type == IType::St) {
+                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
                 _dataMemory[position.first][position.second].validityBit = false;
             }
         }
