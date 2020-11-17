@@ -297,6 +297,9 @@
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_response_tests.cpp">
 			<Option target="google_tests_run"/>
 		</Unit>
+		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/general_cache_tests.cpp">
+			<Option target="google_tests_run"/>
+		</Unit>
 		<Unit filename="/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/lib/googlemock/src/gmock-all.cc">
 			<Option target="gmock"/>
 		</Unit>
