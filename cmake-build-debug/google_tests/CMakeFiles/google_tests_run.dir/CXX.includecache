@@ -324,15 +324,13 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_request_tests.cpp
+/home/shevchenya/CLionProjects/CourseWorkCache/google_tests/cache_data_response_tests.cpp
 random
 -
 gtest/gtest.h
 /home/shevchenya/CLionProjects/CourseWorkCache/google_tests/gtest/gtest.h
 ../src/Memory.h
 /home/shevchenya/CLionProjects/CourseWorkCache/src/Memory.h
-../src/PoolAllocator.h
-/home/shevchenya/CLionProjects/CourseWorkCache/src/PoolAllocator.h
 
 /home/shevchenya/CLionProjects/CourseWorkCache/src/BaseTypes.h
 
