@@ -437,7 +437,7 @@ public:
         } else {
             _cacheMiss = true;
             _waitCycles = failLatency;
-            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
             if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
                 _waitCycles += 120;
         }
