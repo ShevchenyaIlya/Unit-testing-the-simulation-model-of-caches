@@ -419,7 +419,6 @@ public:
             pair<Word, Word> position = findEntry(_requestedIp, false);
             _codeMemory[position.first][position.second].lastUsage = 1;
             changeLRUBit(_codeMemory, position.first, position.second);
-
             return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
         }
     }

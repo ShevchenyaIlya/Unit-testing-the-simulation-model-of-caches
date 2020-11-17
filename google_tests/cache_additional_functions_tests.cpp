@@ -93,7 +93,6 @@ TEST_F(CacheMemoryFixture, CheckAllBitsTests) {
 
     cache.getDataMemory()[3][2].lastUsage = 0;
     ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
-
 }
 
 
