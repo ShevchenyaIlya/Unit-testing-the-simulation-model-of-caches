@@ -340,105 +340,105 @@
     #####:  258:    }
     $$$$$:  258-block  0
         -:  259:
-       13:  260:    bool checkAddress(bool dataOrCode, int address)
-       13:  260-block  0
+       31:  260:    bool checkAddress(bool dataOrCode, int address)
+       31:  260-block  0
         -:  261:    {
-       26:  262:        vector<Block> temporalCacheCopy;
-       13:  262-block  0
-       13:  262-block  1
-       13:  262-block  2
+       62:  262:        vector<Block> temporalCacheCopy;
+       31:  262-block  0
+       31:  262-block  1
+       31:  262-block  2
     %%%%%:  262-block  3
     %%%%%:  262-block  4
-       13:  263:        int blockSize = 0;
-       13:  264:        if (dataOrCode) {
-        7:  265:            temporalCacheCopy = _dataMemory;
-        7:  265-block  0
-        7:  266:            blockSize = dataCacheBytes / blockCount;
-        7:  266-block  0
+       31:  263:        int blockSize = 0;
+       31:  264:        if (dataOrCode) {
+       16:  265:            temporalCacheCopy = _dataMemory;
+       16:  265-block  0
+       16:  266:            blockSize = dataCacheBytes / blockCount;
+       16:  266-block  0
         -:  267:        }
         -:  268:        else {
-        6:  269:            temporalCacheCopy = _codeMemory;
-        6:  269-block  0
-        6:  270:            blockSize = codeCacheBytes / blockCount;
-        6:  270-block  0
+       15:  269:            temporalCacheCopy = _codeMemory;
+       15:  269-block  0
+       15:  270:            blockSize = codeCacheBytes / blockCount;
+       15:  270-block  0
         -:  271:        }
         -:  272:
-       45:  273:        for (Block block : temporalCacheCopy)
-       13:  273-block  0
-       45:  273-block  1
-       38:  273-block  2
-       32:  273-block  3
-       32:  273-block  4
+      113:  273:        for (Block block : temporalCacheCopy)
+       31:  273-block  0
+      113:  273-block  1
+       94:  273-block  2
+       82:  273-block  3
+       82:  273-block  4
         -:  274:        {
-       38:  275:            if (block[(address % blockSize) / lineSizeBytes].address == address)
-       38:  275-block  0
-       38:  276:                return true;
-        6:  276-block  0
-       32:  276-block  1
-       38:  276-block  2
+       94:  275:            if (block[(address % blockSize) / lineSizeBytes].address == address)
+       94:  275-block  0
+       94:  276:                return true;
+       12:  276-block  0
+       82:  276-block  1
+       94:  276-block  2
         -:  277:        }
-       13:  278:        return false;
-        7:  278-block  0
-        6:  278-block  1
+       31:  278:        return false;
+       19:  278-block  0
+       12:  278-block  1
         -:  279:    }
         -:  280:
         -:  281:
-       27:  282:    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
-       27:  282-block  0
+       51:  282:    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
+       51:  282-block  0
         -:  283:    {
-       80:  284:        for (int i = 0; i < blockCount; i++)
-       27:  284-block  0
-       80:  284-block  1
-       53:  284-block  2
+      150:  284:        for (int i = 0; i < blockCount; i++)
+       51:  284-block  0
+      150:  284-block  1
+       99:  284-block  2
         -:  285:        {
-       71:  286:            if (i != key && cache[i][indexing].lastUsage == 0)
-       71:  286-block  0
-       48:  286-block  1
-       18:  286-block  2
-       53:  286-block  3
-       71:  286-block  4
+      139:  286:            if (i != key && cache[i][indexing].lastUsage == 0)
+      139:  286-block  0
+       91:  286-block  1
+       40:  286-block  2
+       99:  286-block  3
+      139:  286-block  4
         -:  287:            {
-       18:  288:                return false;
-       18:  288-block  0
+       40:  288:                return false;
+       40:  288-block  0
         -:  289:            }
         -:  290:        }
-        9:  291:        return true;
-        9:  291-block  0
+       11:  291:        return true;
+       11:  291-block  0
         -:  292:    }
         -:  293:
-       21:  294:    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
-       21:  294-block  0
+       45:  294:    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
+       45:  294-block  0
         -:  295:    {
-       21:  296:        if (checkAllBits(cache, key, indexing))
-       21:  296-block  0
+       45:  296:        if (checkAllBits(cache, key, indexing))
+       45:  296-block  0
         -:  297:        {
-       35:  298:            for (int j = 0; j < blockCount; j++)
-        7:  298-block  0
-       35:  298-block  1
-       28:  298-block  2
-        7:  298-block  3
+       45:  298:            for (int j = 0; j < blockCount; j++)
+        9:  298-block  0
+       45:  298-block  1
+       36:  298-block  2
+        9:  298-block  3
         -:  299:            {
-       28:  300:                if (key != j)
-       28:  300-block  0
-       21:  301:                    cache[j][indexing].lastUsage = 0;
-       21:  301-block  0
+       36:  300:                if (key != j)
+       36:  300-block  0
+       27:  301:                    cache[j][indexing].lastUsage = 0;
+       27:  301-block  0
         -:  302:            }
         -:  303:        }
-       21:  304:    }
+       45:  304:    }
         -:  305:
-       46:  306:    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
-       46:  306-block  0
+      108:  306:    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
+      108:  306-block  0
         -:  307:    {
-       79:  308:        for (int i = 0; i < blockCount; i++)
-       46:  308-block  0
-       79:  308-block  1
-       33:  308-block  2
+      223:  308:        for (int i = 0; i < blockCount; i++)
+      108:  308-block  0
+      223:  308-block  1
+      115:  308-block  2
         -:  309:        {
-       73:  310:            if (cache[i][indexing].address == 0)
-       73:  310-block  0
+      217:  310:            if (cache[i][indexing].address == 0)
+      217:  310-block  0
         -:  311:            {
-       40:  312:                return false;
-       40:  312-block  0
+      102:  312:                return false;
+      102:  312-block  0
         -:  313:            }
         -:  314:        }
         6:  315:        return true;
@@ -567,7 +567,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }

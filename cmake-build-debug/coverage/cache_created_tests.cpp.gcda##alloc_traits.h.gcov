@@ -96,13 +96,13 @@
         -:   91:      destroy(_Alloc& __a, _Ptr __p)
         -:   92:      { _Base_type::destroy(__a, std::addressof(*__p)); }
         -:   93:
-      418:   94:    static _Alloc _S_select_on_copy(const _Alloc& __a)
-       56:   94-block  0
-      362:   94-block  1
+      580:   94:    static _Alloc _S_select_on_copy(const _Alloc& __a)
+       58:   94-block  0
+      522:   94-block  1
     $$$$$:   94-block  2
-      418:   95:    { return _Base_type::select_on_container_copy_construction(__a); }
-       56:   95-block  0
-      362:   95-block  1
+      580:   95:    { return _Base_type::select_on_container_copy_construction(__a); }
+       58:   95-block  0
+      522:   95-block  1
     $$$$$:   95-block  2
         -:   96:
         -:   97:    static void _S_on_swap(_Alloc& __a, _Alloc& __b)

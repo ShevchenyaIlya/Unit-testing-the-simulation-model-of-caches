@@ -117,14 +117,14 @@
     #####:  111:	: _M_empty() {}
         -:  112:
         -:  113:      template<typename... _Args>
-        4:  114:      constexpr _Optional_payload(in_place_t, _Args&&... __args)
-        4:  114-block  0
+       13:  114:      constexpr _Optional_payload(in_place_t, _Args&&... __args)
+       13:  114-block  0
     $$$$$:  114-block  1
-        4:  115:	: _M_payload(std::forward<_Args>(__args)...),
-        4:  115-block  0
+       13:  115:	: _M_payload(std::forward<_Args>(__args)...),
+       13:  115-block  0
     $$$$$:  115-block  1
-        4:  116:	  _M_engaged(true)
-        4:  117:      {}
+       13:  116:	  _M_engaged(true)
+       13:  117:      {}
         -:  118:
         -:  119:      template<typename _Up, typename... _Args>
         -:  120:      constexpr _Optional_payload(std::initializer_list<_Up> __il,
@@ -331,12 +331,12 @@
         -:  319:      // Constructors for engaged optionals.
         -:  320:      template<typename... _Args,
         -:  321:	       enable_if_t<is_constructible_v<_Tp, _Args&&...>, bool> = false>
-        4:  322:        constexpr explicit _Optional_base(in_place_t, _Args&&... __args)
-        4:  322-block  0
+       13:  322:        constexpr explicit _Optional_base(in_place_t, _Args&&... __args)
+       13:  322-block  0
     $$$$$:  322-block  1
         -:  323:        : _M_payload(in_place,
-        4:  324:		     std::forward<_Args>(__args)...) { }
-        4:  324-block  0
+       13:  324:		     std::forward<_Args>(__args)...) { }
+       13:  324-block  0
     $$$$$:  324-block  1
         -:  325:
         -:  326:      template<typename _Up, typename... _Args,
@@ -398,10 +398,10 @@
         -:  382:      // The following functionality is also needed by optional, hence the
         -:  383:      // protected accessibility.
         -:  384:    protected:
-        7:  385:      constexpr bool _M_is_engaged() const noexcept
-        7:  385-block  0
-        7:  386:      { return this->_M_payload._M_engaged; }
-        7:  386-block  0
+       12:  385:      constexpr bool _M_is_engaged() const noexcept
+       12:  385-block  0
+       12:  386:      { return this->_M_payload._M_engaged; }
+       12:  386-block  0
         -:  387:
         -:  388:      // The _M_get operations have _M_engaged as a precondition.
         -:  389:      constexpr _Tp&
@@ -409,10 +409,10 @@
         -:  391:      { return this->_M_payload._M_payload; }
         -:  392:
         -:  393:      constexpr const _Tp&
-        4:  394:      _M_get() const noexcept
-        4:  394-block  0
-        4:  395:      { return this->_M_payload._M_payload; }
-        4:  395-block  0
+        9:  394:      _M_get() const noexcept
+        9:  394-block  0
+        9:  395:      { return this->_M_payload._M_payload; }
+        9:  395-block  0
         -:  396:
         -:  397:      // The _M_construct operation has !_M_engaged as a precondition
         -:  398:      // while _M_destruct has _M_engaged as a precondition.
@@ -510,11 +510,11 @@
         -:  488:			      is_constructible<_Tp, _Up&&>,
         -:  489:			      is_convertible<_Up&&, _Tp>
         -:  490:			      >::value, bool> = true>
-        4:  491:      constexpr optional(_Up&& __t)
-        4:  491-block  0
+       13:  491:      constexpr optional(_Up&& __t)
+       13:  491-block  0
     $$$$$:  491-block  1
-        4:  492:        : _Base(std::in_place, std::forward<_Up>(__t)) { }
-        4:  492-block  0
+       13:  492:        : _Base(std::in_place, std::forward<_Up>(__t)) { }
+       13:  492-block  0
     $$$$$:  492-block  1
         -:  493:
         -:  494:      template <typename _Up = _Tp,
@@ -723,10 +723,10 @@
         -:  697:      { return std::__addressof(this->_M_get()); }
         -:  698:
         -:  699:      constexpr const _Tp&
-        4:  700:      operator*() const&
-        4:  700-block  0
-        4:  701:      { return this->_M_get(); }
-        4:  701-block  0
+        9:  700:      operator*() const&
+        9:  700-block  0
+        9:  701:      { return this->_M_get(); }
+        9:  701-block  0
         -:  702:
         -:  703:      constexpr _Tp&
         -:  704:      operator*()&
@@ -740,10 +740,10 @@
         -:  712:      operator*() const&&
         -:  713:      { return std::move(this->_M_get()); }
         -:  714:
-        7:  715:      constexpr explicit operator bool() const noexcept
-        7:  715-block  0
-        7:  716:      { return this->_M_is_engaged(); }
-        7:  716-block  0
+       12:  715:      constexpr explicit operator bool() const noexcept
+       12:  715-block  0
+       12:  716:      { return this->_M_is_engaged(); }
+       12:  716-block  0
         -:  717:
         -:  718:      constexpr bool has_value() const noexcept
         -:  719:      { return this->_M_is_engaged(); }
@@ -938,15 +938,15 @@
         -:  901:  // Comparisons with value type.
         -:  902:  template<typename _Tp, typename _Up>
         -:  903:    constexpr auto
-        4:  904:    operator==(const optional<_Tp>& __lhs, const _Up& __rhs)
-        4:  904-block  0
+        9:  904:    operator==(const optional<_Tp>& __lhs, const _Up& __rhs)
+        9:  904-block  0
         -:  905:    -> __optional_relop_t<decltype(declval<_Tp>() == declval<_Up>())>
-        4:  906:    { return __lhs && *__lhs == __rhs; }
-        4:  906-block  0
-        4:  906-block  1
-        4:  906-block  2
+        9:  906:    { return __lhs && *__lhs == __rhs; }
+        9:  906-block  0
+        9:  906-block  1
+        9:  906-block  2
     $$$$$:  906-block  3
-        4:  906-block  4
+        9:  906-block  4
         -:  907:
         -:  908:  template<typename _Tp, typename _Up>
         -:  909:    constexpr auto

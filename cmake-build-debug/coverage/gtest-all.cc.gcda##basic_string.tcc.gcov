@@ -338,18 +338,18 @@
         -:  251:
         -:  252:  template<typename _CharT, typename _Traits, typename _Alloc>
         -:  253:    void
-      409:  254:    basic_string<_CharT, _Traits, _Alloc>::
-      409:  254-block  0
+      421:  254:    basic_string<_CharT, _Traits, _Alloc>::
+      421:  254-block  0
         -:  255:    _M_assign(const basic_string& __str)
         -:  256:    {
-      409:  257:      if (this != &__str)
-      409:  257-block  0
+      421:  257:      if (this != &__str)
+      421:  257-block  0
         -:  258:	{
-      409:  259:	  const size_type __rsize = __str.length();
-      409:  259-block  0
-      409:  260:	  const size_type __capacity = capacity();
+      421:  259:	  const size_type __rsize = __str.length();
+      421:  259-block  0
+      421:  260:	  const size_type __capacity = capacity();
         -:  261:
-      409:  262:	  if (__rsize > __capacity)
+      421:  262:	  if (__rsize > __capacity)
         -:  263:	    {
         1:  264:	      size_type __new_capacity = __rsize;
         1:  265:	      pointer __tmp = _M_create(__new_capacity, __capacity);
@@ -361,37 +361,37 @@
         1:  268:	      _M_capacity(__new_capacity);
         -:  269:	    }
         -:  270:
-      409:  271:	  if (__rsize)
-      409:  271-block  0
-      205:  272:	    this->_S_copy(_M_data(), __str._M_data(), __rsize);
-      205:  272-block  0
+      421:  271:	  if (__rsize)
+      421:  271-block  0
+      211:  272:	    this->_S_copy(_M_data(), __str._M_data(), __rsize);
+      211:  272-block  0
         -:  273:
-      409:  274:	  _M_set_length(__rsize);
-      409:  274-block  0
+      421:  274:	  _M_set_length(__rsize);
+      421:  274-block  0
         -:  275:	}
-      409:  276:    }
-      409:  276-block  0
+      421:  276:    }
+      421:  276-block  0
         -:  277:
         -:  278:  template<typename _CharT, typename _Traits, typename _Alloc>
         -:  279:    void
-      120:  280:    basic_string<_CharT, _Traits, _Alloc>::
-      120:  280-block  0
+      124:  280:    basic_string<_CharT, _Traits, _Alloc>::
+      124:  280-block  0
         -:  281:    reserve(size_type __res)
         -:  282:    {
         -:  283:      // Make sure we don't shrink below the current size.
-      120:  284:      if (__res < length())
-      120:  284-block  0
+      124:  284:      if (__res < length())
+      124:  284-block  0
     #####:  285:	__res = length();
     $$$$$:  285-block  0
         -:  286:
-      120:  287:      const size_type __capacity = capacity();
-      120:  287-block  0
-      120:  288:      if (__res != __capacity)
+      124:  287:      const size_type __capacity = capacity();
+      124:  287-block  0
+      124:  288:      if (__res != __capacity)
         -:  289:	{
-      120:  290:	  if (__res > __capacity
-      120:  290-block  0
-       52:  291:	      || __res > size_type(_S_local_capacity))
-       52:  291-block  0
+      124:  290:	  if (__res > __capacity
+      124:  290-block  0
+       56:  291:	      || __res > size_type(_S_local_capacity))
+       56:  291-block  0
         -:  292:	    {
        68:  293:	      pointer __tmp = _M_create(__res, __capacity);
        68:  293-block  0
@@ -400,17 +400,17 @@
        68:  296:	      _M_data(__tmp);
        68:  297:	      _M_capacity(__res);
         -:  298:	    }
-       52:  299:	  else if (!_M_is_local())
-       52:  299-block  0
+       56:  299:	  else if (!_M_is_local())
+       56:  299-block  0
         -:  300:	    {
     #####:  301:	      this->_S_copy(_M_local_data(), _M_data(), length() + 1);
     $$$$$:  301-block  0
     #####:  302:	      _M_destroy(__capacity);
-      120:  303:	      _M_data(_M_local_data());
-      120:  303-block  0
+      124:  303:	      _M_data(_M_local_data());
+      124:  303-block  0
         -:  304:	    }
         -:  305:	}
-      120:  306:    }
+      124:  306:    }
         -:  307:
         -:  308:  template<typename _CharT, typename _Traits, typename _Alloc>
         -:  309:    void
@@ -557,34 +557,34 @@
         -:  418:
         -:  419:  template<typename _CharT, typename _Traits, typename _Alloc>
         -:  420:    basic_string<_CharT, _Traits, _Alloc>&
-      188:  421:    basic_string<_CharT, _Traits, _Alloc>::
-      188:  421-block  0
+      194:  421:    basic_string<_CharT, _Traits, _Alloc>::
+      194:  421-block  0
         -:  422:    _M_replace(size_type __pos, size_type __len1, const _CharT* __s,
         -:  423:	       const size_type __len2)
         -:  424:    {
-      188:  425:      _M_check_length(__len1, __len2, "basic_string::_M_replace");
-      188:  425-block  0
+      194:  425:      _M_check_length(__len1, __len2, "basic_string::_M_replace");
+      194:  425-block  0
         -:  426:
-      188:  427:      const size_type __old_size = this->size();
-      188:  428:      const size_type __new_size = __old_size + __len2 - __len1;
+      194:  427:      const size_type __old_size = this->size();
+      194:  428:      const size_type __new_size = __old_size + __len2 - __len1;
         -:  429:
-      188:  430:      if (__new_size <= this->capacity())
+      194:  430:      if (__new_size <= this->capacity())
         -:  431:	{
-      163:  432:	  pointer __p = this->_M_data() + __pos;
-      163:  432-block  0
+      169:  432:	  pointer __p = this->_M_data() + __pos;
+      169:  432-block  0
         -:  433:
-      163:  434:	  const size_type __how_much = __old_size - __pos - __len1;
-      163:  435:	  if (_M_disjunct(__s))
+      169:  434:	  const size_type __how_much = __old_size - __pos - __len1;
+      169:  435:	  if (_M_disjunct(__s))
         -:  436:	    {
-      163:  437:	      if (__how_much && __len1 != __len2)
-      163:  437-block  0
+      169:  437:	      if (__how_much && __len1 != __len2)
+      169:  437-block  0
     $$$$$:  437-block  1
     #####:  438:		this->_S_move(__p + __len2, __p + __len1, __how_much);
     $$$$$:  438-block  0
-      163:  439:	      if (__len2)
-      163:  439-block  0
-      129:  440:		this->_S_copy(__p, __s, __len2);
-      129:  440-block  0
+      169:  439:	      if (__len2)
+      169:  439-block  0
+      134:  440:		this->_S_copy(__p, __s, __len2);
+      134:  440-block  0
         -:  441:	    }
         -:  442:	  else
         -:  443:	    {
@@ -615,9 +615,9 @@
     #####:  457:		      const size_type __nleft = (__p + __len1) - __s;
     #####:  458:		      this->_S_move(__p, __s, __nleft);
     $$$$$:  458-block  0
-      163:  459:		      this->_S_copy(__p + __nleft, __p + __len2,
+      169:  459:		      this->_S_copy(__p + __nleft, __p + __len2,
     $$$$$:  459-block  0
-      163:  459-block  1
+      169:  459-block  1
         -:  460:				    __len2 - __nleft);
         -:  461:		    }
         -:  462:		}
@@ -627,9 +627,9 @@
        25:  466:	this->_M_mutate(__pos, __len1, __s, __len2);
        25:  466-block  0
         -:  467:
-      188:  468:      this->_M_set_length(__new_size);
-      188:  468-block  0
-      188:  469:      return *this;
+      194:  468:      this->_M_set_length(__new_size);
+      194:  468-block  0
+      194:  469:      return *this;
         -:  470:    }
         -:  471:
         -:  472:  template<typename _CharT, typename _Traits, typename _Alloc>

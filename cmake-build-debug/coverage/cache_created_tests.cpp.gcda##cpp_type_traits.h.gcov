@@ -410,12 +410,12 @@
         -:  405:  // remove the move_iterator wrapper.
         -:  406:  template<typename _Iterator>
         -:  407:    inline _Iterator
-      724:  408:    __miter_base(_Iterator __it)
+     1044:  408:    __miter_base(_Iterator __it)
     $$$$$:  408-block  0
-      724:  408-block  1
-      724:  409:    { return __it; }
+     1044:  408-block  1
+     1044:  409:    { return __it; }
     $$$$$:  409-block  0
-      724:  409-block  1
+     1044:  409-block  1
         -:  410:
         -:  411:_GLIBCXX_END_NAMESPACE_VERSION
         -:  412:} // namespace

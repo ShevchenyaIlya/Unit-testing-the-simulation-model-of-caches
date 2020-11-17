@@ -676,10 +676,10 @@
         -:  498:
         -:  499:  // Deletes self.  We deliberately pick an unusual name for this
         -:  500:  // internal method to avoid clashing with names used in user TESTs.
-       68:  501:  void DeleteSelf_() { delete this; }
-       34:  501-block  0
-       34:  501-block  1
-       34:  501-block  2
+       70:  501:  void DeleteSelf_() { delete this; }
+       35:  501-block  0
+       35:  501-block  1
+       35:  501-block  2
         -:  502:
         -:  503:  const std::unique_ptr<GTEST_FLAG_SAVER_> gtest_flag_saver_;
         -:  504:
@@ -785,13 +785,13 @@
         -:  584:  int test_property_count() const;
         -:  585:
         -:  586:  // Returns true if and only if the test passed (i.e. no test part failed).
-      136:  587:  bool Passed() const { return !Skipped() && !Failed(); }
-       68:  587-block  0
-       68:  587-block  1
-       68:  587-block  2
-       68:  587-block  3
+      140:  587:  bool Passed() const { return !Skipped() && !Failed(); }
+       70:  587-block  0
+       70:  587-block  1
+       70:  587-block  2
+       70:  587-block  3
     $$$$$:  587-block  4
-       68:  587-block  5
+       70:  587-block  5
         -:  588:
         -:  589:  // Returns true if and only if the test was skipped.
         -:  590:  bool Skipped() const;
@@ -806,9 +806,9 @@
         -:  599:  bool HasNonfatalFailure() const;
         -:  600:
         -:  601:  // Returns the elapsed time, in milliseconds.
-       68:  602:  TimeInMillis elapsed_time() const { return elapsed_time_; }
-       34:  602-block  0
-       34:  602-block  1
+       70:  602:  TimeInMillis elapsed_time() const { return elapsed_time_; }
+       35:  602-block  0
+       35:  602-block  1
         -:  603:
         -:  604:  // Gets the time of the test case start, in ms from the start of the
         -:  605:  // UNIX epoch.
@@ -847,12 +847,12 @@
         -:  636:  }
         -:  637:
         -:  638:  // Sets the start time.
-       34:  639:  void set_start_timestamp(TimeInMillis start) { start_timestamp_ = start; }
-       34:  639-block  0
+       35:  639:  void set_start_timestamp(TimeInMillis start) { start_timestamp_ = start; }
+       35:  639-block  0
         -:  640:
         -:  641:  // Sets the elapsed time.
-       34:  642:  void set_elapsed_time(TimeInMillis elapsed) { elapsed_time_ = elapsed; }
-       34:  642-block  0
+       35:  642:  void set_elapsed_time(TimeInMillis elapsed) { elapsed_time_ = elapsed; }
+       35:  642-block  0
         -:  643:
         -:  644:  // Adds a test property to the list. The property is validated and may add
         -:  645:  // a non-fatal failure if invalid (e.g., if it conflicts with reserved
@@ -925,9 +925,9 @@
         -:  708:  ~TestInfo();
         -:  709:
         -:  710:  // Returns the test suite name.
-      204:  711:  const char* test_suite_name() const { return test_suite_name_.c_str(); }
-      102:  711-block  0
-      102:  711-block  1
+      210:  711:  const char* test_suite_name() const { return test_suite_name_.c_str(); }
+      105:  711-block  0
+      105:  711-block  1
         -:  712:
         -:  713:// Legacy API is deprecated but still available
         -:  714:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
@@ -935,19 +935,19 @@
         -:  716:#endif  // GTEST_REMOVE_LEGACY_TEST_CASEAPI_
         -:  717:
         -:  718:  // Returns the test name.
-      340:  719:  const char* name() const { return name_.c_str(); }
-      170:  719-block  0
-      170:  719-block  1
+      350:  719:  const char* name() const { return name_.c_str(); }
+      175:  719-block  0
+      175:  719-block  1
         -:  720:
         -:  721:  // Returns the name of the parameter type, or NULL if this is not a typed
         -:  722:  // or a type-parameterized test.
-       34:  723:  const char* type_param() const {
-       34:  723-block  0
-       34:  724:    if (type_param_.get() != nullptr) return type_param_->c_str();
-       34:  724-block  0
+       35:  723:  const char* type_param() const {
+       35:  723-block  0
+       35:  724:    if (type_param_.get() != nullptr) return type_param_->c_str();
+       35:  724-block  0
     $$$$$:  724-block  1
-       34:  725:    return nullptr;
-       34:  725-block  0
+       35:  725:    return nullptr;
+       35:  725-block  0
         -:  726:  }
         -:  727:
         -:  728:  // Returns the text representation of the value parameter, or NULL if this
@@ -992,27 +992,27 @@
         -:  757:  //
         -:  758:  // For example, *A*:Foo.* is a filter that matches any string that
         -:  759:  // contains the character 'A' or starts with "Foo.".
-      544:  760:  bool should_run() const { return should_run_; }
-      272:  760-block  0
-      272:  760-block  1
+      560:  760:  bool should_run() const { return should_run_; }
+      280:  760-block  0
+      280:  760-block  1
         -:  761:
         -:  762:  // Returns true if and only if this test will appear in the XML report.
-       34:  763:  bool is_reportable() const {
-       34:  763-block  0
+       35:  763:  bool is_reportable() const {
+       35:  763-block  0
         -:  764:    // The XML report includes tests matching the filter, excluding those
         -:  765:    // run in other shards.
-       34:  766:    return matches_filter_ && !is_in_another_shard_;
-       34:  766-block  0
-       34:  766-block  1
-       34:  766-block  2
+       35:  766:    return matches_filter_ && !is_in_another_shard_;
+       35:  766-block  0
+       35:  766-block  1
+       35:  766-block  2
     $$$$$:  766-block  3
-       34:  766-block  4
+       35:  766-block  4
         -:  767:  }
         -:  768:
         -:  769:  // Returns the result of the test.
-      476:  770:  const TestResult* result() const { return &result_; }
-      238:  770-block  0
-      238:  770-block  1
+      490:  770:  const TestResult* result() const { return &result_; }
+      245:  770-block  0
+      245:  770-block  1
         -:  771:
         -:  772: private:
         -:  773:#if GTEST_HAS_DEATH_TEST
@@ -1053,11 +1053,11 @@
         -:  806:  // Skip and records the test result for this object.
         -:  807:  void Skip();
         -:  808:
-       34:  809:  static void ClearTestResult(TestInfo* test_info) {
-       34:  809-block  0
-       34:  810:    test_info->result_.Clear();
-       34:  810-block  0
-       34:  811:  }
+       35:  809:  static void ClearTestResult(TestInfo* test_info) {
+       35:  809-block  0
+       35:  810:    test_info->result_.Clear();
+       35:  810-block  0
+       35:  811:  }
         -:  812:
         -:  813:  // These fields are immutable properties of the test.
         -:  814:  const std::string test_suite_name_;    // test suite name
@@ -1110,25 +1110,25 @@
         -:  861:  virtual ~TestSuite();
         -:  862:
         -:  863:  // Gets the name of the TestSuite.
-      150:  864:  const char* name() const { return name_.c_str(); }
-       75:  864-block  0
-       75:  864-block  1
+      164:  864:  const char* name() const { return name_.c_str(); }
+       82:  864-block  0
+       82:  864-block  1
         -:  865:
         -:  866:  // Returns the name of the parameter type, or NULL if this is not a
         -:  867:  // type-parameterized test suite.
-        4:  868:  const char* type_param() const {
-        4:  868-block  0
-        4:  869:    if (type_param_.get() != nullptr) return type_param_->c_str();
-        4:  869-block  0
+        5:  868:  const char* type_param() const {
+        5:  868-block  0
+        5:  869:    if (type_param_.get() != nullptr) return type_param_->c_str();
+        5:  869-block  0
     $$$$$:  869-block  1
-        4:  870:    return nullptr;
-        4:  870-block  0
+        5:  870:    return nullptr;
+        5:  870-block  0
         -:  871:  }
         -:  872:
         -:  873:  // Returns true if any test in this test suite should run.
-      100:  874:  bool should_run() const { return should_run_; }
-       50:  874-block  0
-       50:  874-block  1
+      110:  874:  bool should_run() const { return should_run_; }
+       55:  874-block  0
+       55:  874-block  1
         -:  875:
         -:  876:  // Gets the number of successful tests in this test suite.
         -:  877:  int successful_test_count() const;
@@ -1160,20 +1160,20 @@
     $$$$$:  901-block  1
         -:  902:
         -:  903:  // Returns true if and only if the test suite failed.
-        8:  904:  bool Failed() const {
-        8:  904-block  0
-        8:  905:    return failed_test_count() > 0 || ad_hoc_test_result().Failed();
-        8:  905-block  0
-        8:  905-block  1
+       10:  904:  bool Failed() const {
+       10:  904-block  0
+       10:  905:    return failed_test_count() > 0 || ad_hoc_test_result().Failed();
+       10:  905-block  0
+       10:  905-block  1
     $$$$$:  905-block  2
-        8:  905-block  3
-        8:  905-block  4
+       10:  905-block  3
+       10:  905-block  4
         -:  906:  }
         -:  907:
         -:  908:  // Returns the elapsed time, in milliseconds.
-        8:  909:  TimeInMillis elapsed_time() const { return elapsed_time_; }
-        4:  909-block  0
-        4:  909-block  1
+       10:  909:  TimeInMillis elapsed_time() const { return elapsed_time_; }
+        5:  909-block  0
+        5:  909-block  1
         -:  910:
         -:  911:  // Gets the time of the test suite start, in ms from the start of the
         -:  912:  // UNIX epoch.
@@ -1187,24 +1187,24 @@
         -:  918:
         -:  919:  // Returns the TestResult that holds test properties recorded during
         -:  920:  // execution of SetUpTestSuite and TearDownTestSuite.
-       16:  921:  const TestResult& ad_hoc_test_result() const { return ad_hoc_test_result_; }
-        8:  921-block  0
-        8:  921-block  1
+       20:  921:  const TestResult& ad_hoc_test_result() const { return ad_hoc_test_result_; }
+       10:  921-block  0
+       10:  921-block  1
         -:  922:
         -:  923: private:
         -:  924:  friend class Test;
         -:  925:  friend class internal::UnitTestImpl;
         -:  926:
         -:  927:  // Gets the (mutable) vector of TestInfos in this TestSuite.
-      144:  928:  std::vector<TestInfo*>& test_info_list() { return test_info_list_; }
-       72:  928-block  0
-       72:  928-block  1
+      150:  928:  std::vector<TestInfo*>& test_info_list() { return test_info_list_; }
+       75:  928-block  0
+       75:  928-block  1
         -:  929:
         -:  930:  // Gets the (immutable) vector of TestInfos in this TestSuite.
-       34:  931:  const std::vector<TestInfo*>& test_info_list() const {
-       34:  931-block  0
-       34:  932:    return test_info_list_;
-       34:  932-block  0
+       35:  931:  const std::vector<TestInfo*>& test_info_list() const {
+       35:  931-block  0
+       35:  932:    return test_info_list_;
+       35:  932-block  0
         -:  933:  }
         -:  934:
         -:  935:  // Returns the i-th test among all the tests. i can range from 0 to
@@ -1212,8 +1212,8 @@
         -:  937:  TestInfo* GetMutableTestInfo(int i);
         -:  938:
         -:  939:  // Sets the should_run member.
-       38:  940:  void set_should_run(bool should) { should_run_ = should; }
-       38:  940-block  0
+       40:  940:  void set_should_run(bool should) { should_run_ = should; }
+       40:  940-block  0
         -:  941:
         -:  942:  // Adds a TestInfo to this test suite.  Will delete the TestInfo upon
         -:  943:  // destruction of the TestSuite object.
@@ -1223,11 +1223,11 @@
         -:  947:  void ClearResult();
         -:  948:
         -:  949:  // Clears the results of all tests in the given test suite.
-        4:  950:  static void ClearTestSuiteResult(TestSuite* test_suite) {
-        4:  950-block  0
-        4:  951:    test_suite->ClearResult();
-        4:  951-block  0
-        4:  952:  }
+        5:  950:  static void ClearTestSuiteResult(TestSuite* test_suite) {
+        5:  950-block  0
+        5:  951:    test_suite->ClearResult();
+        5:  951-block  0
+        5:  952:  }
         -:  953:
         -:  954:  // Runs every test in this TestSuite.
         -:  955:  void Run();
@@ -1237,69 +1237,69 @@
         -:  959:
         -:  960:  // Runs SetUpTestSuite() for this TestSuite.  This wrapper is needed
         -:  961:  // for catching exceptions thrown from SetUpTestSuite().
-        4:  962:  void RunSetUpTestSuite() {
-        4:  962-block  0
-        4:  963:    if (set_up_tc_ != nullptr) {
-        4:  963-block  0
+        5:  962:  void RunSetUpTestSuite() {
+        5:  962-block  0
+        5:  963:    if (set_up_tc_ != nullptr) {
+        5:  963-block  0
     #####:  964:      (*set_up_tc_)();
     $$$$$:  964-block  0
         -:  965:    }
-        4:  966:  }
+        5:  966:  }
         -:  967:
         -:  968:  // Runs TearDownTestSuite() for this TestSuite.  This wrapper is
         -:  969:  // needed for catching exceptions thrown from TearDownTestSuite().
-        4:  970:  void RunTearDownTestSuite() {
-        4:  970-block  0
-        4:  971:    if (tear_down_tc_ != nullptr) {
-        4:  971-block  0
+        5:  970:  void RunTearDownTestSuite() {
+        5:  970-block  0
+        5:  971:    if (tear_down_tc_ != nullptr) {
+        5:  971-block  0
     #####:  972:      (*tear_down_tc_)();
     $$$$$:  972-block  0
         -:  973:    }
-        4:  974:  }
+        5:  974:  }
         -:  975:
         -:  976:  // Returns true if and only if test passed.
-       34:  977:  static bool TestPassed(const TestInfo* test_info) {
-       34:  977-block  0
-       34:  978:    return test_info->should_run() && test_info->result()->Passed();
-       34:  978-block  0
-       34:  978-block  1
-       34:  978-block  2
+       35:  977:  static bool TestPassed(const TestInfo* test_info) {
+       35:  977-block  0
+       35:  978:    return test_info->should_run() && test_info->result()->Passed();
+       35:  978-block  0
+       35:  978-block  1
+       35:  978-block  2
     $$$$$:  978-block  3
-       34:  978-block  4
+       35:  978-block  4
         -:  979:  }
         -:  980:
         -:  981:  // Returns true if and only if test skipped.
-       34:  982:  static bool TestSkipped(const TestInfo* test_info) {
-       34:  982-block  0
-       34:  983:    return test_info->should_run() && test_info->result()->Skipped();
-       34:  983-block  0
-       34:  983-block  1
+       35:  982:  static bool TestSkipped(const TestInfo* test_info) {
+       35:  982-block  0
+       35:  983:    return test_info->should_run() && test_info->result()->Skipped();
+       35:  983-block  0
+       35:  983-block  1
     $$$$$:  983-block  2
-       34:  983-block  3
-       34:  983-block  4
+       35:  983-block  3
+       35:  983-block  4
         -:  984:  }
         -:  985:
         -:  986:  // Returns true if and only if test failed.
-       68:  987:  static bool TestFailed(const TestInfo* test_info) {
-       68:  987-block  0
-       68:  988:    return test_info->should_run() && test_info->result()->Failed();
-       68:  988-block  0
-       68:  988-block  1
+       70:  987:  static bool TestFailed(const TestInfo* test_info) {
+       70:  987-block  0
+       70:  988:    return test_info->should_run() && test_info->result()->Failed();
+       70:  988-block  0
+       70:  988-block  1
     $$$$$:  988-block  2
-       68:  988-block  3
-       68:  988-block  4
+       70:  988-block  3
+       70:  988-block  4
         -:  989:  }
         -:  990:
         -:  991:  // Returns true if and only if the test is disabled and will be reported in
         -:  992:  // the XML report.
-       34:  993:  static bool TestReportableDisabled(const TestInfo* test_info) {
-       34:  993-block  0
-       34:  994:    return test_info->is_reportable() && test_info->is_disabled_;
-       34:  994-block  0
-       34:  994-block  1
+       35:  993:  static bool TestReportableDisabled(const TestInfo* test_info) {
+       35:  993-block  0
+       35:  994:    return test_info->is_reportable() && test_info->is_disabled_;
+       35:  994-block  0
+       35:  994-block  1
     $$$$$:  994-block  2
-       34:  994-block  3
-       34:  994-block  4
+       35:  994-block  3
+       35:  994-block  4
         -:  995:  }
         -:  996:
         -:  997:  // Returns true if and only if test is disabled.
@@ -1317,10 +1317,10 @@
         -: 1005:  }
         -: 1006:
         -: 1007:  // Returns true if the given test should run.
-      136: 1008:  static bool ShouldRunTest(const TestInfo* test_info) {
-      136: 1008-block  0
-      136: 1009:    return test_info->should_run();
-      136: 1009-block  0
+      140: 1008:  static bool ShouldRunTest(const TestInfo* test_info) {
+      140: 1008-block  0
+      140: 1009:    return test_info->should_run();
+      140: 1009-block  0
         -: 1010:  }
         -: 1011:
         -: 1012:  // Shuffles the tests in this test suite.
@@ -1428,8 +1428,8 @@
         -: 1110:  virtual void OnEnvironmentsSetUpEnd(const UnitTest& unit_test) = 0;
         -: 1111:
         -: 1112:  // Fired before the test suite starts.
-        4: 1113:  virtual void OnTestSuiteStart(const TestSuite& /*test_suite*/) {}
-        4: 1113-block  0
+        5: 1113:  virtual void OnTestSuiteStart(const TestSuite& /*test_suite*/) {}
+        5: 1113-block  0
         -: 1114:
         -: 1115:  //  Legacy API is deprecated but still available
         -: 1116:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
@@ -1449,8 +1449,8 @@
         -: 1129:  virtual void OnTestEnd(const TestInfo& test_info) = 0;
         -: 1130:
         -: 1131:  // Fired after the test suite ends.
-        4: 1132:  virtual void OnTestSuiteEnd(const TestSuite& /*test_suite*/) {}
-        4: 1132-block  0
+        5: 1132:  virtual void OnTestSuiteEnd(const TestSuite& /*test_suite*/) {}
+        5: 1132-block  0
         -: 1133:
         -: 1134://  Legacy API is deprecated but still available
         -: 1135:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
@@ -1769,9 +1769,9 @@
         -: 1426:  TestSuite* GetMutableTestSuite(int i);
         -: 1427:
         -: 1428:  // Accessors for the implementation object.
-      998: 1429:  internal::UnitTestImpl* impl() { return impl_; }
-      499: 1429-block  0
-      499: 1429-block  1
+     1034: 1429:  internal::UnitTestImpl* impl() { return impl_; }
+      517: 1429-block  0
+      517: 1429-block  1
        18: 1430:  const internal::UnitTestImpl* impl() const { return impl_; }
         9: 1430-block  0
         9: 1430-block  1

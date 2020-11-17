@@ -93,9 +93,9 @@
         -:   88:// latter (it causes an access violation if you do).  The Message
         -:   89:// class hides this difference by treating a NULL char pointer as
         -:   90:// "(null)".
-      190:   91:class GTEST_API_ Message {
-       95:   91-block  0
-       95:   91-block  1
+      198:   91:class GTEST_API_ Message {
+       99:   91-block  0
+       99:   91-block  1
         -:   92: private:
         -:   93:  // The type of basic IO manipulators (endl, ends, and flush) for
         -:   94:  // narrow streams.

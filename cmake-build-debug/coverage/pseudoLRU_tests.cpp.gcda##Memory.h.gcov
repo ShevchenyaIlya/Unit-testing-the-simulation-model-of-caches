@@ -424,93 +424,93 @@
     $$$$$:  315-block  0
         -:  316:    }
         -:  317:    
-       17:  318:    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
-       17:  318-block  0
+       35:  318:    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
+       35:  318-block  0
         -:  319:    {
         -:  320:        vector<Block> *temporalCacheCopy;
-       17:  321:        int blockSize = 0;
-       17:  322:        if (dataOrCode) {
-       17:  322-block  0
-       10:  323:            temporalCacheCopy = &_dataMemory;
-       10:  324:            blockSize = dataCacheBytes / blockCount;
-       10:  324-block  0
+       35:  321:        int blockSize = 0;
+       35:  322:        if (dataOrCode) {
+       35:  322-block  0
+       22:  323:            temporalCacheCopy = &_dataMemory;
+       22:  324:            blockSize = dataCacheBytes / blockCount;
+       22:  324-block  0
         -:  325:        }
         -:  326:        else {
-        7:  327:            temporalCacheCopy = &_codeMemory;
-        7:  328:            blockSize = codeCacheBytes / blockCount;
-        7:  328-block  0
+       13:  327:            temporalCacheCopy = &_codeMemory;
+       13:  328:            blockSize = codeCacheBytes / blockCount;
+       13:  328-block  0
         -:  329:        }
         -:  330:        
         -:  331:
-       71:  332:        for (int i = 0; i < blockCount; i++) {
-       17:  332-block  0
-       71:  332-block  1
-       54:  332-block  2
-       58:  333:            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
-       58:  333-block  0
-       40:  333-block  1
+      161:  332:        for (int i = 0; i < blockCount; i++) {
+       35:  332-block  0
+      161:  332-block  1
+      126:  332-block  2
+      130:  333:            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
+      130:  333-block  0
+      102:  333-block  1
         4:  333-block  2
-       54:  333-block  3
-       58:  333-block  4
+      126:  333-block  3
+      130:  333-block  4
         4:  334:                return pair<Word, Word>(i, (key % blockSize) / lineSizeBytes);
         4:  334-block  0
         -:  335:            }
         -:  336:        }
         -:  337:
-       13:  338:        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
-       13:  338-block  0
-       13:  339:        Word entryIdentification = 0;
-       65:  340:        for (int i = 0; i < blockCount; i++)
-       65:  340-block  0
-       52:  340-block  1
+       31:  338:        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
+       31:  338-block  0
+       31:  339:        Word entryIdentification = 0;
+      155:  340:        for (int i = 0; i < blockCount; i++)
+      155:  340-block  0
+      124:  340-block  1
         -:  341:        {
-       52:  342:            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
-       52:  342-block  0
+      124:  342:            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
+      124:  342-block  0
         -:  343:            {
-        7:  344:                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
-        7:  344-block  0
-        7:  345:                entryIdentification = i;
+       17:  344:                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
+       17:  344-block  0
+       17:  345:                entryIdentification = i;
         -:  346:            }
         -:  347:        }
         -:  348:
-       13:  349:        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
-       13:  349-block  0
+       31:  349:        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
+       31:  349-block  0
         -:  350:
-       17:  351:        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
-       17:  351-block  0
+       35:  351:        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
+       35:  351-block  0
         -:  352:    }
         -:  353:
         -:  354:
-        8:  355:    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
-        8:  355-block  0
-       16:  356:        vector<Block> temporalCacheCopy;
-        8:  356-block  0
-        8:  356-block  1
-        8:  356-block  2
+       14:  355:    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
+       14:  355-block  0
+       28:  356:        vector<Block> temporalCacheCopy;
+       14:  356-block  0
+       14:  356-block  1
+       14:  356-block  2
     %%%%%:  356-block  3
-        8:  357:        int blockSize = 0;
-        8:  358:        if (dataOrCode) {
-        4:  359:            temporalCacheCopy = _dataMemory;
-        4:  359-block  0
-        4:  360:            blockSize = dataCacheBytes / blockCount;
-        4:  360-block  0
+       14:  357:        int blockSize = 0;
+       14:  358:        if (dataOrCode) {
+        7:  359:            temporalCacheCopy = _dataMemory;
+        7:  359-block  0
+        7:  360:            blockSize = dataCacheBytes / blockCount;
+        7:  360-block  0
         -:  361:        }
         -:  362:        else {
-        4:  363:            temporalCacheCopy = _codeMemory;
-        4:  363-block  0
-        4:  364:            blockSize = codeCacheBytes / blockCount;
-        4:  364-block  0
+        7:  363:            temporalCacheCopy = _codeMemory;
+        7:  363-block  0
+        7:  364:            blockSize = codeCacheBytes / blockCount;
+        7:  364-block  0
         -:  365:        }
         -:  366:
-       24:  367:        for (int i = 0; i < blockCount; i++)
-        8:  367-block  0
-       24:  367-block  1
-       16:  367-block  2
+       32:  367:        for (int i = 0; i < blockCount; i++)
+       14:  367-block  0
+       32:  367-block  1
+       18:  367-block  2
         -:  368:        {
-       22:  369:            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
-       22:  369-block  0
-        6:  370:                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
-        6:  370-block  0
+       30:  369:            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
+       30:  369-block  0
+       12:  370:                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
+       12:  370-block  0
         -:  371:        }
         2:  372:        return pair<Word, Word> (0, 0);
         2:  372-block  0
@@ -581,7 +581,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }

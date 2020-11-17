@@ -133,7 +133,7 @@
         -:  128:      typedef true_type is_always_equal;
         -:  129:#endif
         -:  130:
-      188:  131:      allocator() throw() { }
+      200:  131:      allocator() throw() { }
     $$$$$:  131-block  0
     $$$$$:  131-block  1
     $$$$$:  131-block  2
@@ -144,20 +144,20 @@
         1:  131-block  7
         1:  131-block  8
         1:  131-block  9
-        5:  131-block 10
-        5:  131-block 11
-        4:  131-block 12
-        4:  131-block 13
-       39:  131-block 14
-       39:  131-block 15
+        6:  131-block 10
+        6:  131-block 11
+        5:  131-block 12
+        5:  131-block 13
+       41:  131-block 14
+       41:  131-block 15
     $$$$$:  131-block 16
     $$$$$:  131-block 17
     $$$$$:  131-block 18
     $$$$$:  131-block 19
         1:  131-block 20
         1:  131-block 21
-       39:  131-block 22
-       39:  131-block 23
+       41:  131-block 22
+       41:  131-block 23
         1:  131-block 24
         1:  131-block 25
         1:  131-block 26
@@ -191,7 +191,7 @@
         -:  136:      template<typename _Tp1>
         -:  137:	allocator(const allocator<_Tp1>&) throw() { }
         -:  138:
-      196:  139:      ~allocator() throw() { }
+      208:  139:      ~allocator() throw() { }
     $$$$$:  139-block  0
     $$$$$:  139-block  1
     $$$$$:  139-block  2
@@ -202,18 +202,18 @@
         1:  139-block  7
         1:  139-block  8
         1:  139-block  9
-        5:  139-block 10
-        5:  139-block 11
-        4:  139-block 12
-        4:  139-block 13
-       39:  139-block 14
-       39:  139-block 15
+        6:  139-block 10
+        6:  139-block 11
+        5:  139-block 12
+        5:  139-block 13
+       41:  139-block 14
+       41:  139-block 15
     $$$$$:  139-block 16
     $$$$$:  139-block 17
         1:  139-block 18
         1:  139-block 19
-       39:  139-block 20
-       39:  139-block 21
+       41:  139-block 20
+       41:  139-block 21
     $$$$$:  139-block 22
     $$$$$:  139-block 23
         5:  139-block 24

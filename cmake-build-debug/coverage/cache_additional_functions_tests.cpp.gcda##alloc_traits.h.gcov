@@ -108,12 +108,12 @@
         -:   97:    static void _S_on_swap(_Alloc& __a, _Alloc& __b)
         -:   98:    { std::__alloc_on_swap(__a, __b); }
         -:   99:
-       21:  100:    static constexpr bool _S_propagate_on_copy_assign()
+       45:  100:    static constexpr bool _S_propagate_on_copy_assign()
     $$$$$:  100-block  0
-       21:  100-block  1
-       21:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
+       45:  100-block  1
+       45:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
     $$$$$:  101-block  0
-       21:  101-block  1
+       45:  101-block  1
         -:  102:
         -:  103:    static constexpr bool _S_propagate_on_move_assign()
         -:  104:    { return _Base_type::propagate_on_container_move_assignment::value; }

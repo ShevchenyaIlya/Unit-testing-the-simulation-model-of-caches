@@ -74,12 +74,12 @@
         -:   69:
         -:   70:      /// Calls @c delete @p __ptr
         -:   71:      void
-       37:   72:      operator()(_Tp* __ptr) const
+       38:   72:      operator()(_Tp* __ptr) const
         1:   72-block  0
         1:   72-block  1
         1:   72-block  2
     $$$$$:   72-block  3
-       34:   72-block  4
+       35:   72-block  4
     $$$$$:   72-block  5
     $$$$$:   72-block  6
     $$$$$:   72-block  7
@@ -89,7 +89,7 @@
         -:   75:		      "can't delete pointer to incomplete type");
         -:   76:	static_assert(sizeof(_Tp)>0,
         -:   77:		      "can't delete pointer to incomplete type");
-       37:   78:	delete __ptr;
+       38:   78:	delete __ptr;
         1:   78-block  0
         1:   78-block  1
         1:   78-block  2
@@ -98,8 +98,8 @@
         1:   78-block  5
     $$$$$:   78-block  6
     $$$$$:   78-block  7
-       34:   78-block  8
-       34:   78-block  9
+       35:   78-block  8
+       35:   78-block  9
     $$$$$:   78-block 10
     $$$$$:   78-block 11
     $$$$$:   78-block 12
@@ -108,7 +108,7 @@
     $$$$$:   78-block 15
     $$$$$:   78-block 16
     $$$$$:   78-block 17
-       37:   79:      }
+       38:   79:      }
         -:   80:    };
         -:   81:
         -:   82:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
@@ -177,39 +177,39 @@
     $$$$$:  139-block  1
         1:  139-block  2
         1:  139-block  3
-      408:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+      424:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
         1:  140-block  0
         1:  140-block  1
         1:  140-block  2
         1:  140-block  3
         1:  140-block  4
         1:  140-block  5
-       72:  140-block  6
-       72:  140-block  7
-       34:  140-block  8
-       34:  140-block  9
+       75:  140-block  6
+       75:  140-block  7
+       35:  140-block  8
+       35:  140-block  9
     $$$$$:  140-block 10
     $$$$$:  140-block 11
     $$$$$:  140-block 12
     $$$$$:  140-block 13
-       95:  140-block 14
-       95:  140-block 15
+       99:  140-block 14
+       99:  140-block 15
         -:  141:
         -:  142:      template<typename _Del>
         -:  143:      __uniq_ptr_impl(pointer __p, _Del&& __d)
         -:  144:	: _M_t(__p, std::forward<_Del>(__d)) { }
         -:  145:
-      440:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+      456:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
         2:  146-block  0
         2:  146-block  1
         2:  146-block  2
         2:  146-block  3
         2:  146-block  4
         2:  146-block  5
-      144:  146-block  6
-      144:  146-block  7
-       68:  146-block  8
-       68:  146-block  9
+      150:  146-block  6
+      150:  146-block  7
+       70:  146-block  8
+       70:  146-block  9
     $$$$$:  146-block 10
     $$$$$:  146-block 11
         2:  146-block 12
@@ -218,7 +218,7 @@
     $$$$$:  146-block 15
     $$$$$:  146-block 16
     $$$$$:  146-block 17
-       80:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+       84:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
     $$$$$:  147-block  0
     $$$$$:  147-block  1
     $$$$$:  147-block  2
@@ -231,11 +231,11 @@
     $$$$$:  147-block  9
         2:  147-block 10
         2:  147-block 11
-       38:  147-block 12
-       38:  147-block 13
+       40:  147-block 12
+       40:  147-block 13
     $$$$$:  147-block 14
     $$$$$:  147-block 15
-       74:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+       76:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
         1:  148-block  0
         1:  148-block  1
         1:  148-block  2
@@ -244,8 +244,8 @@
         1:  148-block  5
     $$$$$:  148-block  6
     $$$$$:  148-block  7
-       34:  148-block  8
-       34:  148-block  9
+       35:  148-block  8
+       35:  148-block  9
     $$$$$:  148-block 10
     $$$$$:  148-block 11
     $$$$$:  148-block 12
@@ -305,25 +305,25 @@
         -:  193:      template <typename _Up = _Dp,
         -:  194:		typename = _DeleterConstraint<_Up>>
         -:  195:	explicit
-      204:  196:	unique_ptr(pointer __p) noexcept
+      212:  196:	unique_ptr(pointer __p) noexcept
         1:  196-block  0
         1:  196-block  1
         1:  196-block  2
-       72:  196-block  3
-       34:  196-block  4
+       75:  196-block  3
+       35:  196-block  4
     $$$$$:  196-block  5
     $$$$$:  196-block  6
-       95:  196-block  7
-      204:  197:	: _M_t(__p)
+       99:  196-block  7
+      212:  197:	: _M_t(__p)
         1:  197-block  0
         1:  197-block  1
         1:  197-block  2
-       72:  197-block  3
-       34:  197-block  4
+       75:  197-block  3
+       35:  197-block  4
     $$$$$:  197-block  5
     $$$$$:  197-block  6
-       95:  197-block  7
-      204:  198:        { }
+       99:  197-block  7
+      212:  198:        { }
         -:  199:
         -:  200:      /** Takes ownership of a pointer.
         -:  201:       *
@@ -384,40 +384,40 @@
         -:  256:#endif
         -:  257:
         -:  258:      /// Destructor, invokes the deleter if the stored pointer is not null.
-      110:  259:      ~unique_ptr() noexcept
+      114:  259:      ~unique_ptr() noexcept
         1:  259-block  0
         1:  259-block  1
         1:  259-block  2
         1:  259-block  3
-       72:  259-block  4
-       34:  259-block  5
+       75:  259-block  4
+       35:  259-block  5
     $$$$$:  259-block  6
     $$$$$:  259-block  7
     $$$$$:  259-block  8
         -:  260:      {
-      110:  261:	auto& __ptr = _M_t._M_ptr();
+      114:  261:	auto& __ptr = _M_t._M_ptr();
         1:  261-block  0
         1:  261-block  1
         1:  261-block  2
         1:  261-block  3
-       72:  261-block  4
-       34:  261-block  5
+       75:  261-block  4
+       35:  261-block  5
     $$$$$:  261-block  6
     $$$$$:  261-block  7
     $$$$$:  261-block  8
-      110:  262:	if (__ptr != nullptr)
-       37:  263:	  get_deleter()(__ptr);
+      114:  262:	if (__ptr != nullptr)
+       38:  263:	  get_deleter()(__ptr);
         1:  263-block  0
         1:  263-block  1
         1:  263-block  2
     $$$$$:  263-block  3
     $$$$$:  263-block  4
-       34:  263-block  5
+       35:  263-block  5
     $$$$$:  263-block  6
     $$$$$:  263-block  7
     $$$$$:  263-block  8
-      110:  264:	__ptr = pointer();
-      110:  265:      }
+      114:  264:	__ptr = pointer();
+      114:  265:      }
         -:  266:
         -:  267:      // Assignment.
         -:  268:
@@ -497,43 +497,43 @@
         -:  328:
         -:  329:      /// Return the stored pointer.
         -:  330:      pointer
-       40:  331:      get() const noexcept
+       42:  331:      get() const noexcept
     $$$$$:  331-block  0
     $$$$$:  331-block  1
     $$$$$:  331-block  2
     $$$$$:  331-block  3
     $$$$$:  331-block  4
         2:  331-block  5
-       38:  331-block  6
+       40:  331-block  6
     $$$$$:  331-block  7
-       40:  332:      { return _M_t._M_ptr(); }
+       42:  332:      { return _M_t._M_ptr(); }
     $$$$$:  332-block  0
     $$$$$:  332-block  1
     $$$$$:  332-block  2
     $$$$$:  332-block  3
     $$$$$:  332-block  4
         2:  332-block  5
-       38:  332-block  6
+       40:  332-block  6
     $$$$$:  332-block  7
         -:  333:
         -:  334:      /// Return a reference to the stored deleter.
         -:  335:      deleter_type&
-       37:  336:      get_deleter() noexcept
+       38:  336:      get_deleter() noexcept
         1:  336-block  0
         1:  336-block  1
         1:  336-block  2
     $$$$$:  336-block  3
-       34:  336-block  4
+       35:  336-block  4
     $$$$$:  336-block  5
     $$$$$:  336-block  6
     $$$$$:  336-block  7
     $$$$$:  336-block  8
-       37:  337:      { return _M_t._M_deleter(); }
+       38:  337:      { return _M_t._M_deleter(); }
         1:  337-block  0
         1:  337-block  1
         1:  337-block  2
     $$$$$:  337-block  3
-       34:  337-block  4
+       35:  337-block  4
     $$$$$:  337-block  5
     $$$$$:  337-block  6
     $$$$$:  337-block  7

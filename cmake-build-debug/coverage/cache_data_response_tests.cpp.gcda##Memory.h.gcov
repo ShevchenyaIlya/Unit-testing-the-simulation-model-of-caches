@@ -38,15 +38,15 @@
         -:   33:
         -:   34:using Block = vector<CacheCell>;
         -:   35:
-       12:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
-        6:   36-block  0
-        6:   36-block  1
+       24:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
+       12:   36-block  0
+       12:   36-block  1
        18:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
         9:   37-block  0
         9:   37-block  1
-       12:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
-        6:   38-block  0
-        6:   38-block  1
+       24:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
+       12:   38-block  0
+       12:   38-block  1
         -:   39:
     #####:   40:class MemoryStorage {
     $$$$$:   40-block  0
@@ -673,7 +673,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
@@ -681,80 +681,80 @@
         -:  445:        _requestedOffset = offset;
         -:  446:    }
         -:  447:
-        8:  448:    bool Response(Word _addr, Word &_data, IType _type, Word responseTime)
-        8:  448-block  0
+       17:  448:    bool Response(Word _addr, Word &_data, IType _type, Word responseTime)
+       17:  448-block  0
         -:  449:    {
-        8:  450:        if (_type != IType::Ld && _type != IType::St)
-        8:  450-block  0
-        6:  450-block  1
+       17:  450:        if (_type != IType::Ld && _type != IType::St)
+       17:  450-block  0
+       15:  450-block  1
         2:  451:            return true;
         2:  451-block  0
         -:  452:
-        6:  453:        if (_waitCycles != 0)
-        6:  453-block  0
+       15:  453:        if (_waitCycles != 0)
+       15:  453-block  0
         1:  454:            return false;
         1:  454-block  0
         -:  455:
-        5:  456:        if (_cacheMiss)
-        5:  456-block  0
+       14:  456:        if (_cacheMiss)
+       14:  456-block  0
         -:  457:        {
-        3:  458:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
-        3:  458-block  0
+        9:  458:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
+        9:  458-block  0
         -:  459:
-        3:  460:            bool validity = true;
-        3:  461:            if (_type == IType::St) {
-        2:  462:                memoryLine[ToLineOffset(_addr)] = _data;
-        2:  462-block  0
-        2:  463:                validity = false;
+        9:  460:            bool validity = true;
+        9:  461:            if (_type == IType::St) {
+        8:  462:                memoryLine[ToLineOffset(_addr)] = _data;
+        8:  462-block  0
+        8:  463:                validity = false;
         -:  464:            }
         -:  465:
-        3:  466:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
-        3:  466-block  0
-        3:  467:            Word blockId = latestUsage.first;
-        3:  468:            Word cellId = latestUsage.second;
+        9:  466:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        9:  466-block  0
+        9:  467:            Word blockId = latestUsage.first;
+        9:  468:            Word cellId = latestUsage.second;
         -:  469:
-        3:  470:            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
-        3:  470-block  0
-        1:  470-block  1
-        1:  470-block  2
-        2:  470-block  3
-        3:  470-block  4
+        9:  470:            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
+        9:  470-block  0
+        3:  470-block  1
+        3:  470-block  2
+        6:  470-block  3
+        9:  470-block  4
         -:  471:            {
-        1:  472:                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
-        1:  472-block  0
+        3:  472:                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
+        3:  472-block  0
         -:  473:            }
         -:  474:
-        3:  475:            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
-        3:  475-block  0
+        9:  475:            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
+        9:  475-block  0
         -:  476:
-        3:  477:            if (_type == IType::Ld)
-        3:  478:                _data = memoryLine[_requestedOffset];
+        9:  477:            if (_type == IType::Ld)
+        9:  478:                _data = memoryLine[_requestedOffset];
         1:  478-block  0
-        3:  478-block  1
+        9:  478-block  1
         -:  479:        }
         -:  480:        else
         -:  481:        {
-        2:  482:            pair<Word, Word> position = findEntry(_requestedIp, true);
-        2:  482-block  0
-        2:  483:            _dataMemory[position.first][position.second].lastUsage = 1;
-        2:  483-block  0
-        2:  484:            changeLRUBit(_dataMemory, position.first, position.second);
+        5:  482:            pair<Word, Word> position = findEntry(_requestedIp, true);
+        5:  482-block  0
+        5:  483:            _dataMemory[position.first][position.second].lastUsage = 1;
+        5:  483-block  0
+        5:  484:            changeLRUBit(_dataMemory, position.first, position.second);
         -:  485:
-        2:  486:            if (_type == IType::Ld)
+        5:  486:            if (_type == IType::Ld)
         1:  487:                _data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
         1:  487-block  0
-        1:  488:            else if (_type == IType::St) {
-        1:  488-block  0
-        1:  489:                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
-        1:  489-block  0
-        2:  490:                _dataMemory[position.first][position.second].validityBit = false;
-        2:  490-block  0
+        4:  488:            else if (_type == IType::St) {
+        4:  488-block  0
+        4:  489:                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
+        4:  489-block  0
+        5:  490:                _dataMemory[position.first][position.second].validityBit = false;
+        5:  490-block  0
         -:  491:            }
         -:  492:        }
         -:  493:
-        8:  494:        return true;
-        5:  494-block  0
-        8:  494-block  1
+       17:  494:        return true;
+       14:  494-block  0
+       17:  494-block  1
     %%%%%:  494-block  2
         -:  495:    }
         -:  496:

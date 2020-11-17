@@ -167,28 +167,28 @@
         -:   96:    {
         -:   97:      template<typename _InputIterator, typename _ForwardIterator>
         -:   98:        static _ForwardIterator
-       62:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+       70:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
     $$$$$:   99-block  0
     $$$$$:   99-block  1
     $$$$$:   99-block  2
-       30:   99-block  3
+       34:   99-block  3
     $$$$$:   99-block  4
-        6:   99-block  5
+        8:   99-block  5
     $$$$$:   99-block  6
         2:   99-block  7
-       24:   99-block  8
+       26:   99-block  8
     $$$$$:   99-block  9
         -:  100:		      _ForwardIterator __result)
-       62:  101:        { return std::copy(__first, __last, __result); }
+       70:  101:        { return std::copy(__first, __last, __result); }
     $$$$$:  101-block  0
     $$$$$:  101-block  1
     $$$$$:  101-block  2
-       30:  101-block  3
+       34:  101-block  3
     $$$$$:  101-block  4
-        6:  101-block  5
+        8:  101-block  5
     $$$$$:  101-block  6
         2:  101-block  7
-       24:  101-block  8
+       26:  101-block  8
     $$$$$:  101-block  9
         -:  102:    };
         -:  103:
@@ -203,19 +203,19 @@
         -:  112:  */
         -:  113:  template<typename _InputIterator, typename _ForwardIterator>
         -:  114:    inline _ForwardIterator
-       68:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
+       76:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
     $$$$$:  115-block  0
     $$$$$:  115-block  1
     $$$$$:  115-block  2
-       30:  115-block  3
+       34:  115-block  3
     $$$$$:  115-block  4
     $$$$$:  115-block  5
         4:  115-block  6
-        6:  115-block  7
+        8:  115-block  7
     $$$$$:  115-block  8
     $$$$$:  115-block  9
         2:  115-block 10
-       24:  115-block 11
+       26:  115-block 11
     $$$$$:  115-block 12
     $$$$$:  115-block 13
     $$$$$:  115-block 14
@@ -232,25 +232,25 @@
         -:  125:      // trivial types can have deleted assignment
         -:  126:      typedef typename iterator_traits<_InputIterator>::reference _RefType1;
         -:  127:      typedef typename iterator_traits<_ForwardIterator>::reference _RefType2;
-       68:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
+       76:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
         -:  129:#endif
         -:  130:
         -:  131:      return std::__uninitialized_copy<__is_trivial(_ValueType1)
         -:  132:				       && __is_trivial(_ValueType2)
         -:  133:				       && __assignable>::
-       68:  134:	__uninit_copy(__first, __last, __result);
+       76:  134:	__uninit_copy(__first, __last, __result);
     $$$$$:  134-block  0
     $$$$$:  134-block  1
     $$$$$:  134-block  2
-       30:  134-block  3
+       34:  134-block  3
     $$$$$:  134-block  4
     $$$$$:  134-block  5
         4:  134-block  6
-        6:  134-block  7
+        8:  134-block  7
     $$$$$:  134-block  8
     $$$$$:  134-block  9
         2:  134-block 10
-       24:  134-block 11
+       26:  134-block 11
     $$$$$:  134-block 12
     $$$$$:  134-block 13
     $$$$$:  134-block 14
@@ -433,37 +433,37 @@
         -:  284:
         -:  285:  template<typename _InputIterator, typename _ForwardIterator, typename _Tp>
         -:  286:    inline _ForwardIterator
-       68:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
+       76:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
     $$$$$:  287-block  0
     $$$$$:  287-block  1
     $$$$$:  287-block  2
-       30:  287-block  3
+       34:  287-block  3
     $$$$$:  287-block  4
     $$$$$:  287-block  5
         4:  287-block  6
-        6:  287-block  7
+        8:  287-block  7
     $$$$$:  287-block  8
     $$$$$:  287-block  9
         2:  287-block 10
-       24:  287-block 11
+       26:  287-block 11
     $$$$$:  287-block 12
     $$$$$:  287-block 13
     $$$$$:  287-block 14
         2:  287-block 15
         -:  288:			   _ForwardIterator __result, allocator<_Tp>&)
-       68:  289:    { return std::uninitialized_copy(__first, __last, __result); }
+       76:  289:    { return std::uninitialized_copy(__first, __last, __result); }
     $$$$$:  289-block  0
     $$$$$:  289-block  1
     $$$$$:  289-block  2
-       30:  289-block  3
+       34:  289-block  3
     $$$$$:  289-block  4
     $$$$$:  289-block  5
         4:  289-block  6
-        6:  289-block  7
+        8:  289-block  7
     $$$$$:  289-block  8
     $$$$$:  289-block  9
         2:  289-block 10
-       24:  289-block 11
+       26:  289-block 11
     $$$$$:  289-block 12
     $$$$$:  289-block 13
     $$$$$:  289-block 14
@@ -483,16 +483,16 @@
         -:  302:  template<typename _InputIterator, typename _ForwardIterator,
         -:  303:	   typename _Allocator>
         -:  304:    inline _ForwardIterator
-       66:  305:    __uninitialized_move_if_noexcept_a(_InputIterator __first,
+       74:  305:    __uninitialized_move_if_noexcept_a(_InputIterator __first,
     $$$$$:  305-block  0
-       30:  305-block  1
+       34:  305-block  1
     $$$$$:  305-block  2
         4:  305-block  3
-        6:  305-block  4
+        8:  305-block  4
     $$$$$:  305-block  5
     $$$$$:  305-block  6
         2:  305-block  7
-       24:  305-block  8
+       26:  305-block  8
     $$$$$:  305-block  9
     $$$$$:  305-block 10
     $$$$$:  305-block 11
@@ -501,20 +501,20 @@
         -:  308:				       _Allocator& __alloc)
         -:  309:    {
         -:  310:      return std::__uninitialized_copy_a
-       66:  311:	(_GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__first),
+       74:  311:	(_GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__first),
     $$$$$:  311-block  0
-       30:  311-block  1
+       34:  311-block  1
     $$$$$:  311-block  2
         4:  311-block  3
-        6:  311-block  4
+        8:  311-block  4
     $$$$$:  311-block  5
     $$$$$:  311-block  6
         2:  311-block  7
-       24:  311-block  8
+       26:  311-block  8
     $$$$$:  311-block  9
     $$$$$:  311-block 10
     $$$$$:  311-block 11
-       66:  312:	 _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__last), __result, __alloc);
+       74:  312:	 _GLIBCXX_MAKE_MOVE_IF_NOEXCEPT_ITERATOR(__last), __result, __alloc);
         -:  313:    }
         -:  314:
         -:  315:  template<typename _ForwardIterator, typename _Tp, typename _Allocator>

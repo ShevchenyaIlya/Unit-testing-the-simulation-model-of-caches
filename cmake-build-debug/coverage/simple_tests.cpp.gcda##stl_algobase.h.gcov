@@ -221,18 +221,18 @@
         -:  216:  template<typename _Tp>
         -:  217:    _GLIBCXX14_CONSTEXPR
         -:  218:    inline const _Tp&
-       68:  219:    max(const _Tp& __a, const _Tp& __b)
-       68:  219-block  0
+       73:  219:    max(const _Tp& __a, const _Tp& __b)
+       73:  219-block  0
         -:  220:    {
         -:  221:      // concept requirements
         -:  222:      __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
         -:  223:      //return  __a < __b ? __b : __a;
-       68:  224:      if (__a < __b)
-       68:  224-block  0
-       47:  225:	return __b;
-       47:  225-block  0
-       21:  226:      return __a;
-       21:  226-block  0
+       73:  224:      if (__a < __b)
+       73:  224-block  0
+       50:  225:	return __b;
+       50:  225-block  0
+       23:  226:      return __a;
+       23:  226-block  0
         -:  227:    }
         -:  228:
         -:  229:  /**
@@ -283,14 +283,14 @@
         -:  274:  // remove the __normal_iterator wrapper. See copy, fill, ...
         -:  275:  template<typename _Iterator>
         -:  276:    inline _Iterator
-      789:  277:    __niter_base(_Iterator __it)
-      642:  277-block  0
-        7:  277-block  1
-      140:  277-block  2
-      789:  278:    { return __it; }
-      642:  278-block  0
-        7:  278-block  1
-      140:  278-block  2
+      962:  277:    __niter_base(_Iterator __it)
+      810:  277-block  0
+        8:  277-block  1
+      144:  277-block  2
+      962:  278:    { return __it; }
+      810:  278-block  0
+        8:  278-block  1
+      144:  278-block  2
         -:  279:
         -:  280:  // All of these auxiliary structs serve two purposes.  (1) Replace
         -:  281:  // calls to copy with memmove whenever possible.  (Memmove, not memcpy,
@@ -369,8 +369,8 @@
         -:  354:    {
         -:  355:      template<typename _Tp>
         -:  356:        static _Tp*
-       35:  357:        __copy_m(const _Tp* __first, const _Tp* __last, _Tp* __result)
-       35:  357-block  0
+       36:  357:        __copy_m(const _Tp* __first, const _Tp* __last, _Tp* __result)
+       36:  357-block  0
         -:  358:        {
         -:  359:#if __cplusplus >= 201103L
         -:  360:	  using __assignable = conditional<_IsMove,
@@ -379,32 +379,32 @@
         -:  363:	  // trivial types can have deleted assignment
         -:  364:	  static_assert( __assignable::type::value, "type is not assignable" );
         -:  365:#endif
-       35:  366:	  const ptrdiff_t _Num = __last - __first;
-       35:  367:	  if (_Num)
-       35:  367-block  0
+       36:  366:	  const ptrdiff_t _Num = __last - __first;
+       36:  367:	  if (_Num)
+       36:  367-block  0
     #####:  368:	    __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
     $$$$$:  368-block  0
-       35:  369:	  return __result + _Num;
-       35:  369-block  0
+       36:  369:	  return __result + _Num;
+       36:  369-block  0
         -:  370:	}
         -:  371:    };
         -:  372:
         -:  373:  template<bool _IsMove, typename _II, typename _OI>
         -:  374:    inline _OI
-       35:  375:    __copy_move_a(_II __first, _II __last, _OI __result)
-       35:  375-block  0
+       36:  375:    __copy_move_a(_II __first, _II __last, _OI __result)
+       36:  375-block  0
         -:  376:    {
         -:  377:      typedef typename iterator_traits<_II>::value_type _ValueTypeI;
         -:  378:      typedef typename iterator_traits<_OI>::value_type _ValueTypeO;
         -:  379:      typedef typename iterator_traits<_II>::iterator_category _Category;
-       35:  380:      const bool __simple = (__is_trivial(_ValueTypeI)
+       36:  380:      const bool __simple = (__is_trivial(_ValueTypeI)
         -:  381:	                     && __is_pointer<_II>::__value
         -:  382:	                     && __is_pointer<_OI>::__value
         -:  383:			     && __are_same<_ValueTypeI, _ValueTypeO>::__value);
         -:  384:
         -:  385:      return std::__copy_move<_IsMove, __simple,
-       35:  386:	                      _Category>::__copy_m(__first, __last, __result);
-       35:  386-block  0
+       36:  386:	                      _Category>::__copy_m(__first, __last, __result);
+       36:  386-block  0
         -:  387:    }
         -:  388:
         -:  389:  // Helpers for streambuf iterators (either istream or ostream).
@@ -438,13 +438,13 @@
         -:  417:
         -:  418:  template<bool _IsMove, typename _II, typename _OI>
         -:  419:    inline _OI
-       35:  420:    __copy_move_a2(_II __first, _II __last, _OI __result)
-       35:  420-block  0
+       36:  420:    __copy_move_a2(_II __first, _II __last, _OI __result)
+       36:  420-block  0
         -:  421:    {
-       35:  422:      return _OI(std::__copy_move_a<_IsMove>(std::__niter_base(__first),
-       35:  422-block  0
+       36:  422:      return _OI(std::__copy_move_a<_IsMove>(std::__niter_base(__first),
+       36:  422-block  0
         -:  423:					     std::__niter_base(__last),
-       35:  424:					     std::__niter_base(__result)));
+       36:  424:					     std::__niter_base(__result)));
         -:  425:    }
         -:  426:
         -:  427:  /**
@@ -466,8 +466,8 @@
         -:  443:  */
         -:  444:  template<typename _II, typename _OI>
         -:  445:    inline _OI
-       35:  446:    copy(_II __first, _II __last, _OI __result)
-       35:  446-block  0
+       36:  446:    copy(_II __first, _II __last, _OI __result)
+       36:  446-block  0
         -:  447:    {
         -:  448:      // concept requirements
         -:  449:      __glibcxx_function_requires(_InputIteratorConcept<_II>)
@@ -476,9 +476,9 @@
         -:  452:      __glibcxx_requires_valid_range(__first, __last);
         -:  453:
         -:  454:      return (std::__copy_move_a2<__is_move_iterator<_II>::__value>
-       35:  455:	      (std::__miter_base(__first), std::__miter_base(__last),
-       35:  455-block  0
-       35:  456:	       __result));
+       36:  455:	      (std::__miter_base(__first), std::__miter_base(__last),
+       36:  455-block  0
+       36:  456:	       __result));
         -:  457:    }
         -:  458:
         -:  459:#if __cplusplus >= 201103L
@@ -725,15 +725,15 @@
         -:  700:  template<typename _Tp>
         -:  701:    inline typename
         -:  702:    __gnu_cxx::__enable_if<__is_byte<_Tp>::__value, void>::__type
-        7:  703:    __fill_a(_Tp* __first, _Tp* __last, const _Tp& __c)
-        7:  703-block  0
+        8:  703:    __fill_a(_Tp* __first, _Tp* __last, const _Tp& __c)
+        8:  703-block  0
         -:  704:    {
-        7:  705:      const _Tp __tmp = __c;
-        7:  706:      if (const size_t __len = __last - __first)
-        7:  706-block  0
-        7:  707:	__builtin_memset(__first, static_cast<unsigned char>(__tmp), __len);
-        7:  707-block  0
-        7:  708:    }
+        8:  705:      const _Tp __tmp = __c;
+        8:  706:      if (const size_t __len = __last - __first)
+        8:  706-block  0
+        8:  707:	__builtin_memset(__first, static_cast<unsigned char>(__tmp), __len);
+        8:  707-block  0
+        8:  708:    }
         -:  709:
         -:  710:  /**
         -:  711:   *  @brief Fills the range [first,last) with copies of value.
@@ -763,45 +763,45 @@
         -:  735:  template<typename _OutputIterator, typename _Size, typename _Tp>
         -:  736:    inline typename
         -:  737:    __gnu_cxx::__enable_if<!__is_scalar<_Tp>::__value, _OutputIterator>::__type
-      280:  738:    __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value)
-      280:  738-block  0
+      288:  738:    __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value)
+      288:  738-block  0
         -:  739:    {
-     1680:  740:      for (__decltype(__n + 0) __niter = __n;
-      280:  740-block  0
-     1400:  740-block  1
-     1680:  741:	   __niter > 0; --__niter, ++__first)
-     1680:  741-block  0
-     1400:  742:	*__first = __value;
-      280:  743:      return __first;
-      280:  743-block  0
+     1728:  740:      for (__decltype(__n + 0) __niter = __n;
+      288:  740-block  0
+     1440:  740-block  1
+     1728:  741:	   __niter > 0; --__niter, ++__first)
+     1728:  741-block  0
+     1440:  742:	*__first = __value;
+      288:  743:      return __first;
+      288:  743-block  0
         -:  744:    }
         -:  745:
         -:  746:  template<typename _OutputIterator, typename _Size, typename _Tp>
         -:  747:    inline typename
         -:  748:    __gnu_cxx::__enable_if<__is_scalar<_Tp>::__value, _OutputIterator>::__type
-       35:  749:    __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value)
-       35:  749-block  0
+       36:  749:    __fill_n_a(_OutputIterator __first, _Size __n, const _Tp& __value)
+       36:  749-block  0
         -:  750:    {
-       35:  751:      const _Tp __tmp = __value;
- 36700195:  752:      for (__decltype(__n + 0) __niter = __n;
-       35:  752-block  0
- 36700160:  752-block  1
- 36700195:  753:	   __niter > 0; --__niter, ++__first)
- 36700195:  753-block  0
- 36700160:  754:	*__first = __tmp;
-       35:  755:      return __first;
-       35:  755-block  0
+       36:  751:      const _Tp __tmp = __value;
+ 37748772:  752:      for (__decltype(__n + 0) __niter = __n;
+       36:  752-block  0
+ 37748736:  752-block  1
+ 37748772:  753:	   __niter > 0; --__niter, ++__first)
+ 37748772:  753-block  0
+ 37748736:  754:	*__first = __tmp;
+       36:  755:      return __first;
+       36:  755-block  0
         -:  756:    }
         -:  757:
         -:  758:  template<typename _Size, typename _Tp>
         -:  759:    inline typename
         -:  760:    __gnu_cxx::__enable_if<__is_byte<_Tp>::__value, _Tp*>::__type
-        7:  761:    __fill_n_a(_Tp* __first, _Size __n, const _Tp& __c)
-        7:  761-block  0
+        8:  761:    __fill_n_a(_Tp* __first, _Size __n, const _Tp& __c)
+        8:  761-block  0
         -:  762:    {
-        7:  763:      std::__fill_a(__first, __first + __n, __c);
-        7:  763-block  0
-        7:  764:      return __first + __n;
+        8:  763:      std::__fill_a(__first, __first + __n, __c);
+        8:  763-block  0
+        8:  764:      return __first + __n;
         -:  765:    }
         -:  766:
         -:  767:  /**
@@ -821,18 +821,18 @@
         -:  781:  */
         -:  782:  template<typename _OI, typename _Size, typename _Tp>
         -:  783:    inline _OI
-      322:  784:    fill_n(_OI __first, _Size __n, const _Tp& __value)
-      280:  784-block  0
-        7:  784-block  1
-       35:  784-block  2
+      332:  784:    fill_n(_OI __first, _Size __n, const _Tp& __value)
+      288:  784-block  0
+        8:  784-block  1
+       36:  784-block  2
         -:  785:    {
         -:  786:      // concept requirements
         -:  787:      __glibcxx_function_requires(_OutputIteratorConcept<_OI, _Tp>)
         -:  788:
-      322:  789:      return _OI(std::__fill_n_a(std::__niter_base(__first), __n, __value));
-      280:  789-block  0
-        7:  789-block  1
-       35:  789-block  2
+      332:  789:      return _OI(std::__fill_n_a(std::__niter_base(__first), __n, __value));
+      288:  789-block  0
+        8:  789-block  1
+       36:  789-block  2
         -:  790:    }
         -:  791:
         -:  792:  template<bool _BoolType>

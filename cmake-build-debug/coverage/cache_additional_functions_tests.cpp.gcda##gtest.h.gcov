@@ -309,15 +309,15 @@
         -:  302:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  303:  // we want AssertionResult's copy constructor to be used.
         -:  304:  template <typename T>
-      213:  305:  explicit AssertionResult(
-      213:  305-block  0
+      299:  305:  explicit AssertionResult(
+      299:  305-block  0
         -:  306:      const T& success,
         -:  307:      typename std::enable_if<
         -:  308:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  309:      /*enabler*/
         -:  310:      = nullptr)
-      213:  311:      : success_(success) {}
-      213:  311-block  0
+      299:  311:      : success_(success) {}
+      299:  311-block  0
         -:  312:
         -:  313:#if defined(_MSC_VER) && (_MSC_VER < 1910 || _MSC_VER >= 1920)
         -:  314:  GTEST_DISABLE_MSC_WARNINGS_POP_()

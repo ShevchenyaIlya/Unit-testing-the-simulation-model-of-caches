@@ -144,21 +144,21 @@
         -:  102:    {
         -:  103:      template<typename _ForwardIterator>
         -:  104:        static void
-      160:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
+      168:  105:        __destroy(_ForwardIterator __first, _ForwardIterator __last)
     $$$$$:  105-block  0
-       77:  105-block  1
+       81:  105-block  1
     $$$$$:  105-block  2
     $$$$$:  105-block  3
         6:  105-block  4
-       77:  105-block  5
+       81:  105-block  5
         -:  106:	{
-      165:  107:	  for (; __first != __last; ++__first)
+      173:  107:	  for (; __first != __last; ++__first)
     $$$$$:  107-block  0
-       77:  107-block  1
+       81:  107-block  1
     $$$$$:  107-block  2
     $$$$$:  107-block  3
        11:  107-block  4
-       77:  107-block  5
+       81:  107-block  5
         5:  108:	    std::_Destroy(std::__addressof(*__first));
     $$$$$:  108-block  0
     $$$$$:  108-block  1
@@ -166,7 +166,7 @@
     $$$$$:  108-block  3
         5:  108-block  4
     $$$$$:  108-block  5
-      160:  109:	}
+      168:  109:	}
         -:  110:    };
         -:  111:
         -:  112:  template<>
@@ -174,13 +174,13 @@
         -:  114:    {
         -:  115:      template<typename _ForwardIterator>
         -:  116:        static void
-       44:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
+       50:  117:        __destroy(_ForwardIterator, _ForwardIterator) { }
     $$$$$:  117-block  0
-        4:  117-block  1
+        5:  117-block  1
         1:  117-block  2
         2:  117-block  3
-       20:  117-block  4
-       16:  117-block  5
+       23:  117-block  4
+       18:  117-block  5
     $$$$$:  117-block  6
     $$$$$:  117-block  7
     $$$$$:  117-block  8
@@ -194,15 +194,15 @@
         -:  124:   */
         -:  125:  template<typename _ForwardIterator>
         -:  126:    inline void
-      204:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+      218:  127:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
     $$$$$:  127-block  0
     $$$$$:  127-block  1
-        4:  127-block  2
+        5:  127-block  2
         1:  127-block  3
         2:  127-block  4
-       20:  127-block  5
-       16:  127-block  6
-       77:  127-block  7
+       23:  127-block  5
+       18:  127-block  6
+       81:  127-block  7
     $$$$$:  127-block  8
     $$$$$:  127-block  9
     $$$$$:  127-block 10
@@ -210,7 +210,7 @@
     $$$$$:  127-block 12
         6:  127-block 13
         1:  127-block 14
-       77:  127-block 15
+       81:  127-block 15
         -:  128:    {
         -:  129:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  130:                       _Value_type;
@@ -220,15 +220,15 @@
         -:  134:		    "value type is destructible");
         -:  135:#endif
         -:  136:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-      204:  137:	__destroy(__first, __last);
+      218:  137:	__destroy(__first, __last);
     $$$$$:  137-block  0
     $$$$$:  137-block  1
-        4:  137-block  2
+        5:  137-block  2
         1:  137-block  3
         2:  137-block  4
-       20:  137-block  5
-       16:  137-block  6
-       77:  137-block  7
+       23:  137-block  5
+       18:  137-block  6
+       81:  137-block  7
     $$$$$:  137-block  8
     $$$$$:  137-block  9
     $$$$$:  137-block 10
@@ -236,8 +236,8 @@
     $$$$$:  137-block 12
         6:  137-block 13
         1:  137-block 14
-       77:  137-block 15
-      204:  138:    }
+       81:  137-block 15
+      218:  138:    }
         -:  139:
         -:  140:  template<bool>
         -:  141:    struct _Destroy_n_aux
@@ -302,15 +302,15 @@
         -:  200:
         -:  201:  template<typename _ForwardIterator, typename _Tp>
         -:  202:    inline void
-      204:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
+      218:  203:    _Destroy(_ForwardIterator __first, _ForwardIterator __last,
     $$$$$:  203-block  0
     $$$$$:  203-block  1
-        4:  203-block  2
+        5:  203-block  2
         1:  203-block  3
         2:  203-block  4
-       20:  203-block  5
-       16:  203-block  6
-       77:  203-block  7
+       23:  203-block  5
+       18:  203-block  6
+       81:  203-block  7
     $$$$$:  203-block  8
     $$$$$:  203-block  9
     $$$$$:  203-block 10
@@ -318,18 +318,18 @@
     $$$$$:  203-block 12
         6:  203-block 13
         1:  203-block 14
-       77:  203-block 15
+       81:  203-block 15
         -:  204:	     allocator<_Tp>&)
         -:  205:    {
-      204:  206:      _Destroy(__first, __last);
+      218:  206:      _Destroy(__first, __last);
     $$$$$:  206-block  0
     $$$$$:  206-block  1
-        4:  206-block  2
+        5:  206-block  2
         1:  206-block  3
         2:  206-block  4
-       20:  206-block  5
-       16:  206-block  6
-       77:  206-block  7
+       23:  206-block  5
+       18:  206-block  6
+       81:  206-block  7
     $$$$$:  206-block  8
     $$$$$:  206-block  9
     $$$$$:  206-block 10
@@ -337,8 +337,8 @@
     $$$$$:  206-block 12
         6:  206-block 13
         1:  206-block 14
-       77:  206-block 15
-      204:  207:    }
+       81:  206-block 15
+      218:  207:    }
         -:  208:
         -:  209:#if __cplusplus > 201402L
         -:  210:  template <typename _Tp>

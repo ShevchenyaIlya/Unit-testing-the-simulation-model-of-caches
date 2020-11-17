@@ -136,9 +136,9 @@
         -:  111:                                         const char* extension);
         -:  112:
         -:  113:  // Returns true if and only if the path is "".
-       70:  114:  bool IsEmpty() const { return pathname_.empty(); }
-       35:  114-block  0
-       35:  114-block  1
+       72:  114:  bool IsEmpty() const { return pathname_.empty(); }
+       36:  114-block  0
+       36:  114-block  1
         -:  115:
         -:  116:  // If input name has a trailing separator character, removes it and returns
         -:  117:  // the name, otherwise return the name string unmodified.

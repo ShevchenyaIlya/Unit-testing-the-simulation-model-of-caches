@@ -705,8 +705,8 @@
         -:  700:       *  string class does its own memory management.
         -:  701:      */
         -:  702:      explicit
-       95:  703:      basic_stringstream(ios_base::openmode __m = ios_base::out | ios_base::in)
-       95:  703-block  0
+       99:  703:      basic_stringstream(ios_base::openmode __m = ios_base::out | ios_base::in)
+       99:  703-block  0
     $$$$$:  703-block  1
         -:  704:      : __iostream_type(), _M_stringbuf(__m)
         -:  705:      { this->init(&_M_stringbuf); }

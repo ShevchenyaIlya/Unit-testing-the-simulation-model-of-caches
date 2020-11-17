@@ -81,22 +81,22 @@
         -:   76:      typedef std::true_type propagate_on_container_move_assignment;
         -:   77:#endif
         -:   78:
-      686:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
-       35:   79-block  0
-      560:   79-block  1
-       91:   79-block  2
+      729:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       36:   79-block  0
+      576:   79-block  1
+      117:   79-block  2
         -:   80:
-     1746:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
-     1564:   81-block  0
-      182:   81-block  1
+     2096:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+     1908:   81-block  0
+      188:   81-block  1
         -:   82:
         -:   83:      template<typename _Tp1>
         -:   84:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
         -:   85:
-     2432:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
-       35:   86-block  0
-     2124:   86-block  1
-      273:   86-block  2
+     2825:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       36:   86-block  0
+     2484:   86-block  1
+      305:   86-block  2
         -:   87:
         -:   88:      pointer
         -:   89:      address(reference __x) const _GLIBCXX_NOEXCEPT
@@ -109,26 +109,26 @@
         -:   96:      // NB: __n is permitted to be 0.  The C++ standard says nothing
         -:   97:      // about what the return value is when __n == 0.
         -:   98:      pointer
-     1417:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
-      642:   99-block  0
-      147:   99-block  1
-       35:   99-block  2
-      593:   99-block  3
+     1635:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+      810:   99-block  0
+      175:   99-block  1
+       36:   99-block  2
+      614:   99-block  3
         -:  100:      {
-     1417:  101:	if (__n > this->max_size())
-      642:  101-block  0
-      147:  101-block  1
-       35:  101-block  2
-      593:  101-block  3
-     1417:  102:	  std::__throw_bad_alloc();
+     1635:  101:	if (__n > this->max_size())
+      810:  101-block  0
+      175:  101-block  1
+       36:  101-block  2
+      614:  101-block  3
+     1635:  102:	  std::__throw_bad_alloc();
     $$$$$:  102-block  0
-      642:  102-block  1
+      810:  102-block  1
     $$$$$:  102-block  2
-      147:  102-block  3
+      175:  102-block  3
     $$$$$:  102-block  4
-       35:  102-block  5
+       36:  102-block  5
     $$$$$:  102-block  6
-      593:  102-block  7
+      614:  102-block  7
         -:  103:
         -:  104:#if __cpp_aligned_new
         -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
@@ -137,24 +137,24 @@
         -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
         -:  109:	  }
         -:  110:#endif
-     1417:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
-      642:  111-block  0
-      147:  111-block  1
-       35:  111-block  2
-      593:  111-block  3
+     1635:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+      810:  111-block  0
+      175:  111-block  1
+       36:  111-block  2
+      614:  111-block  3
         -:  112:      }
         -:  113:
         -:  114:      // __p is not permitted to be a null pointer.
         -:  115:      void
-     2784:  116:      deallocate(pointer __p, size_type)
-      642:  116-block  0
-      642:  116-block  1
-       35:  116-block  2
-       35:  116-block  3
-      147:  116-block  4
-      147:  116-block  5
-      568:  116-block  6
-      568:  116-block  7
+     3220:  116:      deallocate(pointer __p, size_type)
+      810:  116-block  0
+      810:  116-block  1
+       36:  116-block  2
+       36:  116-block  3
+      175:  116-block  4
+      175:  116-block  5
+      589:  116-block  6
+      589:  116-block  7
         -:  117:      {
         -:  118:#if __cpp_aligned_new
         -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
@@ -163,24 +163,24 @@
         -:  122:	    return;
         -:  123:	  }
         -:  124:#endif
-     1392:  125:	::operator delete(__p);
-      642:  125-block  0
-       35:  125-block  1
-      147:  125-block  2
-      568:  125-block  3
+     1610:  125:	::operator delete(__p);
+      810:  125-block  0
+       36:  125-block  1
+      175:  125-block  2
+      589:  125-block  3
         -:  126:      }
         -:  127:
         -:  128:      size_type
-     2496:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
-      642:  129-block  0
-      147:  129-block  1
-      105:  129-block  2
-     1602:  129-block  3
-     2496:  130:      { return size_t(-1) / sizeof(_Tp); }
-      642:  130-block  0
-      147:  130-block  1
-      105:  130-block  2
-     1602:  130-block  3
+     2750:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+      810:  129-block  0
+      175:  129-block  1
+      108:  129-block  2
+     1657:  129-block  3
+     2750:  130:      { return size_t(-1) / sizeof(_Tp); }
+      810:  130-block  0
+      175:  130-block  1
+      108:  130-block  2
+     1657:  130-block  3
         -:  131:
         -:  132:#if __cplusplus >= 201103L
         -:  133:      template<typename _Up, typename... _Args>

@@ -78,22 +78,22 @@
         -:   73:    {
         -:   74:      template<typename _InputIterator, typename _ForwardIterator>
         -:   75:        static _ForwardIterator
-       77:   76:        __uninit_copy(_InputIterator __first, _InputIterator __last,
-       77:   76-block  0
+      103:   76:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+      103:   76-block  0
         -:   77:		      _ForwardIterator __result)
         -:   78:        {
-       77:   79:	  _ForwardIterator __cur = __result;
-       77:   79-block  0
+      103:   79:	  _ForwardIterator __cur = __result;
+      103:   79-block  0
         -:   80:	  __try
         -:   81:	    {
-      385:   82:	      for (; __first != __last; ++__first, (void)++__cur)
-      385:   82-block  0
-      308:   82-block  1
-      308:   83:		std::_Construct(std::__addressof(*__cur), *__first);
-      308:   83-block  0
-       77:   84:	      return __cur;
-       77:   84-block  0
-       77:   84-block  1
+      515:   82:	      for (; __first != __last; ++__first, (void)++__cur)
+      515:   82-block  0
+      412:   82-block  1
+      412:   83:		std::_Construct(std::__addressof(*__cur), *__first);
+      412:   83-block  0
+      103:   84:	      return __cur;
+      103:   84-block  0
+      103:   84-block  1
     %%%%%:   84-block  2
         -:   85:	    }
     =====:   86:	  __catch(...)
@@ -112,13 +112,13 @@
         -:   96:    {
         -:   97:      template<typename _InputIterator, typename _ForwardIterator>
         -:   98:        static _ForwardIterator
-      362:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
+      522:   99:        __uninit_copy(_InputIterator __first, _InputIterator __last,
     $$$$$:   99-block  0
-      362:   99-block  1
+      522:   99-block  1
         -:  100:		      _ForwardIterator __result)
-      362:  101:        { return std::copy(__first, __last, __result); }
+      522:  101:        { return std::copy(__first, __last, __result); }
     $$$$$:  101-block  0
-      362:  101-block  1
+      522:  101-block  1
         -:  102:    };
         -:  103:
         -:  104:  /**
@@ -132,10 +132,10 @@
         -:  112:  */
         -:  113:  template<typename _InputIterator, typename _ForwardIterator>
         -:  114:    inline _ForwardIterator
-      439:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
+      625:  115:    uninitialized_copy(_InputIterator __first, _InputIterator __last,
     $$$$$:  115-block  0
-       77:  115-block  1
-      362:  115-block  2
+      103:  115-block  1
+      522:  115-block  2
         -:  116:		       _ForwardIterator __result)
         -:  117:    {
         -:  118:      typedef typename iterator_traits<_InputIterator>::value_type
@@ -148,16 +148,16 @@
         -:  125:      // trivial types can have deleted assignment
         -:  126:      typedef typename iterator_traits<_InputIterator>::reference _RefType1;
         -:  127:      typedef typename iterator_traits<_ForwardIterator>::reference _RefType2;
-      439:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
+      625:  128:      const bool __assignable = is_assignable<_RefType2, _RefType1>::value;
         -:  129:#endif
         -:  130:
         -:  131:      return std::__uninitialized_copy<__is_trivial(_ValueType1)
         -:  132:				       && __is_trivial(_ValueType2)
         -:  133:				       && __assignable>::
-      439:  134:	__uninit_copy(__first, __last, __result);
+      625:  134:	__uninit_copy(__first, __last, __result);
     $$$$$:  134-block  0
-       77:  134-block  1
-      362:  134-block  2
+      103:  134-block  1
+      522:  134-block  2
         -:  135:    }
         -:  136:
         -:  137:
@@ -310,15 +310,15 @@
         -:  284:
         -:  285:  template<typename _InputIterator, typename _ForwardIterator, typename _Tp>
         -:  286:    inline _ForwardIterator
-      439:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
+      625:  287:    __uninitialized_copy_a(_InputIterator __first, _InputIterator __last,
     $$$$$:  287-block  0
-       77:  287-block  1
-      362:  287-block  2
+      103:  287-block  1
+      522:  287-block  2
         -:  288:			   _ForwardIterator __result, allocator<_Tp>&)
-      439:  289:    { return std::uninitialized_copy(__first, __last, __result); }
+      625:  289:    { return std::uninitialized_copy(__first, __last, __result); }
     $$$$$:  289-block  0
-       77:  289-block  1
-      362:  289-block  2
+      103:  289-block  1
+      522:  289-block  2
         -:  290:
         -:  291:  template<typename _InputIterator, typename _ForwardIterator,
         -:  292:	   typename _Allocator>

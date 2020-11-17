@@ -133,31 +133,31 @@
         -:  128:      typedef true_type is_always_equal;
         -:  129:#endif
         -:  130:
-     1372:  131:      allocator() throw() { }
-       35:  131-block  0
-       35:  131-block  1
-      560:  131-block  2
-      560:  131-block  3
-       91:  131-block  4
-       91:  131-block  5
+     1458:  131:      allocator() throw() { }
+       36:  131-block  0
+       36:  131-block  1
+      576:  131-block  2
+      576:  131-block  3
+      117:  131-block  4
+      117:  131-block  5
         -:  132:
-     1746:  133:      allocator(const allocator& __a) throw()
-     1564:  133-block  0
-      182:  133-block  1
-     1746:  134:      : __allocator_base<_Tp>(__a) { }
-     1564:  134-block  0
-      182:  134-block  1
+     2096:  133:      allocator(const allocator& __a) throw()
+     1908:  133-block  0
+      188:  133-block  1
+     2096:  134:      : __allocator_base<_Tp>(__a) { }
+     1908:  134-block  0
+      188:  134-block  1
         -:  135:
         -:  136:      template<typename _Tp1>
         -:  137:	allocator(const allocator<_Tp1>&) throw() { }
         -:  138:
-     4864:  139:      ~allocator() throw() { }
-       35:  139-block  0
-       35:  139-block  1
-     2124:  139-block  2
-     2124:  139-block  3
-      273:  139-block  4
-      273:  139-block  5
+     5650:  139:      ~allocator() throw() { }
+       36:  139-block  0
+       36:  139-block  1
+     2484:  139-block  2
+     2484:  139-block  3
+      305:  139-block  4
+      305:  139-block  5
         -:  140:
         -:  141:      // Inherit everything else.
         -:  142:    };

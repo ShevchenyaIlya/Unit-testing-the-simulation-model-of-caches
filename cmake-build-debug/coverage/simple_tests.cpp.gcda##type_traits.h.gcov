@@ -154,12 +154,12 @@
         -:  149:  // For use in string and vstring.
         -:  150:  template<typename _Type>
         -:  151:    inline bool
-      532:  152:    __is_null_pointer(_Type* __ptr)
-      309:  152-block  0
-      223:  152-block  1
-      532:  153:    { return __ptr == 0; }
-      309:  153-block  0
-      223:  153-block  1
+      550:  152:    __is_null_pointer(_Type* __ptr)
+      318:  152-block  0
+      232:  152-block  1
+      550:  153:    { return __ptr == 0; }
+      318:  153-block  0
+      232:  153-block  1
         -:  154:
         -:  155:  template<typename _Type>
         -:  156:    inline bool

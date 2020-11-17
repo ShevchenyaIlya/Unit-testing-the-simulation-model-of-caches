@@ -184,6 +184,32 @@ google_tests/CMakeFiles/google_tests_run.dir/cache_data_response_tests.cpp.o: ..
 google_tests/CMakeFiles/google_tests_run.dir/cache_data_response_tests.cpp.o: ../src/Memory.h
 google_tests/CMakeFiles/google_tests_run.dir/cache_data_response_tests.cpp.o: ../src/PoolAllocator.h
 
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-death-test.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-matchers.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-message.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-param-test.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-printers.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-test-part.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-typed-test.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest_pred_impl.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest_prod.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/custom/gtest-port.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/custom/gtest-printers.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-death-test-internal.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-filepath.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-internal.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-param-util.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-port-arch.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-port.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-string.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/internal/gtest-type-util.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../google_tests/general_cache_tests.cpp
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../src/BaseTypes.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../src/Instruction.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../src/Memory.h
+google_tests/CMakeFiles/google_tests_run.dir/general_cache_tests.cpp.o: ../src/PoolAllocator.h
+
 google_tests/CMakeFiles/google_tests_run.dir/pseudoLRU_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-death-test.h
 google_tests/CMakeFiles/google_tests_run.dir/pseudoLRU_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-matchers.h
 google_tests/CMakeFiles/google_tests_run.dir/pseudoLRU_tests.cpp.o: ../google_tests/lib/googletest/include/gtest/gtest-message.h

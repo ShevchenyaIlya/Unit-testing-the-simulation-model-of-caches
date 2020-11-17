@@ -143,14 +143,14 @@
     $$$$$:  116-block  2
         -:  117:
         -:  118:      const _Tp_alloc_type&
-       56:  119:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+       58:  119:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
     $$$$$:  119-block  0
     $$$$$:  119-block  1
-       56:  119-block  2
-       56:  120:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+       58:  119-block  2
+       58:  120:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
     $$$$$:  120-block  0
     $$$$$:  120-block  1
-       56:  120-block  2
+       58:  120-block  2
         -:  121:
         -:  122:      allocator_type
     #####:  123:      get_allocator() const _GLIBCXX_NOEXCEPT
@@ -420,29 +420,29 @@
         -:  323:       *  The newly-created %vector uses a copy of the allocator object used
         -:  324:       *  by @a __x (unless the allocator traits dictate a different object).
         -:  325:       */
-      418:  326:      vector(const vector& __x)
-       56:  326-block  0
-      362:  326-block  1
+      580:  326:      vector(const vector& __x)
+       58:  326-block  0
+      522:  326-block  1
         -:  327:      : _Base(__x.size(),
-      418:  328:	_Alloc_traits::_S_select_on_copy(__x._M_get_Tp_allocator()))
-       56:  328-block  0
-       56:  328-block  1
+      580:  328:	_Alloc_traits::_S_select_on_copy(__x._M_get_Tp_allocator()))
+       58:  328-block  0
+       58:  328-block  1
     %%%%%:  328-block  2
     %%%%%:  328-block  3
     %%%%%:  328-block  4
-      362:  328-block  5
-      362:  328-block  6
+      522:  328-block  5
+      522:  328-block  6
     %%%%%:  328-block  7
     %%%%%:  328-block  8
     %%%%%:  328-block  9
         -:  329:      {
-      418:  330:	this->_M_impl._M_finish =
-      418:  331:	  std::__uninitialized_copy_a(__x.begin(), __x.end(),
+      580:  330:	this->_M_impl._M_finish =
+      580:  331:	  std::__uninitialized_copy_a(__x.begin(), __x.end(),
         -:  332:				      this->_M_impl._M_start,
-      418:  333:				      _M_get_Tp_allocator());
-      418:  334:      }
-       56:  334-block  0
-      362:  334-block  1
+      580:  333:				      _M_get_Tp_allocator());
+      580:  334:      }
+       58:  334-block  0
+      522:  334-block  1
         -:  335:
         -:  336:#if __cplusplus >= 201103L
         -:  337:      /**
@@ -690,12 +690,12 @@
         -:  569:       *  element order.
         -:  570:       */
         -:  571:      const_iterator
-      439:  572:      begin() const _GLIBCXX_NOEXCEPT
-      362:  572-block  0
-       77:  572-block  1
-      439:  573:      { return const_iterator(this->_M_impl._M_start); }
-      362:  573-block  0
-       77:  573-block  1
+      625:  572:      begin() const _GLIBCXX_NOEXCEPT
+      522:  572-block  0
+      103:  572-block  1
+      625:  573:      { return const_iterator(this->_M_impl._M_start); }
+      522:  573-block  0
+      103:  573-block  1
         -:  574:
         -:  575:      /**
         -:  576:       *  Returns a read/write iterator that points one past the last
@@ -714,12 +714,12 @@
         -:  587:       *  ordinary element order.
         -:  588:       */
         -:  589:      const_iterator
-      439:  590:      end() const _GLIBCXX_NOEXCEPT
-      362:  590-block  0
-       77:  590-block  1
-      439:  591:      { return const_iterator(this->_M_impl._M_finish); }
-      362:  591-block  0
-       77:  591-block  1
+      625:  590:      end() const _GLIBCXX_NOEXCEPT
+      522:  590-block  0
+      103:  590-block  1
+      625:  591:      { return const_iterator(this->_M_impl._M_finish); }
+      522:  591-block  0
+      103:  591-block  1
         -:  592:
         -:  593:      /**
         -:  594:       *  Returns a read/write reverse iterator that points to the
@@ -798,14 +798,14 @@
         -:  667:      // [23.2.4.2] capacity
         -:  668:      /**  Returns the number of elements in the %vector.  */
         -:  669:      size_type
-      553:  670:      size() const _GLIBCXX_NOEXCEPT
+      739:  670:      size() const _GLIBCXX_NOEXCEPT
     $$$$$:  670-block  0
-      419:  670-block  1
-      134:  670-block  2
-      553:  671:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+      579:  670-block  1
+      160:  670-block  2
+      739:  671:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
     $$$$$:  671-block  0
-      419:  671-block  1
-      134:  671-block  2
+      579:  671-block  1
+      160:  671-block  2
         -:  672:
         -:  673:      /**  Returns the size() of the largest possible %vector.  */
         -:  674:      size_type
@@ -936,15 +936,15 @@
         -:  792:       *  see at().)
         -:  793:       */
         -:  794:      reference
-      570:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+     1089:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
     $$$$$:  795-block  0
-      570:  795-block  1
+     1089:  795-block  1
     $$$$$:  795-block  2
         -:  796:      {
         -:  797:	__glibcxx_requires_subscript(__n);
-      570:  798:	return *(this->_M_impl._M_start + __n);
+     1089:  798:	return *(this->_M_impl._M_start + __n);
     $$$$$:  798-block  0
-      570:  798-block  1
+     1089:  798-block  1
     $$$$$:  798-block  2
         -:  799:      }
         -:  800:

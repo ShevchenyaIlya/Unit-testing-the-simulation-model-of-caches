@@ -161,13 +161,13 @@
         -:  156:      {
         -:  157:	template<typename _Rep, typename _Period>
         -:  158:	  static constexpr _ToDur
-       79:  159:	  __cast(const duration<_Rep, _Period>& __d)
-       79:  159-block  0
+       83:  159:	  __cast(const duration<_Rep, _Period>& __d)
+       83:  159-block  0
         -:  160:	  {
         -:  161:	    typedef typename _ToDur::rep			__to_rep;
         -:  162:	    return _ToDur(static_cast<__to_rep>(
-       79:  163:	      static_cast<_CR>(__d.count()) / static_cast<_CR>(_CF::den)));
-       79:  163-block  0
+       83:  163:	      static_cast<_CR>(__d.count()) / static_cast<_CR>(_CF::den)));
+       83:  163-block  0
         -:  164:	  }
         -:  165:      };
         -:  166:
@@ -176,13 +176,13 @@
         -:  169:      {
         -:  170:	template<typename _Rep, typename _Period>
         -:  171:	  static constexpr _ToDur
-       79:  172:	  __cast(const duration<_Rep, _Period>& __d)
-       79:  172-block  0
+       83:  172:	  __cast(const duration<_Rep, _Period>& __d)
+       83:  172-block  0
         -:  173:	  {
         -:  174:	    typedef typename _ToDur::rep			__to_rep;
         -:  175:	    return _ToDur(static_cast<__to_rep>(
-       79:  176:	      static_cast<_CR>(__d.count()) * static_cast<_CR>(_CF::num)));
-       79:  176-block  0
+       83:  176:	      static_cast<_CR>(__d.count()) * static_cast<_CR>(_CF::num)));
+       83:  176-block  0
         -:  177:	  }
         -:  178:      };
         -:  179:
@@ -200,9 +200,9 @@
         -:  191:    template<typename _ToDur, typename _Rep, typename _Period>
         -:  192:      constexpr typename enable_if<__is_duration<_ToDur>::value,
         -:  193:				   _ToDur>::type
-      158:  194:      duration_cast(const duration<_Rep, _Period>& __d)
-       79:  194-block  0
-       79:  194-block  1
+      166:  194:      duration_cast(const duration<_Rep, _Period>& __d)
+       83:  194-block  0
+       83:  194-block  1
         -:  195:      {
         -:  196:	typedef typename _ToDur::period				__to_period;
         -:  197:	typedef typename _ToDur::rep				__to_rep;
@@ -211,9 +211,9 @@
         -:  200:	  							__cr;
         -:  201:	typedef  __duration_cast_impl<_ToDur, __cf, __cr,
         -:  202:				      __cf::num == 1, __cf::den == 1> __dc;
-      158:  203:	return __dc::__cast(__d);
-       79:  203-block  0
-       79:  203-block  1
+      166:  203:	return __dc::__cast(__d);
+       83:  203-block  0
+       83:  203-block  1
         -:  204:      }
         -:  205:
         -:  206:    /// treat_as_floating_point
@@ -337,11 +337,11 @@
         -:  324:	       enable_if<is_convertible<const _Rep2&, rep>::value
         -:  325:			 && (treat_as_floating_point<rep>::value
         -:  326:			     || !treat_as_floating_point<_Rep2>::value)>::type>
-      316:  327:	  constexpr explicit duration(const _Rep2& __rep)
-       79:  327-block  0
-       79:  327-block  1
-      158:  327-block  2
-      316:  328:	  : __r(static_cast<rep>(__rep)) { }
+      332:  327:	  constexpr explicit duration(const _Rep2& __rep)
+       83:  327-block  0
+       83:  327-block  1
+      166:  327-block  2
+      332:  328:	  : __r(static_cast<rep>(__rep)) { }
         -:  329:
         -:  330:	template<typename _Rep2, typename _Period2, typename = typename
         -:  331:	       enable_if<treat_as_floating_point<rep>::value
@@ -355,14 +355,14 @@
         -:  339:
         -:  340:	// 20.11.5.2 observer
         -:  341:	constexpr rep
-      395:  342:	count() const
-       79:  342-block  0
-       79:  342-block  1
-      237:  342-block  2
-      395:  343:	{ return __r; }
-       79:  343-block  0
-       79:  343-block  1
-      237:  343-block  2
+      415:  342:	count() const
+       83:  342-block  0
+       83:  342-block  1
+      249:  342-block  2
+      415:  343:	{ return __r; }
+       83:  343-block  0
+       83:  343-block  1
+      249:  343-block  2
         -:  344:
         -:  345:	// 20.11.5.3 arithmetic
         -:  346:	constexpr duration
@@ -478,15 +478,15 @@
         -:  456:	     typename _Rep2, typename _Period2>
         -:  457:      constexpr typename common_type<duration<_Rep1, _Period1>,
         -:  458:				     duration<_Rep2, _Period2>>::type
-       79:  459:      operator-(const duration<_Rep1, _Period1>& __lhs,
-       79:  459-block  0
+       83:  459:      operator-(const duration<_Rep1, _Period1>& __lhs,
+       83:  459-block  0
         -:  460:		const duration<_Rep2, _Period2>& __rhs)
         -:  461:      {
         -:  462:	typedef duration<_Rep1, _Period1>			__dur1;
         -:  463:	typedef duration<_Rep2, _Period2>			__dur2;
         -:  464:	typedef typename common_type<__dur1,__dur2>::type	__cd;
-       79:  465:	return __cd(__cd(__lhs).count() - __cd(__rhs).count());
-       79:  465-block  0
+       83:  465:	return __cd(__cd(__lhs).count() - __cd(__rhs).count());
+       83:  465-block  0
         -:  466:      }
         -:  467:
         -:  468:    // SFINAE helper to obtain common_type<_Rep1, _Rep2> only if _Rep2
@@ -647,11 +647,11 @@
         -:  623:	constexpr time_point() : __d(duration::zero())
         -:  624:	{ }
         -:  625:
-      158:  626:	constexpr explicit time_point(const duration& __dur)
-       79:  626-block  0
-       79:  626-block  1
-      158:  627:	: __d(__dur)
-      158:  628:	{ }
+      166:  626:	constexpr explicit time_point(const duration& __dur)
+       83:  626-block  0
+       83:  626-block  1
+      166:  627:	: __d(__dur)
+      166:  628:	{ }
         -:  629:
         -:  630:	// conversions
         -:  631:	template<typename _Dur2,
@@ -662,12 +662,12 @@
         -:  636:
         -:  637:	// observer
         -:  638:	constexpr duration
-      237:  639:	time_since_epoch() const
-       79:  639-block  0
-      158:  639-block  1
-      237:  640:	{ return __d; }
-       79:  640-block  0
-      158:  640-block  1
+      249:  639:	time_since_epoch() const
+       83:  639-block  0
+      166:  639-block  1
+      249:  640:	{ return __d; }
+       83:  640-block  0
+      166:  640-block  1
         -:  641:
         -:  642:	// arithmetic
         -:  643:	_GLIBCXX17_CONSTEXPR time_point&
@@ -701,14 +701,14 @@
         -:  671:    template<typename _ToDur, typename _Clock, typename _Dur>
         -:  672:      constexpr typename enable_if<__is_duration<_ToDur>::value,
         -:  673:				   time_point<_Clock, _ToDur>>::type
-       79:  674:      time_point_cast(const time_point<_Clock, _Dur>& __t)
-       79:  674-block  0
+       83:  674:      time_point_cast(const time_point<_Clock, _Dur>& __t)
+       83:  674-block  0
         -:  675:      {
         -:  676:	typedef time_point<_Clock, _ToDur> 			__time_point;
-       79:  677:	return __time_point(duration_cast<_ToDur>(__t.time_since_epoch()));
-       79:  677-block  0
-       79:  677-block  1
-       79:  677-block  2
+       83:  677:	return __time_point(duration_cast<_ToDur>(__t.time_since_epoch()));
+       83:  677-block  0
+       83:  677-block  1
+       83:  677-block  2
         -:  678:      }
         -:  679:
         -:  680:#if __cplusplus > 201402L
@@ -783,11 +783,11 @@
         -:  749:
         -:  750:    template<typename _Clock, typename _Dur1, typename _Dur2>
         -:  751:      constexpr typename common_type<_Dur1, _Dur2>::type
-       79:  752:      operator-(const time_point<_Clock, _Dur1>& __lhs,
-       79:  752-block  0
+       83:  752:      operator-(const time_point<_Clock, _Dur1>& __lhs,
+       83:  752-block  0
         -:  753:		const time_point<_Clock, _Dur2>& __rhs)
-       79:  754:      { return __lhs.time_since_epoch() - __rhs.time_since_epoch(); }
-       79:  754-block  0
+       83:  754:      { return __lhs.time_since_epoch() - __rhs.time_since_epoch(); }
+       83:  754-block  0
         -:  755:
         -:  756:    template<typename _Clock, typename _Dur1, typename _Dur2>
         -:  757:      constexpr bool
@@ -876,13 +876,13 @@
         -:  840:      }
         -:  841:
         -:  842:      static time_point
-       79:  843:      from_time_t(std::time_t __t) noexcept
-       79:  843-block  0
+       83:  843:      from_time_t(std::time_t __t) noexcept
+       83:  843-block  0
         -:  844:      {
         -:  845:	typedef chrono::time_point<system_clock, seconds>	__from;
         -:  846:	return time_point_cast<system_clock::duration>
-       79:  847:	       (__from(chrono::seconds(__t)));
-       79:  847-block  0
+       83:  847:	       (__from(chrono::seconds(__t)));
+       83:  847-block  0
         -:  848:      }
         -:  849:    };
         -:  850:

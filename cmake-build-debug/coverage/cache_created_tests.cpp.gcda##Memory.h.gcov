@@ -316,12 +316,12 @@
         -:  250:};
         -:  251:
         -:  252:// TODO: Create cache for data and for code that works for 1 and 3 ticks
-       28:  253:class CachedMem
+       29:  253:class CachedMem
     $$$$$:  253-block  0
     $$$$$:  253-block  1
-       28:  253-block  2
-       28:  253-block  3
-       28:  253-block  4
+       29:  253-block  2
+       29:  253-block  3
+       29:  253-block  4
     %%%%%:  253-block  5
         -:  254:{
         -:  255:public:
@@ -520,7 +520,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
@@ -601,11 +601,11 @@
         -:  508:            --_waitCycles;
         -:  509:    }
         -:  510:
-        8:  511:    size_t getWaitCycles()
-        8:  511-block  0
+       18:  511:    size_t getWaitCycles()
+       18:  511-block  0
         -:  512:    {
-        8:  513:        return _waitCycles;
-        8:  513-block  0
+       18:  513:        return _waitCycles;
+       18:  513-block  0
         -:  514:    }
         -:  515:
         -:  516:    static const size_t getFailLatency() {
@@ -628,16 +628,16 @@
         -:  533:        return _cacheMiss;
         -:  534:    }
         -:  535:
-      102:  536:    vector<Block> &getCodeMemory() {
-      102:  536-block  0
-      102:  537:        return _codeMemory;
-      102:  537-block  0
+      120:  536:    vector<Block> &getCodeMemory() {
+      120:  536-block  0
+      120:  537:        return _codeMemory;
+      120:  537-block  0
         -:  538:    }
         -:  539:
-      115:  540:    vector<Block> &getDataMemory(){
-      115:  540-block  0
-      115:  541:        return _dataMemory;
-      115:  541-block  0
+      133:  540:    vector<Block> &getDataMemory(){
+      133:  540-block  0
+      133:  541:        return _dataMemory;
+      133:  541-block  0
         -:  542:    }
         -:  543:
         -:  544:    Word getMemoryRequestIp() const {

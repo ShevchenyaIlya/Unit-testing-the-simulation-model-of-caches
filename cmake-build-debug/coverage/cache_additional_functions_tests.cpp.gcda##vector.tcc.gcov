@@ -181,19 +181,19 @@
         -:  176:
         -:  177:  template<typename _Tp, typename _Alloc>
         -:  178:    vector<_Tp, _Alloc>&
-       21:  179:    vector<_Tp, _Alloc>::
+       45:  179:    vector<_Tp, _Alloc>::
     $$$$$:  179-block  0
-       21:  179-block  1
+       45:  179-block  1
         -:  180:    operator=(const vector<_Tp, _Alloc>& __x)
         -:  181:    {
-       21:  182:      if (&__x != this)
+       45:  182:      if (&__x != this)
     $$$$$:  182-block  0
-       21:  182-block  1
+       45:  182-block  1
         -:  183:	{
         -:  184:#if __cplusplus >= 201103L
-       21:  185:	  if (_Alloc_traits::_S_propagate_on_copy_assign())
+       45:  185:	  if (_Alloc_traits::_S_propagate_on_copy_assign())
     $$$$$:  185-block  0
-       21:  185-block  1
+       45:  185-block  1
         -:  186:	    {
     #####:  187:	      if (!_Alloc_traits::_S_always_equal()
     $$$$$:  187-block  0
@@ -225,22 +225,22 @@
         -:  200:				   __x._M_get_Tp_allocator());
         -:  201:	    }
         -:  202:#endif
-       21:  203:	  const size_type __xlen = __x.size();
+       45:  203:	  const size_type __xlen = __x.size();
     $$$$$:  203-block  0
-       21:  203-block  1
-       21:  204:	  if (__xlen > capacity())
+       45:  203-block  1
+       45:  204:	  if (__xlen > capacity())
         -:  205:	    {
-       21:  206:	      pointer __tmp = _M_allocate_and_copy(__xlen, __x.begin(),
+       45:  206:	      pointer __tmp = _M_allocate_and_copy(__xlen, __x.begin(),
     $$$$$:  206-block  0
-       21:  206-block  1
+       45:  206-block  1
         -:  207:						   __x.end());
-       21:  208:	      std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
-       21:  209:			    _M_get_Tp_allocator());
-       21:  210:	      _M_deallocate(this->_M_impl._M_start,
-       21:  211:			    this->_M_impl._M_end_of_storage
-       21:  212:			    - this->_M_impl._M_start);
-       21:  213:	      this->_M_impl._M_start = __tmp;
-       21:  214:	      this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __xlen;
+       45:  208:	      std::_Destroy(this->_M_impl._M_start, this->_M_impl._M_finish,
+       45:  209:			    _M_get_Tp_allocator());
+       45:  210:	      _M_deallocate(this->_M_impl._M_start,
+       45:  211:			    this->_M_impl._M_end_of_storage
+       45:  212:			    - this->_M_impl._M_start);
+       45:  213:	      this->_M_impl._M_start = __tmp;
+       45:  214:	      this->_M_impl._M_end_of_storage = this->_M_impl._M_start + __xlen;
         -:  215:	    }
     #####:  216:	  else if (size() >= __xlen)
     $$$$$:  216-block  0
@@ -262,13 +262,13 @@
         -:  227:					  this->_M_impl._M_finish,
     #####:  228:					  _M_get_Tp_allocator());
         -:  229:	    }
-       21:  230:	  this->_M_impl._M_finish = this->_M_impl._M_start + __xlen;
+       45:  230:	  this->_M_impl._M_finish = this->_M_impl._M_start + __xlen;
     $$$$$:  230-block  0
-       21:  230-block  1
+       45:  230-block  1
         -:  231:	}
-       21:  232:      return *this;
+       45:  232:      return *this;
     $$$$$:  232-block  0
-       21:  232-block  1
+       45:  232-block  1
         -:  233:    }
         -:  234:
         -:  235:  template<typename _Tp, typename _Alloc>

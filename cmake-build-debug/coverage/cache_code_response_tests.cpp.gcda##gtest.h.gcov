@@ -1594,23 +1594,23 @@
         -: 1538:
         -: 1539:// The helper function for {ASSERT|EXPECT}_EQ.
         -: 1540:template <typename T1, typename T2>
-        5: 1541:AssertionResult CmpHelperEQ(const char* lhs_expression,
+       10: 1541:AssertionResult CmpHelperEQ(const char* lhs_expression,
     $$$$$: 1541-block  0
     $$$$$: 1541-block  1
-        4: 1541-block  2
+        9: 1541-block  2
         1: 1541-block  3
         -: 1542:                            const char* rhs_expression,
         -: 1543:                            const T1& lhs,
         -: 1544:                            const T2& rhs) {
-        5: 1545:  if (lhs == rhs) {
+       10: 1545:  if (lhs == rhs) {
     $$$$$: 1545-block  0
     $$$$$: 1545-block  1
-        4: 1545-block  2
+        9: 1545-block  2
         1: 1545-block  3
-        5: 1546:    return AssertionSuccess();
+       10: 1546:    return AssertionSuccess();
     $$$$$: 1546-block  0
     $$$$$: 1546-block  1
-        4: 1546-block  2
+        9: 1546-block  2
         1: 1546-block  3
         -: 1547:  }
         -: 1548:
@@ -1638,17 +1638,17 @@
         -: 1566:      // and the other is the null pointer constant.
         -: 1567:      typename std::enable_if<!std::is_integral<T1>::value ||
         -: 1568:                              !std::is_pointer<T2>::value>::type* = nullptr>
-        5: 1569:  static AssertionResult Compare(const char* lhs_expression,
+       10: 1569:  static AssertionResult Compare(const char* lhs_expression,
     $$$$$: 1569-block  0
     $$$$$: 1569-block  1
-        4: 1569-block  2
+        9: 1569-block  2
         1: 1569-block  3
         -: 1570:                                 const char* rhs_expression, const T1& lhs,
         -: 1571:                                 const T2& rhs) {
-        5: 1572:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
+       10: 1572:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
     $$$$$: 1572-block  0
     $$$$$: 1572-block  1
-        4: 1572-block  2
+        9: 1572-block  2
         1: 1572-block  3
         -: 1573:  }
         -: 1574:

@@ -38,15 +38,15 @@
         -:   33:
         -:   34:using Block = vector<CacheCell>;
         -:   35:
-        8:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
-        4:   36-block  0
-        4:   36-block  1
-       10:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
-        5:   37-block  0
-        5:   37-block  1
-        8:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
-        4:   38-block  0
-        4:   38-block  1
+       26:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
+       13:   36-block  0
+       13:   36-block  1
+       28:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
+       14:   37-block  0
+       14:   37-block  1
+       26:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
+       13:   38-block  0
+       13:   38-block  1
         -:   39:
     #####:   40:class MemoryStorage {
     $$$$$:   40-block  0
@@ -476,31 +476,31 @@
         -:  372:        return pair<Word, Word> (0, 0);
         -:  373:    }
         -:  374:
-        3:  375:    void Request(Word ip)
-        3:  375-block  0
+       12:  375:    void Request(Word ip)
+       12:  375-block  0
         -:  376:    {
-        3:  377:        if (ip != _memoryRequestIp) {
-        3:  377-block  0
-        2:  378:            _memoryRequestIp = ip;
-        2:  379:            Word lineAddr = ToLineAddr(_memoryRequestIp);
-        2:  379-block  0
-        2:  380:            Word offset = ToLineOffset(_memoryRequestIp);
+       12:  377:        if (ip != _memoryRequestIp) {
+       12:  377-block  0
+       11:  378:            _memoryRequestIp = ip;
+       11:  379:            Word lineAddr = ToLineAddr(_memoryRequestIp);
+       11:  379-block  0
+       11:  380:            Word offset = ToLineOffset(_memoryRequestIp);
         -:  381:
-        2:  382:            if (checkAddress(false, lineAddr)) {
-        1:  383:                _waitCycles = codeLatency;
-        1:  384:                _cacheMiss = false;
-        1:  384-block  0
+       11:  382:            if (checkAddress(false, lineAddr)) {
+        4:  383:                _waitCycles = codeLatency;
+        4:  384:                _cacheMiss = false;
+        4:  384-block  0
         -:  385:            }
         -:  386:            else {
-        1:  387:                _cacheMiss = true;
-        1:  388:                _waitCycles = failLatency;
-        1:  388-block  0
+        7:  387:                _cacheMiss = true;
+        7:  388:                _waitCycles = failLatency;
+        7:  388-block  0
         -:  389:            }
-        2:  390:            _requestedIp = lineAddr;
-        2:  391:            _requestedOffset = offset;
-        2:  391-block  0
+       11:  390:            _requestedIp = lineAddr;
+       11:  391:            _requestedOffset = offset;
+       11:  391-block  0
         -:  392:        }
-        3:  393:    }
+       12:  393:    }
         -:  394:
         -:  395:    std::optional<Word> Response(Word responseTime)
         -:  396:    {
@@ -547,7 +547,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
@@ -635,16 +635,16 @@
     $$$$$:  513-block  0
         -:  514:    }
         -:  515:
-        3:  516:    static const size_t getFailLatency() {
-        3:  516-block  0
-        3:  517:        return failLatency;
-        3:  517-block  0
+       11:  516:    static const size_t getFailLatency() {
+       11:  516-block  0
+       11:  517:        return failLatency;
+       11:  517-block  0
         -:  518:    }
         -:  519:
-        1:  520:    static const size_t getCodeLatency() {
-        1:  520-block  0
-        1:  521:        return codeLatency;
-        1:  521-block  0
+        2:  520:    static const size_t getCodeLatency() {
+        2:  520-block  0
+        2:  521:        return codeLatency;
+        2:  521-block  0
         -:  522:    }
         -:  523:
         -:  524:    static const size_t getDataLatency() {
@@ -655,10 +655,10 @@
         -:  529:        _waitCycles = waitCycles;
         -:  530:    }
         -:  531:
-        5:  532:    bool isCacheMiss() const {
-        5:  532-block  0
-        5:  533:        return _cacheMiss;
-        5:  533-block  0
+       15:  532:    bool isCacheMiss() const {
+       15:  532-block  0
+       15:  533:        return _cacheMiss;
+       15:  533-block  0
         -:  534:    }
         -:  535:
     #####:  536:    vector<Block> &getCodeMemory() {
@@ -675,16 +675,16 @@
         -:  545:        return _memoryRequestIp;
         -:  546:    }
         -:  547:
-        8:  548:    Word getRequestedIp() const {
-        8:  548-block  0
-        8:  549:        return _requestedIp;
-        8:  549-block  0
+       18:  548:    Word getRequestedIp() const {
+       18:  548-block  0
+       18:  549:        return _requestedIp;
+       18:  549-block  0
         -:  550:    }
         -:  551:
-        8:  552:    Word getRequestedOffset() const {
-        8:  552-block  0
-        8:  553:        return _requestedOffset;
-        8:  553-block  0
+       18:  552:    Word getRequestedOffset() const {
+       18:  552-block  0
+       18:  553:        return _requestedOffset;
+       18:  553-block  0
         -:  554:    }
         -:  555:
         2:  556:    void setMemoryRequestIp(Word memoryRequestIp) {

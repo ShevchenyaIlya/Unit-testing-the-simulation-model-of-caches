@@ -99,7 +99,7 @@
         -:   70:   */
         -:   71:  template<typename _Tp>
         -:   72:    constexpr _Tp&&
-      105:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+      111:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
     $$$$$:   73-block  0
     $$$$$:   73-block  1
     $$$$$:   73-block  2
@@ -117,11 +117,11 @@
     $$$$$:   73-block 14
         2:   73-block 15
     $$$$$:   73-block 16
-       11:   73-block 17
+       14:   73-block 17
     $$$$$:   73-block 18
     $$$$$:   73-block 19
         3:   73-block 20
-       80:   73-block 21
+       83:   73-block 21
     $$$$$:   73-block 22
     $$$$$:   73-block 23
     $$$$$:   73-block 24
@@ -138,7 +138,7 @@
     $$$$$:   73-block 35
     $$$$$:   73-block 36
     $$$$$:   73-block 37
-      105:   74:    { return static_cast<_Tp&&>(__t); }
+      111:   74:    { return static_cast<_Tp&&>(__t); }
     $$$$$:   74-block  0
     $$$$$:   74-block  1
     $$$$$:   74-block  2
@@ -156,11 +156,11 @@
     $$$$$:   74-block 14
         2:   74-block 15
     $$$$$:   74-block 16
-       11:   74-block 17
+       14:   74-block 17
     $$$$$:   74-block 18
     $$$$$:   74-block 19
         3:   74-block 20
-       80:   74-block 21
+       83:   74-block 21
     $$$$$:   74-block 22
     $$$$$:   74-block 23
     $$$$$:   74-block 24
@@ -200,7 +200,7 @@
         -:   95:  */
         -:   96:  template<typename _Tp>
         -:   97:    constexpr typename std::remove_reference<_Tp>::type&&
-      213:   98:    move(_Tp&& __t) noexcept
+      222:   98:    move(_Tp&& __t) noexcept
     $$$$$:   98-block  0
     $$$$$:   98-block  1
     $$$$$:   98-block  2
@@ -210,14 +210,14 @@
     $$$$$:   98-block  6
     $$$$$:   98-block  7
     $$$$$:   98-block  8
-       68:   98-block  9
+       70:   98-block  9
     $$$$$:   98-block 10
         3:   98-block 11
     $$$$$:   98-block 12
     $$$$$:   98-block 13
     $$$$$:   98-block 14
     $$$$$:   98-block 15
-       38:   98-block 16
+       40:   98-block 16
     $$$$$:   98-block 17
     $$$$$:   98-block 18
     $$$$$:   98-block 19
@@ -226,8 +226,8 @@
     $$$$$:   98-block 22
     $$$$$:   98-block 23
     $$$$$:   98-block 24
-      104:   98-block 25
-      213:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      109:   98-block 25
+      222:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
     $$$$$:   99-block  0
     $$$$$:   99-block  1
     $$$$$:   99-block  2
@@ -237,14 +237,14 @@
     $$$$$:   99-block  6
     $$$$$:   99-block  7
     $$$$$:   99-block  8
-       68:   99-block  9
+       70:   99-block  9
     $$$$$:   99-block 10
         3:   99-block 11
     $$$$$:   99-block 12
     $$$$$:   99-block 13
     $$$$$:   99-block 14
     $$$$$:   99-block 15
-       38:   99-block 16
+       40:   99-block 16
     $$$$$:   99-block 17
     $$$$$:   99-block 18
     $$$$$:   99-block 19
@@ -253,7 +253,7 @@
     $$$$$:   99-block 22
     $$$$$:   99-block 23
     $$$$$:   99-block 24
-      104:   99-block 25
+      109:   99-block 25
         -:  100:
         -:  101:
         -:  102:  template<typename _Tp>

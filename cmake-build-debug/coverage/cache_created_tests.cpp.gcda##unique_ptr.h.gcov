@@ -168,9 +168,9 @@
     $$$$$:  146-block  3
     $$$$$:  146-block  4
     $$$$$:  146-block  5
-      112:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
-       56:  147-block  0
-       56:  147-block  1
+      114:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+       57:  147-block  0
+       57:  147-block  1
     $$$$$:  147-block  2
     $$$$$:  147-block  3
     $$$$$:  147-block  4
@@ -365,13 +365,13 @@
         -:  312:
         -:  313:      /// Dereference the stored pointer.
         -:  314:      typename add_lvalue_reference<element_type>::type
-       28:  315:      operator*() const
-       28:  315-block  0
+       29:  315:      operator*() const
+       29:  315-block  0
     $$$$$:  315-block  1
         -:  316:      {
         -:  317:	__glibcxx_assert(get() != pointer());
-       28:  318:	return *get();
-       28:  318-block  0
+       29:  318:	return *get();
+       29:  318-block  0
     $$$$$:  318-block  1
         -:  319:      }
         -:  320:
@@ -389,13 +389,13 @@
         -:  328:
         -:  329:      /// Return the stored pointer.
         -:  330:      pointer
-       56:  331:      get() const noexcept
-       56:  331-block  0
+       57:  331:      get() const noexcept
+       57:  331-block  0
     $$$$$:  331-block  1
     $$$$$:  331-block  2
     $$$$$:  331-block  3
-       56:  332:      { return _M_t._M_ptr(); }
-       56:  332-block  0
+       57:  332:      { return _M_t._M_ptr(); }
+       57:  332-block  0
     $$$$$:  332-block  1
     $$$$$:  332-block  2
     $$$$$:  332-block  3

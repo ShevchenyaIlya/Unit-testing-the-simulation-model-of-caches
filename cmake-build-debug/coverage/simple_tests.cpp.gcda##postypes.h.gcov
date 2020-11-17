@@ -139,9 +139,9 @@
         -:  134:      : _M_off(__off), _M_state() { }
         -:  135:
         -:  136:      /// Convert to streamoff.
-       14:  137:      operator streamoff() const { return _M_off; }
-        7:  137-block  0
-        7:  137-block  1
+       16:  137:      operator streamoff() const { return _M_off; }
+        8:  137-block  0
+        8:  137-block  1
         -:  138:
         -:  139:      /// Remember the value of @a st.
         -:  140:      void

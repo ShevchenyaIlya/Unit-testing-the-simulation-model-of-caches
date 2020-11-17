@@ -81,26 +81,26 @@
         -:   70:   */
         -:   71:  template<typename _Tp>
         -:   72:    constexpr _Tp&&
-      211:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+      294:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
     $$$$$:   73-block  0
     $$$$$:   73-block  1
     $$$$$:   73-block  2
     $$$$$:   73-block  3
-       29:   73-block  4
-       12:   73-block  5
+       74:   73-block  4
+       18:   73-block  5
     $$$$$:   73-block  6
-       33:   73-block  7
-      137:   73-block  8
-      211:   74:    { return static_cast<_Tp&&>(__t); }
+       57:   73-block  7
+      145:   73-block  8
+      294:   74:    { return static_cast<_Tp&&>(__t); }
     $$$$$:   74-block  0
     $$$$$:   74-block  1
     $$$$$:   74-block  2
     $$$$$:   74-block  3
-       29:   74-block  4
-       12:   74-block  5
+       74:   74-block  4
+       18:   74-block  5
     $$$$$:   74-block  6
-       33:   74-block  7
-      137:   74-block  8
+       57:   74-block  7
+      145:   74-block  8
         -:   75:
         -:   76:  /**
         -:   77:   *  @brief  Forward an rvalue.

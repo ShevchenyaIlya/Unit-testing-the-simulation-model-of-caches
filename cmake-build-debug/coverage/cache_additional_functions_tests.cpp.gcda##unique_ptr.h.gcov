@@ -150,11 +150,11 @@
         -:  136:
         -:  137:      using pointer = typename _Ptr<_Tp, _Dp>::type;
         -:  138:
-      426:  139:      __uniq_ptr_impl() = default;
+      598:  139:      __uniq_ptr_impl() = default;
     $$$$$:  139-block  0
     $$$$$:  139-block  1
-      213:  139-block  2
-      213:  139-block  3
+      299:  139-block  2
+      299:  139-block  3
     #####:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
     $$$$$:  140-block  0
     $$$$$:  140-block  1
@@ -218,13 +218,13 @@
         -:  180:      /// Default constructor, creates a unique_ptr that owns nothing.
         -:  181:      template <typename _Up = _Dp,
         -:  182:		typename = _DeleterConstraint<_Up>>
-      213:  183:	constexpr unique_ptr() noexcept
+      299:  183:	constexpr unique_ptr() noexcept
     $$$$$:  183-block  0
-      213:  183-block  1
-      213:  184:	: _M_t()
+      299:  183-block  1
+      299:  184:	: _M_t()
     $$$$$:  184-block  0
-      213:  184-block  1
-      213:  185:	{ }
+      299:  184-block  1
+      299:  185:	{ }
         -:  186:
         -:  187:      /** Takes ownership of a pointer.
         -:  188:       *

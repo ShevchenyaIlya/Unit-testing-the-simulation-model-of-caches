@@ -38,15 +38,15 @@
         -:   33:
         -:   34:using Block = vector<CacheCell>;
         -:   35:
-       12:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
-        6:   36-block  0
-        6:   36-block  1
-       14:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
-        7:   37-block  0
-        7:   37-block  1
-       12:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
-        6:   38-block  0
-        6:   38-block  1
+       30:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
+       15:   36-block  0
+       15:   36-block  1
+       32:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
+       16:   37-block  0
+       16:   37-block  1
+       30:   38:static Word ToLineOffset(Word ip) { return ToWordAddr(ip) & (lineSizeWords - 1); }
+       15:   38-block  0
+       15:   38-block  1
         -:   39:
     #####:   40:class MemoryStorage {
     $$$$$:   40-block  0
@@ -573,43 +573,43 @@
         -:  423:        }
         -:  424:    }
         -:  425:
-        5:  426:    void Request(Word _addr, IType _type)
-        5:  426-block  0
+       14:  426:    void Request(Word _addr, IType _type)
+       14:  426-block  0
         -:  427:    {
-        5:  428:        if (_type != IType::Ld && _type != IType::St)
-        5:  428-block  0
-        4:  428-block  1
+       14:  428:        if (_type != IType::Ld && _type != IType::St)
+       14:  428-block  0
+       13:  428-block  1
         2:  429:            return;
         2:  429-block  0
         -:  430:
-        3:  431:        Word lineAddr = ToLineAddr(_addr);
-        3:  431-block  0
-        3:  432:        Word offset = ToLineOffset(_addr);
+       12:  431:        Word lineAddr = ToLineAddr(_addr);
+       12:  431-block  0
+       12:  432:        Word offset = ToLineOffset(_addr);
         -:  433:
-        3:  434:        if (checkAddress(true, lineAddr)) {
-        1:  435:            _waitCycles = dataLatency;
-        1:  436:            _cacheMiss = false;
-        1:  436-block  0
+       12:  434:        if (checkAddress(true, lineAddr)) {
+        4:  435:            _waitCycles = dataLatency;
+        4:  436:            _cacheMiss = false;
+        4:  436-block  0
         -:  437:        } else {
-        2:  438:            _cacheMiss = true;
-        2:  439:            _waitCycles = failLatency;
-        2:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
-        2:  440-block  0
-        2:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
-        2:  441-block  0
-        1:  441-block  1
-    $$$$$:  441-block  2
-    $$$$$:  441-block  3
-        2:  441-block  4
-        2:  441-block  5
-        2:  442:                _waitCycles += 120;
-    $$$$$:  442-block  0
-        2:  442-block  1
+        8:  438:            _cacheMiss = true;
+        8:  439:            _waitCycles = failLatency;
+        8:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
+        8:  440-block  0
+        8:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
+        8:  441-block  0
+        7:  441-block  1
+        1:  441-block  2
+        1:  441-block  3
+        7:  441-block  4
+        8:  441-block  5
+        8:  442:                _waitCycles += 120;
+        1:  442-block  0
+        8:  442-block  1
         -:  443:        }
-        3:  444:        _requestedIp = lineAddr;
-        5:  445:        _requestedOffset = offset;
-        3:  445-block  0
-        5:  445-block  1
+       12:  444:        _requestedIp = lineAddr;
+       14:  445:        _requestedOffset = offset;
+       12:  445-block  0
+       14:  445-block  1
         -:  446:    }
         -:  447:
         -:  448:    bool Response(Word _addr, Word &_data, IType _type, Word responseTime)
@@ -702,10 +702,10 @@
         -:  521:        return codeLatency;
         -:  522:    }
         -:  523:
-        1:  524:    static const size_t getDataLatency() {
-        1:  524-block  0
-        1:  525:        return dataLatency;
-        1:  525-block  0
+        2:  524:    static const size_t getDataLatency() {
+        2:  524-block  0
+        2:  525:        return dataLatency;
+        2:  525-block  0
         -:  526:    }
         -:  527:
         -:  528:    void setWaitCycles(size_t waitCycles) {

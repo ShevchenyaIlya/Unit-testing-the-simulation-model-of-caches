@@ -81,19 +81,19 @@
         -:   76:      typedef std::true_type propagate_on_container_move_assignment;
         -:   77:#endif
         -:   78:
-       94:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+      100:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
     $$$$$:   79-block  0
     $$$$$:   79-block  1
         1:   79-block  2
         1:   79-block  3
         1:   79-block  4
-        5:   79-block  5
-        4:   79-block  6
-       39:   79-block  7
+        6:   79-block  5
+        5:   79-block  6
+       41:   79-block  7
     $$$$$:   79-block  8
     $$$$$:   79-block  9
         1:   79-block 10
-       39:   79-block 11
+       41:   79-block 11
         1:   79-block 12
         1:   79-block 13
         1:   79-block 14
@@ -113,18 +113,18 @@
         -:   83:      template<typename _Tp1>
         -:   84:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
         -:   85:
-       98:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+      104:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
     $$$$$:   86-block  0
     $$$$$:   86-block  1
         1:   86-block  2
         1:   86-block  3
         1:   86-block  4
-        5:   86-block  5
-        4:   86-block  6
-       39:   86-block  7
+        6:   86-block  5
+        5:   86-block  6
+       41:   86-block  7
     $$$$$:   86-block  8
         1:   86-block  9
-       39:   86-block 10
+       41:   86-block 10
     $$$$$:   86-block 11
         5:   86-block 12
         1:   86-block 13
@@ -146,11 +146,11 @@
         -:   96:      // NB: __n is permitted to be 0.  The C++ standard says nothing
         -:   97:      // about what the return value is when __n == 0.
         -:   98:      pointer
-       34:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+       38:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
     $$$$$:   99-block  0
     $$$$$:   99-block  1
     $$$$$:   99-block  2
-       15:   99-block  3
+       17:   99-block  3
     $$$$$:   99-block  4
     $$$$$:   99-block  5
     $$$$$:   99-block  6
@@ -159,21 +159,21 @@
     $$$$$:   99-block  9
         3:   99-block 10
     $$$$$:   99-block 11
-        3:   99-block 12
+        4:   99-block 12
     $$$$$:   99-block 13
     $$$$$:   99-block 14
         1:   99-block 15
-       12:   99-block 16
+       13:   99-block 16
     $$$$$:   99-block 17
     $$$$$:   99-block 18
     $$$$$:   99-block 19
     $$$$$:   99-block 20
         -:  100:      {
-       34:  101:	if (__n > this->max_size())
+       38:  101:	if (__n > this->max_size())
     $$$$$:  101-block  0
     $$$$$:  101-block  1
     $$$$$:  101-block  2
-       15:  101-block  3
+       17:  101-block  3
     $$$$$:  101-block  4
     $$$$$:  101-block  5
     $$$$$:  101-block  6
@@ -182,16 +182,16 @@
     $$$$$:  101-block  9
         3:  101-block 10
     $$$$$:  101-block 11
-        3:  101-block 12
+        4:  101-block 12
     $$$$$:  101-block 13
     $$$$$:  101-block 14
         1:  101-block 15
-       12:  101-block 16
+       13:  101-block 16
     $$$$$:  101-block 17
     $$$$$:  101-block 18
     $$$$$:  101-block 19
     $$$$$:  101-block 20
-       34:  102:	  std::__throw_bad_alloc();
+       38:  102:	  std::__throw_bad_alloc();
     $$$$$:  102-block  0
     $$$$$:  102-block  1
     $$$$$:  102-block  2
@@ -199,7 +199,7 @@
     $$$$$:  102-block  4
     $$$$$:  102-block  5
     $$$$$:  102-block  6
-       15:  102-block  7
+       17:  102-block  7
     $$$$$:  102-block  8
     $$$$$:  102-block  9
     $$$$$:  102-block 10
@@ -217,7 +217,7 @@
     $$$$$:  102-block 22
     $$$$$:  102-block 23
     $$$$$:  102-block 24
-        3:  102-block 25
+        4:  102-block 25
     $$$$$:  102-block 26
     $$$$$:  102-block 27
     $$$$$:  102-block 28
@@ -225,7 +225,7 @@
     $$$$$:  102-block 30
         1:  102-block 31
     $$$$$:  102-block 32
-       12:  102-block 33
+       13:  102-block 33
     $$$$$:  102-block 34
     $$$$$:  102-block 35
     $$$$$:  102-block 36
@@ -242,11 +242,11 @@
         -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
         -:  109:	  }
         -:  110:#endif
-       34:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+       38:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
     $$$$$:  111-block  0
     $$$$$:  111-block  1
     $$$$$:  111-block  2
-       15:  111-block  3
+       17:  111-block  3
     $$$$$:  111-block  4
     $$$$$:  111-block  5
     $$$$$:  111-block  6
@@ -255,11 +255,11 @@
     $$$$$:  111-block  9
         3:  111-block 10
     $$$$$:  111-block 11
-        3:  111-block 12
+        4:  111-block 12
     $$$$$:  111-block 13
     $$$$$:  111-block 14
         1:  111-block 15
-       12:  111-block 16
+       13:  111-block 16
     $$$$$:  111-block 17
     $$$$$:  111-block 18
     $$$$$:  111-block 19
@@ -268,7 +268,7 @@
         -:  113:
         -:  114:      // __p is not permitted to be a null pointer.
         -:  115:      void
-       68:  116:      deallocate(pointer __p, size_type)
+       76:  116:      deallocate(pointer __p, size_type)
     $$$$$:  116-block  0
     $$$$$:  116-block  1
     $$$$$:  116-block  2
@@ -277,18 +277,18 @@
     $$$$$:  116-block  5
     $$$$$:  116-block  6
     $$$$$:  116-block  7
-        3:  116-block  8
-        3:  116-block  9
+        4:  116-block  8
+        4:  116-block  9
     $$$$$:  116-block 10
     $$$$$:  116-block 11
     $$$$$:  116-block 12
     $$$$$:  116-block 13
         1:  116-block 14
         1:  116-block 15
-       15:  116-block 16
-       15:  116-block 17
-       12:  116-block 18
-       12:  116-block 19
+       17:  116-block 16
+       17:  116-block 17
+       13:  116-block 18
+       13:  116-block 19
     $$$$$:  116-block 20
     $$$$$:  116-block 21
     $$$$$:  116-block 22
@@ -321,17 +321,17 @@
         -:  122:	    return;
         -:  123:	  }
         -:  124:#endif
-       34:  125:	::operator delete(__p);
+       38:  125:	::operator delete(__p);
     $$$$$:  125-block  0
     $$$$$:  125-block  1
     $$$$$:  125-block  2
     $$$$$:  125-block  3
-        3:  125-block  4
+        4:  125-block  4
     $$$$$:  125-block  5
     $$$$$:  125-block  6
         1:  125-block  7
-       15:  125-block  8
-       12:  125-block  9
+       17:  125-block  8
+       13:  125-block  9
     $$$$$:  125-block 10
     $$$$$:  125-block 11
     $$$$$:  125-block 12
@@ -347,11 +347,11 @@
         -:  126:      }
         -:  127:
         -:  128:      size_type
-      100:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+      112:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
     $$$$$:  129-block  0
     $$$$$:  129-block  1
     $$$$$:  129-block  2
-       45:  129-block  3
+       51:  129-block  3
     $$$$$:  129-block  4
     $$$$$:  129-block  5
     $$$$$:  129-block  6
@@ -360,20 +360,20 @@
     $$$$$:  129-block  9
         7:  129-block 10
     $$$$$:  129-block 11
-        9:  129-block 12
+       12:  129-block 12
     $$$$$:  129-block 13
     $$$$$:  129-block 14
         3:  129-block 15
-       36:  129-block 16
+       39:  129-block 16
     $$$$$:  129-block 17
     $$$$$:  129-block 18
     $$$$$:  129-block 19
     $$$$$:  129-block 20
-      100:  130:      { return size_t(-1) / sizeof(_Tp); }
+      112:  130:      { return size_t(-1) / sizeof(_Tp); }
     $$$$$:  130-block  0
     $$$$$:  130-block  1
     $$$$$:  130-block  2
-       45:  130-block  3
+       51:  130-block  3
     $$$$$:  130-block  4
     $$$$$:  130-block  5
     $$$$$:  130-block  6
@@ -382,11 +382,11 @@
     $$$$$:  130-block  9
         7:  130-block 10
     $$$$$:  130-block 11
-        9:  130-block 12
+       12:  130-block 12
     $$$$$:  130-block 13
     $$$$$:  130-block 14
         3:  130-block 15
-       36:  130-block 16
+       39:  130-block 16
     $$$$$:  130-block 17
     $$$$$:  130-block 18
     $$$$$:  130-block 19
@@ -395,7 +395,7 @@
         -:  132:#if __cplusplus >= 201103L
         -:  133:      template<typename _Up, typename... _Args>
         -:  134:	void
-       79:  135:	construct(_Up* __p, _Args&&... __args)
+       83:  135:	construct(_Up* __p, _Args&&... __args)
     $$$$$:  135-block  0
     $$$$$:  135-block  1
     $$$$$:  135-block  2
@@ -403,18 +403,18 @@
     $$$$$:  135-block  4
     $$$$$:  135-block  5
     $$$$$:  135-block  6
-       38:  135-block  7
+       40:  135-block  7
     $$$$$:  135-block  8
         2:  135-block  9
-        4:  135-block 10
+        5:  135-block 10
     $$$$$:  135-block 11
     $$$$$:  135-block 12
         1:  135-block 13
-       34:  135-block 14
+       35:  135-block 14
     $$$$$:  135-block 15
     $$$$$:  135-block 16
     $$$$$:  135-block 17
-       79:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+       83:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
     $$$$$:  136-block  0
     $$$$$:  136-block  1
     %%%%%:  136-block  2
@@ -428,16 +428,16 @@
     $$$$$:  136-block 10
     $$$$$:  136-block 11
     $$$$$:  136-block 12
-       38:  136-block 13
+       40:  136-block 13
     $$$$$:  136-block 14
         2:  136-block 15
-        4:  136-block 16
+        5:  136-block 16
     $$$$$:  136-block 17
     $$$$$:  136-block 18
     %%%%%:  136-block 19
     $$$$$:  136-block 20
         1:  136-block 21
-       34:  136-block 22
+       35:  136-block 22
     $$$$$:  136-block 23
     $$$$$:  136-block 24
     %%%%%:  136-block 25

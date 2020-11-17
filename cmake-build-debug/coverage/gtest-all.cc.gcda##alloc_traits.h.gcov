@@ -114,10 +114,10 @@
        25:   98-block  0
     $$$$$:   98-block  1
         -:   99:
-      409:  100:    static constexpr bool _S_propagate_on_copy_assign()
-      409:  100-block  0
-      409:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
-      409:  101-block  0
+      421:  100:    static constexpr bool _S_propagate_on_copy_assign()
+      421:  100-block  0
+      421:  101:    { return _Base_type::propagate_on_container_copy_assignment::value; }
+      421:  101-block  0
         -:  102:
     #####:  103:    static constexpr bool _S_propagate_on_move_assign()
     $$$$$:  103-block  0

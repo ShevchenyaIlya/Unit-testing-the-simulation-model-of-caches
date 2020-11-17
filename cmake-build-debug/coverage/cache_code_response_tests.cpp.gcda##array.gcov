@@ -57,10 +57,10 @@
         -:   52:      typedef __is_nothrow_swappable<_Tp> _Is_nothrow_swappable;
         -:   53:
         -:   54:      static constexpr _Tp&
-      314:   55:      _S_ref(const _Type& __t, std::size_t __n) noexcept
-      314:   55-block  0
-      314:   56:      { return const_cast<_Tp&>(__t[__n]); }
-      314:   56-block  0
+      818:   55:      _S_ref(const _Type& __t, std::size_t __n) noexcept
+      818:   55-block  0
+      818:   56:      { return const_cast<_Tp&>(__t[__n]); }
+      818:   56-block  0
         -:   57:
         -:   58:      static constexpr _Tp*
         -:   59:      _S_ptr(const _Type& __t) noexcept
@@ -189,10 +189,10 @@
         -:  182:
         -:  183:      // Element access.
         -:  184:      _GLIBCXX17_CONSTEXPR reference
-      314:  185:      operator[](size_type __n) noexcept
-      314:  185-block  0
-      314:  186:      { return _AT_Type::_S_ref(_M_elems, __n); }
-      314:  186-block  0
+      818:  185:      operator[](size_type __n) noexcept
+      818:  185-block  0
+      818:  186:      { return _AT_Type::_S_ref(_M_elems, __n); }
+      818:  186-block  0
         -:  187:
         -:  188:      constexpr const_reference
         -:  189:      operator[](size_type __n) const noexcept

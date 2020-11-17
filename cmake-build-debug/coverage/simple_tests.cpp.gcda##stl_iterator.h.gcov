@@ -1041,9 +1041,9 @@
         -: 1036:      : _M_current() { }
         -: 1037:
         -: 1038:      explicit _GLIBCXX17_CONSTEXPR
-       70: 1039:      move_iterator(iterator_type __i)
-       70: 1039-block  0
-       70: 1040:      : _M_current(__i) { }
+       72: 1039:      move_iterator(iterator_type __i)
+       72: 1039-block  0
+       72: 1040:      : _M_current(__i) { }
         -: 1041:
         -: 1042:      template<typename _Iter>
         -: 1043:	_GLIBCXX17_CONSTEXPR
@@ -1051,10 +1051,10 @@
         -: 1045:	: _M_current(__i.base()) { }
         -: 1046:
         -: 1047:      _GLIBCXX17_CONSTEXPR iterator_type
-       70: 1048:      base() const
-       70: 1048-block  0
-       70: 1049:      { return _M_current; }
-       70: 1049-block  0
+       72: 1048:      base() const
+       72: 1048-block  0
+       72: 1049:      { return _M_current; }
+       72: 1049-block  0
         -: 1050:
         -: 1051:      _GLIBCXX17_CONSTEXPR reference
         -: 1052:      operator*() const
@@ -1229,10 +1229,10 @@
         -: 1221:    = typename conditional<__move_if_noexcept_cond<_Tp>::value,
         -: 1222:			   const _Tp*, move_iterator<_Tp*>>::type>
         -: 1223:    inline _GLIBCXX17_CONSTEXPR _ReturnType
-       70: 1224:    __make_move_if_noexcept_iterator(_Tp* __i)
-       70: 1224-block  0
-       70: 1225:    { return _ReturnType(__i); }
-       70: 1225-block  0
+       72: 1224:    __make_move_if_noexcept_iterator(_Tp* __i)
+       72: 1224-block  0
+       72: 1225:    { return _ReturnType(__i); }
+       72: 1225-block  0
         -: 1226:
         -: 1227:  // @} group iterators
         -: 1228:
@@ -1251,11 +1251,11 @@
         -: 1241:
         -: 1242:  template<typename _Iterator>
         -: 1243:    auto
-       70: 1244:    __miter_base(move_iterator<_Iterator> __it)
-       70: 1244-block  0
+       72: 1244:    __miter_base(move_iterator<_Iterator> __it)
+       72: 1244-block  0
         -: 1245:    -> decltype(__miter_base(__it.base()))
-       70: 1246:    { return __miter_base(__it.base()); }
-       70: 1246-block  0
+       72: 1246:    { return __miter_base(__it.base()); }
+       72: 1246-block  0
         -: 1247:
         -: 1248:_GLIBCXX_END_NAMESPACE_VERSION
         -: 1249:} // namespace

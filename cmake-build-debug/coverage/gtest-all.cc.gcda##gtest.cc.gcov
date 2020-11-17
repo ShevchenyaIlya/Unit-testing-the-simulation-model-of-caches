@@ -450,14 +450,14 @@
         5:  373-block  0
         -:  374:                                int (TestSuite::*method)() const) {
         5:  375:  int sum = 0;
-       25:  376:  for (size_t i = 0; i < case_list.size(); i++) {
+       30:  376:  for (size_t i = 0; i < case_list.size(); i++) {
         5:  376-block  0
-       25:  376-block  1
-       20:  377:    sum += (case_list[i]->*method)();
-       20:  377-block  0
+       30:  376-block  1
+       25:  377:    sum += (case_list[i]->*method)();
+       25:  377-block  0
     $$$$$:  377-block  1
-       20:  377-block  2
-       20:  377-block  3
+       25:  377-block  2
+       25:  377-block  3
         -:  378:  }
         5:  379:  return sum;
         5:  379-block  0
@@ -475,22 +475,22 @@
         -:  385:}
         -:  386:
         -:  387:// Returns true if and only if the test suite failed.
-        8:  388:static bool TestSuiteFailed(const TestSuite* test_suite) {
-        8:  388-block  0
-        8:  389:  return test_suite->should_run() && test_suite->Failed();
-        8:  389-block  0
-        8:  389-block  1
+       10:  388:static bool TestSuiteFailed(const TestSuite* test_suite) {
+       10:  388-block  0
+       10:  389:  return test_suite->should_run() && test_suite->Failed();
+       10:  389-block  0
+       10:  389-block  1
     $$$$$:  389-block  2
-        8:  389-block  3
-        8:  389-block  4
+       10:  389-block  3
+       10:  389-block  4
         -:  390:}
         -:  391:
         -:  392:// Returns true if and only if test_suite contains at least one test that
         -:  393:// should run.
-        8:  394:static bool ShouldRunTestSuite(const TestSuite* test_suite) {
-        8:  394-block  0
-        8:  395:  return test_suite->should_run();
-        8:  395-block  0
+       10:  394:static bool ShouldRunTestSuite(const TestSuite* test_suite) {
+       10:  394-block  0
+       10:  395:  return test_suite->should_run();
+       10:  395-block  0
         -:  396:}
         -:  397:
         -:  398:// AssertHelper constructor.
@@ -1033,15 +1033,15 @@
         -:  651://
         -:  652:// This recursive algorithm isn't very efficient, but is clear and
         -:  653:// works well enough for matching test names, which are short.
-     4209:  654:bool UnitTestOptions::PatternMatchesString(const char *pattern,
-     4209:  654-block  0
+     4426:  654:bool UnitTestOptions::PatternMatchesString(const char *pattern,
+     4426:  654-block  0
         -:  655:                                           const char *str) {
-     4209:  656:  switch (*pattern) {
-     4209:  656-block  0
-       68:  657:    case '\0':
+     4426:  656:  switch (*pattern) {
+     4426:  656-block  0
+       70:  657:    case '\0':
         -:  658:    case ':':  // Either ':' or '\0' marks the end of the pattern.
-       68:  659:      return *str == '\0';
-       68:  659-block  0
+       70:  659:      return *str == '\0';
+       70:  659-block  0
     #####:  660:    case '?':  // Matches any single character.
     #####:  661:      return *str != '\0' && PatternMatchesString(pattern + 1, str + 1);
     $$$$$:  661-block  0
@@ -1049,82 +1049,82 @@
     $$$$$:  661-block  2
     $$$$$:  661-block  3
     $$$$$:  661-block  4
-     2678:  662:    case '*':  // Matches any string (possibly empty) of characters.
-     4107:  663:      return (*str != '\0' && PatternMatchesString(pattern, str + 1)) ||
-     2678:  663-block  0
-     2568:  663-block  1
-     1283:  663-block  2
-     1395:  663-block  3
-     4107:  664:          PatternMatchesString(pattern + 1, str);
-     1429:  664-block  0
-     2678:  664-block  1
-     1463:  665:    default:  // Non-special character.  Matches itself.
-     1463:  666:      return *pattern == *str &&
-     1463:  666-block  0
+     2808:  662:    case '*':  // Matches any string (possibly empty) of characters.
+     4321:  663:      return (*str != '\0' && PatternMatchesString(pattern, str + 1)) ||
+     2808:  663-block  0
+     2693:  663-block  1
+     1330:  663-block  2
+     1478:  663-block  3
+     4321:  664:          PatternMatchesString(pattern + 1, str);
+     1513:  664-block  0
+     2808:  664-block  1
+     1548:  665:    default:  // Non-special character.  Matches itself.
+     1548:  666:      return *pattern == *str &&
+     1548:  666-block  0
     $$$$$:  666-block  1
-     1463:  666-block  2
-     1463:  667:          PatternMatchesString(pattern + 1, str + 1);
+     1548:  666-block  2
+     1548:  667:          PatternMatchesString(pattern + 1, str + 1);
     $$$$$:  667-block  0
-     1463:  667-block  1
+     1548:  667-block  1
         -:  668:  }
         -:  669:}
         -:  670:
-      140:  671:bool UnitTestOptions::MatchesFilter(
-      140:  671-block  0
+      145:  671:bool UnitTestOptions::MatchesFilter(
+      145:  671-block  0
         -:  672:    const std::string& name, const char* filter) {
-      140:  673:  const char *cur_pattern = filter;
-      140:  673-block  0
+      145:  673:  const char *cur_pattern = filter;
+      145:  673-block  0
         -:  674:  for (;;) {
-      212:  675:    if (PatternMatchesString(cur_pattern, name.c_str())) {
-      212:  675-block  0
-       72:  675-block  1
-       34:  676:      return true;
-       34:  676-block  0
+      220:  675:    if (PatternMatchesString(cur_pattern, name.c_str())) {
+      220:  675-block  0
+       75:  675-block  1
+       35:  676:      return true;
+       35:  676-block  0
         -:  677:    }
         -:  678:
         -:  679:    // Finds the next pattern in the filter.
-      178:  680:    cur_pattern = strchr(cur_pattern, ':');
+      185:  680:    cur_pattern = strchr(cur_pattern, ':');
         -:  681:
         -:  682:    // Returns if no more pattern can be found.
-      178:  683:    if (cur_pattern == nullptr) {
-      178:  683-block  0
-      106:  684:      return false;
-      106:  684-block  0
+      185:  683:    if (cur_pattern == nullptr) {
+      185:  683-block  0
+      110:  684:      return false;
+      110:  684-block  0
         -:  685:    }
         -:  686:
         -:  687:    // Skips the pattern separater (the ':' character).
-       72:  688:    cur_pattern++;
+       75:  688:    cur_pattern++;
         -:  689:  }
         -:  690:}
         -:  691:
         -:  692:// Returns true if and only if the user-specified filter matches the test
         -:  693:// suite name and the test name.
-       34:  694:bool UnitTestOptions::FilterMatchesTest(const std::string& test_suite_name,
-       34:  694-block  0
+       35:  694:bool UnitTestOptions::FilterMatchesTest(const std::string& test_suite_name,
+       35:  694-block  0
         -:  695:                                        const std::string& test_name) {
-       68:  696:  const std::string& full_name = test_suite_name + "." + test_name.c_str();
-       34:  696-block  0
-       34:  696-block  1
-       34:  696-block  2
+       70:  696:  const std::string& full_name = test_suite_name + "." + test_name.c_str();
+       35:  696-block  0
+       35:  696-block  1
+       35:  696-block  2
     %%%%%:  696-block  3
     %%%%%:  696-block  4
     %%%%%:  696-block  5
         -:  697:
         -:  698:  // Split --gtest_filter at '-', if there is one, to separate into
         -:  699:  // positive filter and negative filter portions
-       34:  700:  const char* const p = GTEST_FLAG(filter).c_str();
-       34:  701:  const char* const dash = strchr(p, '-');
-       68:  702:  std::string positive;
+       35:  700:  const char* const p = GTEST_FLAG(filter).c_str();
+       35:  701:  const char* const dash = strchr(p, '-');
+       70:  702:  std::string positive;
     %%%%%:  702-block  0
-       68:  703:  std::string negative;
-       34:  703-block  0
+       70:  703:  std::string negative;
+       35:  703-block  0
     %%%%%:  703-block  1
-       34:  704:  if (dash == nullptr) {
-       34:  705:    positive = GTEST_FLAG(filter).c_str();  // Whole string is a positive filter
-       34:  705-block  0
-       34:  706:    negative = "";
-       34:  706-block  0
-       34:  706-block  1
+       35:  704:  if (dash == nullptr) {
+       35:  705:    positive = GTEST_FLAG(filter).c_str();  // Whole string is a positive filter
+       35:  705-block  0
+       35:  706:    negative = "";
+       35:  706-block  0
+       35:  706-block  1
         -:  707:  } else {
     #####:  708:    positive = std::string(p, dash);   // Everything up to the dash
     $$$$$:  708-block  0
@@ -1145,15 +1145,15 @@
         -:  715:
         -:  716:  // A filter is a colon-separated list of patterns.  It matches a
         -:  717:  // test if any pattern in it matches the test.
-       68:  718:  return (MatchesFilter(full_name, positive.c_str()) &&
-       34:  718-block  0
-       34:  718-block  1
-       34:  718-block  2
-       34:  718-block  3
+       70:  718:  return (MatchesFilter(full_name, positive.c_str()) &&
+       35:  718-block  0
+       35:  718-block  1
+       35:  718-block  2
+       35:  718-block  3
     $$$$$:  718-block  4
-       68:  719:          !MatchesFilter(full_name, negative.c_str()));
-       34:  719-block  0
-       34:  719-block  1
+       70:  719:          !MatchesFilter(full_name, negative.c_str()));
+       35:  719-block  0
+       35:  719-block  1
         -:  720:}
         -:  721:
         -:  722:#if GTEST_HAS_SEH
@@ -1267,10 +1267,10 @@
         -:  809:// from user test code.  GetTestTypeId() is guaranteed to always
         -:  810:// return the same value, as it always calls GetTypeId<>() from the
         -:  811:// gtest.cc, which is within the Google Test framework.
-        7:  812:TypeId GetTestTypeId() {
-        7:  812-block  0
-        7:  813:  return GetTypeId<Test>();
-        7:  813-block  0
+        8:  812:TypeId GetTestTypeId() {
+        8:  812-block  0
+        8:  813:  return GetTypeId<Test>();
+        8:  813-block  0
         -:  814:}
         -:  815:
         -:  816:// The value of GetTestTypeId() as seen from within the Google Test
@@ -1477,10 +1477,10 @@
         -:  926:}
         -:  927:
         -:  928:// Gets the number of all test suites.
-        5:  929:int UnitTestImpl::total_test_suite_count() const {
-        5:  929-block  0
-        5:  930:  return static_cast<int>(test_suites_.size());
-        5:  930-block  0
+        6:  929:int UnitTestImpl::total_test_suite_count() const {
+        6:  929-block  0
+        6:  930:  return static_cast<int>(test_suites_.size());
+        6:  930-block  0
         -:  931:}
         -:  932:
         -:  933:// Gets the number of all test suites that contain at least one test
@@ -1570,18 +1570,18 @@
         -:  997:}
         -:  998:
         -:  999:// Returns the current time in milliseconds.
-       79: 1000:TimeInMillis GetTimeInMillis() {
-       79: 1000-block  0
-       79: 1001:  return std::chrono::duration_cast<std::chrono::milliseconds>(
-       79: 1001-block  0
-       79: 1002:             std::chrono::system_clock::now() -
+       83: 1000:TimeInMillis GetTimeInMillis() {
+       83: 1000-block  0
+       83: 1001:  return std::chrono::duration_cast<std::chrono::milliseconds>(
+       83: 1001-block  0
+       83: 1002:             std::chrono::system_clock::now() -
     %%%%%: 1002-block  0
     %%%%%: 1002-block  1
-      158: 1003:             std::chrono::system_clock::from_time_t(0))
-       79: 1003-block  0
-      158: 1004:      .count();
-       79: 1004-block  0
-       79: 1004-block  1
+      166: 1003:             std::chrono::system_clock::from_time_t(0))
+       83: 1003-block  0
+      166: 1004:      .count();
+       83: 1004-block  0
+       83: 1004-block  1
         -: 1005:}
         -: 1006:
         -: 1007:// Utilities
@@ -1718,16 +1718,16 @@
         -: 1100:// ASSERT/EXPECT in a procedure adds over 200 bytes to the procedure's
         -: 1101:// stack frame leading to huge stack frames in some cases; gcc does not reuse
         -: 1102:// the stack space.
-      190: 1103:Message::Message() : ss_(new ::std::stringstream) {
-       95: 1103-block  0
-       95: 1103-block  1
+      198: 1103:Message::Message() : ss_(new ::std::stringstream) {
+       99: 1103-block  0
+       99: 1103-block  1
     %%%%%: 1103-block  2
     %%%%%: 1103-block  3
         -: 1104:  // By default, we want there to be enough precision when printing
         -: 1105:  // a double to a Message.
-       95: 1106:  *ss_ << std::setprecision(std::numeric_limits<double>::digits10 + 2);
-       95: 1107:}
-       95: 1107-block  0
+       99: 1106:  *ss_ << std::setprecision(std::numeric_limits<double>::digits10 + 2);
+       99: 1107:}
+       99: 1107-block  0
         -: 1108:
         -: 1109:// These two overloads allow streaming a wide C string to a Message
         -: 1110:// using the UTF-8 encoding.
@@ -1761,10 +1761,10 @@
         -: 1126:
         -: 1127:// Gets the text streamed to this object so far as an std::string.
         -: 1128:// Each '\0' character in the buffer is replaced with "\\0".
-       95: 1129:std::string Message::GetString() const {
-       95: 1129-block  0
-       95: 1130:  return internal::StringStreamToString(ss_.get());
-       95: 1130-block  0
+       99: 1129:std::string Message::GetString() const {
+       99: 1129-block  0
+       99: 1130:  return internal::StringStreamToString(ss_.get());
+       99: 1130-block  0
         -: 1131:}
         -: 1132:
         -: 1133:// AssertionResult constructors.
@@ -1806,10 +1806,10 @@
         -: 1153:}
         -: 1154:
         -: 1155:// Makes a successful assertion result.
-      174: 1156:AssertionResult AssertionSuccess() {
-      174: 1156-block  0
-      174: 1157:  return AssertionResult(true);
-      174: 1157-block  0
+      233: 1156:AssertionResult AssertionSuccess() {
+      233: 1156-block  0
+      233: 1157:  return AssertionResult(true);
+      233: 1157-block  0
         -: 1158:}
         -: 1159:
         -: 1160:// Makes a failed assertion result.
@@ -3749,36 +3749,36 @@
         -: 2159:
         -: 2160:// Converts the buffer in a stringstream to an std::string, converting NUL
         -: 2161:// bytes to "\\0" along the way.
-       95: 2162:std::string StringStreamToString(::std::stringstream* ss) {
-       95: 2162-block  0
-      190: 2163:  const ::std::string& str = ss->str();
-       95: 2163-block  0
-       95: 2163-block  1
+       99: 2162:std::string StringStreamToString(::std::stringstream* ss) {
+       99: 2162-block  0
+      198: 2163:  const ::std::string& str = ss->str();
+       99: 2163-block  0
+       99: 2163-block  1
     %%%%%: 2163-block  2
-       95: 2164:  const char* const start = str.c_str();
-       95: 2164-block  0
-       95: 2165:  const char* const end = start + str.length();
+       99: 2164:  const char* const start = str.c_str();
+       99: 2164-block  0
+       99: 2165:  const char* const end = start + str.length();
         -: 2166:
-       95: 2167:  std::string result;
-       95: 2168:  result.reserve(static_cast<size_t>(2 * (end - start)));
-     1023: 2169:  for (const char* ch = start; ch != end; ++ch) {
-       95: 2169-block  0
-     1023: 2169-block  1
-      928: 2169-block  2
-      928: 2170:    if (*ch == '\0') {
-      928: 2170-block  0
+       99: 2167:  std::string result;
+       99: 2168:  result.reserve(static_cast<size_t>(2 * (end - start)));
+     1021: 2169:  for (const char* ch = start; ch != end; ++ch) {
+       99: 2169-block  0
+     1021: 2169-block  1
+      922: 2169-block  2
+      922: 2170:    if (*ch == '\0') {
+      922: 2170-block  0
     #####: 2171:      result += "\\0";  // Replaces NUL with "\\0";
     $$$$$: 2171-block  0
     $$$$$: 2171-block  1
         -: 2172:    } else {
-      928: 2173:      result += *ch;
-      928: 2173-block  0
+      922: 2173:      result += *ch;
+      922: 2173-block  0
         -: 2174:    }
         -: 2175:  }
         -: 2176:
-      190: 2177:  return result;
-       95: 2177-block  0
-       95: 2177-block  1
+      198: 2177:  return result;
+       99: 2177-block  0
+       99: 2177-block  1
     %%%%%: 2177-block  2
         -: 2178:}
         -: 2179:
@@ -3818,16 +3818,16 @@
         -: 2196:// class TestResult
         -: 2197:
         -: 2198:// Creates an empty TestResult.
-       39: 2199:TestResult::TestResult()
-       39: 2199-block  0
-       39: 2200:    : death_test_count_(0), start_timestamp_(0), elapsed_time_(0) {}
-       39: 2200-block  0
+       41: 2199:TestResult::TestResult()
+       41: 2199-block  0
+       41: 2200:    : death_test_count_(0), start_timestamp_(0), elapsed_time_(0) {}
+       41: 2200-block  0
         -: 2201:
         -: 2202:// D'tor.
-       78: 2203:TestResult::~TestResult() {
-       39: 2203-block  0
-       39: 2203-block  1
-       39: 2204:}
+       82: 2203:TestResult::~TestResult() {
+       41: 2203-block  0
+       41: 2203-block  1
+       41: 2204:}
         -: 2205:
         -: 2206:// Returns the i-th test part result among all the results. i can
         -: 2207:// range from 0 to total_part_count() - 1. If i is not in that range,
@@ -4123,14 +4123,14 @@
         -: 2352:}
         -: 2353:
         -: 2354:// Clears the object.
-       38: 2355:void TestResult::Clear() {
-       38: 2355-block  0
-       38: 2356:  test_part_results_.clear();
-       38: 2356-block  0
-       38: 2357:  test_properties_.clear();
-       38: 2358:  death_test_count_ = 0;
-       38: 2359:  elapsed_time_ = 0;
-       38: 2360:}
+       40: 2355:void TestResult::Clear() {
+       40: 2355-block  0
+       40: 2356:  test_part_results_.clear();
+       40: 2356-block  0
+       40: 2357:  test_properties_.clear();
+       40: 2358:  death_test_count_ = 0;
+       40: 2359:  elapsed_time_ = 0;
+       40: 2360:}
         -: 2361:
         -: 2362:// Returns true off the test part was skipped.
     #####: 2363:static bool TestPartSkipped(const TestPartResult& result) {
@@ -4140,30 +4140,30 @@
         -: 2365:}
         -: 2366:
         -: 2367:// Returns true if and only if the test was skipped.
-      171: 2368:bool TestResult::Skipped() const {
-      171: 2368-block  0
-      171: 2369:  return !Failed() && CountIf(test_part_results_, TestPartSkipped) > 0;
-      171: 2369-block  0
-      171: 2369-block  1
+      176: 2368:bool TestResult::Skipped() const {
+      176: 2368-block  0
+      176: 2369:  return !Failed() && CountIf(test_part_results_, TestPartSkipped) > 0;
+      176: 2369-block  0
+      176: 2369-block  1
     $$$$$: 2369-block  2
-      171: 2369-block  3
-      171: 2369-block  4
+      176: 2369-block  3
+      176: 2369-block  4
         -: 2370:}
         -: 2371:
         -: 2372:// Returns true if and only if the test failed.
-      351: 2373:bool TestResult::Failed() const {
-      351: 2373-block  0
-      351: 2374:  for (int i = 0; i < total_part_count(); ++i) {
-      351: 2374-block  0
-      351: 2374-block  1
+      363: 2373:bool TestResult::Failed() const {
+      363: 2373-block  0
+      363: 2374:  for (int i = 0; i < total_part_count(); ++i) {
+      363: 2374-block  0
+      363: 2374-block  1
     $$$$$: 2374-block  2
     #####: 2375:    if (GetTestPartResult(i).failed())
     $$$$$: 2375-block  0
     #####: 2376:      return true;
     $$$$$: 2376-block  0
         -: 2377:  }
-      351: 2378:  return false;
-      351: 2378-block  0
+      363: 2378:  return false;
+      363: 2378-block  0
         -: 2379:}
         -: 2380:
         -: 2381:// Returns true if and only if the test part fatally failed.
@@ -4174,10 +4174,10 @@
         -: 2384:}
         -: 2385:
         -: 2386:// Returns true if and only if the test fatally failed.
-       69: 2387:bool TestResult::HasFatalFailure() const {
-       69: 2387-block  0
-       69: 2388:  return CountIf(test_part_results_, TestPartFatallyFailed) > 0;
-       69: 2388-block  0
+       71: 2387:bool TestResult::HasFatalFailure() const {
+       71: 2387-block  0
+       71: 2388:  return CountIf(test_part_results_, TestPartFatallyFailed) > 0;
+       71: 2388-block  0
         -: 2389:}
         -: 2390:
         -: 2391:// Returns true if and only if the test part non-fatally failed.
@@ -4196,10 +4196,10 @@
         -: 2400:
         -: 2401:// Gets the number of all test parts.  This is the sum of the number
         -: 2402:// of successful test parts and the number of failed test parts.
-      351: 2403:int TestResult::total_part_count() const {
-      351: 2403-block  0
-      351: 2404:  return static_cast<int>(test_part_results_.size());
-      351: 2404-block  0
+      363: 2403:int TestResult::total_part_count() const {
+      363: 2403-block  0
+      363: 2404:  return static_cast<int>(test_part_results_.size());
+      363: 2404-block  0
         -: 2405:}
         -: 2406:
         -: 2407:// Returns the number of the test properties.
@@ -4214,37 +4214,37 @@
         -: 2414:// Creates a Test object.
         -: 2415:
         -: 2416:// The c'tor saves the states of all flags.
-       34: 2417:Test::Test()
-       34: 2417-block  0
-       34: 2418:    : gtest_flag_saver_(new GTEST_FLAG_SAVER_) {
-       34: 2418-block  0
-       34: 2418-block  1
+       35: 2417:Test::Test()
+       35: 2417-block  0
+       35: 2418:    : gtest_flag_saver_(new GTEST_FLAG_SAVER_) {
+       35: 2418-block  0
+       35: 2418-block  1
     %%%%%: 2418-block  2
-       34: 2419:}
+       35: 2419:}
         -: 2420:
         -: 2421:// The d'tor restores the states of all flags.  The actual work is
         -: 2422:// done by the d'tor of the gtest_flag_saver_ field, and thus not
         -: 2423:// visible here.
-       68: 2424:Test::~Test() {
+       70: 2424:Test::~Test() {
     $$$$$: 2424-block  0
-       34: 2424-block  1
-       34: 2424-block  2
+       35: 2424-block  1
+       35: 2424-block  2
     #####: 2425:}
     $$$$$: 2425-block  0
         -: 2426:
         -: 2427:// Sets up the test fixture.
         -: 2428://
         -: 2429:// A sub-class may override this.
-        6: 2430:void Test::SetUp() {
-        6: 2430-block  0
-        6: 2431:}
+        7: 2430:void Test::SetUp() {
+        7: 2430-block  0
+        7: 2431:}
         -: 2432:
         -: 2433:// Tears down the test fixture.
         -: 2434://
         -: 2435:// A sub-class may override this.
-       34: 2436:void Test::TearDown() {
-       34: 2436-block  0
-       34: 2437:}
+       35: 2436:void Test::TearDown() {
+       35: 2436-block  0
+       35: 2437:}
         -: 2438:
         -: 2439:// Allows user supplied key value pairs to be recorded for later output.
     #####: 2440:void Test::RecordProperty(const std::string& key, const std::string& value) {
@@ -4302,24 +4302,24 @@
         -: 2469:// same fixture class as the first test in the current test suite.  If
         -: 2470:// yes, it returns true; otherwise it generates a Google Test failure and
         -: 2471:// returns false.
-       34: 2472:bool Test::HasSameFixtureClass() {
-       34: 2472-block  0
-       34: 2473:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
-       34: 2473-block  0
-       34: 2474:  const TestSuite* const test_suite = impl->current_test_suite();
-       34: 2474-block  0
+       35: 2472:bool Test::HasSameFixtureClass() {
+       35: 2472-block  0
+       35: 2473:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
+       35: 2473-block  0
+       35: 2474:  const TestSuite* const test_suite = impl->current_test_suite();
+       35: 2474-block  0
         -: 2475:
         -: 2476:  // Info about the first test in the current test suite.
-       34: 2477:  const TestInfo* const first_test_info = test_suite->test_info_list()[0];
-       34: 2478:  const internal::TypeId first_fixture_id = first_test_info->fixture_class_id_;
-       34: 2479:  const char* const first_test_name = first_test_info->name();
+       35: 2477:  const TestInfo* const first_test_info = test_suite->test_info_list()[0];
+       35: 2478:  const internal::TypeId first_fixture_id = first_test_info->fixture_class_id_;
+       35: 2479:  const char* const first_test_name = first_test_info->name();
         -: 2480:
         -: 2481:  // Info about the current test.
-       34: 2482:  const TestInfo* const this_test_info = impl->current_test_info();
-       34: 2483:  const internal::TypeId this_fixture_id = this_test_info->fixture_class_id_;
-       34: 2484:  const char* const this_test_name = this_test_info->name();
+       35: 2482:  const TestInfo* const this_test_info = impl->current_test_info();
+       35: 2483:  const internal::TypeId this_fixture_id = this_test_info->fixture_class_id_;
+       35: 2484:  const char* const this_test_name = this_test_info->name();
         -: 2485:
-       34: 2486:  if (this_fixture_id != first_fixture_id) {
+       35: 2486:  if (this_fixture_id != first_fixture_id) {
         -: 2487:    // Is the first test defined using TEST?
     #####: 2488:    const bool first_is_TEST = first_fixture_id == internal::GetTestTypeId();
     $$$$$: 2488-block  0
@@ -4419,10 +4419,10 @@
     $$$$$: 2527-block  0
         -: 2528:  }
         -: 2529:
-       34: 2530:  return true;
-       34: 2530-block  0
-       34: 2530-block  1
-       34: 2530-block  2
+       35: 2530:  return true;
+       35: 2530-block  0
+       35: 2530-block  1
+       35: 2530-block  2
         -: 2531:}
         -: 2532:
         -: 2533:#if GTEST_HAS_SEH
@@ -4498,11 +4498,11 @@
         -: 2583:// exceptions in the same function.  Therefore, we provide a separate
         -: 2584:// wrapper function for handling SEH exceptions.)
         -: 2585:template <class T, typename Result>
-      179: 2586:Result HandleSehExceptionsInMethodIfSupported(
+      186: 2586:Result HandleSehExceptionsInMethodIfSupported(
         1: 2586-block  0
-        8: 2586-block  1
-       34: 2586-block  2
-      136: 2586-block  3
+       10: 2586-block  1
+       35: 2586-block  2
+      140: 2586-block  3
         -: 2587:    T* object, Result (T::*method)(), const char* location) {
         -: 2588:#if GTEST_HAS_SEH
         -: 2589:  __try {
@@ -4521,23 +4521,23 @@
         -: 2602:  }
         -: 2603:#else
         -: 2604:  (void)location;
-      179: 2605:  return (object->*method)();
+      186: 2605:  return (object->*method)();
         1: 2605-block  0
     $$$$$: 2605-block  1
         1: 2605-block  2
         1: 2605-block  3
-        8: 2605-block  4
+       10: 2605-block  4
     $$$$$: 2605-block  5
-        8: 2605-block  6
-        8: 2605-block  7
-       34: 2605-block  8
-       34: 2605-block  9
+       10: 2605-block  6
+       10: 2605-block  7
+       35: 2605-block  8
+       35: 2605-block  9
     $$$$$: 2605-block 10
-       34: 2605-block 11
-      136: 2605-block 12
-      102: 2605-block 13
-       34: 2605-block 14
-      136: 2605-block 15
+       35: 2605-block 11
+      140: 2605-block 12
+      105: 2605-block 13
+       35: 2605-block 14
+      140: 2605-block 15
         -: 2606:#endif  // GTEST_HAS_SEH
         -: 2607:}
         -: 2608:
@@ -4545,11 +4545,11 @@
         -: 2610:// exceptions, if they are supported; returns the 0-value for type
         -: 2611:// Result in case of an SEH exception.
         -: 2612:template <class T, typename Result>
-      179: 2613:Result HandleExceptionsInMethodIfSupported(
+      186: 2613:Result HandleExceptionsInMethodIfSupported(
         1: 2613-block  0
-        8: 2613-block  1
-       34: 2613-block  2
-      136: 2613-block  3
+       10: 2613-block  1
+       35: 2613-block  2
+      140: 2613-block  3
         -: 2614:    T* object, Result (T::*method)(), const char* location) {
         -: 2615:  // NOTE: The user code can affect the way in which Google Test handles
         -: 2616:  // exceptions by setting GTEST_FLAG(catch_exceptions), but only before
@@ -4574,22 +4574,22 @@
         -: 2635:  // throw statement in the code under test.  For this reason, we perform
         -: 2636:  // the check early, sacrificing the ability to affect Google Test's
         -: 2637:  // exception handling in the method where the exception is thrown.
-      179: 2638:  if (internal::GetUnitTestImpl()->catch_exceptions()) {
+      186: 2638:  if (internal::GetUnitTestImpl()->catch_exceptions()) {
         1: 2638-block  0
-        8: 2638-block  1
-       34: 2638-block  2
-      136: 2638-block  3
+       10: 2638-block  1
+       35: 2638-block  2
+      140: 2638-block  3
         -: 2639:#if GTEST_HAS_EXCEPTIONS
         -: 2640:    try {
-      179: 2641:      return HandleSehExceptionsInMethodIfSupported(object, method, location);
+      186: 2641:      return HandleSehExceptionsInMethodIfSupported(object, method, location);
         1: 2641-block  0
         1: 2641-block  1
-        8: 2641-block  2
-        8: 2641-block  3
-       34: 2641-block  4
-       34: 2641-block  5
-      136: 2641-block  6
-      136: 2641-block  7
+       10: 2641-block  2
+       10: 2641-block  3
+       35: 2641-block  4
+       35: 2641-block  5
+      140: 2641-block  6
+      140: 2641-block  7
     =====: 2642:    } catch (const AssertionException&) {  // NOLINT
     %%%%%: 2642-block  0
     %%%%%: 2642-block  1
@@ -4675,7 +4675,7 @@
         -: 2660:    return HandleSehExceptionsInMethodIfSupported(object, method, location);
         -: 2661:#endif  // GTEST_HAS_EXCEPTIONS
         -: 2662:  } else {
-      179: 2663:    return (object->*method)();
+      186: 2663:    return (object->*method)();
     $$$$$: 2663-block  0
     $$$$$: 2663-block  1
     $$$$$: 2663-block  2
@@ -4686,19 +4686,19 @@
     $$$$$: 2663-block  7
     $$$$$: 2663-block  8
     $$$$$: 2663-block  9
-        8: 2663-block 10
+       10: 2663-block 10
     %%%%%: 2663-block 11
     $$$$$: 2663-block 12
     $$$$$: 2663-block 13
     $$$$$: 2663-block 14
     $$$$$: 2663-block 15
-       34: 2663-block 16
+       35: 2663-block 16
     %%%%%: 2663-block 17
     $$$$$: 2663-block 18
     $$$$$: 2663-block 19
     $$$$$: 2663-block 20
     $$$$$: 2663-block 21
-      136: 2663-block 22
+      140: 2663-block 22
     %%%%%: 2663-block 23
         -: 2664:  }
         -: 2665:}
@@ -4706,43 +4706,43 @@
         -: 2667:}  // namespace internal
         -: 2668:
         -: 2669:// Runs the test and updates the test result.
-       34: 2670:void Test::Run() {
-       34: 2670-block  0
-       34: 2671:  if (!HasSameFixtureClass()) return;
-       34: 2671-block  0
+       35: 2670:void Test::Run() {
+       35: 2670-block  0
+       35: 2671:  if (!HasSameFixtureClass()) return;
+       35: 2671-block  0
     $$$$$: 2671-block  1
         -: 2672:
-       34: 2673:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
-       34: 2673-block  0
-       34: 2674:  impl->os_stack_trace_getter()->UponLeavingGTest();
-       34: 2675:  internal::HandleExceptionsInMethodIfSupported(this, &Test::SetUp, "SetUp()");
+       35: 2673:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
+       35: 2673-block  0
+       35: 2674:  impl->os_stack_trace_getter()->UponLeavingGTest();
+       35: 2675:  internal::HandleExceptionsInMethodIfSupported(this, &Test::SetUp, "SetUp()");
         -: 2676:  // We will run the test only if SetUp() was successful and didn't call
         -: 2677:  // GTEST_SKIP().
-       34: 2678:  if (!HasFatalFailure() && !IsSkipped()) {
-       34: 2678-block  0
-       34: 2678-block  1
+       35: 2678:  if (!HasFatalFailure() && !IsSkipped()) {
+       35: 2678-block  0
+       35: 2678-block  1
     $$$$$: 2678-block  2
-       34: 2678-block  3
-       34: 2679:    impl->os_stack_trace_getter()->UponLeavingGTest();
-       34: 2679-block  0
-       34: 2680:    internal::HandleExceptionsInMethodIfSupported(
+       35: 2678-block  3
+       35: 2679:    impl->os_stack_trace_getter()->UponLeavingGTest();
+       35: 2679-block  0
+       35: 2680:    internal::HandleExceptionsInMethodIfSupported(
         -: 2681:        this, &Test::TestBody, "the test body");
         -: 2682:  }
         -: 2683:
         -: 2684:  // However, we want to clean up as much as possible.  Hence we will
         -: 2685:  // always call TearDown(), even if SetUp() or the test body has
         -: 2686:  // failed.
-       34: 2687:  impl->os_stack_trace_getter()->UponLeavingGTest();
-       34: 2687-block  0
-       34: 2688:  internal::HandleExceptionsInMethodIfSupported(
+       35: 2687:  impl->os_stack_trace_getter()->UponLeavingGTest();
+       35: 2687-block  0
+       35: 2688:  internal::HandleExceptionsInMethodIfSupported(
         -: 2689:      this, &Test::TearDown, "TearDown()");
         -: 2690:}
         -: 2691:
         -: 2692:// Returns true if and only if the current test has a fatal failure.
-       69: 2693:bool Test::HasFatalFailure() {
-       69: 2693-block  0
-       69: 2694:  return internal::GetUnitTestImpl()->current_test_result()->HasFatalFailure();
-       69: 2694-block  0
+       71: 2693:bool Test::HasFatalFailure() {
+       71: 2693-block  0
+       71: 2694:  return internal::GetUnitTestImpl()->current_test_result()->HasFatalFailure();
+       71: 2694-block  0
         -: 2695:}
         -: 2696:
         -: 2697:// Returns true if and only if the current test has a non-fatal failure.
@@ -4754,23 +4754,23 @@
         -: 2701:}
         -: 2702:
         -: 2703:// Returns true if and only if the current test was skipped.
-       69: 2704:bool Test::IsSkipped() {
-       69: 2704-block  0
-       69: 2705:  return internal::GetUnitTestImpl()->current_test_result()->Skipped();
-       69: 2705-block  0
+       71: 2704:bool Test::IsSkipped() {
+       71: 2704-block  0
+       71: 2705:  return internal::GetUnitTestImpl()->current_test_result()->Skipped();
+       71: 2705-block  0
         -: 2706:}
         -: 2707:
         -: 2708:// class TestInfo
         -: 2709:
         -: 2710:// Constructs a TestInfo object. It assumes ownership of the test factory
         -: 2711:// object.
-       34: 2712:TestInfo::TestInfo(const std::string& a_test_suite_name,
-       34: 2712-block  0
+       35: 2712:TestInfo::TestInfo(const std::string& a_test_suite_name,
+       35: 2712-block  0
         -: 2713:                   const std::string& a_name, const char* a_type_param,
         -: 2714:                   const char* a_value_param,
         -: 2715:                   internal::CodeLocation a_code_location,
         -: 2716:                   internal::TypeId fixture_class_id,
-       34: 2717:                   internal::TestFactoryBase* factory)
+       35: 2717:                   internal::TestFactoryBase* factory)
         -: 2718:    : test_suite_name_(a_test_suite_name),
         -: 2719:      name_(a_name),
     #####: 2720:      type_param_(a_type_param ? new std::string(a_type_param) : nullptr),
@@ -4785,23 +4785,23 @@
         -: 2725:      is_disabled_(false),
         -: 2726:      matches_filter_(false),
         -: 2727:      factory_(factory),
-       34: 2728:      result_() {}
-       34: 2728-block  0
-       34: 2728-block  1
+       35: 2728:      result_() {}
+       35: 2728-block  0
+       35: 2728-block  1
     $$$$$: 2728-block  2
     $$$$$: 2728-block  3
-       34: 2728-block  4
-       34: 2728-block  5
+       35: 2728-block  4
+       35: 2728-block  5
     $$$$$: 2728-block  6
-       34: 2728-block  7
+       35: 2728-block  7
     $$$$$: 2728-block  8
     $$$$$: 2728-block  9
-       34: 2728-block 10
-       34: 2728-block 11
+       35: 2728-block 10
+       35: 2728-block 11
     $$$$$: 2728-block 12
-       34: 2728-block 13
-       34: 2728-block 14
-       34: 2728-block 15
+       35: 2728-block 13
+       35: 2728-block 14
+       35: 2728-block 15
     %%%%%: 2728-block 16
     %%%%%: 2728-block 17
     %%%%%: 2728-block 18
@@ -4817,11 +4817,11 @@
     %%%%%: 2728-block 28
         -: 2729:
         -: 2730:// Destructs a TestInfo object.
-       68: 2731:TestInfo::~TestInfo() { delete factory_; }
-       34: 2731-block  0
-       34: 2731-block  1
-       34: 2731-block  2
-       34: 2731-block  3
+       70: 2731:TestInfo::~TestInfo() { delete factory_; }
+       35: 2731-block  0
+       35: 2731-block  1
+       35: 2731-block  2
+       35: 2731-block  3
         -: 2732:
         -: 2733:namespace internal {
         -: 2734:
@@ -4843,21 +4843,21 @@
         -: 2750://   factory:          pointer to the factory that creates a test object.
         -: 2751://                     The newly created TestInfo instance will assume
         -: 2752://                     ownership of the factory object.
-       34: 2753:TestInfo* MakeAndRegisterTestInfo(
-       34: 2753-block  0
+       35: 2753:TestInfo* MakeAndRegisterTestInfo(
+       35: 2753-block  0
         -: 2754:    const char* test_suite_name, const char* name, const char* type_param,
         -: 2755:    const char* value_param, CodeLocation code_location,
         -: 2756:    TypeId fixture_class_id, SetUpTestSuiteFunc set_up_tc,
         -: 2757:    TearDownTestSuiteFunc tear_down_tc, TestFactoryBase* factory) {
         -: 2758:  TestInfo* const test_info =
         -: 2759:      new TestInfo(test_suite_name, name, type_param, value_param,
-       34: 2760:                   code_location, fixture_class_id, factory);
-       34: 2760-block  0
-       34: 2760-block  1
-       34: 2760-block  2
-       34: 2760-block  3
-       34: 2760-block  4
-       34: 2760-block  5
+       35: 2760:                   code_location, fixture_class_id, factory);
+       35: 2760-block  0
+       35: 2760-block  1
+       35: 2760-block  2
+       35: 2760-block  3
+       35: 2760-block  4
+       35: 2760-block  5
     %%%%%: 2760-block  6
     %%%%%: 2760-block  7
     %%%%%: 2760-block  8
@@ -4868,9 +4868,9 @@
     %%%%%: 2760-block 13
     %%%%%: 2760-block 14
     %%%%%: 2760-block 15
-       34: 2761:  GetUnitTestImpl()->AddTestInfo(set_up_tc, tear_down_tc, test_info);
-       34: 2762:  return test_info;
-       34: 2762-block  0
+       35: 2761:  GetUnitTestImpl()->AddTestInfo(set_up_tc, tear_down_tc, test_info);
+       35: 2762:  return test_info;
+       35: 2762-block  0
         -: 2763:}
         -: 2764:
     #####: 2765:void ReportInvalidTestSuiteType(const char* test_suite_name,
@@ -4969,64 +4969,64 @@
         -: 2827:
         -: 2828:// Creates the test object, runs it, records its result, and then
         -: 2829:// deletes it.
-       34: 2830:void TestInfo::Run() {
-       34: 2830-block  0
-       34: 2831:  if (!should_run_) return;
-       34: 2831-block  0
+       35: 2830:void TestInfo::Run() {
+       35: 2830-block  0
+       35: 2831:  if (!should_run_) return;
+       35: 2831-block  0
     $$$$$: 2831-block  1
         -: 2832:
         -: 2833:  // Tells UnitTest where to store test result.
-       34: 2834:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
-       34: 2834-block  0
-       34: 2835:  impl->set_current_test_info(this);
+       35: 2834:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
+       35: 2834-block  0
+       35: 2835:  impl->set_current_test_info(this);
         -: 2836:
-       34: 2837:  TestEventListener* repeater = UnitTest::GetInstance()->listeners().repeater();
+       35: 2837:  TestEventListener* repeater = UnitTest::GetInstance()->listeners().repeater();
         -: 2838:
         -: 2839:  // Notifies the unit test event listeners that a test is about to start.
-       34: 2840:  repeater->OnTestStart(*this);
+       35: 2840:  repeater->OnTestStart(*this);
         -: 2841:
-       34: 2842:  const TimeInMillis start = internal::GetTimeInMillis();
+       35: 2842:  const TimeInMillis start = internal::GetTimeInMillis();
         -: 2843:
-       34: 2844:  impl->os_stack_trace_getter()->UponLeavingGTest();
+       35: 2844:  impl->os_stack_trace_getter()->UponLeavingGTest();
         -: 2845:
         -: 2846:  // Creates the test object.
-       34: 2847:  Test* const test = internal::HandleExceptionsInMethodIfSupported(
-       34: 2848:      factory_, &internal::TestFactoryBase::CreateTest,
-       34: 2849:      "the test fixture's constructor");
+       35: 2847:  Test* const test = internal::HandleExceptionsInMethodIfSupported(
+       35: 2848:      factory_, &internal::TestFactoryBase::CreateTest,
+       35: 2849:      "the test fixture's constructor");
         -: 2850:
         -: 2851:  // Runs the test if the constructor didn't generate a fatal failure or invoke
         -: 2852:  // GTEST_SKIP().
         -: 2853:  // Note that the object will not be null
-       34: 2854:  if (!Test::HasFatalFailure() && !Test::IsSkipped()) {
-       34: 2854-block  0
-       34: 2854-block  1
+       35: 2854:  if (!Test::HasFatalFailure() && !Test::IsSkipped()) {
+       35: 2854-block  0
+       35: 2854-block  1
     $$$$$: 2854-block  2
-       34: 2854-block  3
+       35: 2854-block  3
         -: 2855:    // This doesn't throw as all user code that can throw are wrapped into
         -: 2856:    // exception handling code.
-       34: 2857:    test->Run();
-       34: 2857-block  0
+       35: 2857:    test->Run();
+       35: 2857-block  0
         -: 2858:  }
         -: 2859:
-       34: 2860:  if (test != nullptr) {
-       34: 2860-block  0
+       35: 2860:  if (test != nullptr) {
+       35: 2860-block  0
         -: 2861:    // Deletes the test object.
-       34: 2862:    impl->os_stack_trace_getter()->UponLeavingGTest();
-       34: 2862-block  0
-       34: 2863:    internal::HandleExceptionsInMethodIfSupported(
+       35: 2862:    impl->os_stack_trace_getter()->UponLeavingGTest();
+       35: 2862-block  0
+       35: 2863:    internal::HandleExceptionsInMethodIfSupported(
         -: 2864:        test, &Test::DeleteSelf_, "the test fixture's destructor");
         -: 2865:  }
         -: 2866:
-       34: 2867:  result_.set_start_timestamp(start);
-       34: 2867-block  0
-       34: 2868:  result_.set_elapsed_time(internal::GetTimeInMillis() - start);
+       35: 2867:  result_.set_start_timestamp(start);
+       35: 2867-block  0
+       35: 2868:  result_.set_elapsed_time(internal::GetTimeInMillis() - start);
         -: 2869:
         -: 2870:  // Notifies the unit test event listener that a test has just finished.
-       34: 2871:  repeater->OnTestEnd(*this);
+       35: 2871:  repeater->OnTestEnd(*this);
         -: 2872:
         -: 2873:  // Tells UnitTest to stop associating assertion results to this
         -: 2874:  // test.
-       34: 2875:  impl->set_current_test_info(nullptr);
+       35: 2875:  impl->set_current_test_info(nullptr);
         -: 2876:}
         -: 2877:
         -: 2878:// Skip and records a skipped test result for this object.
@@ -5067,31 +5067,31 @@
         -: 2900:// class TestSuite
         -: 2901:
         -: 2902:// Gets the number of successful tests in this test suite.
-        4: 2903:int TestSuite::successful_test_count() const {
-        4: 2903-block  0
-        4: 2904:  return CountIf(test_info_list_, TestPassed);
-        4: 2904-block  0
+        5: 2903:int TestSuite::successful_test_count() const {
+        5: 2903-block  0
+        5: 2904:  return CountIf(test_info_list_, TestPassed);
+        5: 2904-block  0
         -: 2905:}
         -: 2906:
         -: 2907:// Gets the number of successful tests in this test suite.
-        4: 2908:int TestSuite::skipped_test_count() const {
-        4: 2908-block  0
-        4: 2909:  return CountIf(test_info_list_, TestSkipped);
-        4: 2909-block  0
+        5: 2908:int TestSuite::skipped_test_count() const {
+        5: 2908-block  0
+        5: 2909:  return CountIf(test_info_list_, TestSkipped);
+        5: 2909-block  0
         -: 2910:}
         -: 2911:
         -: 2912:// Gets the number of failed tests in this test suite.
-        8: 2913:int TestSuite::failed_test_count() const {
-        8: 2913-block  0
-        8: 2914:  return CountIf(test_info_list_, TestFailed);
-        8: 2914-block  0
+       10: 2913:int TestSuite::failed_test_count() const {
+       10: 2913-block  0
+       10: 2914:  return CountIf(test_info_list_, TestFailed);
+       10: 2914-block  0
         -: 2915:}
         -: 2916:
         -: 2917:// Gets the number of disabled tests that will be reported in the XML report.
-        4: 2918:int TestSuite::reportable_disabled_test_count() const {
-        4: 2918-block  0
-        4: 2919:  return CountIf(test_info_list_, TestReportableDisabled);
-        4: 2919-block  0
+        5: 2918:int TestSuite::reportable_disabled_test_count() const {
+        5: 2918-block  0
+        5: 2919:  return CountIf(test_info_list_, TestReportableDisabled);
+        5: 2919-block  0
         -: 2920:}
         -: 2921:
         -: 2922:// Gets the number of disabled tests in this test suite.
@@ -5109,17 +5109,17 @@
         -: 2930:}
         -: 2931:
         -: 2932:// Get the number of tests in this test suite that should run.
-       16: 2933:int TestSuite::test_to_run_count() const {
-       16: 2933-block  0
-       16: 2934:  return CountIf(test_info_list_, ShouldRunTest);
-       16: 2934-block  0
+       20: 2933:int TestSuite::test_to_run_count() const {
+       20: 2933-block  0
+       20: 2934:  return CountIf(test_info_list_, ShouldRunTest);
+       20: 2934-block  0
         -: 2935:}
         -: 2936:
         -: 2937:// Gets the number of all tests.
-       38: 2938:int TestSuite::total_test_count() const {
-       38: 2938-block  0
-       38: 2939:  return static_cast<int>(test_info_list_.size());
-       38: 2939-block  0
+       40: 2938:int TestSuite::total_test_count() const {
+       40: 2938-block  0
+       40: 2939:  return static_cast<int>(test_info_list_.size());
+       40: 2939-block  0
         -: 2940:}
         -: 2941:
         -: 2942:// Creates a TestSuite with the given name.
@@ -5131,10 +5131,10 @@
         -: 2948://                 this is not a typed or a type-parameterized test suite.
         -: 2949://   set_up_tc:    pointer to the function that sets up the test suite
         -: 2950://   tear_down_tc: pointer to the function that tears down the test suite
-        4: 2951:TestSuite::TestSuite(const char* a_name, const char* a_type_param,
-        4: 2951-block  0
+        5: 2951:TestSuite::TestSuite(const char* a_name, const char* a_type_param,
+        5: 2951-block  0
         -: 2952:                     internal::SetUpTestSuiteFunc set_up_tc,
-        4: 2953:                     internal::TearDownTestSuiteFunc tear_down_tc)
+        5: 2953:                     internal::TearDownTestSuiteFunc tear_down_tc)
         -: 2954:    : name_(a_name),
     #####: 2955:      type_param_(a_type_param ? new std::string(a_type_param) : nullptr),
     $$$$$: 2955-block  0
@@ -5143,16 +5143,16 @@
         -: 2957:      tear_down_tc_(tear_down_tc),
         -: 2958:      should_run_(false),
         -: 2959:      start_timestamp_(0),
-        4: 2960:      elapsed_time_(0) {}
-        4: 2960-block  0
-        4: 2960-block  1
+        5: 2960:      elapsed_time_(0) {}
+        5: 2960-block  0
+        5: 2960-block  1
     $$$$$: 2960-block  2
     $$$$$: 2960-block  3
-        4: 2960-block  4
-        4: 2960-block  5
+        5: 2960-block  4
+        5: 2960-block  5
     $$$$$: 2960-block  6
-        4: 2960-block  7
-        4: 2960-block  8
+        5: 2960-block  7
+        5: 2960-block  8
     %%%%%: 2960-block  9
     %%%%%: 2960-block 10
     %%%%%: 2960-block 11
@@ -5165,14 +5165,14 @@
     %%%%%: 2960-block 18
         -: 2961:
         -: 2962:// Destructor of TestSuite.
-       12: 2963:TestSuite::~TestSuite() {
-        4: 2963-block  0
-        4: 2963-block  1
+       15: 2963:TestSuite::~TestSuite() {
+        5: 2963-block  0
+        5: 2963-block  1
         -: 2964:  // Deletes every Test in the collection.
-        4: 2965:  ForEach(test_info_list_, internal::Delete<TestInfo>);
-        4: 2965-block  0
-        4: 2966:}
-        4: 2966-block  0
+        5: 2965:  ForEach(test_info_list_, internal::Delete<TestInfo>);
+        5: 2965-block  0
+        5: 2966:}
+        5: 2966-block  0
         -: 2967:
         -: 2968:// Returns the i-th test among all the tests. i can range from 0 to
         -: 2969:// total_test_count() - 1. If i is not in that range, returns NULL.
@@ -5188,61 +5188,61 @@
         -: 2974:
         -: 2975:// Returns the i-th test among all the tests. i can range from 0 to
         -: 2976:// total_test_count() - 1. If i is not in that range, returns NULL.
-       34: 2977:TestInfo* TestSuite::GetMutableTestInfo(int i) {
-       34: 2977-block  0
-       34: 2978:  const int index = GetElementOr(test_indices_, i, -1);
-       34: 2978-block  0
-       34: 2979:  return index < 0 ? nullptr : test_info_list_[static_cast<size_t>(index)];
-       34: 2979-block  0
+       35: 2977:TestInfo* TestSuite::GetMutableTestInfo(int i) {
+       35: 2977-block  0
+       35: 2978:  const int index = GetElementOr(test_indices_, i, -1);
+       35: 2978-block  0
+       35: 2979:  return index < 0 ? nullptr : test_info_list_[static_cast<size_t>(index)];
+       35: 2979-block  0
     $$$$$: 2979-block  1
-       34: 2979-block  2
+       35: 2979-block  2
         -: 2980:}
         -: 2981:
         -: 2982:// Adds a test to this test suite.  Will delete the test upon
         -: 2983:// destruction of the TestSuite object.
-       34: 2984:void TestSuite::AddTestInfo(TestInfo* test_info) {
-       34: 2984-block  0
-       34: 2985:  test_info_list_.push_back(test_info);
-       34: 2985-block  0
-       34: 2986:  test_indices_.push_back(static_cast<int>(test_indices_.size()));
-       34: 2987:}
-       34: 2987-block  0
+       35: 2984:void TestSuite::AddTestInfo(TestInfo* test_info) {
+       35: 2984-block  0
+       35: 2985:  test_info_list_.push_back(test_info);
+       35: 2985-block  0
+       35: 2986:  test_indices_.push_back(static_cast<int>(test_indices_.size()));
+       35: 2987:}
+       35: 2987-block  0
         -: 2988:
         -: 2989:// Runs every test in this TestSuite.
-        4: 2990:void TestSuite::Run() {
-        4: 2990-block  0
-        4: 2991:  if (!should_run_) return;
-        4: 2991-block  0
+        5: 2990:void TestSuite::Run() {
+        5: 2990-block  0
+        5: 2991:  if (!should_run_) return;
+        5: 2991-block  0
     $$$$$: 2991-block  1
         -: 2992:
-        4: 2993:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
-        4: 2993-block  0
-        4: 2994:  impl->set_current_test_suite(this);
+        5: 2993:  internal::UnitTestImpl* const impl = internal::GetUnitTestImpl();
+        5: 2993-block  0
+        5: 2994:  impl->set_current_test_suite(this);
         -: 2995:
-        4: 2996:  TestEventListener* repeater = UnitTest::GetInstance()->listeners().repeater();
+        5: 2996:  TestEventListener* repeater = UnitTest::GetInstance()->listeners().repeater();
         -: 2997:
         -: 2998:  // Call both legacy and the new API
-        4: 2999:  repeater->OnTestSuiteStart(*this);
+        5: 2999:  repeater->OnTestSuiteStart(*this);
         -: 3000://  Legacy API is deprecated but still available
         -: 3001:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-        4: 3002:  repeater->OnTestCaseStart(*this);
+        5: 3002:  repeater->OnTestCaseStart(*this);
         -: 3003:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
         -: 3004:
-        4: 3005:  impl->os_stack_trace_getter()->UponLeavingGTest();
-        4: 3006:  internal::HandleExceptionsInMethodIfSupported(
+        5: 3005:  impl->os_stack_trace_getter()->UponLeavingGTest();
+        5: 3006:  internal::HandleExceptionsInMethodIfSupported(
         -: 3007:      this, &TestSuite::RunSetUpTestSuite, "SetUpTestSuite()");
         -: 3008:
-        4: 3009:  start_timestamp_ = internal::GetTimeInMillis();
-       38: 3010:  for (int i = 0; i < total_test_count(); i++) {
-       38: 3010-block  0
-       34: 3010-block  1
-       34: 3011:    GetMutableTestInfo(i)->Run();
-       34: 3011-block  0
-       34: 3012:    if (GTEST_FLAG(fail_fast) && GetMutableTestInfo(i)->result()->Failed()) {
+        5: 3009:  start_timestamp_ = internal::GetTimeInMillis();
+       40: 3010:  for (int i = 0; i < total_test_count(); i++) {
+       40: 3010-block  0
+       35: 3010-block  1
+       35: 3011:    GetMutableTestInfo(i)->Run();
+       35: 3011-block  0
+       35: 3012:    if (GTEST_FLAG(fail_fast) && GetMutableTestInfo(i)->result()->Failed()) {
     $$$$$: 3012-block  0
     $$$$$: 3012-block  1
-       34: 3012-block  2
-       34: 3012-block  3
+       35: 3012-block  2
+       35: 3012-block  3
     #####: 3013:      for (int j = i + 1; j < total_test_count(); j++) {
     $$$$$: 3013-block  0
     $$$$$: 3013-block  1
@@ -5253,21 +5253,21 @@
     $$$$$: 3016-block  0
         -: 3017:    }
         -: 3018:  }
-        4: 3019:  elapsed_time_ = internal::GetTimeInMillis() - start_timestamp_;
-        4: 3019-block  0
+        5: 3019:  elapsed_time_ = internal::GetTimeInMillis() - start_timestamp_;
+        5: 3019-block  0
         -: 3020:
-        4: 3021:  impl->os_stack_trace_getter()->UponLeavingGTest();
-        4: 3022:  internal::HandleExceptionsInMethodIfSupported(
+        5: 3021:  impl->os_stack_trace_getter()->UponLeavingGTest();
+        5: 3022:  internal::HandleExceptionsInMethodIfSupported(
         -: 3023:      this, &TestSuite::RunTearDownTestSuite, "TearDownTestSuite()");
         -: 3024:
         -: 3025:  // Call both legacy and the new API
-        4: 3026:  repeater->OnTestSuiteEnd(*this);
+        5: 3026:  repeater->OnTestSuiteEnd(*this);
         -: 3027://  Legacy API is deprecated but still available
         -: 3028:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-        4: 3029:  repeater->OnTestCaseEnd(*this);
+        5: 3029:  repeater->OnTestCaseEnd(*this);
         -: 3030:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
         -: 3031:
-        4: 3032:  impl->set_current_test_suite(nullptr);
+        5: 3032:  impl->set_current_test_suite(nullptr);
         -: 3033:}
         -: 3034:
         -: 3035:// Skips all tests under this TestSuite.
@@ -5308,12 +5308,12 @@
         -: 3063:}
         -: 3064:
         -: 3065:// Clears the results of all tests in this test suite.
-        4: 3066:void TestSuite::ClearResult() {
-        4: 3066-block  0
-        4: 3067:  ad_hoc_test_result_.Clear();
-        4: 3067-block  0
-        4: 3068:  ForEach(test_info_list_, TestInfo::ClearTestResult);
-        4: 3069:}
+        5: 3066:void TestSuite::ClearResult() {
+        5: 3066-block  0
+        5: 3067:  ad_hoc_test_result_.Clear();
+        5: 3067-block  0
+        5: 3068:  ForEach(test_info_list_, TestInfo::ClearTestResult);
+        5: 3069:}
         -: 3070:
         -: 3071:// Shuffles the tests in this test suite.
     #####: 3072:void TestSuite::ShuffleTests(internal::Random* random) {
@@ -5323,38 +5323,38 @@
     #####: 3074:}
         -: 3075:
         -: 3076:// Restores the test order to before the first shuffle.
-        4: 3077:void TestSuite::UnshuffleTests() {
-        4: 3077-block  0
-       38: 3078:  for (size_t i = 0; i < test_indices_.size(); i++) {
-        4: 3078-block  0
-       38: 3078-block  1
-       34: 3079:    test_indices_[i] = static_cast<int>(i);
-       34: 3079-block  0
+        5: 3077:void TestSuite::UnshuffleTests() {
+        5: 3077-block  0
+       40: 3078:  for (size_t i = 0; i < test_indices_.size(); i++) {
+        5: 3078-block  0
+       40: 3078-block  1
+       35: 3079:    test_indices_[i] = static_cast<int>(i);
+       35: 3079-block  0
         -: 3080:  }
-        4: 3081:}
+        5: 3081:}
         -: 3082:
         -: 3083:// Formats a countable noun.  Depending on its quantity, either the
         -: 3084:// singular form or the plural form is used. e.g.
         -: 3085://
         -: 3086:// FormatCountableNoun(1, "formula", "formuli") returns "1 formula".
         -: 3087:// FormatCountableNoun(5, "book", "books") returns "5 books".
-       13: 3088:static std::string FormatCountableNoun(int count,
-       13: 3088-block  0
+       15: 3088:static std::string FormatCountableNoun(int count,
+       15: 3088-block  0
         -: 3089:                                       const char * singular_form,
         -: 3090:                                       const char * plural_form) {
-       26: 3091:  return internal::StreamableToString(count) + " " +
-       13: 3091-block  0
-       13: 3091-block  1
+       30: 3091:  return internal::StreamableToString(count) + " " +
+       15: 3091-block  0
+       15: 3091-block  1
     %%%%%: 3091-block  2
     %%%%%: 3091-block  3
     %%%%%: 3091-block  4
-       39: 3092:      (count == 1 ? singular_form : plural_form);
-       13: 3092-block  0
-        2: 3092-block  1
+       45: 3092:      (count == 1 ? singular_form : plural_form);
+       15: 3092-block  0
+        4: 3092-block  1
        11: 3092-block  2
-       13: 3092-block  3
-       13: 3092-block  4
-       13: 3092-block  5
+       15: 3092-block  3
+       15: 3092-block  4
+       15: 3092-block  5
         -: 3093:}
         -: 3094:
         -: 3095:// Formats the count of tests.
@@ -5597,34 +5597,34 @@
         -: 3268:// This routine must actually emit the characters rather than return a string
         -: 3269:// that would be colored when printed, as can be done on Linux.
         -: 3270:
-       81: 3271:static void ColoredPrintf(GTestColor color, const char* fmt, ...) {
-       81: 3271-block  0
+       85: 3271:static void ColoredPrintf(GTestColor color, const char* fmt, ...) {
+       85: 3271-block  0
         -: 3272:  va_list args;
-       81: 3273:  va_start(args, fmt);
+       85: 3273:  va_start(args, fmt);
         -: 3274:
         -: 3275:#if GTEST_OS_WINDOWS_MOBILE || GTEST_OS_ZOS || GTEST_OS_IOS || \
         -: 3276:    GTEST_OS_WINDOWS_PHONE || GTEST_OS_WINDOWS_RT || defined(ESP_PLATFORM)
         -: 3277:  const bool use_color = AlwaysFalse();
         -: 3278:#else
         -: 3279:  static const bool in_color_mode =
-       81: 3280:      ShouldUseColor(posix::IsATTY(posix::FileNo(stdout)) != 0);
-       81: 3280-block  0
+       85: 3280:      ShouldUseColor(posix::IsATTY(posix::FileNo(stdout)) != 0);
+       85: 3280-block  0
         1: 3280-block  1
         1: 3280-block  2
-       81: 3281:  const bool use_color = in_color_mode && (color != GTestColor::kDefault);
-       81: 3281-block  0
+       85: 3281:  const bool use_color = in_color_mode && (color != GTestColor::kDefault);
+       85: 3281-block  0
     $$$$$: 3281-block  1
     $$$$$: 3281-block  2
-       81: 3281-block  3
+       85: 3281-block  3
         -: 3282:#endif  // GTEST_OS_WINDOWS_MOBILE || GTEST_OS_ZOS
         -: 3283:
-       81: 3284:  if (!use_color) {
-       81: 3284-block  0
-       81: 3285:    vprintf(fmt, args);
-       81: 3285-block  0
-       81: 3286:    va_end(args);
-       81: 3287:    return;
-       81: 3287-block  0
+       85: 3284:  if (!use_color) {
+       85: 3284-block  0
+       85: 3285:    vprintf(fmt, args);
+       85: 3285-block  0
+       85: 3286:    va_end(args);
+       85: 3287:    return;
+       85: 3287-block  0
         -: 3288:  }
         -: 3289:
         -: 3290:#if GTEST_OS_WINDOWS && !GTEST_OS_WINDOWS_MOBILE && \
@@ -5656,9 +5656,9 @@
     #####: 3314:  printf("\033[m");  // Resets the terminal to default.
     $$$$$: 3314-block  0
         -: 3315:#endif  // GTEST_OS_WINDOWS && !GTEST_OS_WINDOWS_MOBILE
-       81: 3316:  va_end(args);
+       85: 3316:  va_end(args);
     $$$$$: 3316-block  0
-       81: 3316-block  1
+       85: 3316-block  1
         -: 3317:}
         -: 3318:
         -: 3319:// Text printed in Google Test's text output and --gtest_list_tests
@@ -5702,11 +5702,11 @@
         2: 3345:  PrettyUnitTestResultPrinter() {}
         1: 3345-block  0
         1: 3345-block  1
-       68: 3346:  static void PrintTestName(const char* test_suite, const char* test) {
-       68: 3346-block  0
-       68: 3347:    printf("%s.%s", test_suite, test);
-       68: 3347-block  0
-       68: 3348:  }
+       70: 3346:  static void PrintTestName(const char* test_suite, const char* test) {
+       70: 3346-block  0
+       70: 3347:    printf("%s.%s", test_suite, test);
+       70: 3347-block  0
+       70: 3348:  }
         -: 3349:
         -: 3350:  // The following methods override what's in the TestEventListener class.
         1: 3351:  void OnTestProgramStart(const UnitTest& /*unit_test*/) override {}
@@ -5805,30 +5805,30 @@
         1: 3422:}
         -: 3423:
         -: 3424:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-        4: 3425:void PrettyUnitTestResultPrinter::OnTestCaseStart(const TestCase& test_case) {
-        4: 3425-block  0
+        5: 3425:void PrettyUnitTestResultPrinter::OnTestCaseStart(const TestCase& test_case) {
+        5: 3425-block  0
         -: 3426:  const std::string counts =
-        8: 3427:      FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
-        4: 3427-block  0
-        4: 3427-block  1
-        4: 3427-block  2
+       10: 3427:      FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
+        5: 3427-block  0
+        5: 3427-block  1
+        5: 3427-block  2
     %%%%%: 3427-block  3
-        4: 3428:  ColoredPrintf(GTestColor::kGreen, "[----------] ");
-        4: 3428-block  0
-        4: 3429:  printf("%s from %s", counts.c_str(), test_case.name());
-        4: 3429-block  0
-        4: 3430:  if (test_case.type_param() == nullptr) {
-        4: 3430-block  0
-        4: 3431:    printf("\n");
-        4: 3431-block  0
-        4: 3431-block  1
+        5: 3428:  ColoredPrintf(GTestColor::kGreen, "[----------] ");
+        5: 3428-block  0
+        5: 3429:  printf("%s from %s", counts.c_str(), test_case.name());
+        5: 3429-block  0
+        5: 3430:  if (test_case.type_param() == nullptr) {
+        5: 3430-block  0
+        5: 3431:    printf("\n");
+        5: 3431-block  0
+        5: 3431-block  1
         -: 3432:  } else {
     #####: 3433:    printf(", where %s = %s\n", kTypeParamLabel, test_case.type_param());
     $$$$$: 3433-block  0
         -: 3434:  }
-        4: 3435:  fflush(stdout);
-        4: 3435-block  0
-        4: 3436:}
+        5: 3435:  fflush(stdout);
+        5: 3435-block  0
+        5: 3436:}
         -: 3437:#else
         -: 3438:void PrettyUnitTestResultPrinter::OnTestSuiteStart(
         -: 3439:    const TestSuite& test_suite) {
@@ -5845,14 +5845,14 @@
         -: 3450:}
         -: 3451:#endif  // GTEST_REMOVE_LEGACY_TEST_CASEAPI_
         -: 3452:
-       34: 3453:void PrettyUnitTestResultPrinter::OnTestStart(const TestInfo& test_info) {
-       34: 3453-block  0
-       34: 3454:  ColoredPrintf(GTestColor::kGreen, "[ RUN      ] ");
-       34: 3454-block  0
-       34: 3455:  PrintTestName(test_info.test_suite_name(), test_info.name());
-       34: 3456:  printf("\n");
-       34: 3457:  fflush(stdout);
-       34: 3458:}
+       35: 3453:void PrettyUnitTestResultPrinter::OnTestStart(const TestInfo& test_info) {
+       35: 3453-block  0
+       35: 3454:  ColoredPrintf(GTestColor::kGreen, "[ RUN      ] ");
+       35: 3454-block  0
+       35: 3455:  PrintTestName(test_info.test_suite_name(), test_info.name());
+       35: 3456:  printf("\n");
+       35: 3457:  fflush(stdout);
+       35: 3458:}
         -: 3459:
         -: 3460:// Called after an assertion failure.
     #####: 3461:void PrettyUnitTestResultPrinter::OnTestPartResult(
@@ -5873,12 +5873,12 @@
         -: 3472:  }
         -: 3473:}
         -: 3474:
-       34: 3475:void PrettyUnitTestResultPrinter::OnTestEnd(const TestInfo& test_info) {
-       34: 3475-block  0
-       34: 3476:  if (test_info.result()->Passed()) {
-       34: 3476-block  0
-       34: 3477:    ColoredPrintf(GTestColor::kGreen, "[       OK ] ");
-       34: 3477-block  0
+       35: 3475:void PrettyUnitTestResultPrinter::OnTestEnd(const TestInfo& test_info) {
+       35: 3475-block  0
+       35: 3476:  if (test_info.result()->Passed()) {
+       35: 3476-block  0
+       35: 3477:    ColoredPrintf(GTestColor::kGreen, "[       OK ] ");
+       35: 3477-block  0
     #####: 3478:  } else if (test_info.result()->Skipped()) {
     $$$$$: 3478-block  0
     #####: 3479:    ColoredPrintf(GTestColor::kGreen, "[  SKIPPED ] ");
@@ -5887,54 +5887,54 @@
     #####: 3481:    ColoredPrintf(GTestColor::kRed, "[  FAILED  ] ");
     $$$$$: 3481-block  0
         -: 3482:  }
-       34: 3483:  PrintTestName(test_info.test_suite_name(), test_info.name());
-       34: 3483-block  0
-       34: 3484:  if (test_info.result()->Failed())
+       35: 3483:  PrintTestName(test_info.test_suite_name(), test_info.name());
+       35: 3483-block  0
+       35: 3484:  if (test_info.result()->Failed())
     #####: 3485:    PrintFullTestCommentIfPresent(test_info);
     $$$$$: 3485-block  0
         -: 3486:
-       34: 3487:  if (GTEST_FLAG(print_time)) {
-       34: 3487-block  0
-       34: 3488:    printf(" (%s ms)\n", internal::StreamableToString(
-       34: 3488-block  0
-       34: 3488-block  1
+       35: 3487:  if (GTEST_FLAG(print_time)) {
+       35: 3487-block  0
+       35: 3488:    printf(" (%s ms)\n", internal::StreamableToString(
+       35: 3488-block  0
+       35: 3488-block  1
     %%%%%: 3488-block  2
     %%%%%: 3488-block  3
-       68: 3489:           test_info.result()->elapsed_time()).c_str());
-       34: 3489-block  0
+       70: 3489:           test_info.result()->elapsed_time()).c_str());
+       35: 3489-block  0
         -: 3490:  } else {
     #####: 3491:    printf("\n");
     $$$$$: 3491-block  0
         -: 3492:  }
-       34: 3493:  fflush(stdout);
-       34: 3493-block  0
-       34: 3494:}
+       35: 3493:  fflush(stdout);
+       35: 3493-block  0
+       35: 3494:}
         -: 3495:
         -: 3496:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-        4: 3497:void PrettyUnitTestResultPrinter::OnTestCaseEnd(const TestCase& test_case) {
-        4: 3497-block  0
-        4: 3498:  if (!GTEST_FLAG(print_time)) return;
-        4: 3498-block  0
+        5: 3497:void PrettyUnitTestResultPrinter::OnTestCaseEnd(const TestCase& test_case) {
+        5: 3497-block  0
+        5: 3498:  if (!GTEST_FLAG(print_time)) return;
+        5: 3498-block  0
     $$$$$: 3498-block  1
         -: 3499:
         -: 3500:  const std::string counts =
-        8: 3501:      FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
-        4: 3501-block  0
-        4: 3501-block  1
-        4: 3501-block  2
-        4: 3501-block  3
+       10: 3501:      FormatCountableNoun(test_case.test_to_run_count(), "test", "tests");
+        5: 3501-block  0
+        5: 3501-block  1
+        5: 3501-block  2
+        5: 3501-block  3
     %%%%%: 3501-block  4
-        4: 3502:  ColoredPrintf(GTestColor::kGreen, "[----------] ");
-        4: 3502-block  0
-        4: 3503:  printf("%s from %s (%s ms total)\n\n", counts.c_str(), test_case.name(),
-        4: 3503-block  0
-        8: 3504:         internal::StreamableToString(test_case.elapsed_time()).c_str());
-        4: 3504-block  0
-        4: 3504-block  1
+        5: 3502:  ColoredPrintf(GTestColor::kGreen, "[----------] ");
+        5: 3502-block  0
+        5: 3503:  printf("%s from %s (%s ms total)\n\n", counts.c_str(), test_case.name(),
+        5: 3503-block  0
+       10: 3504:         internal::StreamableToString(test_case.elapsed_time()).c_str());
+        5: 3504-block  0
+        5: 3504-block  1
     %%%%%: 3504-block  2
     %%%%%: 3504-block  3
     %%%%%: 3504-block  4
-        4: 3505:  fflush(stdout);
+        5: 3505:  fflush(stdout);
         -: 3506:}
         -: 3507:#else
         -: 3508:void PrettyUnitTestResultPrinter::OnTestSuiteEnd(const TestSuite& test_suite) {
@@ -6457,28 +6457,28 @@
         1: 3831-block  5
         -: 3832://  Legacy API is deprecated but still available
         -: 3833:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-       12: 3834:GTEST_REPEATER_METHOD_(OnTestCaseStart, TestSuite)
-        4: 3834-block  0
-        4: 3834-block  1
-        4: 3834-block  2
-        8: 3834-block  3
-        4: 3834-block  4
-        4: 3834-block  5
+       15: 3834:GTEST_REPEATER_METHOD_(OnTestCaseStart, TestSuite)
+        5: 3834-block  0
+        5: 3834-block  1
+        5: 3834-block  2
+       10: 3834-block  3
+        5: 3834-block  4
+        5: 3834-block  5
         -: 3835:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-       12: 3836:GTEST_REPEATER_METHOD_(OnTestSuiteStart, TestSuite)
-        4: 3836-block  0
-        4: 3836-block  1
-        4: 3836-block  2
-        8: 3836-block  3
-        4: 3836-block  4
-        4: 3836-block  5
-      102: 3837:GTEST_REPEATER_METHOD_(OnTestStart, TestInfo)
-       34: 3837-block  0
-       34: 3837-block  1
-       34: 3837-block  2
-       68: 3837-block  3
-       34: 3837-block  4
-       34: 3837-block  5
+       15: 3836:GTEST_REPEATER_METHOD_(OnTestSuiteStart, TestSuite)
+        5: 3836-block  0
+        5: 3836-block  1
+        5: 3836-block  2
+       10: 3836-block  3
+        5: 3836-block  4
+        5: 3836-block  5
+      105: 3837:GTEST_REPEATER_METHOD_(OnTestStart, TestInfo)
+       35: 3837-block  0
+       35: 3837-block  1
+       35: 3837-block  2
+       70: 3837-block  3
+       35: 3837-block  4
+       35: 3837-block  5
     #####: 3838:GTEST_REPEATER_METHOD_(OnTestPartResult, TestPartResult)
     $$$$$: 3838-block  0
     $$$$$: 3838-block  1
@@ -6507,30 +6507,30 @@
         2: 3841-block  3
         1: 3841-block  4
         1: 3841-block  5
-      102: 3842:GTEST_REVERSE_REPEATER_METHOD_(OnTestEnd, TestInfo)
-       34: 3842-block  0
-       34: 3842-block  1
-       34: 3842-block  2
-       68: 3842-block  3
-       34: 3842-block  4
-       34: 3842-block  5
+      105: 3842:GTEST_REVERSE_REPEATER_METHOD_(OnTestEnd, TestInfo)
+       35: 3842-block  0
+       35: 3842-block  1
+       35: 3842-block  2
+       70: 3842-block  3
+       35: 3842-block  4
+       35: 3842-block  5
         -: 3843://  Legacy API is deprecated but still available
         -: 3844:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-       12: 3845:GTEST_REVERSE_REPEATER_METHOD_(OnTestCaseEnd, TestSuite)
-        4: 3845-block  0
-        4: 3845-block  1
-        4: 3845-block  2
-        8: 3845-block  3
-        4: 3845-block  4
-        4: 3845-block  5
+       15: 3845:GTEST_REVERSE_REPEATER_METHOD_(OnTestCaseEnd, TestSuite)
+        5: 3845-block  0
+        5: 3845-block  1
+        5: 3845-block  2
+       10: 3845-block  3
+        5: 3845-block  4
+        5: 3845-block  5
         -: 3846:#endif  //  GTEST_REMOVE_LEGACY_TEST_CASEAPI_
-       12: 3847:GTEST_REVERSE_REPEATER_METHOD_(OnTestSuiteEnd, TestSuite)
-        4: 3847-block  0
-        4: 3847-block  1
-        4: 3847-block  2
-        8: 3847-block  3
-        4: 3847-block  4
-        4: 3847-block  5
+       15: 3847:GTEST_REVERSE_REPEATER_METHOD_(OnTestSuiteEnd, TestSuite)
+        5: 3847-block  0
+        5: 3847-block  1
+        5: 3847-block  2
+       10: 3847-block  3
+        5: 3847-block  4
+        5: 3847-block  5
         3: 3848:GTEST_REVERSE_REPEATER_METHOD_(OnTestProgramEnd, UnitTest)
         1: 3848-block  0
         1: 3848-block  1
@@ -9068,8 +9068,8 @@
         -: 4855:#endif  // GTEST_HAS_ABSL
         -: 4856:}
         -: 4857:
-      178: 4858:void OsStackTraceGetter::UponLeavingGTest() GTEST_LOCK_EXCLUDED_(mutex_) {
-      178: 4858-block  0
+      185: 4858:void OsStackTraceGetter::UponLeavingGTest() GTEST_LOCK_EXCLUDED_(mutex_) {
+      185: 4858-block  0
         -: 4859:#if GTEST_HAS_ABSL
         -: 4860:  void* caller_frame = nullptr;
         -: 4861:  if (absl::GetStackTrace(&caller_frame, 1, 3) <= 0) {
@@ -9079,7 +9079,7 @@
         -: 4865:  MutexLock lock(&mutex_);
         -: 4866:  caller_frame_ = caller_frame;
         -: 4867:#endif  // GTEST_HAS_ABSL
-      178: 4868:}
+      185: 4868:}
         -: 4869:
         -: 4870:// A helper class that creates the premature-exit file in its
         -: 4871:// constructor and deletes the file in its destructor.
@@ -9183,9 +9183,9 @@
         -: 4936:
         -: 4937:// Returns repeater that broadcasts the TestEventListener events to all
         -: 4938:// subscribers.
-       78: 4939:TestEventListener* TestEventListeners::repeater() { return repeater_; }
-       39: 4939-block  0
-       39: 4939-block  1
+       82: 4939:TestEventListener* TestEventListeners::repeater() { return repeater_; }
+       41: 4939-block  0
+       41: 4939-block  1
         -: 4940:
         -: 4941:// Sets the default_result_printer attribute to the provided listener.
         -: 4942:// The listener is also added to the listener list and previous
@@ -9252,8 +9252,8 @@
         -: 4987:// We don't protect this under mutex_ as a user is not supposed to
         -: 4988:// call this before main() starts, from which point on the return
         -: 4989:// value will never change.
-      498: 4990:UnitTest* UnitTest::GetInstance() {
-      498: 4990-block  0
+      516: 4990:UnitTest* UnitTest::GetInstance() {
+      516: 4990-block  0
         -: 4991:  // CodeGear C++Builder insists on a public destructor for the
         -: 4992:  // default implementation.  Use this implementation to keep good OO
         -: 4993:  // design with private destructor.
@@ -9262,16 +9262,16 @@
         -: 4996:  static UnitTest* const instance = new UnitTest;
         -: 4997:  return instance;
         -: 4998:#else
-      498: 4999:  static UnitTest instance;
-      498: 4999-block  0
+      516: 4999:  static UnitTest instance;
+      516: 4999-block  0
         1: 4999-block  1
         1: 4999-block  2
         1: 4999-block  3
     %%%%%: 4999-block  4
     %%%%%: 4999-block  5
-      498: 5000:  return &instance;
-      498: 5000-block  0
-      498: 5000-block  1
+      516: 5000:  return &instance;
+      516: 5000-block  0
+      516: 5000-block  1
         -: 5001:#endif  // defined(__BORLANDC__)
         -: 5002:}
         -: 5003:
@@ -9440,10 +9440,10 @@
         -: 5118:
         -: 5119:// Returns the list of event listeners that can be used to track events
         -: 5120:// inside Google Test.
-       38: 5121:TestEventListeners& UnitTest::listeners() {
-       38: 5121-block  0
-       38: 5122:  return *impl()->listeners();
-       38: 5122-block  0
+       40: 5121:TestEventListeners& UnitTest::listeners() {
+       40: 5121-block  0
+       40: 5122:  return *impl()->listeners();
+       40: 5122-block  0
         -: 5123:}
         -: 5124:
         -: 5125:// Registers and returns a global test environment.  When a test
@@ -10072,29 +10072,29 @@
         -: 5535:// namespace.
         -: 5536://
         -: 5537:// TestSuiteNameIs is copyable.
-      612: 5538:class TestSuiteNameIs {
-       68: 5538-block  0
-       68: 5538-block  1
-       68: 5538-block  2
-       68: 5538-block  3
-      170: 5538-block  4
-      170: 5538-block  5
+      630: 5538:class TestSuiteNameIs {
+       70: 5538-block  0
+       70: 5538-block  1
+       70: 5538-block  2
+       70: 5538-block  3
+      175: 5538-block  4
+      175: 5538-block  5
         -: 5539: public:
         -: 5540:  // Constructor.
-       68: 5541:  explicit TestSuiteNameIs(const std::string& name) : name_(name) {}
-       34: 5541-block  0
-       34: 5541-block  1
+       70: 5541:  explicit TestSuiteNameIs(const std::string& name) : name_(name) {}
+       35: 5541-block  0
+       35: 5541-block  1
         -: 5542:
         -: 5543:  // Returns true if and only if the name of test_suite matches name_.
-       63: 5544:  bool operator()(const TestSuite* test_suite) const {
-       63: 5544-block  0
-      126: 5545:    return test_suite != nullptr &&
-       63: 5545-block  0
+       67: 5544:  bool operator()(const TestSuite* test_suite) const {
+       67: 5544-block  0
+      134: 5545:    return test_suite != nullptr &&
+       67: 5545-block  0
        30: 5545-block  1
-       33: 5545-block  2
-      126: 5546:           strcmp(test_suite->name(), name_.c_str()) == 0;
-       63: 5546-block  0
-       63: 5546-block  1
+       37: 5545-block  2
+      134: 5546:           strcmp(test_suite->name(), name_.c_str()) == 0;
+       67: 5546-block  0
+       67: 5546-block  1
         -: 5547:  }
         -: 5548:
         -: 5549: private:
@@ -10113,21 +10113,21 @@
         -: 5562://                    this is not a typed or a type-parameterized test suite.
         -: 5563://   set_up_tc:       pointer to the function that sets up the test suite
         -: 5564://   tear_down_tc:    pointer to the function that tears down the test suite
-       34: 5565:TestSuite* UnitTestImpl::GetTestSuite(
-       34: 5565-block  0
+       35: 5565:TestSuite* UnitTestImpl::GetTestSuite(
+       35: 5565-block  0
         -: 5566:    const char* test_suite_name, const char* type_param,
         -: 5567:    internal::SetUpTestSuiteFunc set_up_tc,
         -: 5568:    internal::TearDownTestSuiteFunc tear_down_tc) {
         -: 5569:  // Can we find a TestSuite with the given name?
         -: 5570:  const auto test_suite =
-       34: 5571:      std::find_if(test_suites_.rbegin(), test_suites_.rend(),
-       34: 5571-block  0
+       35: 5571:      std::find_if(test_suites_.rbegin(), test_suites_.rend(),
+       35: 5571-block  0
     %%%%%: 5571-block  1
     %%%%%: 5571-block  2
-       68: 5572:                   TestSuiteNameIs(test_suite_name));
-       34: 5572-block  0
-       34: 5572-block  1
-       34: 5572-block  2
+       70: 5572:                   TestSuiteNameIs(test_suite_name));
+       35: 5572-block  0
+       35: 5572-block  1
+       35: 5572-block  2
     %%%%%: 5572-block  3
     %%%%%: 5572-block  4
     %%%%%: 5572-block  5
@@ -10135,23 +10135,23 @@
     %%%%%: 5572-block  7
     %%%%%: 5572-block  8
         -: 5573:
-       34: 5574:  if (test_suite != test_suites_.rend()) return *test_suite;
-       34: 5574-block  0
+       35: 5574:  if (test_suite != test_suites_.rend()) return *test_suite;
+       35: 5574-block  0
        30: 5574-block  1
     %%%%%: 5574-block  2
         -: 5575:
         -: 5576:  // No.  Let's create one.
         -: 5577:  auto* const new_test_suite =
-        4: 5578:      new TestSuite(test_suite_name, type_param, set_up_tc, tear_down_tc);
-        4: 5578-block  0
-        4: 5578-block  1
+        5: 5578:      new TestSuite(test_suite_name, type_param, set_up_tc, tear_down_tc);
+        5: 5578-block  0
+        5: 5578-block  1
     %%%%%: 5578-block  2
         -: 5579:
         -: 5580:  // Is this a death test suite?
-        4: 5581:  if (internal::UnitTestOptions::MatchesFilter(test_suite_name,
-        4: 5581-block  0
-        4: 5581-block  1
-        4: 5581-block  2
+        5: 5581:  if (internal::UnitTestOptions::MatchesFilter(test_suite_name,
+        5: 5581-block  0
+        5: 5581-block  1
+        5: 5581-block  2
     %%%%%: 5581-block  3
     %%%%%: 5581-block  4
     %%%%%: 5581-block  5
@@ -10171,17 +10171,17 @@
     %%%%%: 5589-block  0
         -: 5590:  } else {
         -: 5591:    // No.  Appends to the end of the list.
-        4: 5592:    test_suites_.push_back(new_test_suite);
-        4: 5592-block  0
+        5: 5592:    test_suites_.push_back(new_test_suite);
+        5: 5592-block  0
         -: 5593:  }
         -: 5594:
-        4: 5595:  test_suite_indices_.push_back(static_cast<int>(test_suite_indices_.size()));
-        4: 5595-block  0
+        5: 5595:  test_suite_indices_.push_back(static_cast<int>(test_suite_indices_.size()));
+        5: 5595-block  0
     %%%%%: 5595-block  1
-       34: 5596:  return new_test_suite;
-        4: 5596-block  0
-       34: 5596-block  1
-       34: 5596-block  2
+       35: 5596:  return new_test_suite;
+        5: 5596-block  0
+       35: 5596-block  1
+       35: 5596-block  2
         -: 5597:}
         -: 5598:
         -: 5599:// Helpers for setting up / tearing down the given environment.  They
@@ -10345,18 +10345,18 @@
     $$$$$: 5718-block  0
         1: 5719:      } else if (!Test::HasFatalFailure()) {
         1: 5719-block  0
-        5: 5720:        for (int test_index = 0; test_index < total_test_suite_count();
+        6: 5720:        for (int test_index = 0; test_index < total_test_suite_count();
         1: 5720-block  0
-        5: 5720-block  1
-        4: 5720-block  2
+        6: 5720-block  1
+        5: 5720-block  2
         1: 5720-block  3
         -: 5721:             test_index++) {
-        4: 5722:          GetMutableSuiteCase(test_index)->Run();
-        4: 5722-block  0
-        4: 5723:          if (GTEST_FLAG(fail_fast) &&
+        5: 5722:          GetMutableSuiteCase(test_index)->Run();
+        5: 5722-block  0
+        5: 5723:          if (GTEST_FLAG(fail_fast) &&
     $$$$$: 5723-block  0
-        4: 5723-block  1
-        4: 5723-block  2
+        5: 5723-block  1
+        5: 5723-block  2
     #####: 5724:              GetMutableSuiteCase(test_index)->Failed()) {
     $$$$$: 5724-block  0
     #####: 5725:            for (int j = test_index + 1; j < total_test_suite_count(); j++) {
@@ -10652,80 +10652,80 @@
         -: 5892:  // this shard.
         1: 5893:  int num_runnable_tests = 0;
         1: 5894:  int num_selected_tests = 0;
-        5: 5895:  for (auto* test_suite : test_suites_) {
+        6: 5895:  for (auto* test_suite : test_suites_) {
         1: 5895-block  0
-        5: 5895-block  1
-        4: 5895-block  2
-        8: 5896:    const std::string& test_suite_name = test_suite->name();
-        4: 5896-block  0
-        4: 5896-block  1
+        6: 5895-block  1
+        5: 5895-block  2
+       10: 5896:    const std::string& test_suite_name = test_suite->name();
+        5: 5896-block  0
+        5: 5896-block  1
     %%%%%: 5896-block  2
     %%%%%: 5896-block  3
     %%%%%: 5896-block  4
     %%%%%: 5896-block  5
     %%%%%: 5896-block  6
-        4: 5897:    test_suite->set_should_run(false);
+        5: 5897:    test_suite->set_should_run(false);
         -: 5898:
-       38: 5899:    for (size_t j = 0; j < test_suite->test_info_list().size(); j++) {
-       38: 5899-block  0
-       34: 5900:      TestInfo* const test_info = test_suite->test_info_list()[j];
-       34: 5900-block  0
-       68: 5901:      const std::string test_name(test_info->name());
-       34: 5901-block  0
+       40: 5899:    for (size_t j = 0; j < test_suite->test_info_list().size(); j++) {
+       40: 5899-block  0
+       35: 5900:      TestInfo* const test_info = test_suite->test_info_list()[j];
+       35: 5900-block  0
+       70: 5901:      const std::string test_name(test_info->name());
+       35: 5901-block  0
     %%%%%: 5901-block  1
     %%%%%: 5901-block  2
     %%%%%: 5901-block  3
         -: 5902:      // A test is disabled if test suite name or test name matches
         -: 5903:      // kDisableTestFilter.
-       34: 5904:      const bool is_disabled = internal::UnitTestOptions::MatchesFilter(
-       68: 5905:                                   test_suite_name, kDisableTestFilter) ||
-       34: 5905-block  0
-       34: 5905-block  1
+       35: 5904:      const bool is_disabled = internal::UnitTestOptions::MatchesFilter(
+       70: 5905:                                   test_suite_name, kDisableTestFilter) ||
+       35: 5905-block  0
+       35: 5905-block  1
     $$$$$: 5905-block  2
-       34: 5905-block  3
-       34: 5906:                               internal::UnitTestOptions::MatchesFilter(
-       34: 5906-block  0
-       34: 5907:                                   test_name, kDisableTestFilter);
-       34: 5908:      test_info->is_disabled_ = is_disabled;
+       35: 5905-block  3
+       35: 5906:                               internal::UnitTestOptions::MatchesFilter(
+       35: 5906-block  0
+       35: 5907:                                   test_name, kDisableTestFilter);
+       35: 5908:      test_info->is_disabled_ = is_disabled;
         -: 5909:
         -: 5910:      const bool matches_filter = internal::UnitTestOptions::FilterMatchesTest(
-       34: 5911:          test_suite_name, test_name);
-       34: 5911-block  0
-       34: 5912:      test_info->matches_filter_ = matches_filter;
+       35: 5911:          test_suite_name, test_name);
+       35: 5911-block  0
+       35: 5912:      test_info->matches_filter_ = matches_filter;
         -: 5913:
-       34: 5914:      const bool is_runnable =
-       34: 5915:          (GTEST_FLAG(also_run_disabled_tests) || !is_disabled) &&
-       34: 5915-block  0
-       34: 5915-block  1
-       34: 5915-block  2
-       34: 5915-block  3
+       35: 5914:      const bool is_runnable =
+       35: 5915:          (GTEST_FLAG(also_run_disabled_tests) || !is_disabled) &&
+       35: 5915-block  0
+       35: 5915-block  1
+       35: 5915-block  2
+       35: 5915-block  3
     $$$$$: 5915-block  4
         -: 5916:          matches_filter;
         -: 5917:
         -: 5918:      const bool is_in_another_shard =
-       34: 5919:          shard_tests != IGNORE_SHARDING_PROTOCOL &&
-       34: 5919-block  0
+       35: 5919:          shard_tests != IGNORE_SHARDING_PROTOCOL &&
+       35: 5919-block  0
     $$$$$: 5919-block  1
-       34: 5919-block  2
+       35: 5919-block  2
     #####: 5920:          !ShouldRunTestOnShard(total_shards, shard_index, num_runnable_tests);
     $$$$$: 5920-block  0
-       34: 5921:      test_info->is_in_another_shard_ = is_in_another_shard;
-       34: 5922:      const bool is_selected = is_runnable && !is_in_another_shard;
-       34: 5922-block  0
-       34: 5922-block  1
-       34: 5922-block  2
+       35: 5921:      test_info->is_in_another_shard_ = is_in_another_shard;
+       35: 5922:      const bool is_selected = is_runnable && !is_in_another_shard;
+       35: 5922-block  0
+       35: 5922-block  1
+       35: 5922-block  2
     $$$$$: 5922-block  3
         -: 5923:
-       34: 5924:      num_runnable_tests += is_runnable;
-       34: 5925:      num_selected_tests += is_selected;
+       35: 5924:      num_runnable_tests += is_runnable;
+       35: 5925:      num_selected_tests += is_selected;
         -: 5926:
-       34: 5927:      test_info->should_run_ = is_selected;
-       34: 5928:      test_suite->set_should_run(test_suite->should_run() || is_selected);
-       34: 5928-block  0
-        4: 5928-block  1
-       34: 5928-block  2
+       35: 5927:      test_info->should_run_ = is_selected;
+       35: 5928:      test_suite->set_should_run(test_suite->should_run() || is_selected);
+       35: 5928-block  0
+        5: 5928-block  1
+       35: 5928-block  2
     $$$$$: 5928-block  3
-       34: 5928-block  4
+       35: 5928-block  4
         -: 5929:    }
         -: 5930:  }
         1: 5931:  return num_selected_tests;
@@ -10909,10 +10909,10 @@
         -: 6022:// Returns the current OS stack trace getter if it is not NULL;
         -: 6023:// otherwise, creates an OsStackTraceGetter, makes it the current
         -: 6024:// getter, and returns it.
-      178: 6025:OsStackTraceGetterInterface* UnitTestImpl::os_stack_trace_getter() {
-      178: 6025-block  0
-      178: 6026:  if (os_stack_trace_getter_ == nullptr) {
-      178: 6026-block  0
+      185: 6025:OsStackTraceGetterInterface* UnitTestImpl::os_stack_trace_getter() {
+      185: 6025-block  0
+      185: 6026:  if (os_stack_trace_getter_ == nullptr) {
+      185: 6026-block  0
         -: 6027:#ifdef GTEST_OS_STACK_TRACE_GETTER_
         -: 6028:    os_stack_trace_getter_ = new GTEST_OS_STACK_TRACE_GETTER_;
         -: 6029:#else
@@ -10921,17 +10921,17 @@
         -: 6031:#endif  // GTEST_OS_STACK_TRACE_GETTER_
         -: 6032:  }
         -: 6033:
-      178: 6034:  return os_stack_trace_getter_;
-      178: 6034-block  0
+      185: 6034:  return os_stack_trace_getter_;
+      185: 6034-block  0
         -: 6035:}
         -: 6036:
         -: 6037:// Returns the most specific TestResult currently running.
-      138: 6038:TestResult* UnitTestImpl::current_test_result() {
-      138: 6038-block  0
-      138: 6039:  if (current_test_info_ != nullptr) {
-      138: 6039-block  0
-      136: 6040:    return &current_test_info_->result_;
-      136: 6040-block  0
+      142: 6038:TestResult* UnitTestImpl::current_test_result() {
+      142: 6038-block  0
+      142: 6039:  if (current_test_info_ != nullptr) {
+      142: 6039-block  0
+      140: 6040:    return &current_test_info_->result_;
+      140: 6040-block  0
         -: 6041:  }
         2: 6042:  if (current_test_suite_ != nullptr) {
         2: 6042-block  0
@@ -10967,14 +10967,14 @@
         -: 6064:// Restores the test suites and tests to their order before the first shuffle.
         1: 6065:void UnitTestImpl::UnshuffleTests() {
         1: 6065-block  0
-        5: 6066:  for (size_t i = 0; i < test_suites_.size(); i++) {
+        6: 6066:  for (size_t i = 0; i < test_suites_.size(); i++) {
         1: 6066-block  0
-        5: 6066-block  1
+        6: 6066-block  1
         -: 6067:    // Unshuffles the tests in each test suite.
-        4: 6068:    test_suites_[i]->UnshuffleTests();
-        4: 6068-block  0
+        5: 6068:    test_suites_[i]->UnshuffleTests();
+        5: 6068-block  0
         -: 6069:    // Resets the index of each test suite.
-        4: 6070:    test_suite_indices_[i] = static_cast<int>(i);
+        5: 6070:    test_suite_indices_[i] = static_cast<int>(i);
         -: 6071:  }
         1: 6072:}
         -: 6073:
@@ -11003,9 +11003,9 @@
         -: 6094:class ClassUniqueToAlwaysTrue {};
         -: 6095:}
         -: 6096:
-      138: 6097:bool IsTrue(bool condition) { return condition; }
-       69: 6097-block  0
-       69: 6097-block  1
+      142: 6097:bool IsTrue(bool condition) { return condition; }
+       71: 6097-block  0
+       71: 6097-block  1
         -: 6098:
     #####: 6099:bool AlwaysTrue() {
     $$$$$: 6099-block  0

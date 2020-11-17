@@ -242,8 +242,8 @@
         -:  230:    {
         -:  231:      while (__builtin_constant_p(*__s) && *__s)
         -:  232:	__s++;
-      436:  233:      return __builtin_constant_p(*__s);
-      436:  233-block  0
+      453:  233:      return __builtin_constant_p(*__s);
+      453:  233-block  0
         -:  234:    }
         -:  235:
         -:  236:  /**
@@ -294,9 +294,9 @@
         -:  281:      typedef mbstate_t         state_type;
         -:  282:
         -:  283:      static _GLIBCXX17_CONSTEXPR void
-     3917:  284:      assign(char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
-     3917:  284-block  0
-     3917:  285:      { __c1 = __c2; }
+     3985:  284:      assign(char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
+     3985:  284-block  0
+     3985:  285:      { __c1 = __c2; }
         -:  286:
         -:  287:      static _GLIBCXX_CONSTEXPR bool
         -:  288:      eq(const char_type& __c1, const char_type& __c2) _GLIBCXX_NOEXCEPT
@@ -325,17 +325,17 @@
         -:  311:      }
         -:  312:
         -:  313:      static _GLIBCXX17_CONSTEXPR size_t
-      436:  314:      length(const char_type* __s)
-      436:  314-block  0
+      453:  314:      length(const char_type* __s)
+      453:  314-block  0
         -:  315:      {
         -:  316:#if __cplusplus > 201402
-      436:  317:	if (__constant_string_p(__s))
-      436:  317-block  0
+      453:  317:	if (__constant_string_p(__s))
+      453:  317-block  0
     #####:  318:	  return __gnu_cxx::char_traits<char_type>::length(__s);
     $$$$$:  318-block  0
         -:  319:#endif
-      436:  320:	return __builtin_strlen(__s);
-      436:  320-block  0
+      453:  320:	return __builtin_strlen(__s);
+      453:  320-block  0
         -:  321:      }
         -:  322:
         -:  323:      static _GLIBCXX17_CONSTEXPR const char_type*
@@ -361,15 +361,15 @@
         -:  343:      }
         -:  344:
         -:  345:      static char_type*
-      988:  346:      copy(char_type* __s1, const char_type* __s2, size_t __n)
-      988:  346-block  0
+     1010:  346:      copy(char_type* __s1, const char_type* __s2, size_t __n)
+     1010:  346-block  0
         -:  347:      {
-      988:  348:	if (__n == 0)
-      988:  348-block  0
+     1010:  348:	if (__n == 0)
+     1010:  348-block  0
         8:  349:	  return __s1;
         8:  349-block  0
-      980:  350:	return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
-      980:  350-block  0
+     1002:  350:	return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+     1002:  350-block  0
         -:  351:      }
         -:  352:
         -:  353:      static char_type*

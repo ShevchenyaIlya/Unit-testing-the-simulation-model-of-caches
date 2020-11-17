@@ -357,31 +357,31 @@
     $$$$$:  213-block  0
         -:  214:    }
         -:  215:
-        7:  216:    Line readLineFromMemory(Word ip)
-        7:  216-block  0
+       19:  216:    Line readLineFromMemory(Word ip)
+       19:  216-block  0
         -:  217:    {
-        7:  218:        Line memoryLine = { 0 };
-      231:  219:        for (int i = 0; i < lineSizeWords; ++i) {
-        7:  219-block  0
-      231:  219-block  1
-      224:  220:            memoryLine[i] = _mem.Read(ip + 4 * i);
-      224:  220-block  0
+       19:  218:        Line memoryLine = { 0 };
+      627:  219:        for (int i = 0; i < lineSizeWords; ++i) {
+       19:  219-block  0
+      627:  219-block  1
+      608:  220:            memoryLine[i] = _mem.Read(ip + 4 * i);
+      608:  220-block  0
         -:  221:        }
         -:  222:
-        7:  223:        return memoryLine;
-        7:  223-block  0
+       19:  223:        return memoryLine;
+       19:  223-block  0
         -:  224:    }
         -:  225:
-        2:  226:    void writeLineToMemory(Line memoryLine, Word lineAddr)
-        2:  226-block  0
+        5:  226:    void writeLineToMemory(Line memoryLine, Word lineAddr)
+        5:  226-block  0
         -:  227:    {
-       66:  228:        for (int i = 0; i < lineSizeWords; ++i) {
-        2:  228-block  0
-       66:  228-block  1
-       64:  229:            _mem.Write(lineAddr + 4 * i, memoryLine[i]);
-       64:  229-block  0
+      165:  228:        for (int i = 0; i < lineSizeWords; ++i) {
+        5:  228-block  0
+      165:  228-block  1
+      160:  229:            _mem.Write(lineAddr + 4 * i, memoryLine[i]);
+      160:  229-block  0
         -:  230:        }
-        2:  231:    }
+        5:  231:    }
         -:  232:
     #####:  233:    void Clock() override
     $$$$$:  233-block  0
@@ -628,49 +628,49 @@
         -:  392:        }
         -:  393:    }
         -:  394:
-        5:  395:    std::optional<Word> Response(Word responseTime)
-        5:  395-block  0
+       14:  395:    std::optional<Word> Response(Word responseTime)
+       14:  395-block  0
         -:  396:    {
-        5:  397:        if (_waitCycles > 0)
-        5:  397-block  0
+       14:  397:        if (_waitCycles > 0)
+       14:  397-block  0
         1:  398:            return std::optional<Word>();
         1:  398-block  0
         -:  399:
-        4:  400:        if (_cacheMiss)
-        4:  400-block  0
+       13:  400:        if (_cacheMiss)
+       13:  400-block  0
         -:  401:        {
-        2:  402:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
-        2:  402-block  0
+        8:  402:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
+        8:  402-block  0
         -:  403:
-        2:  404:            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
-        2:  405:            Word blockId = latestUsage.first;
-        2:  406:            Word cellId = latestUsage.second;
+        8:  404:            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
+        8:  405:            Word blockId = latestUsage.first;
+        8:  406:            Word cellId = latestUsage.second;
         -:  407:
-        2:  408:            if (_codeMemory[blockId][cellId].address != 0)
-        2:  408-block  0
+        8:  408:            if (_codeMemory[blockId][cellId].address != 0)
+        8:  408-block  0
         -:  409:            {
-        1:  410:                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
-        1:  411:                                       _codeMemory[blockId][cellId].address);
-        1:  411-block  0
+        2:  410:                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
+        2:  411:                                       _codeMemory[blockId][cellId].address);
+        2:  411-block  0
         -:  412:            }
         -:  413:
-        2:  414:            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
-        2:  414-block  0
+        8:  414:            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
+        8:  414-block  0
         -:  415:
-        2:  416:            return memoryLine[_requestedOffset];
-        2:  416-block  0
-        2:  416-block  1
+        8:  416:            return memoryLine[_requestedOffset];
+        8:  416-block  0
+        8:  416-block  1
         -:  417:
         -:  418:        } else {
-        2:  419:            pair<Word, Word> position = findEntry(_requestedIp, false);
-        2:  419-block  0
-        2:  420:            _codeMemory[position.first][position.second].lastUsage = 1;
-        2:  420-block  0
-        2:  421:            changeLRUBit(_codeMemory, position.first, position.second);
-        5:  422:            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
-        2:  422-block  0
-        2:  422-block  1
-        5:  422-block  2
+        5:  419:            pair<Word, Word> position = findEntry(_requestedIp, false);
+        5:  419-block  0
+        5:  420:            _codeMemory[position.first][position.second].lastUsage = 1;
+        5:  420-block  0
+        5:  421:            changeLRUBit(_codeMemory, position.first, position.second);
+       14:  422:            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
+        5:  422-block  0
+        5:  422-block  1
+       14:  422-block  2
     %%%%%:  422-block  3
         -:  423:        }
         -:  424:    }
@@ -689,7 +689,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
@@ -787,10 +787,10 @@
         -:  525:        return dataLatency;
         -:  526:    }
         -:  527:
-        3:  528:    void setWaitCycles(size_t waitCycles) {
-        3:  528-block  0
-        3:  529:        _waitCycles = waitCycles;
-        3:  530:    }
+       21:  528:    void setWaitCycles(size_t waitCycles) {
+       21:  528-block  0
+       21:  529:        _waitCycles = waitCycles;
+       21:  530:    }
         -:  531:
         -:  532:    bool isCacheMiss() const {
         -:  533:        return _cacheMiss;

@@ -285,9 +285,9 @@
         -:  280://   Expected: Foo() is even
         -:  281://     Actual: it's 5
         -:  282://
-      426:  283:class GTEST_API_ AssertionResult {
-      213:  283-block  0
-      213:  283-block  1
+      598:  283:class GTEST_API_ AssertionResult {
+      299:  283-block  0
+      299:  283-block  1
         -:  284: public:
         -:  285:  // Copy constructor.
         -:  286:  // Used in EXPECT_TRUE/FALSE(assertion_result).
@@ -328,9 +328,9 @@
         -:  321:  }
         -:  322:
         -:  323:  // Returns true if and only if the assertion succeeded.
-      426:  324:  operator bool() const { return success_; }  // NOLINT
-      213:  324-block  0
-      213:  324-block  1
+      598:  324:  operator bool() const { return success_; }  // NOLINT
+      299:  324-block  0
+      299:  324-block  1
         -:  325:
         -:  326:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  327:  AssertionResult operator!() const;

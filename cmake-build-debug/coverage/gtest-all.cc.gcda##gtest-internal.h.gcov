@@ -497,16 +497,16 @@
         -:  432:// returned for different types.  Calling the function twice with the
         -:  433:// same type argument is guaranteed to return the same ID.
         -:  434:template <typename T>
-        7:  435:TypeId GetTypeId() {
+        8:  435:TypeId GetTypeId() {
     $$$$$:  435-block  0
-        7:  435-block  1
+        8:  435-block  1
         -:  436:  // The compiler is required to allocate a different
         -:  437:  // TypeIdHelper<T>::dummy_ variable for each T used to instantiate
         -:  438:  // the template.  Therefore, the address of dummy_ is guaranteed to
         -:  439:  // be unique.
-        7:  440:  return &(TypeIdHelper<T>::dummy_);
+        8:  440:  return &(TypeIdHelper<T>::dummy_);
     $$$$$:  440-block  0
-        7:  440-block  1
+        8:  440-block  1
         -:  441:}
         -:  442:
         -:  443:// Returns the type ID of ::testing::Test.  Always call this instead
@@ -562,11 +562,11 @@
         -:  489:using SetUpTestSuiteFunc = void (*)();
         -:  490:using TearDownTestSuiteFunc = void (*)();
         -:  491:
-      136:  492:struct CodeLocation {
+      140:  492:struct CodeLocation {
     $$$$$:  492-block  0
     $$$$$:  492-block  1
-       68:  492-block  2
-       68:  492-block  3
+       70:  492-block  2
+       70:  492-block  3
     $$$$$:  492-block  4
     $$$$$:  492-block  5
     #####:  493:  CodeLocation(const std::string& a_file, int a_line)

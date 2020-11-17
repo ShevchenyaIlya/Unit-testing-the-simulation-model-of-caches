@@ -78,10 +78,10 @@
         -:   73:    struct _Head_base<_Idx, _Head, true>
         -:   74:    : public _Head
         -:   75:    {
-      213:   76:      constexpr _Head_base()
+      299:   76:      constexpr _Head_base()
     $$$$$:   76-block  0
-      213:   76-block  1
-      213:   77:      : _Head() { }
+      299:   76-block  1
+      299:   77:      : _Head() { }
         -:   78:
         -:   79:      constexpr _Head_base(const _Head& __h)
         -:   80:      : _Head(__h) { }
@@ -132,10 +132,10 @@
         -:  119:  template<std::size_t _Idx, typename _Head>
         -:  120:    struct _Head_base<_Idx, _Head, false>
         -:  121:    {
-      213:  122:      constexpr _Head_base()
+      299:  122:      constexpr _Head_base()
     $$$$$:  122-block  0
-      213:  122-block  1
-      213:  123:      : _M_head_impl() { }
+      299:  122-block  1
+      299:  123:      : _M_head_impl() { }
         -:  124:
         -:  125:      constexpr _Head_base(const _Head& __h)
         -:  126:      : _M_head_impl(__h) { }
@@ -242,12 +242,12 @@
         -:  203:      static constexpr const _Inherited&
         -:  204:      _M_tail(const _Tuple_impl& __t) noexcept { return __t; }
         -:  205:
-      213:  206:      constexpr _Tuple_impl()
+      299:  206:      constexpr _Tuple_impl()
     $$$$$:  206-block  0
-      213:  206-block  1
-      213:  207:      : _Inherited(), _Base() { }
+      299:  206-block  1
+      299:  207:      : _Inherited(), _Base() { }
     $$$$$:  207-block  0
-      213:  207-block  1
+      299:  207-block  1
         -:  208:
         -:  209:      explicit
         -:  210:      constexpr _Tuple_impl(const _Head& __head, const _Tail&... __tail)
@@ -402,12 +402,12 @@
         -:  353:      static constexpr const _Head&
         -:  354:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  355:
-      213:  356:      constexpr _Tuple_impl()
+      299:  356:      constexpr _Tuple_impl()
     $$$$$:  356-block  0
-      213:  356-block  1
-      213:  357:      : _Base() { }
+      299:  356-block  1
+      299:  357:      : _Base() { }
     $$$$$:  357-block  0
-      213:  357-block  1
+      299:  357-block  1
         -:  358:
         -:  359:      explicit
         -:  360:      constexpr _Tuple_impl(const _Head& __head)
@@ -969,12 +969,12 @@
         -:  916:                                     __is_implicitly_default_constructible<_U2>>
         -:  917:                                   ::value, bool>::type = true>
         -:  918:
-      213:  919:      constexpr tuple()
+      299:  919:      constexpr tuple()
     $$$$$:  919-block  0
-      213:  919-block  1
-      213:  920:      : _Inherited() { }
+      299:  919-block  1
+      299:  920:      : _Inherited() { }
     $$$$$:  920-block  0
-      213:  920-block  1
+      299:  920-block  1
         -:  921:
         -:  922:      template <typename _U1 = _T1,
         -:  923:                typename _U2 = _T2,

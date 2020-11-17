@@ -412,15 +412,15 @@
         -:  323:
         -:  324:      // True if _Rep and source do not overlap.
         -:  325:      bool
-      163:  326:      _M_disjunct(const _CharT* __s) const _GLIBCXX_NOEXCEPT
-      163:  326-block  0
+      169:  326:      _M_disjunct(const _CharT* __s) const _GLIBCXX_NOEXCEPT
+      169:  326-block  0
         -:  327:      {
-      326:  328:	return (less<const _CharT*>()(__s, _M_data())
-      163:  328-block  0
-      163:  328-block  1
-      163:  329:		|| less<const _CharT*>()(_M_data() + this->size(), __s));
+      338:  328:	return (less<const _CharT*>()(__s, _M_data())
+      169:  328-block  0
+      169:  328-block  1
+      169:  329:		|| less<const _CharT*>()(_M_data() + this->size(), __s));
     $$$$$:  329-block  0
-      163:  329-block  1
+      169:  329-block  1
     $$$$$:  329-block  2
         -:  330:      }
         -:  331:
@@ -686,32 +686,32 @@
         -:  528:       *  The newly-created string contains the exact contents of @a __str.
         -:  529:       *  @a __str is a valid, but unspecified string.
         -:  530:       **/
-      173:  531:      basic_string(basic_string&& __str) noexcept
-      173:  531-block  0
-      173:  532:      : _M_dataplus(_M_local_data(), std::move(__str._M_get_allocator()))
-      173:  532-block  0
+      180:  531:      basic_string(basic_string&& __str) noexcept
+      180:  531-block  0
+      180:  532:      : _M_dataplus(_M_local_data(), std::move(__str._M_get_allocator()))
+      180:  532-block  0
         -:  533:      {
-      173:  534:	if (__str._M_is_local())
+      180:  534:	if (__str._M_is_local())
         -:  535:	  {
-       59:  536:	    traits_type::copy(_M_local_buf, __str._M_local_buf,
-       59:  536-block  0
+       63:  536:	    traits_type::copy(_M_local_buf, __str._M_local_buf,
+       63:  536-block  0
         -:  537:			      _S_local_capacity + 1);
         -:  538:	  }
         -:  539:	else
         -:  540:	  {
-      114:  541:	    _M_data(__str._M_data());
-      114:  541-block  0
-      114:  542:	    _M_capacity(__str._M_allocated_capacity);
+      117:  541:	    _M_data(__str._M_data());
+      117:  541-block  0
+      117:  542:	    _M_capacity(__str._M_allocated_capacity);
         -:  543:	  }
         -:  544:
         -:  545:	// Must use _M_length() here not _M_set_length() because
         -:  546:	// basic_stringbuf relies on writing into unallocated capacity so
         -:  547:	// we mess up the contents if we put a '\0' in the string.
-      173:  548:	_M_length(__str.length());
-      173:  548-block  0
-      173:  549:	__str._M_data(__str._M_local_data());
-      173:  550:	__str._M_set_length(0);
-      173:  551:      }
+      180:  548:	_M_length(__str.length());
+      180:  548-block  0
+      180:  549:	__str._M_data(__str._M_local_data());
+      180:  550:	__str._M_set_length(0);
+      180:  551:      }
         -:  552:
         -:  553:      /**
         -:  554:       *  @brief  Construct string from an initializer %list.
@@ -827,12 +827,12 @@
         -:  651:       *  @param  __str  Source string.
         -:  652:       */
         -:  653:      basic_string&
-      409:  654:      operator=(const basic_string& __str)
-      409:  654-block  0
+      421:  654:      operator=(const basic_string& __str)
+      421:  654-block  0
         -:  655:      {
         -:  656:#if __cplusplus >= 201103L
-      409:  657:	if (_Alloc_traits::_S_propagate_on_copy_assign())
-      409:  657-block  0
+      421:  657:	if (_Alloc_traits::_S_propagate_on_copy_assign())
+      421:  657-block  0
         -:  658:	  {
     #####:  659:	    if (!_Alloc_traits::_S_always_equal() && !_M_is_local()
     $$$$$:  659-block  0
@@ -873,9 +873,9 @@
     $$$$$:  682-block  0
         -:  683:	  }
         -:  684:#endif
-      409:  685:	return this->assign(__str);
-      409:  685-block  0
-      409:  685-block  1
+      421:  685:	return this->assign(__str);
+      421:  685-block  0
+      421:  685-block  1
         -:  686:      }
         -:  687:
         -:  688:      /**
@@ -883,10 +883,10 @@
         -:  690:       *  @param  __s  Source null-terminated string.
         -:  691:       */
         -:  692:      basic_string&
-       68:  693:      operator=(const _CharT* __s)
-       68:  693-block  0
-       68:  694:      { return this->assign(__s); }
-       68:  694-block  0
+       70:  693:      operator=(const _CharT* __s)
+       70:  693-block  0
+       70:  694:      { return this->assign(__s); }
+       70:  694-block  0
         -:  695:
         -:  696:      /**
         -:  697:       *  @brief  Set value to string of length 1.
@@ -1272,10 +1272,10 @@
         -: 1018:       *  <code>*this == ""</code>.
         -: 1019:       */
         -: 1020:      bool
-       38: 1021:      empty() const _GLIBCXX_NOEXCEPT
-       38: 1021-block  0
-       38: 1022:      { return this->size() == 0; }
-       38: 1022-block  0
+       39: 1021:      empty() const _GLIBCXX_NOEXCEPT
+       39: 1021-block  0
+       39: 1022:      { return this->size() == 0; }
+       39: 1022-block  0
         -: 1023:
         -: 1024:      // Element access:
         -: 1025:      /**
@@ -1435,12 +1435,12 @@
         -: 1173:       *  @return  Reference to this string.
         -: 1174:       */
         -: 1175:      basic_string&
-      928: 1176:      operator+=(_CharT __c)
-      928: 1176-block  0
+      922: 1176:      operator+=(_CharT __c)
+      922: 1176-block  0
         -: 1177:      {
-      928: 1178:	this->push_back(__c);
-      928: 1178-block  0
-      928: 1179:	return *this;
+      922: 1178:	this->push_back(__c);
+      922: 1178-block  0
+      922: 1179:	return *this;
         -: 1180:      }
         -: 1181:
         -: 1182:#if __cplusplus >= 201103L
@@ -1608,18 +1608,18 @@
         -: 1336:       *  @param __c  Character to append.
         -: 1337:       */
         -: 1338:      void
-      928: 1339:      push_back(_CharT __c)
-      928: 1339-block  0
+      922: 1339:      push_back(_CharT __c)
+      922: 1339-block  0
         -: 1340:      {
-      928: 1341:	const size_type __size = this->size();
-      928: 1341-block  0
-      928: 1342:	if (__size + 1 > this->capacity())
+      922: 1341:	const size_type __size = this->size();
+      922: 1341-block  0
+      922: 1342:	if (__size + 1 > this->capacity())
     #####: 1343:	  this->_M_mutate(__size, size_type(0), 0, size_type(1));
     $$$$$: 1343-block  0
-      928: 1344:	traits_type::assign(this->_M_data()[__size], __c);
-      928: 1344-block  0
-      928: 1345:	this->_M_set_length(__size + 1);
-      928: 1346:      }
+      922: 1344:	traits_type::assign(this->_M_data()[__size], __c);
+      922: 1344-block  0
+      922: 1345:	this->_M_set_length(__size + 1);
+      922: 1346:      }
         -: 1347:
         -: 1348:      /**
         -: 1349:       *  @brief  Set value to contents of another string.
@@ -1627,12 +1627,12 @@
         -: 1351:       *  @return  Reference to this string.
         -: 1352:       */
         -: 1353:      basic_string&
-      409: 1354:      assign(const basic_string& __str)
-      409: 1354-block  0
+      421: 1354:      assign(const basic_string& __str)
+      421: 1354-block  0
         -: 1355:      {
-      409: 1356:	this->_M_assign(__str);
-      409: 1356-block  0
-      409: 1357:	return *this;
+      421: 1356:	this->_M_assign(__str);
+      421: 1356-block  0
+      421: 1357:	return *this;
         -: 1358:      }
         -: 1359:
         -: 1360:#if __cplusplus >= 201103L
@@ -1700,13 +1700,13 @@
         -: 1422:       *  function returns.
         -: 1423:       */
         -: 1424:      basic_string&
-       68: 1425:      assign(const _CharT* __s)
-       68: 1425-block  0
+       70: 1425:      assign(const _CharT* __s)
+       70: 1425-block  0
         -: 1426:      {
         -: 1427:	__glibcxx_requires_string(__s);
-       68: 1428:	return _M_replace(size_type(0), this->size(), __s,
-       68: 1428-block  0
-       68: 1429:			  traits_type::length(__s));
+       70: 1428:	return _M_replace(size_type(0), this->size(), __s,
+       70: 1428-block  0
+       70: 1429:			  traits_type::length(__s));
         -: 1430:      }
         -: 1431:
         -: 1432:      /**
@@ -6235,16 +6235,16 @@
         -: 5922:   */
         -: 5923:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5924:    inline basic_string<_CharT, _Traits, _Alloc>
-       34: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
-       34: 5925-block  0
+       35: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+       35: 5925-block  0
         -: 5926:	      const _CharT* __rhs)
         -: 5927:    {
-       34: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
-       34: 5928-block  0
-       34: 5929:      __str.append(__rhs);
-       34: 5930:      return __str;
-       34: 5930-block  0
-       34: 5930-block  1
+       35: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
+       35: 5928-block  0
+       35: 5929:      __str.append(__rhs);
+       35: 5930:      return __str;
+       35: 5930-block  0
+       35: 5930-block  1
     %%%%%: 5930-block  2
         -: 5931:    }
         -: 5932:
@@ -6322,11 +6322,11 @@
         -: 5986:
         -: 5987:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5988:    inline basic_string<_CharT, _Traits, _Alloc>
-      102: 5989:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
-      102: 5989-block  0
+      107: 5989:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+      107: 5989-block  0
         -: 5990:	      const _CharT* __rhs)
-      102: 5991:    { return std::move(__lhs.append(__rhs)); }
-      102: 5991-block  0
+      107: 5991:    { return std::move(__lhs.append(__rhs)); }
+      107: 5991-block  0
         -: 5992:
         -: 5993:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5994:    inline basic_string<_CharT, _Traits, _Alloc>

@@ -49,14 +49,14 @@
         -:   44:   */
         -:   45:  template<typename _Tp>
         -:   46:    inline _GLIBCXX_CONSTEXPR _Tp*
-     5891:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-     3469:   47-block  0
-     1246:   47-block  1
-     1176:   47-block  2
-     5891:   48:    { return __builtin_addressof(__r); }
-     3469:   48-block  0
-     1246:   48-block  1
-     1176:   48-block  2
+     6237:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+     3547:   47-block  0
+     1290:   47-block  1
+     1400:   47-block  2
+     6237:   48:    { return __builtin_addressof(__r); }
+     3547:   48-block  0
+     1290:   48-block  1
+     1400:   48-block  2
         -:   49:
         -:   50:_GLIBCXX_END_NAMESPACE_VERSION
         -:   51:} // namespace
@@ -108,18 +108,18 @@
         -:   95:  */
         -:   96:  template<typename _Tp>
         -:   97:    constexpr typename std::remove_reference<_Tp>::type&&
-     6623:   98:    move(_Tp&& __t) noexcept
-      280:   98-block  0
-     5040:   98-block  1
+     6818:   98:    move(_Tp&& __t) noexcept
+      288:   98-block  0
+     5184:   98-block  1
     $$$$$:   98-block  2
-     1023:   98-block  3
-      280:   98-block  4
-     6623:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
-      280:   99-block  0
-     5040:   99-block  1
+     1058:   98-block  3
+      288:   98-block  4
+     6818:   99:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      288:   99-block  0
+     5184:   99-block  1
     $$$$$:   99-block  2
-     1023:   99-block  3
-      280:   99-block  4
+     1058:   99-block  3
+      288:   99-block  4
         -:  100:
         -:  101:
         -:  102:  template<typename _Tp>
@@ -157,12 +157,12 @@
         -:  134:  */
         -:  135:  template<typename _Tp>
         -:  136:    inline _GLIBCXX17_CONSTEXPR _Tp*
-     4715:  137:    addressof(_Tp& __r) noexcept
-     3469:  137-block  0
-     1246:  137-block  1
-     4715:  138:    { return std::__addressof(__r); }
-     3469:  138-block  0
-     1246:  138-block  1
+     4837:  137:    addressof(_Tp& __r) noexcept
+     3547:  137-block  0
+     1290:  137-block  1
+     4837:  138:    { return std::__addressof(__r); }
+     3547:  138-block  0
+     1290:  138-block  1
         -:  139:
         -:  140:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  141:  // 2598. addressof works on temporaries
@@ -211,8 +211,8 @@
         -:  184:    typename enable_if<__and_<__not_<__is_tuple_like<_Tp>>,
         -:  185:			      is_move_constructible<_Tp>,
         -:  186:			      is_move_assignable<_Tp>>::value>::type
-     1680:  187:    swap(_Tp& __a, _Tp& __b)
-     1680:  187-block  0
+     1728:  187:    swap(_Tp& __a, _Tp& __b)
+     1728:  187-block  0
     $$$$$:  187-block  1
         -:  188:    noexcept(__and_<is_nothrow_move_constructible<_Tp>,
         -:  189:	            is_nothrow_move_assignable<_Tp>>::value)
@@ -224,12 +224,12 @@
         -:  195:      // concept requirements
         -:  196:      __glibcxx_function_requires(_SGIAssignableConcept<_Tp>)
         -:  197:
-     1680:  198:      _Tp __tmp = _GLIBCXX_MOVE(__a);
-     1680:  198-block  0
+     1728:  198:      _Tp __tmp = _GLIBCXX_MOVE(__a);
+     1728:  198-block  0
     $$$$$:  198-block  1
-     1680:  199:      __a = _GLIBCXX_MOVE(__b);
-     1680:  200:      __b = _GLIBCXX_MOVE(__tmp);
-     1680:  201:    }
+     1728:  199:      __a = _GLIBCXX_MOVE(__b);
+     1728:  200:      __b = _GLIBCXX_MOVE(__tmp);
+     1728:  201:    }
         -:  202:
         -:  203:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  204:  // DR 809. std::swap should be overloaded for array types.

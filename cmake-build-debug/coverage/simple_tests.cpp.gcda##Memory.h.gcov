@@ -38,9 +38,9 @@
         -:   33:
         -:   34:using Block = vector<CacheCell>;
         -:   35:
-      576:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
-      288:   36-block  0
-      288:   36-block  1
+     1536:   36:static Word ToWordAddr(Word ip) { return ip >> 2u; }
+      768:   36-block  0
+      768:   36-block  1
     #####:   37:static Word ToLineAddr(Word ip) { return ip & ~(lineSizeBytes - 1); }
     $$$$$:   37-block  0
     $$$$$:   37-block  1
@@ -48,34 +48,34 @@
     $$$$$:   38-block  0
     $$$$$:   38-block  1
         -:   39:
-       70:   40:class MemoryStorage {
-       35:   40-block  0
-       35:   40-block  1
+       72:   40:class MemoryStorage {
+       36:   40-block  0
+       36:   40-block  1
         -:   41:public:
         -:   42:
-       35:   43:    MemoryStorage()
-       35:   43-block  0
-       35:   44:    {
-       35:   44-block  0
+       36:   43:    MemoryStorage()
+       36:   43-block  0
+       36:   44:    {
+       36:   44-block  0
     %%%%%:   44-block  1
-       35:   45:        _mem.resize(memSize);
-       35:   46:    }
-       35:   46-block  0
+       36:   45:        _mem.resize(memSize);
+       36:   46:    }
+       36:   46-block  0
         -:   47:
-        7:   48:    bool LoadElf(const std::string &elf_filename) {
-        7:   48-block  0
-       14:   49:        std::ifstream elffile;
-        7:   49-block  0
-        7:   49-block  1
-        7:   49-block  2
+        8:   48:    bool LoadElf(const std::string &elf_filename) {
+        8:   48-block  0
+       16:   49:        std::ifstream elffile;
+        8:   49-block  0
+        8:   49-block  1
+        8:   49-block  2
     %%%%%:   49-block  3
     %%%%%:   49-block  4
-        7:   50:        elffile.open(elf_filename, std::ios::in | std::ios::binary);
-        7:   50-block  0
+        8:   50:        elffile.open(elf_filename, std::ios::in | std::ios::binary);
+        8:   50-block  0
         -:   51:
-        7:   52:        if (!elffile.is_open()) {
-        7:   52-block  0
-        7:   52-block  1
+        8:   52:        if (!elffile.is_open()) {
+        8:   52-block  0
+        8:   52-block  1
     #####:   53:            std::cerr << "ERROR: load_elf: failed opening file \"" << elf_filename << "\"" << std::endl;
     $$$$$:   53-block  0
     $$$$$:   53-block  1
@@ -85,25 +85,25 @@
     $$$$$:   54-block  0
         -:   55:        }
         -:   56:
-        7:   57:        elffile.seekg(0, elffile.end);
-        7:   57-block  0
-        7:   58:        size_t buf_sz = elffile.tellg();
-        7:   58-block  0
-        7:   58-block  1
-        7:   59:        elffile.seekg(0, elffile.beg);
+        8:   57:        elffile.seekg(0, elffile.end);
+        8:   57-block  0
+        8:   58:        size_t buf_sz = elffile.tellg();
+        8:   58-block  0
+        8:   58-block  1
+        8:   59:        elffile.seekg(0, elffile.beg);
         -:   60:
         -:   61:        // Read the entire file. If it doesn't fit in host memory, it won't fit in the risc-v processor
-       14:   62:        std::vector<char> buf(buf_sz);
-        7:   62-block  0
-        7:   62-block  1
-        7:   62-block  2
+       16:   62:        std::vector<char> buf(buf_sz);
+        8:   62-block  0
+        8:   62-block  1
+        8:   62-block  2
     %%%%%:   62-block  3
     %%%%%:   62-block  4
-        7:   63:        elffile.read(buf.data(), buf_sz);
+        8:   63:        elffile.read(buf.data(), buf_sz);
         -:   64:
-        7:   65:        if (!elffile) {
-        7:   65-block  0
-        7:   65-block  1
+        8:   65:        if (!elffile) {
+        8:   65-block  0
+        8:   65-block  1
     #####:   66:            std::cerr << "ERROR: load_elf: failed reading elf header" << std::endl;
     $$$$$:   66-block  0
     $$$$$:   66-block  1
@@ -111,8 +111,8 @@
     $$$$$:   67-block  0
         -:   68:        }
         -:   69:
-        7:   70:        if (buf_sz < sizeof(Elf32_Ehdr)) {
-        7:   70-block  0
+        8:   70:        if (buf_sz < sizeof(Elf32_Ehdr)) {
+        8:   70-block  0
     #####:   71:            std::cerr << "ERROR: load_elf: file too small to be a valid elf file" << std::endl;
     $$$$$:   71-block  0
     $$$$$:   71-block  1
@@ -121,16 +121,16 @@
         -:   73:        }
         -:   74:
         -:   75:        // make sure the header matches elf32 or elf64
-        7:   76:        Elf32_Ehdr *ehdr = (Elf32_Ehdr *) buf.data();
-        7:   76-block  0
-        7:   77:        unsigned char* e_ident = ehdr->e_ident;
-        7:   78:        if (e_ident[EI_MAG0] != ELFMAG0
-        7:   79:            || e_ident[EI_MAG1] != ELFMAG1
-        7:   79-block  0
-        7:   80:            || e_ident[EI_MAG2] != ELFMAG2
-        7:   80-block  0
-        7:   81:            || e_ident[EI_MAG3] != ELFMAG3) {
-        7:   81-block  0
+        8:   76:        Elf32_Ehdr *ehdr = (Elf32_Ehdr *) buf.data();
+        8:   76-block  0
+        8:   77:        unsigned char* e_ident = ehdr->e_ident;
+        8:   78:        if (e_ident[EI_MAG0] != ELFMAG0
+        8:   79:            || e_ident[EI_MAG1] != ELFMAG1
+        8:   79-block  0
+        8:   80:            || e_ident[EI_MAG2] != ELFMAG2
+        8:   80-block  0
+        8:   81:            || e_ident[EI_MAG3] != ELFMAG3) {
+        8:   81-block  0
     #####:   82:            std::cerr << "ERROR: load_elf: file is not an elf file" << std::endl;
     $$$$$:   82-block  0
     $$$$$:   82-block  1
@@ -138,12 +138,12 @@
     $$$$$:   83-block  0
         -:   84:        }
         -:   85:
-        7:   86:        if (e_ident[EI_CLASS] == ELFCLASS32) {
-        7:   86-block  0
+        8:   86:        if (e_ident[EI_CLASS] == ELFCLASS32) {
+        8:   86-block  0
         -:   87:            // 32-bit ELF
-        7:   88:            return this->LoadElfSpecific<Elf32_Ehdr, Elf32_Phdr>(buf.data(), buf_sz);
-        7:   88-block  0
-        7:   88-block  1
+        8:   88:            return this->LoadElfSpecific<Elf32_Ehdr, Elf32_Phdr>(buf.data(), buf_sz);
+        8:   88-block  0
+        8:   88-block  1
     #####:   89:        } else if (e_ident[EI_CLASS] == ELFCLASS64) {
     $$$$$:   89-block  0
         -:   90:            // 64-bit ELF
@@ -159,64 +159,64 @@
         -:   95:        }
         -:   96:    }
         -:   97:
-      224:   98:    Word Read(Word ip)
-      224:   98-block  0
+      608:   98:    Word Read(Word ip)
+      608:   98-block  0
         -:   99:    {
-      224:  100:        return _mem[ToWordAddr(ip)];
-      224:  100-block  0
+      608:  100:        return _mem[ToWordAddr(ip)];
+      608:  100-block  0
         -:  101:    }
         -:  102:
-       64:  103:    void Write(Word ip, Word data)
-       64:  103-block  0
+      160:  103:    void Write(Word ip, Word data)
+      160:  103-block  0
         -:  104:    {
-       64:  105:        _mem[ToWordAddr(ip)] = data;
-       64:  105-block  0
-       64:  106:    }
+      160:  105:        _mem[ToWordAddr(ip)] = data;
+      160:  105-block  0
+      160:  106:    }
         -:  107:
         -:  108:private:
         -:  109:    template <typename Elf_Ehdr, typename Elf_Phdr>
-        7:  110:    bool LoadElfSpecific(char *buf, size_t buf_sz) {
+        8:  110:    bool LoadElfSpecific(char *buf, size_t buf_sz) {
     $$$$$:  110-block  0
-        7:  110-block  1
+        8:  110-block  1
         -:  111:        // 64-bit ELF
-        7:  112:        Elf_Ehdr *ehdr = (Elf_Ehdr*) buf;
-        7:  113:        Elf_Phdr *phdr = (Elf_Phdr*) (buf + ehdr->e_phoff);
-        7:  114:        if (buf_sz < ehdr->e_phoff + ehdr->e_phnum * sizeof(Elf_Phdr)) {
+        8:  112:        Elf_Ehdr *ehdr = (Elf_Ehdr*) buf;
+        8:  113:        Elf_Phdr *phdr = (Elf_Phdr*) (buf + ehdr->e_phoff);
+        8:  114:        if (buf_sz < ehdr->e_phoff + ehdr->e_phnum * sizeof(Elf_Phdr)) {
     $$$$$:  114-block  0
-        7:  114-block  1
+        8:  114-block  1
     #####:  115:            std::cerr << "ERROR: load_elf: file too small for expected number of program header tables" << std::endl;
     $$$$$:  115-block  0
     $$$$$:  115-block  1
     #####:  116:            return false;
         -:  117:        }
-        7:  118:        auto memptr = reinterpret_cast<char*>(_mem.data());
+        8:  118:        auto memptr = reinterpret_cast<char*>(_mem.data());
     $$$$$:  118-block  0
-        7:  118-block  1
+        8:  118-block  1
         -:  119:        // loop through program header tables
-       14:  120:        for (int i = 0 ; i < ehdr->e_phnum ; i++) {
+       16:  120:        for (int i = 0 ; i < ehdr->e_phnum ; i++) {
     $$$$$:  120-block  0
     $$$$$:  120-block  1
-       14:  120-block  2
-        7:  120-block  3
-        7:  121:            if ((phdr[i].p_type == PT_LOAD) && (phdr[i].p_memsz > 0)) {
+       16:  120-block  2
+        8:  120-block  3
+        8:  121:            if ((phdr[i].p_type == PT_LOAD) && (phdr[i].p_memsz > 0)) {
     $$$$$:  121-block  0
     $$$$$:  121-block  1
-        7:  121-block  2
-        7:  121-block  3
-        7:  122:                if (phdr[i].p_memsz < phdr[i].p_filesz) {
+        8:  121-block  2
+        8:  121-block  3
+        8:  122:                if (phdr[i].p_memsz < phdr[i].p_filesz) {
     $$$$$:  122-block  0
-        7:  122-block  1
+        8:  122-block  1
     #####:  123:                    std::cerr << "ERROR: load_elf: file size is larger than memory size" << std::endl;
     $$$$$:  123-block  0
     $$$$$:  123-block  1
     #####:  124:                    return false;
         -:  125:                }
-        7:  126:                if (phdr[i].p_filesz > 0) {
+        8:  126:                if (phdr[i].p_filesz > 0) {
     $$$$$:  126-block  0
-        7:  126-block  1
-        7:  127:                    if (phdr[i].p_offset + phdr[i].p_filesz > buf_sz) {
+        8:  126-block  1
+        8:  127:                    if (phdr[i].p_offset + phdr[i].p_filesz > buf_sz) {
     $$$$$:  127-block  0
-        7:  127-block  1
+        8:  127-block  1
     #####:  128:                        std::cerr << "ERROR: load_elf: file section overflow" << std::endl;
     $$$$$:  128-block  0
     $$$$$:  128-block  1
@@ -226,26 +226,26 @@
         -:  132:                    // start of file section: buf + phdr[i].p_offset
         -:  133:                    // end of file section: buf + phdr[i].p_offset + phdr[i].p_filesz
         -:  134:                    // start of memory: phdr[i].p_paddr
-        7:  135:                    std::memcpy(memptr + phdr[i].p_paddr, buf + phdr[i].p_offset, phdr[i].p_filesz);
+        8:  135:                    std::memcpy(memptr + phdr[i].p_paddr, buf + phdr[i].p_offset, phdr[i].p_filesz);
     $$$$$:  135-block  0
-        7:  135-block  1
+        8:  135-block  1
         -:  136:                }
-        7:  137:                if (phdr[i].p_memsz > phdr[i].p_filesz) {
+        8:  137:                if (phdr[i].p_memsz > phdr[i].p_filesz) {
     $$$$$:  137-block  0
-        7:  137-block  1
+        8:  137-block  1
         -:  138:                    // copy 0's to fill up remaining memory
     #####:  139:                    size_t zeros_sz = phdr[i].p_memsz - phdr[i].p_filesz;
-        7:  140:                    std::memset(memptr + phdr[i].p_paddr + phdr[i].p_filesz, 0, zeros_sz);
+        8:  140:                    std::memset(memptr + phdr[i].p_paddr + phdr[i].p_filesz, 0, zeros_sz);
     $$$$$:  140-block  0
     $$$$$:  140-block  1
     $$$$$:  140-block  2
-        7:  140-block  3
+        8:  140-block  3
         -:  141:                }
         -:  142:            }
         -:  143:        }
-        7:  144:        return true;
+        8:  144:        return true;
     $$$$$:  144-block  0
-        7:  144-block  1
+        8:  144-block  1
         -:  145:    }
         -:  146:
         -:  147:    std::vector<Word> _mem;
@@ -254,12 +254,12 @@
         -:  150:class IMem
         -:  151:{
         -:  152:public:
-       35:  153:    IMem() = default;
-       35:  153-block  0
-       35:  154:    virtual ~IMem() = default;
+       36:  153:    IMem() = default;
+       36:  153-block  0
+       36:  154:    virtual ~IMem() = default;
     $$$$$:  154-block  0
     $$$$$:  154-block  1
-       35:  154-block  2
+       36:  154-block  2
         -:  155:    IMem(const IMem &) = delete;
         -:  156:    IMem(IMem &&) = delete;
         -:  157:
@@ -274,20 +274,20 @@
         -:  166:    virtual size_t getWaitCycles() = 0;
         -:  167:};
         -:  168:
-       70:  169:class UncachedMem : public IMem
+       72:  169:class UncachedMem : public IMem
     $$$$$:  169-block  0
     $$$$$:  169-block  1
-       35:  169-block  2
-       35:  169-block  3
+       36:  169-block  2
+       36:  169-block  3
         -:  170:{
         -:  171:public:
-       35:  172:    explicit UncachedMem(MemoryStorage& amem)
-       35:  172-block  0
-       35:  173:            : _mem(amem)
-       35:  173-block  0
+       36:  172:    explicit UncachedMem(MemoryStorage& amem)
+       36:  172-block  0
+       36:  173:            : _mem(amem)
+       36:  173-block  0
         -:  174:    {
         -:  175:
-       35:  176:    }
+       36:  176:    }
         -:  177:
         -:  178:
     #####:  179:    void Request(Word ip) override
@@ -399,25 +399,25 @@
         -:  250:};
         -:  251:
         -:  252:// TODO: Create cache for data and for code that works for 1 and 3 ticks
-      126:  253:class CachedMem
-       63:  253-block  0
-       63:  253-block  1
+      130:  253:class CachedMem
+       65:  253-block  0
+       65:  253-block  1
         -:  254:{
         -:  255:public:
-       70:  256:    explicit CachedMem(UncachedMem& uncachedMem): _mem(uncachedMem) {
-       35:  256-block  0
-       35:  256-block  1
-       35:  256-block  2
-       35:  256-block  3
+       72:  256:    explicit CachedMem(UncachedMem& uncachedMem): _mem(uncachedMem) {
+       36:  256-block  0
+       36:  256-block  1
+       36:  256-block  2
+       36:  256-block  3
     %%%%%:  256-block  4
     %%%%%:  256-block  5
     %%%%%:  256-block  6
     %%%%%:  256-block  7
     %%%%%:  256-block  8
     %%%%%:  256-block  9
-       35:  257:        initializeCache();
-       35:  258:    }
-       35:  258-block  0
+       36:  257:        initializeCache();
+       36:  258:    }
+       36:  258-block  0
         -:  259:
         -:  260:    bool checkAddress(bool dataOrCode, int address)
         -:  261:    {
@@ -599,7 +599,7 @@
         -:  437:        } else {
         -:  438:            _cacheMiss = true;
         -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
+        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
         -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
@@ -656,23 +656,23 @@
         -:  494:        return true;
         -:  495:    }
         -:  496:
-       35:  497:    void initializeCache()
-       35:  497-block  0
+       36:  497:    void initializeCache()
+       36:  497-block  0
         -:  498:    {
-      175:  499:        for (int i = 0; i < blockCount; ++i) {
-       35:  499-block  0
-      175:  499-block  1
-      140:  500:            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
-      140:  500-block  0
-      140:  500-block  1
+      180:  499:        for (int i = 0; i < blockCount; ++i) {
+       36:  499-block  0
+      180:  499-block  1
+      144:  500:            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
+      144:  500-block  0
+      144:  500-block  1
     %%%%%:  500-block  2
     %%%%%:  500-block  3
-      140:  501:            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
-      140:  501-block  0
+      144:  501:            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
+      144:  501-block  0
     %%%%%:  501-block  1
         -:  502:        }
-       35:  503:    }
-       35:  503-block  0
+       36:  503:    }
+       36:  503-block  0
         -:  504:
         -:  505:    void Clock()
         -:  506:    {

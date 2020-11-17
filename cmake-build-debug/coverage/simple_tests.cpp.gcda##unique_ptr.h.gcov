@@ -74,23 +74,23 @@
         -:   69:
         -:   70:      /// Calls @c delete @p __ptr
         -:   71:      void
-      130:   72:      operator()(_Tp* __ptr) const
-       35:   72-block  0
+      135:   72:      operator()(_Tp* __ptr) const
+       36:   72-block  0
     $$$$$:   72-block  1
-       95:   72-block  2
+       99:   72-block  2
         -:   73:      {
         -:   74:	static_assert(!is_void<_Tp>::value,
         -:   75:		      "can't delete pointer to incomplete type");
         -:   76:	static_assert(sizeof(_Tp)>0,
         -:   77:		      "can't delete pointer to incomplete type");
-      130:   78:	delete __ptr;
-       35:   78-block  0
-       35:   78-block  1
+      135:   78:	delete __ptr;
+       36:   78-block  0
+       36:   78-block  1
     $$$$$:   78-block  2
     $$$$$:   78-block  3
-       95:   78-block  4
-       95:   78-block  5
-      130:   79:      }
+       99:   78-block  4
+       99:   78-block  5
+      135:   79:      }
         -:   80:    };
         -:   81:
         -:   82:  // _GLIBCXX_RESOLVE_LIB_DEFECTS
@@ -151,35 +151,35 @@
         -:  137:      using pointer = typename _Ptr<_Tp, _Dp>::type;
         -:  138:
         -:  139:      __uniq_ptr_impl() = default;
-       70:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
-       35:  140-block  0
-       35:  140-block  1
+       72:  140:      __uniq_ptr_impl(pointer __p) : _M_t() { _M_ptr() = __p; }
+       36:  140-block  0
+       36:  140-block  1
         -:  141:
         -:  142:      template<typename _Del>
         -:  143:      __uniq_ptr_impl(pointer __p, _Del&& __d)
         -:  144:	: _M_t(__p, std::forward<_Del>(__d)) { }
         -:  145:
-     1114:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
-      154:  146-block  0
-      154:  146-block  1
-      213:  146-block  2
-      213:  146-block  3
-      190:  146-block  4
-      190:  146-block  5
-     1314:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
+     1306:  146:      pointer&   _M_ptr() { return std::get<0>(_M_t); }
+      156:  146-block  0
+      156:  146-block  1
+      299:  146-block  2
+      299:  146-block  3
+      198:  146-block  4
+      198:  146-block  5
+     1338:  147:      pointer    _M_ptr() const { return std::get<0>(_M_t); }
     $$$$$:  147-block  0
     $$$$$:  147-block  1
-      657:  147-block  2
-      657:  147-block  3
+      669:  147-block  2
+      669:  147-block  3
     $$$$$:  147-block  4
     $$$$$:  147-block  5
-      372:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
-       91:  148-block  0
-       91:  148-block  1
+      382:  148:      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
+       92:  148-block  0
+       92:  148-block  1
     $$$$$:  148-block  2
     $$$$$:  148-block  3
-       95:  148-block  4
-       95:  148-block  5
+       99:  148-block  4
+       99:  148-block  5
         -:  149:      const _Dp& _M_deleter() const { return std::get<1>(_M_t); }
         -:  150:
         -:  151:    private:
@@ -227,11 +227,11 @@
         -:  193:      template <typename _Up = _Dp,
         -:  194:		typename = _DeleterConstraint<_Up>>
         -:  195:	explicit
-       35:  196:	unique_ptr(pointer __p) noexcept
-       35:  196-block  0
-       35:  197:	: _M_t(__p)
-       35:  197-block  0
-       35:  198:        { }
+       36:  196:	unique_ptr(pointer __p) noexcept
+       36:  196-block  0
+       36:  197:	: _M_t(__p)
+       36:  197-block  0
+       36:  198:        { }
         -:  199:
         -:  200:      /** Takes ownership of a pointer.
         -:  201:       *
@@ -292,22 +292,22 @@
         -:  256:#endif
         -:  257:
         -:  258:      /// Destructor, invokes the deleter if the stored pointer is not null.
-      371:  259:      ~unique_ptr() noexcept
-       63:  259-block  0
-      213:  259-block  1
-       95:  259-block  2
+      462:  259:      ~unique_ptr() noexcept
+       64:  259-block  0
+      299:  259-block  1
+       99:  259-block  2
         -:  260:      {
-      371:  261:	auto& __ptr = _M_t._M_ptr();
-       63:  261-block  0
-      213:  261-block  1
-       95:  261-block  2
-      371:  262:	if (__ptr != nullptr)
-      130:  263:	  get_deleter()(__ptr);
-       35:  263-block  0
+      462:  261:	auto& __ptr = _M_t._M_ptr();
+       64:  261-block  0
+      299:  261-block  1
+       99:  261-block  2
+      462:  262:	if (__ptr != nullptr)
+      135:  263:	  get_deleter()(__ptr);
+       36:  263-block  0
     $$$$$:  263-block  1
-       95:  263-block  2
-      371:  264:	__ptr = pointer();
-      371:  265:      }
+       99:  263-block  2
+      462:  264:	__ptr = pointer();
+      462:  265:      }
         -:  266:
         -:  267:      // Assignment.
         -:  268:
@@ -357,12 +357,12 @@
         -:  312:
         -:  313:      /// Dereference the stored pointer.
         -:  314:      typename add_lvalue_reference<element_type>::type
-      562:  315:      operator*() const
-      562:  315-block  0
+      570:  315:      operator*() const
+      570:  315-block  0
         -:  316:      {
         -:  317:	__glibcxx_assert(get() != pointer());
-      562:  318:	return *get();
-      562:  318-block  0
+      570:  318:	return *get();
+      570:  318-block  0
         -:  319:      }
         -:  320:
         -:  321:      /// Return the stored pointer.
@@ -379,25 +379,25 @@
         -:  328:
         -:  329:      /// Return the stored pointer.
         -:  330:      pointer
-      657:  331:      get() const noexcept
+      669:  331:      get() const noexcept
     $$$$$:  331-block  0
-      657:  331-block  1
+      669:  331-block  1
     $$$$$:  331-block  2
-      657:  332:      { return _M_t._M_ptr(); }
+      669:  332:      { return _M_t._M_ptr(); }
     $$$$$:  332-block  0
-      657:  332-block  1
+      669:  332-block  1
     $$$$$:  332-block  2
         -:  333:
         -:  334:      /// Return a reference to the stored deleter.
         -:  335:      deleter_type&
-      186:  336:      get_deleter() noexcept
-       91:  336-block  0
+      191:  336:      get_deleter() noexcept
+       92:  336-block  0
     $$$$$:  336-block  1
-       95:  336-block  2
-      186:  337:      { return _M_t._M_deleter(); }
-       91:  337-block  0
+       99:  336-block  2
+      191:  337:      { return _M_t._M_deleter(); }
+       92:  337-block  0
     $$$$$:  337-block  1
-       95:  337-block  2
+       99:  337-block  2
         -:  338:
         -:  339:      /// Return a reference to the stored deleter.
         -:  340:      const deleter_type&

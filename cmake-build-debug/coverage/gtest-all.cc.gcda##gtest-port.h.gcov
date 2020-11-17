@@ -1753,24 +1753,24 @@
         -: 1699:// shares its API with MutexBase otherwise.
         -: 1700:class Mutex : public MutexBase {
         -: 1701: public:
-       41: 1702:  Mutex() {
-       41: 1702-block  0
-       41: 1703:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_init(&mutex_, nullptr));
-       41: 1703-block  0
+       43: 1702:  Mutex() {
+       43: 1702-block  0
+       43: 1703:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_init(&mutex_, nullptr));
+       43: 1703-block  0
     $$$$$: 1703-block  1
     $$$$$: 1703-block  2
     $$$$$: 1703-block  3
     $$$$$: 1703-block  4
     %%%%%: 1703-block  5
-       41: 1704:    has_owner_ = false;
-       41: 1705:  }
-       41: 1705-block  0
-       41: 1706:  ~Mutex() {
-       41: 1706-block  0
-       41: 1707:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_destroy(&mutex_));
-       41: 1707-block  0
+       43: 1704:    has_owner_ = false;
+       43: 1705:  }
+       43: 1705-block  0
+       43: 1706:  ~Mutex() {
+       43: 1706-block  0
+       43: 1707:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_destroy(&mutex_));
+       43: 1707-block  0
     $$$$$: 1707-block  1
-       41: 1708:  }
+       43: 1708:  }
         -: 1709:
         -: 1710: private:
         -: 1711:  GTEST_DISALLOW_COPY_AND_ASSIGN_(Mutex);
