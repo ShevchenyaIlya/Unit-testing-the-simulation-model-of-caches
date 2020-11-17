@@ -36,8 +36,8 @@ public:
                 _csrf.Read(_instruction);
                 _exe.Execute(_instruction, _ip);
                 // Memory request
-                _mem.Request(_instruction);
-                _memoryWaiting = _mem.Response(_instruction, _csrf.getCycleNumber());
+                _mem.Request(_instruction->_addr, _instruction->_type);
+                _memoryWaiting = _mem.Response(_instruction->_addr, _instruction->_data, _instruction->_type, _csrf.getCycleNumber());
                 if (!_memoryWaiting) {
                     _waitingInstruction = static_cast<std::unique_ptr<Instruction> &&>(_instruction);
                     return;
@@ -45,7 +45,7 @@ public:
 
             } else {
                 _instruction = static_cast<std::unique_ptr<Instruction> &&>(_waitingInstruction);
-                _mem.Response(_instruction, _csrf.getCycleNumber());
+                _mem.Response(_instruction->_addr, _instruction->_data, _instruction->_type, _csrf.getCycleNumber());
             }
             // Write + Write
             _rf.Write(_instruction);
