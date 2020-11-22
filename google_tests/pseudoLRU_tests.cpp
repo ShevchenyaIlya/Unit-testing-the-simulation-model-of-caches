@@ -97,7 +97,8 @@ TEST_F(CacheMemoryFixture, PseudoLRUFindingTestsCacheUpdate) {
             cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].lastUsage = 1;
     }
 
-    cache.pseudoLRUFinding(true, requestedId);
+    pair<Word, Word> result = cache.pseudoLRUFinding(true, requestedId);
+    cache.changeLRUBit(cache.getDataMemory(), result.first, result.second);
     for (int i = 0; i < cache.getDataMemory().size(); i++) {
         ASSERT_EQ(cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
     }
@@ -108,7 +109,8 @@ TEST_F(CacheMemoryFixture, PseudoLRUFindingTestsCacheUpdate) {
             cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage = 1;
     }
 
-    cache.pseudoLRUFinding(false, requestedId);
+    result = cache.pseudoLRUFinding(false, requestedId);
+    cache.changeLRUBit(cache.getCodeMemory(), result.first, result.second);
     for (int i = 0; i < cache.getCodeMemory().size(); i++) {
         ASSERT_EQ(cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
     }
