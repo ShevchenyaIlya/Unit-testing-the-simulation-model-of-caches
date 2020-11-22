@@ -68,7 +68,7 @@ TEST_F(CacheMemoryFixture, CheckAddressTests) {
 TEST_F(CacheMemoryFixture, CheckAllBitsTests) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(0, blockCount);
+    std::uniform_int_distribution<> distrib(0, 1);
     CachedMem cache = *memModelPtr;
 
     ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), distrib(gen), (512 % (codeCacheBytes / blockCount)) / lineSizeBytes));
@@ -81,17 +81,17 @@ TEST_F(CacheMemoryFixture, CheckAllBitsTests) {
 
     ASSERT_TRUE(cache.checkAllBits(cache.getCodeMemory(), distrib(gen), blockId));
 
-    blockId = distrib(gen);
+    int cellId = distrib(gen);
     for (Block &block : cache.getDataMemory()) {
         block[blockId].lastUsage = 1;
     }
 
     ASSERT_TRUE(cache.checkAllBits(cache.getDataMemory(), distrib(gen), blockId));
 
-    cache.getCodeMemory()[2][3].lastUsage = 0;
+    cache.getCodeMemory()[2][blockId].lastUsage = 0;
     ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
 
-    cache.getDataMemory()[3][2].lastUsage = 0;
+    cache.getDataMemory()[3][cellId].lastUsage = 0;
     ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
 }
 
