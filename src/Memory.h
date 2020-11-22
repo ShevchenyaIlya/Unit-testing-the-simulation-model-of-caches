@@ -249,7 +249,6 @@ private:
     MemoryStorage& _mem;
 };
 
-// TODO: Create cache for data and for code that works for 1 and 3 ticks
 class CachedMem
 {
 public:
@@ -346,8 +345,6 @@ public:
             }
         }
 
-        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
-
         return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
     }
 
@@ -404,6 +401,7 @@ public:
             pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
             Word blockId = latestUsage.first;
             Word cellId = latestUsage.second;
+            changeLRUBit(_codeMemory, blockId, cellId);
 
             if (_codeMemory[blockId][cellId].address != 0)
             {
@@ -438,7 +436,9 @@ public:
             _cacheMiss = true;
             _waitCycles = failLatency;
             pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
-            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
+            if (_type == IType::St && (
+                    (_dataMemory[latestUsage.first][latestUsage.second].address != 0)
+                    && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
                 _waitCycles += 120;
         }
         _requestedIp = lineAddr;
@@ -466,6 +466,7 @@ public:
             pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
             Word blockId = latestUsage.first;
             Word cellId = latestUsage.second;
+            changeLRUBit(_dataMemory, blockId, cellId);
 
             if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
             {
