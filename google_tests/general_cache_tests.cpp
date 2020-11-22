@@ -159,9 +159,9 @@ TEST(GeneralCacheTests, emptyCodeDataRequestResponse) {
         cache.Response(1024 + i * dataCacheBytes / blockCount, responseData, IType::St, 20);
     }
 
-    ASSERT_FALSE(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
-    ASSERT_EQ(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
-    ASSERT_EQ(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(4096)], 2048);
+    ASSERT_FALSE(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
+    ASSERT_EQ(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+    ASSERT_EQ(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(4096)], 2048);
 
     //Full data cache request / response
     cache.Request(5120, IType::St);
@@ -173,9 +173,9 @@ TEST(GeneralCacheTests, emptyCodeDataRequestResponse) {
     cache.setWaitCycles(0);
     responseData = 1111;
     ASSERT_TRUE(cache.Response(5120, responseData, IType::St, 20));
-    ASSERT_FALSE(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
-    ASSERT_EQ(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
-    ASSERT_EQ(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(5120)], 1111);
+    ASSERT_FALSE(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
+    ASSERT_EQ(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+    ASSERT_EQ(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(5120)], 1111);
 
 }
 
