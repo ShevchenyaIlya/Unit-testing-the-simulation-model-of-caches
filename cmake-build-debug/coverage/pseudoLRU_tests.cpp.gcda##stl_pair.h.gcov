@@ -345,13 +345,13 @@
         -:  340:                         bool>::type=true>
        59:  341:	constexpr pair(_U1&& __x, _U2&& __y)
         4:  341-block  0
-       35:  341-block  1
-       18:  341-block  2
+       33:  341-block  1
+       20:  341-block  2
         2:  341-block  3
        59:  342:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
         4:  342-block  0
-       35:  342-block  1
-       18:  342-block  2
+       33:  342-block  1
+       20:  342-block  2
         2:  342-block  3
         -:  343:
         -:  344:      template<typename _U1, typename _U2, typename
@@ -399,18 +399,18 @@
         -:  386:      }
         -:  387:
         -:  388:      pair&
-        5:  389:      operator=(typename conditional<
-        5:  389-block  0
+        6:  389:      operator=(typename conditional<
+        6:  389-block  0
         -:  390:		__and_<is_move_assignable<_T1>,
         -:  391:		       is_move_assignable<_T2>>::value,
         -:  392:		pair&&, __nonesuch_no_braces&&>::type __p)
         -:  393:      noexcept(__and_<is_nothrow_move_assignable<_T1>,
         -:  394:		      is_nothrow_move_assignable<_T2>>::value)
         -:  395:      {
-        5:  396:	first = std::forward<first_type>(__p.first);
-        5:  396-block  0
-        5:  397:	second = std::forward<second_type>(__p.second);
-        5:  398:	return *this;
+        6:  396:	first = std::forward<first_type>(__p.first);
+        6:  396-block  0
+        6:  397:	second = std::forward<second_type>(__p.second);
+        6:  398:	return *this;
         -:  399:      }
         -:  400:
         -:  401:      template<typename _U1, typename _U2>

@@ -315,240 +315,240 @@
         -:  249:    MemoryStorage& _mem;
         -:  250:};
         -:  251:
-        -:  252:// TODO: Create cache for data and for code that works for 1 and 3 ticks
-    #####:  253:class CachedMem
-    $$$$$:  253-block  0
-    $$$$$:  253-block  1
-    $$$$$:  253-block  2
-    $$$$$:  253-block  3
-    $$$$$:  253-block  4
-    %%%%%:  253-block  5
-        -:  254:{
-        -:  255:public:
-    #####:  256:    explicit CachedMem(UncachedMem& uncachedMem): _mem(uncachedMem) {
-    $$$$$:  256-block  0
-    $$$$$:  256-block  1
-    $$$$$:  256-block  2
-    $$$$$:  256-block  3
-    %%%%%:  256-block  4
-    %%%%%:  256-block  5
-    %%%%%:  256-block  6
-    %%%%%:  256-block  7
-    %%%%%:  256-block  8
-    %%%%%:  256-block  9
-    #####:  257:        initializeCache();
-    #####:  258:    }
-    $$$$$:  258-block  0
-        -:  259:
-    #####:  260:    bool checkAddress(bool dataOrCode, int address)
-    $$$$$:  260-block  0
-        -:  261:    {
-    #####:  262:        vector<Block> temporalCacheCopy;
-    $$$$$:  262-block  0
-    $$$$$:  262-block  1
-    $$$$$:  262-block  2
-    %%%%%:  262-block  3
-    %%%%%:  262-block  4
-    #####:  263:        int blockSize = 0;
-    #####:  264:        if (dataOrCode) {
-    #####:  265:            temporalCacheCopy = _dataMemory;
+    #####:  252:class CachedMem
+    $$$$$:  252-block  0
+    $$$$$:  252-block  1
+    $$$$$:  252-block  2
+    $$$$$:  252-block  3
+    $$$$$:  252-block  4
+    %%%%%:  252-block  5
+        -:  253:{
+        -:  254:public:
+    #####:  255:    explicit CachedMem(UncachedMem& uncachedMem): _mem(uncachedMem) {
+    $$$$$:  255-block  0
+    $$$$$:  255-block  1
+    $$$$$:  255-block  2
+    $$$$$:  255-block  3
+    %%%%%:  255-block  4
+    %%%%%:  255-block  5
+    %%%%%:  255-block  6
+    %%%%%:  255-block  7
+    %%%%%:  255-block  8
+    %%%%%:  255-block  9
+    #####:  256:        initializeCache();
+    #####:  257:    }
+    $$$$$:  257-block  0
+        -:  258:
+    #####:  259:    bool checkAddress(bool dataOrCode, int address)
+    $$$$$:  259-block  0
+        -:  260:    {
+    #####:  261:        vector<Block> temporalCacheCopy;
+    $$$$$:  261-block  0
+    $$$$$:  261-block  1
+    $$$$$:  261-block  2
+    %%%%%:  261-block  3
+    %%%%%:  261-block  4
+    #####:  262:        int blockSize = 0;
+    #####:  263:        if (dataOrCode) {
+    #####:  264:            temporalCacheCopy = _dataMemory;
+    $$$$$:  264-block  0
+    #####:  265:            blockSize = dataCacheBytes / blockCount;
     $$$$$:  265-block  0
-    #####:  266:            blockSize = dataCacheBytes / blockCount;
-    $$$$$:  266-block  0
-        -:  267:        }
-        -:  268:        else {
-    #####:  269:            temporalCacheCopy = _codeMemory;
+        -:  266:        }
+        -:  267:        else {
+    #####:  268:            temporalCacheCopy = _codeMemory;
+    $$$$$:  268-block  0
+    #####:  269:            blockSize = codeCacheBytes / blockCount;
     $$$$$:  269-block  0
-    #####:  270:            blockSize = codeCacheBytes / blockCount;
-    $$$$$:  270-block  0
-        -:  271:        }
-        -:  272:
-    #####:  273:        for (Block block : temporalCacheCopy)
-    $$$$$:  273-block  0
-    $$$$$:  273-block  1
-    $$$$$:  273-block  2
-    $$$$$:  273-block  3
-    $$$$$:  273-block  4
-        -:  274:        {
-    #####:  275:            if (block[(address % blockSize) / lineSizeBytes].address == address)
+        -:  270:        }
+        -:  271:
+    #####:  272:        for (Block block : temporalCacheCopy)
+    $$$$$:  272-block  0
+    $$$$$:  272-block  1
+    $$$$$:  272-block  2
+    $$$$$:  272-block  3
+    $$$$$:  272-block  4
+        -:  273:        {
+    #####:  274:            if (block[(address % blockSize) / lineSizeBytes].address == address)
+    $$$$$:  274-block  0
+    #####:  275:                return true;
     $$$$$:  275-block  0
-    #####:  276:                return true;
-    $$$$$:  276-block  0
-    $$$$$:  276-block  1
-    $$$$$:  276-block  2
-        -:  277:        }
-    #####:  278:        return false;
-    $$$$$:  278-block  0
-    $$$$$:  278-block  1
-        -:  279:    }
+    $$$$$:  275-block  1
+    $$$$$:  275-block  2
+        -:  276:        }
+    #####:  277:        return false;
+    $$$$$:  277-block  0
+    $$$$$:  277-block  1
+        -:  278:    }
+        -:  279:
         -:  280:
-        -:  281:
-        -:  282:    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
-        -:  283:    {
-        -:  284:        for (int i = 0; i < blockCount; i++)
-        -:  285:        {
-        -:  286:            if (i != key && cache[i][indexing].lastUsage == 0)
-        -:  287:            {
-        -:  288:                return false;
-        -:  289:            }
-        -:  290:        }
-        -:  291:        return true;
-        -:  292:    }
-        -:  293:
-        -:  294:    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
-        -:  295:    {
-        -:  296:        if (checkAllBits(cache, key, indexing))
-        -:  297:        {
-        -:  298:            for (int j = 0; j < blockCount; j++)
-        -:  299:            {
-        -:  300:                if (key != j)
-        -:  301:                    cache[j][indexing].lastUsage = 0;
-        -:  302:            }
-        -:  303:        }
-        -:  304:    }
-        -:  305:
-        -:  306:    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
-        -:  307:    {
-        -:  308:        for (int i = 0; i < blockCount; i++)
-        -:  309:        {
-        -:  310:            if (cache[i][indexing].address == 0)
-        -:  311:            {
-        -:  312:                return false;
-        -:  313:            }
-        -:  314:        }
-        -:  315:        return true;
-        -:  316:    }
-        -:  317:    
-        -:  318:    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
-        -:  319:    {
-        -:  320:        vector<Block> *temporalCacheCopy;
-        -:  321:        int blockSize = 0;
-        -:  322:        if (dataOrCode) {
-        -:  323:            temporalCacheCopy = &_dataMemory;
-        -:  324:            blockSize = dataCacheBytes / blockCount;
-        -:  325:        }
-        -:  326:        else {
-        -:  327:            temporalCacheCopy = &_codeMemory;
-        -:  328:            blockSize = codeCacheBytes / blockCount;
-        -:  329:        }
-        -:  330:        
-        -:  331:
-        -:  332:        for (int i = 0; i < blockCount; i++) {
-        -:  333:            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
-        -:  334:                return pair<Word, Word>(i, (key % blockSize) / lineSizeBytes);
-        -:  335:            }
-        -:  336:        }
-        -:  337:
-        -:  338:        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
-        -:  339:        Word entryIdentification = 0;
-        -:  340:        for (int i = 0; i < blockCount; i++)
-        -:  341:        {
-        -:  342:            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
-        -:  343:            {
-        -:  344:                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
-        -:  345:                entryIdentification = i;
-        -:  346:            }
-        -:  347:        }
-        -:  348:
-        -:  349:        changeLRUBit(*temporalCacheCopy, entryIdentification, (key % blockSize) / lineSizeBytes);
+        -:  281:    static bool checkAllBits(vector<Block> &cache, Word key, unsigned long indexing)
+        -:  282:    {
+        -:  283:        for (int i = 0; i < blockCount; i++)
+        -:  284:        {
+        -:  285:            if (i != key && cache[i][indexing].lastUsage == 0)
+        -:  286:            {
+        -:  287:                return false;
+        -:  288:            }
+        -:  289:        }
+        -:  290:        return true;
+        -:  291:    }
+        -:  292:
+        -:  293:    static void changeLRUBit(vector<Block> &cache, Word key, unsigned long indexing)
+        -:  294:    {
+        -:  295:        if (checkAllBits(cache, key, indexing))
+        -:  296:        {
+        -:  297:            for (int j = 0; j < blockCount; j++)
+        -:  298:            {
+        -:  299:                if (key != j)
+        -:  300:                    cache[j][indexing].lastUsage = 0;
+        -:  301:            }
+        -:  302:        }
+        -:  303:    }
+        -:  304:
+        -:  305:    static bool ifAllMarked(vector<Block> &cache, unsigned long indexing)
+        -:  306:    {
+        -:  307:        for (int i = 0; i < blockCount; i++)
+        -:  308:        {
+        -:  309:            if (cache[i][indexing].address == 0)
+        -:  310:            {
+        -:  311:                return false;
+        -:  312:            }
+        -:  313:        }
+        -:  314:        return true;
+        -:  315:    }
+        -:  316:    
+        -:  317:    pair<Word, Word> pseudoLRUFinding(bool dataOrCode, int key)
+        -:  318:    {
+        -:  319:        vector<Block> *temporalCacheCopy;
+        -:  320:        int blockSize = 0;
+        -:  321:        if (dataOrCode) {
+        -:  322:            temporalCacheCopy = &_dataMemory;
+        -:  323:            blockSize = dataCacheBytes / blockCount;
+        -:  324:        }
+        -:  325:        else {
+        -:  326:            temporalCacheCopy = &_codeMemory;
+        -:  327:            blockSize = codeCacheBytes / blockCount;
+        -:  328:        }
+        -:  329:        
+        -:  330:
+        -:  331:        for (int i = 0; i < blockCount; i++) {
+        -:  332:            if (!(*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].validityBit && ifAllMarked(*temporalCacheCopy, (key % blockSize) / lineSizeBytes)) {
+        -:  333:                return pair<Word, Word>(i, (key % blockSize) / lineSizeBytes);
+        -:  334:            }
+        -:  335:        }
+        -:  336:
+        -:  337:        Word minEntryValue = (*temporalCacheCopy)[0][(key % blockSize) / lineSizeBytes].lastUsage;
+        -:  338:        Word entryIdentification = 0;
+        -:  339:        for (int i = 0; i < blockCount; i++)
+        -:  340:        {
+        -:  341:            if ((*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage < minEntryValue)
+        -:  342:            {
+        -:  343:                minEntryValue = (*temporalCacheCopy)[i][(key % blockSize) / lineSizeBytes].lastUsage;
+        -:  344:                entryIdentification = i;
+        -:  345:            }
+        -:  346:        }
+        -:  347:
+        -:  348:        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
+        -:  349:    }
         -:  350:
-        -:  351:        return pair<Word, Word>(entryIdentification, (key % blockSize) / lineSizeBytes);
-        -:  352:    }
-        -:  353:
-        -:  354:
-        -:  355:    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
-        -:  356:        vector<Block> temporalCacheCopy;
-        -:  357:        int blockSize = 0;
-        -:  358:        if (dataOrCode) {
-        -:  359:            temporalCacheCopy = _dataMemory;
-        -:  360:            blockSize = dataCacheBytes / blockCount;
-        -:  361:        }
-        -:  362:        else {
-        -:  363:            temporalCacheCopy = _codeMemory;
-        -:  364:            blockSize = codeCacheBytes / blockCount;
-        -:  365:        }
-        -:  366:
-        -:  367:        for (int i = 0; i < blockCount; i++)
-        -:  368:        {
-        -:  369:            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
-        -:  370:                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
-        -:  371:        }
-        -:  372:        return pair<Word, Word> (0, 0);
-        -:  373:    }
-        -:  374:
-       12:  375:    void Request(Word ip)
-       12:  375-block  0
-        -:  376:    {
-       12:  377:        if (ip != _memoryRequestIp) {
-       12:  377-block  0
-       11:  378:            _memoryRequestIp = ip;
-       11:  379:            Word lineAddr = ToLineAddr(_memoryRequestIp);
-       11:  379-block  0
-       11:  380:            Word offset = ToLineOffset(_memoryRequestIp);
-        -:  381:
-       11:  382:            if (checkAddress(false, lineAddr)) {
-        4:  383:                _waitCycles = codeLatency;
-        4:  384:                _cacheMiss = false;
-        4:  384-block  0
-        -:  385:            }
-        -:  386:            else {
-        7:  387:                _cacheMiss = true;
-        7:  388:                _waitCycles = failLatency;
-        7:  388-block  0
-        -:  389:            }
-       11:  390:            _requestedIp = lineAddr;
-       11:  391:            _requestedOffset = offset;
-       11:  391-block  0
-        -:  392:        }
-       12:  393:    }
-        -:  394:
-        -:  395:    std::optional<Word> Response(Word responseTime)
-        -:  396:    {
-        -:  397:        if (_waitCycles > 0)
-        -:  398:            return std::optional<Word>();
-        -:  399:
-        -:  400:        if (_cacheMiss)
-        -:  401:        {
-        -:  402:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
-        -:  403:
-        -:  404:            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
-        -:  405:            Word blockId = latestUsage.first;
-        -:  406:            Word cellId = latestUsage.second;
-        -:  407:
-        -:  408:            if (_codeMemory[blockId][cellId].address != 0)
-        -:  409:            {
-        -:  410:                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
-        -:  411:                                       _codeMemory[blockId][cellId].address);
-        -:  412:            }
+        -:  351:
+        -:  352:    pair<Word, Word> findEntry(int requestedId, bool dataOrCode) {
+        -:  353:        vector<Block> temporalCacheCopy;
+        -:  354:        int blockSize = 0;
+        -:  355:        if (dataOrCode) {
+        -:  356:            temporalCacheCopy = _dataMemory;
+        -:  357:            blockSize = dataCacheBytes / blockCount;
+        -:  358:        }
+        -:  359:        else {
+        -:  360:            temporalCacheCopy = _codeMemory;
+        -:  361:            blockSize = codeCacheBytes / blockCount;
+        -:  362:        }
+        -:  363:
+        -:  364:        for (int i = 0; i < blockCount; i++)
+        -:  365:        {
+        -:  366:            if (temporalCacheCopy[i][(requestedId % blockSize) / lineSizeBytes].address == requestedId)
+        -:  367:                return pair<Word, Word> (i, (requestedId % blockSize) / lineSizeBytes);
+        -:  368:        }
+        -:  369:        return pair<Word, Word> (0, 0);
+        -:  370:    }
+        -:  371:
+       12:  372:    void Request(Word ip)
+       12:  372-block  0
+        -:  373:    {
+       12:  374:        if (ip != _memoryRequestIp) {
+       12:  374-block  0
+       11:  375:            _memoryRequestIp = ip;
+       11:  376:            Word lineAddr = ToLineAddr(_memoryRequestIp);
+       11:  376-block  0
+       11:  377:            Word offset = ToLineOffset(_memoryRequestIp);
+        -:  378:
+       11:  379:            if (checkAddress(false, lineAddr)) {
+        4:  380:                _waitCycles = codeLatency;
+        4:  381:                _cacheMiss = false;
+        4:  381-block  0
+        -:  382:            }
+        -:  383:            else {
+        7:  384:                _cacheMiss = true;
+        7:  385:                _waitCycles = failLatency;
+        7:  385-block  0
+        -:  386:            }
+       11:  387:            _requestedIp = lineAddr;
+       11:  388:            _requestedOffset = offset;
+       11:  388-block  0
+        -:  389:        }
+       12:  390:    }
+        -:  391:
+        -:  392:    std::optional<Word> Response(Word responseTime)
+        -:  393:    {
+        -:  394:        if (_waitCycles > 0)
+        -:  395:            return std::optional<Word>();
+        -:  396:
+        -:  397:        if (_cacheMiss)
+        -:  398:        {
+        -:  399:            Line memoryLine = _mem.readLineFromMemory(_requestedIp);
+        -:  400:
+        -:  401:            pair<Word, Word> latestUsage = pseudoLRUFinding(false, _requestedIp);
+        -:  402:            Word blockId = latestUsage.first;
+        -:  403:            Word cellId = latestUsage.second;
+        -:  404:            changeLRUBit(_codeMemory, blockId, cellId);
+        -:  405:
+        -:  406:            if (_codeMemory[blockId][cellId].address != 0)
+        -:  407:            {
+        -:  408:                _mem.writeLineToMemory(_codeMemory[blockId][cellId].dataLine,
+        -:  409:                                       _codeMemory[blockId][cellId].address);
+        -:  410:            }
+        -:  411:
+        -:  412:            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
         -:  413:
-        -:  414:            _codeMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, true};
+        -:  414:            return memoryLine[_requestedOffset];
         -:  415:
-        -:  416:            return memoryLine[_requestedOffset];
-        -:  417:
-        -:  418:        } else {
-        -:  419:            pair<Word, Word> position = findEntry(_requestedIp, false);
-        -:  420:            _codeMemory[position.first][position.second].lastUsage = 1;
-        -:  421:            changeLRUBit(_codeMemory, position.first, position.second);
-        -:  422:            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
-        -:  423:        }
-        -:  424:    }
-        -:  425:
-        -:  426:    void Request(Word _addr, IType _type)
-        -:  427:    {
-        -:  428:        if (_type != IType::Ld && _type != IType::St)
-        -:  429:            return;
-        -:  430:
-        -:  431:        Word lineAddr = ToLineAddr(_addr);
-        -:  432:        Word offset = ToLineOffset(_addr);
-        -:  433:
-        -:  434:        if (checkAddress(true, lineAddr)) {
-        -:  435:            _waitCycles = dataLatency;
-        -:  436:            _cacheMiss = false;
-        -:  437:        } else {
-        -:  438:            _cacheMiss = true;
-        -:  439:            _waitCycles = failLatency;
-        -:  440:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
-        -:  441:            if (_type == IType::St && ((_dataMemory[latestUsage.first][latestUsage.second].address != 0) && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
+        -:  416:        } else {
+        -:  417:            pair<Word, Word> position = findEntry(_requestedIp, false);
+        -:  418:            _codeMemory[position.first][position.second].lastUsage = 1;
+        -:  419:            changeLRUBit(_codeMemory, position.first, position.second);
+        -:  420:            return _codeMemory[position.first][position.second].dataLine[_requestedOffset];
+        -:  421:        }
+        -:  422:    }
+        -:  423:
+        -:  424:    void Request(Word _addr, IType _type)
+        -:  425:    {
+        -:  426:        if (_type != IType::Ld && _type != IType::St)
+        -:  427:            return;
+        -:  428:
+        -:  429:        Word lineAddr = ToLineAddr(_addr);
+        -:  430:        Word offset = ToLineOffset(_addr);
+        -:  431:
+        -:  432:        if (checkAddress(true, lineAddr)) {
+        -:  433:            _waitCycles = dataLatency;
+        -:  434:            _cacheMiss = false;
+        -:  435:        } else {
+        -:  436:            _cacheMiss = true;
+        -:  437:            _waitCycles = failLatency;
+        -:  438:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, lineAddr);
+        -:  439:            if (_type == IType::St && (
+        -:  440:                    (_dataMemory[latestUsage.first][latestUsage.second].address != 0)
+        -:  441:                    && !_dataMemory[latestUsage.first][latestUsage.second].validityBit))
         -:  442:                _waitCycles += 120;
         -:  443:        }
         -:  444:        _requestedIp = lineAddr;
@@ -576,152 +576,153 @@
         -:  466:            pair<Word, Word> latestUsage = pseudoLRUFinding(true, _requestedIp);
         -:  467:            Word blockId = latestUsage.first;
         -:  468:            Word cellId = latestUsage.second;
-        -:  469:
-        -:  470:            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
-        -:  471:            {
-        -:  472:                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
-        -:  473:            }
-        -:  474:
-        -:  475:            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
-        -:  476:
-        -:  477:            if (_type == IType::Ld)
-        -:  478:                _data = memoryLine[_requestedOffset];
-        -:  479:        }
-        -:  480:        else
-        -:  481:        {
-        -:  482:            pair<Word, Word> position = findEntry(_requestedIp, true);
-        -:  483:            _dataMemory[position.first][position.second].lastUsage = 1;
-        -:  484:            changeLRUBit(_dataMemory, position.first, position.second);
-        -:  485:
-        -:  486:            if (_type == IType::Ld)
-        -:  487:                _data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
-        -:  488:            else if (_type == IType::St) {
-        -:  489:                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
-        -:  490:                _dataMemory[position.first][position.second].validityBit = false;
-        -:  491:            }
-        -:  492:        }
-        -:  493:
-        -:  494:        return true;
-        -:  495:    }
-        -:  496:
-    #####:  497:    void initializeCache()
-    $$$$$:  497-block  0
-        -:  498:    {
-    #####:  499:        for (int i = 0; i < blockCount; ++i) {
-    $$$$$:  499-block  0
-    $$$$$:  499-block  1
-    #####:  500:            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
+        -:  469:            changeLRUBit(_dataMemory, blockId, cellId);
+        -:  470:
+        -:  471:            if (_dataMemory[blockId][cellId].address != 0 && !_dataMemory[blockId][cellId].validityBit)
+        -:  472:            {
+        -:  473:                _mem.writeLineToMemory(_dataMemory[blockId][cellId].dataLine, _dataMemory[blockId][cellId].address);
+        -:  474:            }
+        -:  475:
+        -:  476:            _dataMemory[blockId][cellId] = CacheCell {_requestedIp, memoryLine, 1, validity};
+        -:  477:
+        -:  478:            if (_type == IType::Ld)
+        -:  479:                _data = memoryLine[_requestedOffset];
+        -:  480:        }
+        -:  481:        else
+        -:  482:        {
+        -:  483:            pair<Word, Word> position = findEntry(_requestedIp, true);
+        -:  484:            _dataMemory[position.first][position.second].lastUsage = 1;
+        -:  485:            changeLRUBit(_dataMemory, position.first, position.second);
+        -:  486:
+        -:  487:            if (_type == IType::Ld)
+        -:  488:                _data = _dataMemory[position.first][position.second].dataLine[_requestedOffset];
+        -:  489:            else if (_type == IType::St) {
+        -:  490:                _dataMemory[position.first][position.second].dataLine[_requestedOffset] = _data;
+        -:  491:                _dataMemory[position.first][position.second].validityBit = false;
+        -:  492:            }
+        -:  493:        }
+        -:  494:
+        -:  495:        return true;
+        -:  496:    }
+        -:  497:
+    #####:  498:    void initializeCache()
+    $$$$$:  498-block  0
+        -:  499:    {
+    #####:  500:        for (int i = 0; i < blockCount; ++i) {
     $$$$$:  500-block  0
     $$$$$:  500-block  1
-    %%%%%:  500-block  2
-    %%%%%:  500-block  3
-    #####:  501:            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
+    #####:  501:            _codeMemory[i] = vector<CacheCell>(codeCacheBytes / lineSizeBytes / blockCount);
     $$$$$:  501-block  0
-    %%%%%:  501-block  1
-        -:  502:        }
-    #####:  503:    }
-    $$$$$:  503-block  0
-        -:  504:
-        -:  505:    void Clock()
-        -:  506:    {
-        -:  507:        if (_waitCycles > 0)
-        -:  508:            --_waitCycles;
-        -:  509:    }
-        -:  510:
-    #####:  511:    size_t getWaitCycles()
-    $$$$$:  511-block  0
-        -:  512:    {
-    #####:  513:        return _waitCycles;
-    $$$$$:  513-block  0
-        -:  514:    }
-        -:  515:
-       11:  516:    static const size_t getFailLatency() {
-       11:  516-block  0
-       11:  517:        return failLatency;
+    $$$$$:  501-block  1
+    %%%%%:  501-block  2
+    %%%%%:  501-block  3
+    #####:  502:            _dataMemory[i] = vector<CacheCell>(dataCacheBytes / lineSizeBytes / blockCount);
+    $$$$$:  502-block  0
+    %%%%%:  502-block  1
+        -:  503:        }
+    #####:  504:    }
+    $$$$$:  504-block  0
+        -:  505:
+        -:  506:    void Clock()
+        -:  507:    {
+        -:  508:        if (_waitCycles > 0)
+        -:  509:            --_waitCycles;
+        -:  510:    }
+        -:  511:
+    #####:  512:    size_t getWaitCycles()
+    $$$$$:  512-block  0
+        -:  513:    {
+    #####:  514:        return _waitCycles;
+    $$$$$:  514-block  0
+        -:  515:    }
+        -:  516:
+       11:  517:    static const size_t getFailLatency() {
        11:  517-block  0
-        -:  518:    }
-        -:  519:
-        2:  520:    static const size_t getCodeLatency() {
-        2:  520-block  0
-        2:  521:        return codeLatency;
+       11:  518:        return failLatency;
+       11:  518-block  0
+        -:  519:    }
+        -:  520:
+        2:  521:    static const size_t getCodeLatency() {
         2:  521-block  0
-        -:  522:    }
-        -:  523:
-        -:  524:    static const size_t getDataLatency() {
-        -:  525:        return dataLatency;
-        -:  526:    }
-        -:  527:
-        -:  528:    void setWaitCycles(size_t waitCycles) {
-        -:  529:        _waitCycles = waitCycles;
-        -:  530:    }
-        -:  531:
-       15:  532:    bool isCacheMiss() const {
-       15:  532-block  0
-       15:  533:        return _cacheMiss;
+        2:  522:        return codeLatency;
+        2:  522-block  0
+        -:  523:    }
+        -:  524:
+        -:  525:    static const size_t getDataLatency() {
+        -:  526:        return dataLatency;
+        -:  527:    }
+        -:  528:
+        -:  529:    void setWaitCycles(size_t waitCycles) {
+        -:  530:        _waitCycles = waitCycles;
+        -:  531:    }
+        -:  532:
+       15:  533:    bool isCacheMiss() const {
        15:  533-block  0
-        -:  534:    }
-        -:  535:
-    #####:  536:    vector<Block> &getCodeMemory() {
-    $$$$$:  536-block  0
-    #####:  537:        return _codeMemory;
+       15:  534:        return _cacheMiss;
+       15:  534-block  0
+        -:  535:    }
+        -:  536:
+    #####:  537:    vector<Block> &getCodeMemory() {
     $$$$$:  537-block  0
-        -:  538:    }
-        -:  539:
-        -:  540:    vector<Block> &getDataMemory(){
-        -:  541:        return _dataMemory;
-        -:  542:    }
-        -:  543:
-        -:  544:    Word getMemoryRequestIp() const {
-        -:  545:        return _memoryRequestIp;
-        -:  546:    }
-        -:  547:
-       18:  548:    Word getRequestedIp() const {
-       18:  548-block  0
-       18:  549:        return _requestedIp;
+    #####:  538:        return _codeMemory;
+    $$$$$:  538-block  0
+        -:  539:    }
+        -:  540:
+        -:  541:    vector<Block> &getDataMemory(){
+        -:  542:        return _dataMemory;
+        -:  543:    }
+        -:  544:
+        -:  545:    Word getMemoryRequestIp() const {
+        -:  546:        return _memoryRequestIp;
+        -:  547:    }
+        -:  548:
+       18:  549:    Word getRequestedIp() const {
        18:  549-block  0
-        -:  550:    }
-        -:  551:
-       18:  552:    Word getRequestedOffset() const {
-       18:  552-block  0
-       18:  553:        return _requestedOffset;
+       18:  550:        return _requestedIp;
+       18:  550-block  0
+        -:  551:    }
+        -:  552:
+       18:  553:    Word getRequestedOffset() const {
        18:  553-block  0
-        -:  554:    }
-        -:  555:
-        2:  556:    void setMemoryRequestIp(Word memoryRequestIp) {
-        2:  556-block  0
-        2:  557:        _memoryRequestIp = memoryRequestIp;
-        2:  558:    }
-        -:  559:
-        -:  560:    void setCacheMiss(bool cacheMiss) {
-        -:  561:        _cacheMiss = cacheMiss;
-        -:  562:    }
-        -:  563:
-        -:  564:    UncachedMem &getMem() const {
-        -:  565:        return _mem;
-        -:  566:    }
-        -:  567:
-        -:  568:    void setRequestedIp(Word requestedIp) {
-        -:  569:        _requestedIp = requestedIp;
-        -:  570:    }
-        -:  571:
-        -:  572:    void setRequestedOffset(Word requestedOffset) {
-        -:  573:        _requestedOffset = requestedOffset;
-        -:  574:    }
-        -:  575:
-        -:  576:private:
-        -:  577:    static constexpr size_t failLatency = 152;
-        -:  578:    static constexpr size_t codeLatency = 1;
-        -:  579:    static constexpr size_t dataLatency = 3;
-        -:  580:
-        -:  581:    Word _memoryRequestIp = 0;
-        -:  582:    Word _requestedIp = 0;
-        -:  583:    Word _requestedOffset = 0;
-        -:  584:    size_t _waitCycles = 0;
-        -:  585:    bool _cacheMiss = false;
-        -:  586:
-        -:  587:    vector<Block> _codeMemory = vector<Block>(blockCount);
-        -:  588:    vector<Block> _dataMemory = vector<Block>(blockCount);
-        -:  589:    UncachedMem& _mem;
-        -:  590:};
-        -:  591:
-        -:  592:#endif //RISCV_SIM_DATAMEMORY_H
+       18:  554:        return _requestedOffset;
+       18:  554-block  0
+        -:  555:    }
+        -:  556:
+        2:  557:    void setMemoryRequestIp(Word memoryRequestIp) {
+        2:  557-block  0
+        2:  558:        _memoryRequestIp = memoryRequestIp;
+        2:  559:    }
+        -:  560:
+        -:  561:    void setCacheMiss(bool cacheMiss) {
+        -:  562:        _cacheMiss = cacheMiss;
+        -:  563:    }
+        -:  564:
+        -:  565:    UncachedMem &getMem() const {
+        -:  566:        return _mem;
+        -:  567:    }
+        -:  568:
+        -:  569:    void setRequestedIp(Word requestedIp) {
+        -:  570:        _requestedIp = requestedIp;
+        -:  571:    }
+        -:  572:
+        -:  573:    void setRequestedOffset(Word requestedOffset) {
+        -:  574:        _requestedOffset = requestedOffset;
+        -:  575:    }
+        -:  576:
+        -:  577:private:
+        -:  578:    static constexpr size_t failLatency = 152;
+        -:  579:    static constexpr size_t codeLatency = 1;
+        -:  580:    static constexpr size_t dataLatency = 3;
+        -:  581:
+        -:  582:    Word _memoryRequestIp = 0;
+        -:  583:    Word _requestedIp = 0;
+        -:  584:    Word _requestedOffset = 0;
+        -:  585:    size_t _waitCycles = 0;
+        -:  586:    bool _cacheMiss = false;
+        -:  587:
+        -:  588:    vector<Block> _codeMemory = vector<Block>(blockCount);
+        -:  589:    vector<Block> _dataMemory = vector<Block>(blockCount);
+        -:  590:    UncachedMem& _mem;
+        -:  591:};
+        -:  592:
+        -:  593:#endif //RISCV_SIM_DATAMEMORY_H

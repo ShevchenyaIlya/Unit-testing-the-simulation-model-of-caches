@@ -143,11 +143,11 @@
         -:  138:       *  @return @c addressof(__r)
         -:  139:      */
         -:  140:      static pointer
-     4837:  141:      pointer_to(__make_not_void<element_type>& __r) noexcept
-     3547:  141-block  0
+     4840:  141:      pointer_to(__make_not_void<element_type>& __r) noexcept
+     3550:  141-block  0
      1290:  141-block  1
-     4837:  142:      { return std::addressof(__r); }
-     3547:  142-block  0
+     4840:  142:      { return std::addressof(__r); }
+     3550:  142-block  0
      1290:  142-block  1
         -:  143:    };
         -:  144:

@@ -180,15 +180,15 @@
       953:  168:      { _M_dataplus._M_p = __p; }
         -:  169:
         -:  170:      void
-     3020:  171:      _M_length(size_type __length)
-     3020:  171-block  0
-     3020:  172:      { _M_string_length = __length; }
+     3023:  171:      _M_length(size_type __length)
+     3023:  171-block  0
+     3023:  172:      { _M_string_length = __length; }
         -:  173:
         -:  174:      pointer
-    11557:  175:      _M_data() const
-    11557:  175-block  0
-    11557:  176:      { return _M_dataplus._M_p; }
-    11557:  176-block  0
+    11566:  175:      _M_data() const
+    11566:  175-block  0
+    11566:  176:      { return _M_dataplus._M_p; }
+    11566:  176-block  0
         -:  177:
         -:  178:      pointer
      1290:  179:      _M_local_data()
@@ -203,12 +203,12 @@
         -:  186:      }
         -:  187:
         -:  188:      const_pointer
-     3547:  189:      _M_local_data() const
-     3547:  189-block  0
+     3550:  189:      _M_local_data() const
+     3550:  189-block  0
         -:  190:      {
         -:  191:#if __cplusplus >= 201103L
-     3547:  192:	return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
-     3547:  192-block  0
+     3550:  192:	return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+     3550:  192-block  0
         -:  193:#else
         -:  194:	return const_pointer(_M_local_buf);
         -:  195:#endif
@@ -220,19 +220,19 @@
       748:  200:      { _M_allocated_capacity = __capacity; }
         -:  201:
         -:  202:      void
-     2790:  203:      _M_set_length(size_type __n)
-     2790:  203-block  0
+     2793:  203:      _M_set_length(size_type __n)
+     2793:  203-block  0
         -:  204:      {
-     2790:  205:	_M_length(__n);
-     2790:  205-block  0
-     2790:  206:	traits_type::assign(_M_data()[__n], _CharT());
-     2790:  207:      }
+     2793:  205:	_M_length(__n);
+     2793:  205-block  0
+     2793:  206:	traits_type::assign(_M_data()[__n], _CharT());
+     2793:  207:      }
         -:  208:
         -:  209:      bool
-     3547:  210:      _M_is_local() const
-     3547:  210-block  0
-     3547:  211:      { return _M_data() == _M_local_data(); }
-     3547:  211-block  0
+     3550:  210:      _M_is_local() const
+     3550:  210-block  0
+     3550:  211:      { return _M_data() == _M_local_data(); }
+     3550:  211-block  0
         -:  212:
         -:  213:      // Create & Destroy
         -:  214:      pointer
@@ -383,11 +383,11 @@
         -:  336:      {
      1195:  337:	if (__n == 1)
      1195:  337-block  0
-      273:  338:	  traits_type::assign(*__d, *__s);
-      273:  338-block  0
+      271:  338:	  traits_type::assign(*__d, *__s);
+      271:  338-block  0
         -:  339:	else
-      922:  340:	  traits_type::copy(__d, __s, __n);
-      922:  340-block  0
+      924:  340:	  traits_type::copy(__d, __s, __n);
+      924:  340-block  0
      1195:  341:      }
         -:  342:
         -:  343:      static void
@@ -987,10 +987,10 @@
         -:  917:      ///  Returns the number of characters in the string, not including any
         -:  918:      ///  null-termination.
         -:  919:      size_type
-     1857:  920:      size() const _GLIBCXX_NOEXCEPT
-     1857:  920-block  0
-     1857:  921:      { return _M_string_length; }
-     1857:  921-block  0
+     1860:  920:      size() const _GLIBCXX_NOEXCEPT
+     1860:  920-block  0
+     1860:  921:      { return _M_string_length; }
+     1860:  921-block  0
         -:  922:
         -:  923:      ///  Returns the number of characters in the string, not including any
         -:  924:      ///  null-termination.
@@ -1056,15 +1056,15 @@
         -:  980:       *  before needing to allocate more memory.
         -:  981:       */
         -:  982:      size_type
-     1893:  983:      capacity() const _GLIBCXX_NOEXCEPT
-     1893:  983-block  0
+     1896:  983:      capacity() const _GLIBCXX_NOEXCEPT
+     1896:  983-block  0
         -:  984:      {
-     1893:  985:	return _M_is_local() ? size_type(_S_local_capacity)
-     1893:  985-block  0
-      899:  985-block  1
+     1896:  985:	return _M_is_local() ? size_type(_S_local_capacity)
+     1896:  985-block  0
+      902:  985-block  1
       994:  985-block  2
-     1893:  986:	                     : _M_allocated_capacity;
-     1893:  986-block  0
+     1896:  986:	                     : _M_allocated_capacity;
+     1896:  986-block  0
         -:  987:      }
         -:  988:
         -:  989:      /**

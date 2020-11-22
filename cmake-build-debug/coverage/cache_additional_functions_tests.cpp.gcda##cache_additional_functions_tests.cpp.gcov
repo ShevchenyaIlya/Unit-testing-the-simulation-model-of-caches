@@ -310,7 +310,7 @@
     %%%%%:   69-block 11
         1:   70:    std::mt19937 gen(rd());
         1:   70-block  0
-        1:   71:    std::uniform_int_distribution<> distrib(0, blockCount);
+        1:   71:    std::uniform_int_distribution<> distrib(0, 1);
         1:   71-block  0
         2:   72:    CachedMem cache = *memModelPtr;
         1:   72-block  0
@@ -390,7 +390,7 @@
     %%%%%:   82-block 16
     %%%%%:   82-block 17
         -:   83:
-        1:   84:    blockId = distrib(gen);
+        1:   84:    int cellId = distrib(gen);
         1:   84-block  0
     $$$$$:   84-block  1
         5:   85:    for (Block &block : cache.getDataMemory()) {
@@ -420,7 +420,7 @@
     %%%%%:   89-block 16
     %%%%%:   89-block 17
         -:   90:
-        1:   91:    cache.getCodeMemory()[2][3].lastUsage = 0;
+        1:   91:    cache.getCodeMemory()[2][blockId].lastUsage = 0;
         1:   91-block  0
         1:   92:    ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
     $$$$$:   92-block  0
@@ -441,7 +441,7 @@
     %%%%%:   92-block 15
     %%%%%:   92-block 16
         -:   93:
-        1:   94:    cache.getDataMemory()[3][2].lastUsage = 0;
+        1:   94:    cache.getDataMemory()[3][cellId].lastUsage = 0;
         1:   94-block  0
         1:   95:    ASSERT_FALSE(cache.checkAllBits(cache.getCodeMemory(), 0, 0));
     $$$$$:   95-block  0

@@ -3761,18 +3761,18 @@
         -: 2166:
        99: 2167:  std::string result;
        99: 2168:  result.reserve(static_cast<size_t>(2 * (end - start)));
-     1021: 2169:  for (const char* ch = start; ch != end; ++ch) {
+     1024: 2169:  for (const char* ch = start; ch != end; ++ch) {
        99: 2169-block  0
-     1021: 2169-block  1
-      922: 2169-block  2
-      922: 2170:    if (*ch == '\0') {
-      922: 2170-block  0
+     1024: 2169-block  1
+      925: 2169-block  2
+      925: 2170:    if (*ch == '\0') {
+      925: 2170-block  0
     #####: 2171:      result += "\\0";  // Replaces NUL with "\\0";
     $$$$$: 2171-block  0
     $$$$$: 2171-block  1
         -: 2172:    } else {
-      922: 2173:      result += *ch;
-      922: 2173-block  0
+      925: 2173:      result += *ch;
+      925: 2173-block  0
         -: 2174:    }
         -: 2175:  }
         -: 2176:

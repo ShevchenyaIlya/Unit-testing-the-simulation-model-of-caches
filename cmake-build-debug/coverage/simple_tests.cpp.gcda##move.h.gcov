@@ -49,12 +49,12 @@
         -:   44:   */
         -:   45:  template<typename _Tp>
         -:   46:    inline _GLIBCXX_CONSTEXPR _Tp*
-     6237:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-     3547:   47-block  0
+     6240:   47:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+     3550:   47-block  0
      1290:   47-block  1
      1400:   47-block  2
-     6237:   48:    { return __builtin_addressof(__r); }
-     3547:   48-block  0
+     6240:   48:    { return __builtin_addressof(__r); }
+     3550:   48-block  0
      1290:   48-block  1
      1400:   48-block  2
         -:   49:
@@ -81,10 +81,10 @@
         -:   70:   */
         -:   71:  template<typename _Tp>
         -:   72:    constexpr _Tp&&
-       10:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-       10:   73-block  0
-       10:   74:    { return static_cast<_Tp&&>(__t); }
-       10:   74-block  0
+       12:   73:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+       12:   73-block  0
+       12:   74:    { return static_cast<_Tp&&>(__t); }
+       12:   74-block  0
         -:   75:
         -:   76:  /**
         -:   77:   *  @brief  Forward an rvalue.
@@ -157,11 +157,11 @@
         -:  134:  */
         -:  135:  template<typename _Tp>
         -:  136:    inline _GLIBCXX17_CONSTEXPR _Tp*
-     4837:  137:    addressof(_Tp& __r) noexcept
-     3547:  137-block  0
+     4840:  137:    addressof(_Tp& __r) noexcept
+     3550:  137-block  0
      1290:  137-block  1
-     4837:  138:    { return std::__addressof(__r); }
-     3547:  138-block  0
+     4840:  138:    { return std::__addressof(__r); }
+     3550:  138-block  0
      1290:  138-block  1
         -:  139:
         -:  140:  // _GLIBCXX_RESOLVE_LIB_DEFECTS

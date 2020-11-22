@@ -438,167 +438,169 @@
         3:   97-block  0
         -:   98:    }
         -:   99:
-        1:  100:    cache.pseudoLRUFinding(true, requestedId);
+        1:  100:    pair<Word, Word> result = cache.pseudoLRUFinding(true, requestedId);
         1:  100-block  0
-        5:  101:    for (int i = 0; i < cache.getDataMemory().size(); i++) {
+        1:  101:    cache.changeLRUBit(cache.getDataMemory(), result.first, result.second);
         1:  101-block  0
-        5:  101-block  1
-        4:  101-block  2
-    $$$$$:  101-block  3
-        4:  102:        ASSERT_EQ(cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
-        4:  102-block  0
+        5:  102:    for (int i = 0; i < cache.getDataMemory().size(); i++) {
+        5:  102-block  0
         4:  102-block  1
     $$$$$:  102-block  2
-    $$$$$:  102-block  3
-    $$$$$:  102-block  4
-    $$$$$:  102-block  5
-        4:  102-block  6
-        4:  102-block  7
-        4:  102-block  8
-    %%%%%:  102-block  9
-    %%%%%:  102-block 10
-    %%%%%:  102-block 11
-    %%%%%:  102-block 12
-    %%%%%:  102-block 13
-    %%%%%:  102-block 14
-    %%%%%:  102-block 15
-    %%%%%:  102-block 16
-        -:  103:    }
-        -:  104:
-        5:  105:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
-        1:  105-block  0
-        5:  105-block  1
-        4:  105-block  2
-        4:  106:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
-        4:  106-block  0
-        4:  107:        if (i != destinationId)
-        3:  108:            cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage = 1;
-        3:  108-block  0
-        -:  109:    }
-        -:  110:
-        1:  111:    cache.pseudoLRUFinding(false, requestedId);
-        1:  111-block  0
-        5:  112:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        4:  103:        ASSERT_EQ(cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
+        4:  103-block  0
+        4:  103-block  1
+    $$$$$:  103-block  2
+    $$$$$:  103-block  3
+    $$$$$:  103-block  4
+    $$$$$:  103-block  5
+        4:  103-block  6
+        4:  103-block  7
+        4:  103-block  8
+    %%%%%:  103-block  9
+    %%%%%:  103-block 10
+    %%%%%:  103-block 11
+    %%%%%:  103-block 12
+    %%%%%:  103-block 13
+    %%%%%:  103-block 14
+    %%%%%:  103-block 15
+    %%%%%:  103-block 16
+        -:  104:    }
+        -:  105:
+        5:  106:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        1:  106-block  0
+        5:  106-block  1
+        4:  106-block  2
+        4:  107:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
+        4:  107-block  0
+        4:  108:        if (i != destinationId)
+        3:  109:            cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage = 1;
+        3:  109-block  0
+        -:  110:    }
+        -:  111:
+        1:  112:    result = cache.pseudoLRUFinding(false, requestedId);
         1:  112-block  0
-        5:  112-block  1
-        4:  112-block  2
-    $$$$$:  112-block  3
-        1:  112-block  4
-        1:  112-block  5
-        4:  113:        ASSERT_EQ(cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
-        4:  113-block  0
-        4:  113-block  1
-    $$$$$:  113-block  2
-    $$$$$:  113-block  3
-    $$$$$:  113-block  4
-    $$$$$:  113-block  5
-        4:  113-block  6
-        4:  113-block  7
-        4:  113-block  8
-    %%%%%:  113-block  9
-    %%%%%:  113-block 10
-    %%%%%:  113-block 11
-    %%%%%:  113-block 12
-    %%%%%:  113-block 13
-    %%%%%:  113-block 14
-    %%%%%:  113-block 15
-        -:  114:    }
-        -:  115:}
-        -:  116:
-        8:  117:TEST_F(CacheMemoryFixture, PseudoLRUFindingTestsChooseChangedLine) {
-        1:  117-block  0
-        1:  117-block  1
-        1:  117-block  2
-        1:  117-block  3
-        1:  117-block  4
-    %%%%%:  117-block  5
-    %%%%%:  117-block  6
-    %%%%%:  117-block  7
-    %%%%%:  117-block  8
-    %%%%%:  117-block  9
-        1:  117-block 10
-        1:  117-block 11
-        1:  117-block 12
-        1:  117-block 13
-        1:  117-block 14
-        2:  118:    CachedMem cache = *memModelPtr;
-        1:  118-block  0
-        1:  118-block  1
-        1:  118-block  2
-    $$$$$:  118-block  3
-        1:  118-block  4
-    %%%%%:  118-block  5
-    %%%%%:  118-block  6
-        -:  119:
-        1:  120:    Word requestedId = rand() % 1024;
+        1:  112-block  1
+        1:  113:    cache.changeLRUBit(cache.getCodeMemory(), result.first, result.second);
+        5:  114:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        5:  114-block  0
+        4:  114-block  1
+    $$$$$:  114-block  2
+        1:  114-block  3
+        1:  114-block  4
+        4:  115:        ASSERT_EQ(cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].lastUsage, 0);
+        4:  115-block  0
+        4:  115-block  1
+    $$$$$:  115-block  2
+    $$$$$:  115-block  3
+    $$$$$:  115-block  4
+    $$$$$:  115-block  5
+        4:  115-block  6
+        4:  115-block  7
+        4:  115-block  8
+    %%%%%:  115-block  9
+    %%%%%:  115-block 10
+    %%%%%:  115-block 11
+    %%%%%:  115-block 12
+    %%%%%:  115-block 13
+    %%%%%:  115-block 14
+    %%%%%:  115-block 15
+        -:  116:    }
+        -:  117:}
+        -:  118:
+        8:  119:TEST_F(CacheMemoryFixture, PseudoLRUFindingTestsChooseChangedLine) {
+        1:  119-block  0
+        1:  119-block  1
+        1:  119-block  2
+        1:  119-block  3
+        1:  119-block  4
+    %%%%%:  119-block  5
+    %%%%%:  119-block  6
+    %%%%%:  119-block  7
+    %%%%%:  119-block  8
+    %%%%%:  119-block  9
+        1:  119-block 10
+        1:  119-block 11
+        1:  119-block 12
+        1:  119-block 13
+        1:  119-block 14
+        2:  120:    CachedMem cache = *memModelPtr;
         1:  120-block  0
-        1:  121:    Word destinationId = rand() % blockCount;
-        -:  122:
-        5:  123:    for (int i = 0; i < cache.getDataMemory().size(); i++) {
-        5:  123-block  0
-        4:  124:        cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].address = i + 1;
-        4:  124-block  0
-        4:  125:        cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
-        -:  126:    }
-        -:  127:
-        1:  128:    pair<Word, Word>destinationValue = pair<Word, Word>(destinationId, (requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes);
-        1:  128-block  0
-        1:  129:    cache.getDataMemory()[destinationId][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].validityBit = false;
-        1:  130:    ASSERT_EQ(cache.pseudoLRUFinding(true, requestedId), destinationValue);
+        1:  120-block  1
+        1:  120-block  2
+    $$$$$:  120-block  3
+        1:  120-block  4
+    %%%%%:  120-block  5
+    %%%%%:  120-block  6
+        -:  121:
+        1:  122:    Word requestedId = rand() % 1024;
+        1:  122-block  0
+        1:  123:    Word destinationId = rand() % blockCount;
+        -:  124:
+        5:  125:    for (int i = 0; i < cache.getDataMemory().size(); i++) {
+        5:  125-block  0
+        4:  126:        cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].address = i + 1;
+        4:  126-block  0
+        4:  127:        cache.getDataMemory()[i][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
+        -:  128:    }
+        -:  129:
+        1:  130:    pair<Word, Word>destinationValue = pair<Word, Word>(destinationId, (requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes);
         1:  130-block  0
-        1:  130-block  1
-    $$$$$:  130-block  2
-    $$$$$:  130-block  3
-    $$$$$:  130-block  4
-    $$$$$:  130-block  5
-        1:  130-block  6
-        1:  130-block  7
-        1:  130-block  8
-    %%%%%:  130-block  9
-    %%%%%:  130-block 10
-    %%%%%:  130-block 11
-    %%%%%:  130-block 12
-    %%%%%:  130-block 13
-    %%%%%:  130-block 14
-    %%%%%:  130-block 15
-    %%%%%:  130-block 16
-        -:  131:
-        5:  132:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        1:  131:    cache.getDataMemory()[destinationId][(requestedId % ( dataCacheBytes / blockCount)) / lineSizeBytes].validityBit = false;
+        1:  132:    ASSERT_EQ(cache.pseudoLRUFinding(true, requestedId), destinationValue);
         1:  132-block  0
-    $$$$$:  132-block  1
-        5:  132-block  2
-        4:  133:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].address = i + 1;
-        4:  133-block  0
-        4:  134:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
-        -:  135:    }
-        -:  136:
-        1:  137:    destinationValue = pair<Word, Word>(destinationId, (requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes);
-        1:  137-block  0
-        1:  138:    cache.getCodeMemory()[destinationId][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = false;
-        1:  139:    ASSERT_EQ(cache.pseudoLRUFinding(false, requestedId), destinationValue);
+        1:  132-block  1
+    $$$$$:  132-block  2
+    $$$$$:  132-block  3
+    $$$$$:  132-block  4
+    $$$$$:  132-block  5
+        1:  132-block  6
+        1:  132-block  7
+        1:  132-block  8
+    %%%%%:  132-block  9
+    %%%%%:  132-block 10
+    %%%%%:  132-block 11
+    %%%%%:  132-block 12
+    %%%%%:  132-block 13
+    %%%%%:  132-block 14
+    %%%%%:  132-block 15
+    %%%%%:  132-block 16
+        -:  133:
+        5:  134:    for (int i = 0; i < cache.getCodeMemory().size(); i++) {
+        1:  134-block  0
+    $$$$$:  134-block  1
+        5:  134-block  2
+        4:  135:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].address = i + 1;
+        4:  135-block  0
+        4:  136:        cache.getCodeMemory()[i][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = true;
+        -:  137:    }
+        -:  138:
+        1:  139:    destinationValue = pair<Word, Word>(destinationId, (requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes);
         1:  139-block  0
-        1:  139-block  1
-    $$$$$:  139-block  2
-    $$$$$:  139-block  3
-    $$$$$:  139-block  4
-    $$$$$:  139-block  5
-        1:  139-block  6
-        1:  139-block  7
-        1:  139-block  8
-        1:  139-block  9
-    $$$$$:  139-block 10
-        1:  139-block 11
-    %%%%%:  139-block 12
-    %%%%%:  139-block 13
-    %%%%%:  139-block 14
-    %%%%%:  139-block 15
-    %%%%%:  139-block 16
-    %%%%%:  139-block 17
-    %%%%%:  139-block 18
-        4:  140:}
-        1:  140-block  0
-        1:  140-block  1
-        1:  140-block  2
-        1:  140-block  3
-        1:  140-block  4
-        1:  140-block  5
+        1:  140:    cache.getCodeMemory()[destinationId][(requestedId % ( codeCacheBytes / blockCount)) / lineSizeBytes].validityBit = false;
+        1:  141:    ASSERT_EQ(cache.pseudoLRUFinding(false, requestedId), destinationValue);
+        1:  141-block  0
+        1:  141-block  1
+    $$$$$:  141-block  2
+    $$$$$:  141-block  3
+    $$$$$:  141-block  4
+    $$$$$:  141-block  5
+        1:  141-block  6
+        1:  141-block  7
+        1:  141-block  8
+        1:  141-block  9
+    $$$$$:  141-block 10
+        1:  141-block 11
+    %%%%%:  141-block 12
+    %%%%%:  141-block 13
+    %%%%%:  141-block 14
+    %%%%%:  141-block 15
+    %%%%%:  141-block 16
+    %%%%%:  141-block 17
+    %%%%%:  141-block 18
+        4:  142:}
+        1:  142-block  0
+        1:  142-block  1
+        1:  142-block  2
+        1:  142-block  3
+        1:  142-block  4
+        1:  142-block  5

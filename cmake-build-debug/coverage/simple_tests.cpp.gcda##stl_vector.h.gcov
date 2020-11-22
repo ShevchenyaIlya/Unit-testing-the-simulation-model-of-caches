@@ -932,14 +932,14 @@
         -:  792:       *  see at().)
         -:  793:       */
         -:  794:      reference
-     1969:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
-     1201:  795-block  0
-      768:  795-block  1
+     1864:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+     1128:  795-block  0
+      736:  795-block  1
         -:  796:      {
         -:  797:	__glibcxx_requires_subscript(__n);
-     1969:  798:	return *(this->_M_impl._M_start + __n);
-     1201:  798-block  0
-      768:  798-block  1
+     1864:  798:	return *(this->_M_impl._M_start + __n);
+     1128:  798-block  0
+      736:  798-block  1
         -:  799:      }
         -:  800:
         -:  801:      /**

@@ -936,15 +936,15 @@
         -:  792:       *  see at().)
         -:  793:       */
         -:  794:      reference
-     1089:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+     1016:  795:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
     $$$$$:  795-block  0
-     1089:  795-block  1
+     1016:  795-block  1
     $$$$$:  795-block  2
         -:  796:      {
         -:  797:	__glibcxx_requires_subscript(__n);
-     1089:  798:	return *(this->_M_impl._M_start + __n);
+     1016:  798:	return *(this->_M_impl._M_start + __n);
     $$$$$:  798-block  0
-     1089:  798-block  1
+     1016:  798-block  1
     $$$$$:  798-block  2
         -:  799:      }
         -:  800:

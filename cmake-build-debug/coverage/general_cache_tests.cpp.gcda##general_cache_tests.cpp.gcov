@@ -1652,7 +1652,7 @@
         4:  159:        cache.Response(1024 + i * dataCacheBytes / blockCount, responseData, IType::St, 20);
         -:  160:    }
         -:  161:
-        1:  162:    ASSERT_FALSE(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
+        1:  162:    ASSERT_FALSE(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
         1:  162-block  0
     $$$$$:  162-block  1
     $$$$$:  162-block  2
@@ -1671,7 +1671,7 @@
     %%%%%:  162-block 15
     %%%%%:  162-block 16
     %%%%%:  162-block 17
-        1:  163:    ASSERT_EQ(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+        1:  163:    ASSERT_EQ(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
         1:  163-block  0
     $$$$$:  163-block  1
         1:  163-block  2
@@ -1690,7 +1690,7 @@
     %%%%%:  163-block 15
     %%%%%:  163-block 16
     %%%%%:  163-block 17
-        1:  164:    ASSERT_EQ(cache.getDataMemory()[0][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(4096)], 2048);
+        1:  164:    ASSERT_EQ(cache.getDataMemory()[blockCount - 1][4096 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(4096)], 2048);
         1:  164-block  0
     $$$$$:  164-block  1
         1:  164-block  2
@@ -1817,7 +1817,7 @@
     %%%%%:  175-block 15
     %%%%%:  175-block 16
     %%%%%:  175-block 17
-        1:  176:    ASSERT_FALSE(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
+        1:  176:    ASSERT_FALSE(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].validityBit);
         1:  176-block  0
     $$$$$:  176-block  1
     $$$$$:  176-block  2
@@ -1837,7 +1837,7 @@
     %%%%%:  176-block 16
     %%%%%:  176-block 17
     %%%%%:  176-block 18
-        1:  177:    ASSERT_EQ(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
+        1:  177:    ASSERT_EQ(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].lastUsage, 1);
         1:  177-block  0
     $$$$$:  177-block  1
         1:  177-block  2
@@ -1856,7 +1856,7 @@
     %%%%%:  177-block 15
     %%%%%:  177-block 16
     %%%%%:  177-block 17
-        1:  178:    ASSERT_EQ(cache.getDataMemory()[1][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(5120)], 1111);
+        1:  178:    ASSERT_EQ(cache.getDataMemory()[0][5120 % (dataCacheBytes / blockCount) / lineSizeBytes].dataLine[ToLineOffset(5120)], 1111);
         1:  178-block  0
     $$$$$:  178-block  1
         1:  178-block  2

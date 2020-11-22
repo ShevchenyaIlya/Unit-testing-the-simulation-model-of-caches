@@ -1435,12 +1435,12 @@
         -: 1173:       *  @return  Reference to this string.
         -: 1174:       */
         -: 1175:      basic_string&
-      922: 1176:      operator+=(_CharT __c)
-      922: 1176-block  0
+      925: 1176:      operator+=(_CharT __c)
+      925: 1176-block  0
         -: 1177:      {
-      922: 1178:	this->push_back(__c);
-      922: 1178-block  0
-      922: 1179:	return *this;
+      925: 1178:	this->push_back(__c);
+      925: 1178-block  0
+      925: 1179:	return *this;
         -: 1180:      }
         -: 1181:
         -: 1182:#if __cplusplus >= 201103L
@@ -1608,18 +1608,18 @@
         -: 1336:       *  @param __c  Character to append.
         -: 1337:       */
         -: 1338:      void
-      922: 1339:      push_back(_CharT __c)
-      922: 1339-block  0
+      925: 1339:      push_back(_CharT __c)
+      925: 1339-block  0
         -: 1340:      {
-      922: 1341:	const size_type __size = this->size();
-      922: 1341-block  0
-      922: 1342:	if (__size + 1 > this->capacity())
+      925: 1341:	const size_type __size = this->size();
+      925: 1341-block  0
+      925: 1342:	if (__size + 1 > this->capacity())
     #####: 1343:	  this->_M_mutate(__size, size_type(0), 0, size_type(1));
     $$$$$: 1343-block  0
-      922: 1344:	traits_type::assign(this->_M_data()[__size], __c);
-      922: 1344-block  0
-      922: 1345:	this->_M_set_length(__size + 1);
-      922: 1346:      }
+      925: 1344:	traits_type::assign(this->_M_data()[__size], __c);
+      925: 1344-block  0
+      925: 1345:	this->_M_set_length(__size + 1);
+      925: 1346:      }
         -: 1347:
         -: 1348:      /**
         -: 1349:       *  @brief  Set value to contents of another string.
