@@ -8,7 +8,7 @@ int main()
 {
     MemoryStorage mem ;
     // /home/shevchenya/CLionProjects/CourseWorkCache/programs/build/assembly/bin/simple.riscv
-    mem.LoadElf("../program");
+    mem.LoadElf("program");
     UncachedMem uncachedMem = UncachedMem (mem);
     std::unique_ptr<CachedMem> memModelPtr( new CachedMem(uncachedMem));
     Cpu cpu{*memModelPtr};
